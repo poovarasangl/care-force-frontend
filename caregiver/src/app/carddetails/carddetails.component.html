@@ -1,0 +1,312 @@
+<div class="hirestep3 card-dtl mke-pay" *ngIf="taskpaymentdata && DefaultCurrency && payamentdev === 0">
+    <div class="container">
+        <div class="hirestp3holder">
+            <h1 class="confbook-text ng-binding"> <span
+                    class="bk-id ng-binding">{{'BookingId' | translate}}:</span>{{taskpaymentdata.booking_id}}
+            </h1>
+            <div class="conf-divs tsk-dtls">
+                <h3>{{'JobSummary' | translate}}</h3>
+                <div class="conf-white def_relative">
+                    <div class="form-group cl-rgt-dtls">
+                        <div class="leftartr-img img_profile_select">
+                            <figure>
+                                <img style="height:100%;width:100%;" src="{{imageUrl}}{{taskpaymentdata.tasker.avatar}}"
+                                    UserDefaultImage>
+                            </figure>
+                        </div>
+                    </div>
+                    <div class="col-lft-dtls">
+                        <div class="form-group">
+                            <label for="line1"> <span class="lab_el_12 ng-binding"> {{'JobCategory' | translate}}
+                                    :</span>
+                            </label>
+                            <p>{{taskpaymentdata.category.name}}</p>
+                            <br>
+                        </div>
+                        <div class="form-group">
+                            <label for="line1"> <span class="lab_el_12 ng-binding"> {{'ExpertName' | translate}}
+                                    :</span>
+                            </label>
+                            <p>{{taskpaymentdata.tasker.username | titlecase}}</p>
+                        </div>
+                        <div class="form-group">
+                            <label for="line1"><span class="lab_el_12 ng-binding">{{'JobDate_Day' | translate}}:</span>
+                            </label>
+                            <p>{{taskpaymentdata.task_details.timestamp | date:'dd-MM-yyyy'}} /
+                                {{taskpaymentdata.task_details.timestamp | date:'EEEE'}}</p>
+                            <br>
+                        </div>
+                        <div class="form-group amt-tag ng-scope"
+                            *ngIf="taskpaymentdata.invoice.amount.total && !taskpaymentdata.invoice.amount.extra_amount">
+                            <label for="line1">
+                                <span class="lab_el_12 ng-binding"> {{'JobAmount' | translate}}
+                                    (Incl.Material Fee):</span>
+                            </label>
+                            <p> <span class="lab_el_12"></span> {{DefaultCurrency.symbol}}
+                                {{taskpaymentdata.invoice.amount.total * DefaultCurrency.value | number:'1.2-2'}}
+                            </p>
+                        </div>
+                        <div class="form-group amt-tag ng-scope"
+                            *ngIf="taskpaymentdata.invoice.amount.total && taskpaymentdata.invoice.amount.extra_amount">
+                            <label for="line1">
+                                <span class="lab_el_12 ng-binding"> {{'JobAmount' | translate}}
+                                    (Incl.Material Fee):</span>
+                            </label>
+                            <p><span class="lab_el_12"></span></p>
+                            <p> <span class="lab_el_12"></span> {{DefaultCurrency.symbol}}
+                                {{(taskpaymentdata.invoice.amount.total + taskpaymentdata.invoice.amount.extra_amount) * DefaultCurrency.value | number:'1.2-2'}}
+                            </p>
+                        </div>
+                        <div class="form-group amt-tag ng-scope">
+                            <label for="line1">
+                                <span class="lab_el_12 ng-binding"> {{'ServiceTax' | translate}} :</span>
+                            </label>
+                            <p> <span class="lab_el_12"></span> {{DefaultCurrency.symbol}}
+                                {{taskpaymentdata.invoice.amount.service_tax * DefaultCurrency.value | number:'1.2-2'}}
+                            </p>
+                        </div>
+                        <div class="form-group amt-tag ng-scope">
+                            <label for="line1">
+                                <span class="lab_el_12 ng-binding"> {{'Total' | translate}} :</span>
+                            </label>
+                            <p class="ng-binding ng-scope" *ngIf="!taskpaymentdata.invoice.amount.extra_amount"> <span
+                                    class="lab_el_12"></span> {{DefaultCurrency.symbol}}
+                                {{(taskpaymentdata.invoice.amount.total + taskpaymentdata.invoice.amount.service_tax) * DefaultCurrency.value | number:'1.2-2'}}
+                            </p>
+                            <p *ngIf="taskpaymentdata.invoice.amount.extra_amount"> <span class="lab_el_12"></span>
+                                {{DefaultCurrency.symbol}}
+                                {{(taskpaymentdata.invoice.amount.total + taskpaymentdata.invoice.amount.extra_amount + taskpaymentdata.invoice.amount.service_tax) * DefaultCurrency.value | number:'1.2-2'}}
+                            </p>
+                        </div>
+                        <div class="form-group amt-tag" *ngIf="taskpaymentdata.invoice.coupon">
+                            <label for="line1">
+                                <span class="lab_el_12"> {{'Coupon' | translate}} :</span>
+                            </label>
+                            <p> <span class="lab_el_12"></span> {{taskpaymentdata.invoice.coupon}}
+                            </p>
+                        </div>
+
+                        <div class="form-group amt-tag" *ngIf="taskpaymentdata.invoice.coupon">
+                            <label for="line1">
+                                <span class="lab_el_12">{{'Amount_Discount' | translate}}:</span>
+                            </label>
+                            <p *ngIf="taskpaymentdata.invoice.coupon"> <span class="lab_el_12"></span>
+                                {{DefaultCurrency.symbol}}
+                                {{taskpaymentdata.invoice.amount.balance_amount * DefaultCurrency.value | number: '1.2-2'}}
+                            </p>
+                        </div>
+                        <div class="form-group amt-tag"
+                            *ngIf="taskpaymentdata.invoice && taskpaymentdata.invoice.amount && taskpaymentdata.invoice.amount.discount">
+                            <label for="line1">
+                                <span class="lab_el_12">{{'Discount_Amount' | translate}}:</span>
+                            </label>
+                            <p *ngIf="taskpaymentdata.invoice.coupon"> <span class="lab_el_12"></span>
+                                {{DefaultCurrency.symbol}}
+                                {{taskpaymentdata.invoice.amount.discount * DefaultCurrency.value | number: '1.2-2'}}
+                            </p>
+                        </div>
+
+                        <div class="form-group amt-tag" *ngIf="taskpaymentdata.payment_type">
+                            <label for="line1">
+                                <span class="lab_el_12">{{'PartiallyPaid' | translate}} :</span>
+                            </label>
+                            <p> <span class="lab_el_12"></span> {{DefaultCurrency.symbol}}
+                                {{(taskpaymentdata.invoice.amount.grand_total - taskpaymentdata.invoice.amount.balance_amount) * DefaultCurrency.value | number:'1.2-2'}}
+                            </p>
+                        </div>
+                        <div class="form-group amt-tag">
+                            <label for="line1">
+                                <span class="lab_el_12 ng-binding"> {{'AmountTo_Paid' | translate}}</span>
+                            </label>
+                            <p
+                                *ngIf="!taskpaymentdata.invoice.coupon && taskpaymentdata.payment_type != 'wallet-other'">
+                                <span class="lab_el_12"></span>{{DefaultCurrency.symbol}}
+                                {{taskpaymentdata.invoice.amount.grand_total * DefaultCurrency.value | number: '1.2-2'}}
+                            </p>
+                            <!-- Payment With Coupon-->
+                            <p *ngIf="taskpaymentdata.invoice.coupon && taskpaymentdata.payment_type != 'wallet-other'">
+                                <span class="lab_el_12"></span> {{DefaultCurrency.symbol}}
+                                {{taskpaymentdata.invoice.amount.balance_amount * DefaultCurrency.value | number: '1.2-2'}}
+                            </p>
+                            <!-- Partial Payment Without Coupon-->
+                            <p
+                                *ngIf="!taskpaymentdata.invoice.coupon && taskpaymentdata.payment_type == 'wallet-other'">
+                                <span class="lab_el_12"></span> {{DefaultCurrency.symbol}}
+                                {{taskpaymentdata.invoice.amount.balance_amount * DefaultCurrency.value | number: '1.2-2'}}
+                            </p>
+                            <!-- Partial Payment With Coupon-->
+                            <p *ngIf="taskpaymentdata.invoice.coupon && taskpaymentdata.payment_type == 'wallet-other'">
+                                <span class="lab_el_12"></span> {{DefaultCurrency.symbol}}
+                                {{taskpaymentdata.invoice.amount.balance_amount * DefaultCurrency.value | number: '1.2-2'}}
+                            </p>
+                        </div>
+                        <div class="form-group">
+                            <label for="line1"></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- [disabled]="taskpaymentdata.invoice.coupon ? true : false" -->
+            <div class="conf-divs copuon-cde">
+                <h3>{{'Coupons' | translate}}</h3>
+                <div class="form-group ng-scope">
+                    <label for="line1">{{'DoYouHaveCoupon' | translate}} ? </label>
+                    <input name="coupon" type="text" [(ngModel)]="coupon"
+                        [disabled]="taskpaymentdata.invoice.coupon ? true : false" aria-invalid="false">
+                    <input *ngIf="couponbtn === 0 && !taskpaymentdata.invoice.coupon" class="couponbtn ng-scope"
+                        value="Apply" (click)="applyCoupon()" type="button">
+                    <button class="couponbtn ng-scope " *ngIf="couponbtn === 1" type="button" disabled>
+                        <i class="fa fa-circle-o-notch fa-spin"></i>&nbsp; {{'Loading' | translate}}
+                    </button>
+                    <input class="couponbtn" *ngIf="taskpaymentdata.invoice.coupon" value="Remove"
+                        (click)="removecoupon()" title="Remove this coupon" type="button">
+                </div>
+            </div>
+            <div class="pay-meth">
+                <ul class="wallet-mny ng-scope" *ngIf="taskpaymentdata.invoice.amount.grand_total != 0.00">
+                    <li *ngFor="let item of paymentlist">
+                        <input [disabled]="taskpaymentdata.invoice.status === 1" type="radio" id="{{item.code}}"
+                            name="type" (click)="btn_type = $event.target.value;" value="{{item.code}}"
+                            class="ng-pristine ng-untouched ng-valid ng-empty" aria-invalid="false">
+                        <label for="{{item.code}}">{{item.name}}</label>
+                        <div class="check"></div>
+                    </li>
+                </ul>
+            </div>
+            <div *ngIf="btn_type === 'wallet'" aria-hidden="true" class="ng-hide">
+                <input class="bluebtn marginsds ng-scope" value="Wallet Payment" *ngIf="walletbtn === 0"
+                    (click)="walletpayment(taskpaymentdata)" type="submit">
+                <button class="bluebtn marginsds ng-scope" *ngIf="walletbtn === 1" type="button" disabled>
+                    <i class="fa fa-circle-o-notch fa-spin"></i>&nbsp; {{'Loading' | translate}}
+                </button>
+            </div>
+            <div *ngIf="btn_type === 'paypal'" aria-hidden="true" class="ng-hide">
+                <input class="bluebtn marginsds ng-scope" *ngIf="paypalbtn === 0" value="Paypal Payment"
+                    (click)="paypalPayment(taskpaymentdata)" type="submit">
+                <button class="bluebtn marginsds ng-scope" *ngIf="paypalbtn === 1" type="button" disabled>
+                    <i class="fa fa-circle-o-notch fa-spin"></i>&nbsp; {{'Loading' | translate}}
+                </button>
+            </div>
+            <div class="dopayment ng-scope" *ngIf="btn_type === 'stripe'">
+                <div class="conf-divs">
+                    <h3>{{'Payment' | translate}}</h3>
+                    <div class="conf-white">
+                        <form role="form" id="payment-form" [formGroup]="carddetailsform" (ngSubmit)="onSubmit()">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="form-group">
+                                        <label for="cardNumber">{{'CreditCard' | translate}}</label>
+                                        <div class="input-group cardnum">
+                                            <input type="number" class="form-control" name="number" max="16"
+                                                placeholder="Valid Card Number" autocomplete="cc-number"
+                                                formControlName="number" (keyup)="checklength($event)" />
+                                            <span *ngIf="number == ''" class="input-group-addon "><i
+                                                    class="fa fa-credit-card-alt" aria-hidden="true"></i></span>
+                                            <!-- <span *ngIf="number = '^4[0-9]{6,}$'" class="input-group-addon"><i class="fa fa-cc-visa" aria-hidden="true"></i></span> -->
+                                        </div>
+                                        <div *ngIf="submitted && cardformvalidation.number.errors"
+                                            class="invalid-feedback">
+                                            <div class="error_msg" *ngIf="cardformvalidation.number.errors.required">
+                                                {{'CardNumber_required' | translate}}
+                                            </div>
+                                        </div>
+                                        <div class="error_msg" *ngIf="cardnumber_Error">{{cardnumber_Error}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-8 col-md-8">
+                                    <label><span class="hidden-xs">{{'Expiration' | translate}}</span></label>
+                                    <div class="form-group">
+                                        <div class="col-xs-5 col-md-5">
+                                            <div class="input-group">
+                                                <select name="exp_month" class="form-control"
+                                                    formControlName="exp_month">
+                                                    <option value="" class="" selected="selected">MM</option>
+                                                    <option value="01">01</option>
+                                                    <option value="02">02</option>
+                                                    <option value="03">03</option>
+                                                    <option value="04">04</option>
+                                                    <option value="05">05</option>
+                                                    <option value="06">06</option>
+                                                    <option value="07">07</option>
+                                                    <option value="08">08</option>
+                                                    <option value="09">09</option>
+                                                    <option value="10">10</option>
+                                                    <option value="11">11</option>
+                                                    <option value="12">12</option>
+                                                </select>
+                                                <span class="input-group-addon"><i class="fa fa-calendar"
+                                                        aria-hidden="true"></i></span>
+                                            </div>
+                                            <div *ngIf="submitted && cardformvalidation.exp_month.errors"
+                                                class="invalid-feedback">
+                                                <div class="error_msg"
+                                                    *ngIf="cardformvalidation.exp_month.errors.required">
+                                                    {{'ExpMonth_required' | translate}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <span style="font-size: 25px;float: left;">/</span>
+                                        <div class="col-xs-5 col-md-5">
+                                            <div class="input-group">
+                                                <select name="exp_year" class="form-control" formControlName="exp_year">
+                                                    <option value="" class="" selected="selected">YYYY</option>
+                                                    <option *ngFor="let item of yearlist" value="{{item}}">{{item}}
+                                                    </option>
+                                                </select>
+                                                <span class="input-group-addon"><i class="fa fa-calendar"
+                                                        aria-hidden="true"></i></span>
+                                            </div>
+                                            <div *ngIf="submitted && cardformvalidation.exp_year.errors"
+                                                class="invalid-feedback">
+                                                <div class="error_msg"
+                                                    *ngIf="cardformvalidation.exp_year.errors.required">
+                                                    {{'ExpYear_required' | translate}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-4 col-md-4">
+                                    <div class="form-group">
+                                        <label for="cardCVC">{{'CVV_code' | translate}}</label>
+                                        <div class="input-group">
+                                            <input type="number" placeholder="123" class="form-control" name="cvv"
+                                                maxlength="3" formControlName="cvv" />
+                                            <span class="input-group-addon"><i class="fa fa-credit-card-alt"
+                                                    aria-hidden="true"></i></span>
+                                        </div>
+                                        <div *ngIf="submitted && cardformvalidation.cvv.errors"
+                                            class="invalid-feedback">
+                                            <div class="error_msg" *ngIf="cardformvalidation.cvv.errors.required">
+                                                {{'Cvvnumber_required' | translate}}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="dopaymentcredit">
+                                <button class="bluebtn marginsds " *ngIf="submit_btn === 1" type="button" disabled>
+                                    <i class="fa fa-circle-o-notch fa-spin"></i>&nbsp; {{'Loading' | translate}}
+                                </button>&nbsp;&nbsp;
+                                <input class="bluebtn marginsds ng-scope" *ngIf="submit_btn === 0" value="Card Payment"
+                                    type="submit">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!---->
+<div class="payment-stus" *ngIf="payamentdev === 1">
+    <div class="success-stus fail-stus">
+        <div class="checkmark-circle fail-ico">
+            <div class="background"><i class="fa fa-times failed-icon" aria-hidden="true"></i></div>
+        </div>
+        <span class="ng-binding failed-text">{{'PaymentFailed' | translate}} </span>
+        <a class="goto-paypage" (click)="backpage()">{{'GoPaymentPage' | translate}}</a>
+    </div>
+    <!-- failure -->
+</div>

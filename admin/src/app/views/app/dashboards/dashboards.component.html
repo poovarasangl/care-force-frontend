@@ -1,0 +1,340 @@
+<!-- /app/dashboards/* custom container -->
+<div class="row">
+    <div class="col-12 sec-card-det">
+        <!-- <h4>STRIPE DETAILS</h4>
+        <div class="card text-white bg-success mb-4">
+            <div class="row card-body">
+                <div class="col-md-3">
+                    <p class="text-lg" *ngIf="stripedatas && arrayone">
+                        Account Info ({{arrayone.mode}})
+                    </p>
+                    <p class="text-l text-strong mb-0" *ngIf="stripedatas && arraytwo">{{arraytwo.id}}</p>
+                    <p class="text-l text-strong mb-0"></p>
+                </div>
+                <div class="col-md-3">
+                    <p class="text-lg">
+                        Stripe Status
+                    </p>
+                    <p class="text-l text-strong mb-0" *ngIf="stripedatas && arraytwo">Payouts: <span *ngIf="arraytwo.payouts_enabled == true">Active</span> <span *ngIf="arraytwo.payouts_enabled == false">Inactive</span></p>
+                    <p class="text-l text-strong mb-0" *ngIf="stripedatas && arraytwo">Charges: <span *ngIf="arraytwo.charges_enabled == true">Active</span> <span *ngIf="arraytwo.charges_enabled == false">Inactive</span></p>
+                </div>
+                <div class="col-md-3">
+                    <p class="text-lg">
+                        Available Amount
+                    </p>
+                    <p class="text-l text-strong mb-0" *ngIf="stripedatas && availableamount">$ {{availableamount.amount}}</p>
+                    <p class="text-l text-strong mb-0"></p>
+                </div>
+                <div class="col-md-3">
+                    <p class="text-lg">
+                        Pending Amount
+                    </p>
+                    <p class="text-l text-strong mb-0" *ngIf="stripedatas && pendingamount">$ {{pendingamount.amount}}</p>
+                    <p class="text-l text-strong mb-0"></p>
+                </div>
+            </div>
+        </div> -->
+        <h4>GENERAL STATISTICS</h4>
+        <div class="row common-dash">
+            <div class="col-md-3" *ngIf="userPrivilege">
+                <div class="sec-dash clr-des1">
+                    <div class="dashboard-card">
+                        <i class="fa fa fa-user-plus"></i>
+                        <h4>AGENCY</h4>
+                        <h5 *ngIf="dashboarddatas && dashboarddatas.userStatistics">{{dashboarddatas.userStatistics.Total}}</h5>
+
+                        <div class="user-diver">
+                            <div class="left-sec">
+                                <h6>Today's Agency</h6>
+                                <span *ngIf="dashboarddatas && dashboarddatas.userStatistics">{{dashboarddatas.userStatistics.Today}}</span>
+                            </div>
+                            <div class="left-sec">
+                                <h6>Today's Agency Login</h6>
+                                <span *ngIf="dashboarddatas && dashboarddatas.userStatistics">{{dashboarddatas.userStatistics.TodayLogin}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="link-sec">
+                        <p routerLink="/app/agency/list">Show More <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3" *ngIf="taskerPrivilege">
+                <div class="sec-dash clr-des2">
+                    <div class="dashboard-card">
+                        <i class="fa fa-users"></i>
+                        <h4>Caregiver</h4>
+                        <h5 *ngIf="dashboarddatas && dashboarddatas.taskerStatistics">{{dashboarddatas.taskerStatistics.Total}}</h5>
+
+                        <div class="user-diver">
+                            <div class="left-sec">
+                                <h6>Today's Caregivers</h6>
+                                <span *ngIf="dashboarddatas && dashboarddatas.taskerStatistics">{{dashboarddatas.taskerStatistics.Today}}</span>
+                            </div>
+                            <div class="left-sec">
+                                <h6>Active Caregivers</h6>
+                                <span *ngIf="dashboarddatas && dashboarddatas.taskerStatistics">{{dashboarddatas.taskerStatistics.ActiveTasker}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="link-sec">
+                        <p routerLink="/app/experts/taskers/taskerlist">Show More <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3" *ngIf="taskPrivilege">
+                <div class="sec-dash clr-des3">
+                    <div class="dashboard-card">
+                        <i class="fa fa-ticket"></i>
+                        <h4>TASKS</h4>
+                        <h5 *ngIf="dashboarddatas && dashboarddatas.taskStatistics">{{dashboarddatas.taskStatistics.Total}}</h5>
+
+                        <div class="user-diver">
+                            <div class="left-sec">
+                                <h6>Today Tasks</h6>
+                                <span *ngIf="dashboarddatas && dashboarddatas.taskStatistics">{{dashboarddatas.taskStatistics.Today}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="link-sec">
+                        <p routerLink="/app/jobs/all-jobs">Show More <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3" *ngIf="catogoryPrivilege">
+                <div class="sec-dash clr-des4">
+                    <div class="dashboard-card">
+                        <i class="fa fa-location-arrow"></i>
+                        <h4>CATEGORIES</h4>
+                        <h5 *ngIf="dashboarddatas && dashboarddatas.categoryStatistics">{{dashboarddatas.categoryStatistics.MainCategory}}</h5>
+
+                        <!-- <div class="user-diver">
+                            <div class="left-sec">
+                                <h6>Sub-categories</h6>
+                                <span *ngIf="dashboarddatas && dashboarddatas.categoryStatistics">{{dashboarddatas.categoryStatistics.SubCategory}}</span>
+                            </div>
+                        </div> -->
+                    </div>
+                    <div class="link-sec">
+                        <p routerLink="/app/categories/mainlist">Show More <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h4>SITE EARNINGS</h4>
+            <div class="row common-dash">
+            <div class="col-md-3">
+                <div class="sec-dash clr-des5">
+                    <div class="dashboard-card">
+                        <i class="fa fa-money"></i>
+                        <h4>Total Earning</h4>
+                        <h5 *ngIf="dashboarddatas && dashboarddatas.earningStatistics">${{dashboarddatas.earningStatistics.Total.amount | number :'1.2-2'}}</h5>
+
+                        <div class="user-diver">
+                            <div class="left-sec">
+                                <h6>Today's earnings</h6>
+                                <span *ngIf="dashboarddatas && dashboarddatas.earningStatistics">${{dashboarddatas.earningStatistics.Today.amount | number :'1.2-2'}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="link-sec">
+                        <p routerLink="/app/earnings/earninglist">Show More <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="sec-dash clr-des6">
+                    <div class="dashboard-card">
+                        <i class="fa fa-money"></i>
+                        <h4>Admin Earning</h4>
+                        <h5 *ngIf="dashboarddatas && dashboarddatas.earningStatistics">${{dashboarddatas.earningStatistics.Total.adminEarnings | number :'1.2-2'}}</h5>
+
+                        <div class="user-diver">
+                            <div class="left-sec">
+                                <h6>Today's earnings</h6>
+                                <span *ngIf="dashboarddatas && dashboarddatas.earningStatistics.Today">${{dashboarddatas.earningStatistics.Today.adminEarnings | number :'1.2-2'}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="link-sec">
+                        <p routerLink="/app/earnings/earninglist">Show More <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="sec-dash clr-des7">
+                    <div class="dashboard-card">
+                        <i class="fa fa-gift"></i>
+                        <h4>COUPONS</h4>
+                        <h5 *ngIf="dashboarddatas && dashboarddatas.couponStatistics">{{dashboarddatas.couponStatistics}}</h5>
+                    </div>
+                    <div class="user-diver">
+                        <div class="left-sec">
+                            <h6>&nbsp;</h6>
+                            <span>&nbsp;</span>
+                        </div>
+                        <div class="left-sec">
+                            <h6>&nbsp;</h6>
+                            <span>&nbsp;</span>
+                        </div>
+                    </div>
+                    <div class="link-sec">
+                        <p routerLink="/app/coupons/list">Show More <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="sec-dash clr-des8">
+                    <div class="dashboard-card">
+                        <i class="fa fa-comment"></i>
+                        <h4>Subscriber</h4>
+                        <h5 *ngIf="dashboarddatas && dashboarddatas.subscriber">{{dashboarddatas.subscriber}}</h5>
+
+                        <div class="user-diver">
+                            <div class="left-sec">
+                                <h6>&nbsp;</h6>
+                                <span>&nbsp;</span>
+                            </div>
+                            <div class="left-sec">
+                                <h6>&nbsp;</h6>
+                                <span>&nbsp;</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="link-sec">
+                        <p routerLink="/app/subscribers/list">Show More <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 sec-card-det-two-bg" *ngIf="taskPrivilege">
+        <h4>TASK STATISTICS</h4>
+        <div class="row icon-cards-row mb-2 sec-card-det-two">
+            <div class="">
+                <a class="card card-clr1">
+                    <div class="card-body text-center"><i class="fa fa-ticket card-head"></i>
+                        <p class="card-text font-weight-semibold mb-0 card-head">TOTALTASK</p>
+                        <p class="lead text-center card-head" *ngIf="dashboarddatas && dashboarddatas.taskStatistics">{{dashboarddatas.taskStatistics.Total}}</p>
+                    </div>
+                    <div class="link-sec">
+                        <p routerLink="/app/jobs/all-jobs" class="card-head">Show More <i class="fa fa-long-arrow-right card-head" aria-hidden="true"></i>
+                        </p>
+                    </div>
+                </a>
+            </div>
+            <div class="">
+                <a class="card card-clr2">
+                    <div class="card-body text-center"><i class="fa fa-ticket card-head"></i>
+                        <p class="card-text font-weight-semibold mb-0 card-head">ONGOING</p>
+                        <p class="lead text-center card-head" *ngIf="dashboarddatas && dashboarddatas.taskStatistics">{{dashboarddatas.taskStatistics.OnGoing}}</p>
+                    </div>
+                    <div class="link-sec">
+                        <p routerLink="/app/jobs/ongoing" class="card-head">Show More <i class="fa fa-long-arrow-right card-head" aria-hidden="true"></i>
+                        </p>
+                    </div>
+                </a>
+            </div>
+            <div class="">
+                <a class="card card-clr3">
+                    <div class="card-body text-center"><i class="fa fa-ticket card-head"></i>
+                        <p class="card-text font-weight-semibold mb-0 card-head">PAYMENT PENDING</p>
+                        <p class="lead text-center card-head" *ngIf="dashboarddatas && dashboarddatas.taskStatistics">{{dashboarddatas.taskStatistics.PaymentPending}}</p>
+                    </div>
+                    <div class="link-sec">
+                        <p routerLink="/app/jobs/paymentpending" class="card-head">Show More <i class="fa fa-long-arrow-right card-head" aria-hidden="true"></i>
+                        </p>
+                    </div>
+                </a>
+            </div>
+            <div class="">
+                <a class="card card-clr4">
+                    <div class="card-body text-center"><i class="fa fa-ticket card-head"></i>
+                        <p class="card-text font-weight-semibold mb-0 card-head">COMPLETED</p>
+                        <p class="lead text-center card-head" *ngIf="dashboarddatas && dashboarddatas.taskStatistics">{{dashboarddatas.taskStatistics.Completed}}</p>
+                    </div>
+                    <div class="link-sec">
+                        <p routerLink="/app/jobs/completed" class="card-head">Show More <i class="fa fa-long-arrow-right card-head" aria-hidden="true"></i>
+                        </p>
+                    </div>
+                </a>
+            </div>
+            <div class="">
+                <a class="card card-clr5">
+                    <div class="card-body text-center"><i class="fa fa-ticket card-head"></i>
+                        <p class="card-text font-weight-semibold mb-0 card-head">CANCEL</p>
+                        <p class="lead text-center card-head" *ngIf="dashboarddatas && dashboarddatas.taskStatistics">{{dashboarddatas.taskStatistics.Cancel}}</p>
+                    </div>
+                    <div class="link-sec">
+                        <p routerLink="/app/jobs/cancelled" class="card-head">Show More <i class="fa fa-long-arrow-right card-head" aria-hidden="true"></i>
+                        </p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="col-12 sec-card-det-three-bg">
+        <div class="graph-field charts line-graph">
+            <div class="sec-one graph line-graph">
+                <h3>Line graph</h3>
+
+                <div class="chart-container chart">
+                    <app-line-chart *ngIf="earndatas" [shadow]="false" [options]="chartDataConfig.lineChartOptions" [data]="lineChartData"></app-line-chart>
+                </div>
+            </div>
+            <div class="sec-two graph pie-graph">
+                <div class="chart-container chart">
+                    <h3>Overall Earning</h3>
+                    <app-pie-chart *ngIf="dashboarddatas" [shadow]="false" [options]="chartDataConfig.pieChartOptions" [data]="pieChartData"></app-pie-chart>
+                </div>
+            </div>
+        </div>
+    </div> -->
+    <!-- <div class="col-12 sec-card-det-four-bg">
+        <div class="stats-field">
+            <div class="sec-one stats tasker_stats">
+                <h3>Tasker Statistics</h3>
+                <hr>
+                <li class="scroll-li">
+                    <div class="detl-stats" *ngFor="let item of taskerstatsdatas">
+                        <span class="sec-one-stats">
+                                <p>Name: {{item.name}}</p>
+                                <p>JOBS: {{item.count}}</p>
+                            </span>
+                        <span class="sec-two-stats">
+                                <strong><p class="percnt-stats">{{item.percentage | number :'1.2-2'}}%</p></strong>
+                            </span>
+                        <progress id="file" value={{item.percentage}} max="100"> </progress>
+                        <hr>
+                    </div>
+                </li>
+            </div>
+            <div class="sec-two stats categry_stats">
+                <h3>Categorie Statistics</h3>
+                <hr>
+                <li class="scroll-li">
+                    <div class="detl-stats" *ngFor="let item of catgrystatsdatas">
+                        <span class="sec-one-stats">
+                                <p>Name: {{item.name}}</p>
+                                <p>JOBS: {{item.count}}</p>
+                            </span>
+                        <span class="sec-two-stats">
+                            <strong> <p class="percnt-stats">{{item.percentage | number :'1.2-2'}}%</p></strong>
+                            </span>
+                        <progress id="file" value={{item.percentage}} max="100"> </progress>
+                        <hr>
+                    </div>
+                </li>
+            </div>
+        </div>
+    </div> -->
+</div>
+<app-spinner [spinner]="spinner"></app-spinner>

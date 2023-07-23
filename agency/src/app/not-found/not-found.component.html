@@ -1,0 +1,28 @@
+<section ui-view="specialview" class="ng-scope">
+    <div class="bgcontainer post_step_last erroe-pge ng-scope">
+        <div style="background-image: url('../../assets/images/Default/404background.jpeg');"
+            class="sinupimg-container"></div>
+        <span class="opacot"></span>
+        <div class="cont-holder">
+            <div class="splcontainer">
+                <div class="images-lom">
+                    <a (click)="homepage()"><img src="assets/images/Default/logo_login.png" style=" width:300px"></a>
+                </div>
+                <div class="leftside error-content">
+                    <div class="col-md-7 intro-text">
+                        <div class="main">
+                            <span class="error-img"><img src="assets/images/Default/404.png" alt="404 icon"></span>
+                            <h1 class="ng-binding"> Page Not Found</h1>
+                            <p class="ng-binding">The page you are looking for was moved, removed, renamed or might
+                                never existed.</p>
+                            <!-- <button type="button" class="btn btn-warning" ui-sref="landing">Back to Home </button> -->
+                            <span class="page-scroll">
+                                <a class="btn slide-btn bg-inverse ng-binding" (click)="homepage()">Back To Home</a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

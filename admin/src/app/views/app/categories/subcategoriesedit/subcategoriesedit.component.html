@@ -1,0 +1,104 @@
+<app-breadcrumb></app-breadcrumb>
+<app-spinner [spinner]="spinner"></app-spinner>
+<h2 class="mb-4">Add/Edit Main Category</h2>
+<form #form="ngForm" novalidate class="tooltip-label-right">
+    <div class="card mb-4 categories">
+        <div class="card-body">
+            <div class="maincat">
+                <div class="form-group">
+                    <label> Category Name</label>
+                    <input type="text" class="form-control" name="name" ngModel required #name="ngModel" (keyup)="catslug($event)" [ngClass]="{ 'invalid-input': form.submitted && !name.valid }">
+                    <div *ngIf="!name.valid && form.submitted" class="required-message">Sub Category Name is required!</div>
+                </div>
+                <div class="form-group ">
+                    <label>Page slug</label>
+                    <p >{{imageUrl}}category/{{subcateditdata.slug}}</p>
+                </div>
+                <!-- <div class="form-group">
+                    <label>Parent</label>
+                    <select class="form-control select1 selectpicker"   [disabled] ='subcateditdata.parent'  name="parent" ngModel required #parent="ngModel" >
+                        <option class="special" value="" disabled selected hidden>
+                            Selected</option>
+                        <option class="special" *ngFor="let item of catlist" [value]=item._id>
+                           {{item.name}}
+                        </option>
+                    </select>
+                </div>  -->
+                <!-- <div class="form-group">
+                    <label> Category Image</label>
+                    <input type="file" id="file" name="image" class="form-control" accept="image/*" #image ngModel (change)="getFiles($event, 'image')">
+                    <span class="help-block">Allowed files: jpeg, png, jpg. Max file size 1Mb</span>
+                    <img alt="image" class="preview-image black-image" *ngIf="subcateditdata && subcateditdata.image && !imagepreview.image" src="{{imageUrl}}{{subcateditdata.image}}"><br>
+                    <img alt="image" class="preview-image black-image" *ngIf="imagepreview.image" [src]="imagepreview.image"><br>
+                </div>
+                <div class="form-group">
+                    <label>Sub Category In-active Icon(Mobile app)</label>
+                    <input type="file" id="file2" name="icon" class="form-control" accept="image/*" #icon ngModel (change)="getFiles($event, 'icon')">
+                    <span class="help-block">Allowed files: jpeg, png, jpg. Max file size 1Mb</span>
+                    <img alt="icon" class="preview-image black-image" *ngIf="subcateditdata && subcateditdata.icon && !imagepreview.icon" src="{{imageUrl}}{{subcateditdata.icon}}"><br>
+                    <img alt="icon" class="preview-image black-image" *ngIf="imagepreview.icon" [src]="imagepreview.icon"><br>
+                </div>
+                <div class="form-group">
+                    <label> Category Active Icon(Mobile app)</label>
+                    <input type="file" id="file3" name="activeicon" class="form-control" accept="image/*" #activeicon ngModel (change)="getFiles($event, 'activeicon')">
+                    <span class="help-block">Allowed files: jpeg, png, jpg. Max file size 1Mb</span>
+                    <img alt="activeicon" class="preview-image black-image" *ngIf="subcateditdata && subcateditdata.activeicon && !imagepreview.activeicon" src="{{imageUrl}}{{subcateditdata.activeicon}}"><br>
+                    <img alt="activeicon" class="preview-image black-image" *ngIf="imagepreview.activeicon" [src]="imagepreview.activeicon"><br>
+                </div> -->
+
+                <!-- <div class="form-group">
+                    <h3 class="mb-4">Set Priority</h3>
+                    <label class="switch">
+                        <input type="checkbox" name="priority" [checked]="prioirtystate ? true : false" (change)="prioritychange($event)">
+                        <span class="slider round"></span> 
+                    </label>
+                </div> -->
+            </div>
+        </div>
+    </div>
+    <div class="card mb-4 categories">
+        <div class="card-body">
+            <div class="seodetails">
+                <div class="form-group">
+                    <label>Job Hours</label>
+                    <input type="number" class="form-control" name="hours" ngModel required #hours="ngModel" [ngClass]="{ 'invalid-input': form.submitted && !hours.valid }">
+                    <div *ngIf="!hours.valid && form.submitted" class="required-message">Job Hours is required!</div>
+                </div>
+                <div class="form-group">
+                    <label>Price Type</label>
+                    <ng-select [items]="[{id:'Hourly', name:'Hourly'}, {id:'Flat', name:'Flat'}]" bindLabel="name" (change)="rateTypeCheck($event)"
+                    bindValue="id" name="ratetype" [ngClass]="{ 'invalid-input': form.submitted && !ratetype.valid }" ngModel required #ratetype="ngModel">
+                    </ng-select>
+                    <div *ngIf="!ratetype.valid && form.submitted" class="required-message">Price Type is required</div>
+                </div>
+                <div class="form-group">
+                    <label>Minimum {{rateType}} Rate</label>
+                    <input type="number" class="form-control" name="commision" ngModel required #commision="ngModel" [ngClass]="{ 'invalid-input': form.submitted && !commision.valid }">
+                    <div *ngIf="!commision.valid && form.submitted" class="required-message">Minimum {{rateType}} Rate is required!</div>
+                </div>
+                <div class="form-group">
+                    <label>Admin Commission (%)</label>
+                    <input type="number" class="form-control" name="admincommision" ngModel required #admincommision="ngModel" [ngClass]="{ 'invalid-input': form.submitted && !admincommision.valid }">
+                    <div *ngIf="!admincommision.valid && form.submitted" class="required-message">Admin Commission is required!</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card mb-4 categories">
+        <div class="card-body">
+            <div class="status">
+                <div class="form-group">
+                    <label>Status</label>
+                    <ng-select [items]="[{id:'1', name:'Publish'}, {id:'2', name:'Unpublish'}]" bindLabel="name"
+                    bindValue="id" name="status" [ngClass]="{ 'invalid-input': form.submitted && !status.valid }" ngModel required #status="ngModel">
+                    </ng-select>
+                    <div *ngIf="!status.valid && form.submitted" class="required-message">Status is required</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <app-state-button [btnClass]="'btn btn-primary btn-lg btn-shadow'" style="float: right;" [currentState]="buttonState" [isDisabled]="buttonDisabled" (click)="onSubmit()">
+        Submit
+    </app-state-button>
+</form>
+<simple-notifications></simple-notifications>

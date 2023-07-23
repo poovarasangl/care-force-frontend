@@ -1,0 +1,198 @@
+<section class="handy-home-footer">
+    <div class="footer">
+        <div class="container">
+
+            <!-- <div class="col-md-3 ft-div">
+                <div class="footer-log-sec">
+                    <h3>{{'KeepInTouch' | translate}}</h3>
+                    <p class="section-title add-sec"><a href="https://maps.google.com/?q={{Settings.location}}"
+                            target="_blank"><i class="fa fa-home"
+                                aria-hidden="true"></i>&nbsp;&nbsp;<span>{{Settings.location}}</span></a></p>
+                    <div class="Contact Us">
+                        <p class="section-title add-sec"><a href="mailto:{{Settings.email_address}}" target="_blank"><i
+                                    class="fa fa-envelope"
+                                    aria-hidden="true"></i>&nbsp;&nbsp;{{Settings.email_address}}</a></p>
+                        <p class="section-title add-sec"><a href="tel:{{Settings.contact_number_one}}"
+                                target="_blank"><i class="fa fa-phone"
+                                    aria-hidden="true"></i>&nbsp;&nbsp;{{Settings.contact_number_one}}</a></p>
+                        <p class="section-title add-sec"><a href="tel:{{Settings.contact_number_two}}"
+                                target="_blank"><i class="fa fa-phone"
+                                    aria-hidden="true"></i>&nbsp;&nbsp;{{Settings.contact_number_two}}</a></p>
+                    </div>
+                    <div class="app-section">
+                        <ul class="app-main">
+                            <li *ngFor="let rc of Settings.appstore">
+                                <span *ngIf="rc.name == 'Google Play' || rc.name =='App Store'">
+                                    <a href={{rc.url}} *ngIf="rc.name =='App Store'" target="_blank"><img
+                                            src="assets/images/Default/app_store.png"> </a>
+                                    <a href={{rc.url}} *ngIf="rc.name =='Google Play'" target="_blank"><img
+                                            src="assets/images/Default/google_play.png"> </a>
+                                </span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 ft-div foot-menu">
+                <div class="footer_information">
+                    <h3>{{'Company' | translate}}</h3>
+                    <ul class="footer_links">
+                        <li *ngFor="let item of pages">
+                            <a *ngIf="item.category === 'COMPANY'" (click)="pagesfun(item.slug)"
+                                target="_blank">{{item.name}}</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-3 ft-div plat-menu">
+                <div class="footer_information">
+                    <h3>{{'Platform' | translate}}</h3>
+                    <ul class="footer_links">
+                        <li *ngFor="let item of pages">
+                            <a *ngIf="item.category === 'INFORMATIONS'" (click)="pagesfun(item.slug)"
+                                target="_blank">{{item.name}}</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-md-3 ft-div footer-log">
+                <h3 style="text-align: initial;">{{'StayConnected' | translate}}</h3>
+                <ul class="social-icons">
+                    <li *ngFor="let rc of Settings.social">
+                        <a href={{rc.url}} *ngIf="rc.name=='Facebook' && (rc.status == 1 || rc.status == '1')"
+                            target="_blank"> <i class="fa fa-facebook" aria-hidden="true"></i></a>
+                        <a href={{rc.url}} *ngIf="rc.name=='Twitter'  && (rc.status == 1 || rc.status == '1')"
+                            target="_blank"> <i class="fa fa-twitter" aria-hidden="true"></i></a>
+                        <a href={{rc.url}} *ngIf="rc.name=='Google Plus' && (rc.status == 1 || rc.status == '1')"
+                            target="_blank"> <i class="fa fa-google-plus" aria-hidden="true"></i></a>
+                        <a href={{rc.url}} *ngIf="rc.name=='Youtube' && (rc.status == 1 || rc.status == '1')"
+                            target="_blank"> <i class="fa fa-youtube-play" aria-hidden="true"></i></a>
+                        <a href={{rc.url}} *ngIf="rc.name=='Pinterest' && (rc.status == 1 || rc.status == '1')"
+                            target="_blank"> <i class="fa fa-pinterest-p" aria-hidden="true"></i></a>
+                        <a href={{rc.url}} *ngIf="rc.name=='Linkedin' && (rc.status == 1 || rc.status == '1')"
+                            target="_blank"> <i class="fa fa-linkedin" aria-hidden="true"></i></a>
+                    </li>
+                </ul>
+
+                <div class="sub-sections">
+                    <p>{{'Subscribe' | translate}}</p>
+                    <div class="sub-email">
+                        <form>
+                            <div class="group-control">
+                                <input ng-pattern="/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/"
+                                    name="email" placeholder="Enter Your Email Address" class="form-control"
+                                    (change)="emailchange($event.target.value)">
+                                <div class="text-center con-sub">
+                                    <button class="btn btn-default subscribes" type="button"
+                                        (click)="onSubmit()">{{'SEND' | translate}}</button>
+                                </div>
+                                <div *ngIf="submitted" class="invalid-feedback">
+                                    <div class="error_msg" *ngIf="error_msg">{{error_msg}}</div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="handy-lang-section">
+                        <select class="lang" (change)="setLang($event.target.value)" [(ngModel)]="languagevalue">
+                            <option *ngFor="let item of Languages" value="{{item.code}}">{{item.name}}</option>
+                        </select>
+                        <select class="currency lang" (change)="currency($event.target.value)">
+                            <option *ngFor="let item of currencies" value="{{item.code}}"
+                                [selected]="item.code === currencyvalue">{{item.code}}</option>
+                        </select>
+                    </div>
+                </div>
+            </div> -->
+
+            <div class="row">
+                <div class="col-md-3 col-sm-12 col-xs-12">
+                    <div class="logo-white">
+                        <img src="assets/images/logo/careforce-white.png">
+                    </div>
+                    <ul class="social-icons">
+                        <li *ngFor="let rc of Settings.social">
+                            <a href={{rc.url}} *ngIf="rc.name=='Facebook' && (rc.status == 1 || rc.status == '1')"
+                                target="_blank"> <i class="fa fa-facebook" aria-hidden="true"></i></a>
+                            <a href={{rc.url}} *ngIf="rc.name=='Twitter'  && (rc.status == 1 || rc.status == '1')"
+                                target="_blank"> <i class="fa fa-twitter" aria-hidden="true"></i></a>
+                            <a href={{rc.url}} *ngIf="rc.name=='Linkedin' && (rc.status == 1 || rc.status == '1')"
+                                target="_blank"> <i class="fa fa-linkedin" aria-hidden="true"></i></a>
+                            <!-- <a href={{rc.url}} *ngIf="rc.name=='Google Plus' && (rc.status == 1 || rc.status == '1')"
+                                target="_blank"> <i class="fa fa-google-plus" aria-hidden="true"></i></a> -->
+                            <!-- <a href={{rc.url}} *ngIf="rc.name=='Youtube' && (rc.status == 1 || rc.status == '1')"
+                                target="_blank"> <i class="fa fa-youtube-play" aria-hidden="true"></i></a> -->
+                            <!-- <a href={{rc.url}} *ngIf="rc.name=='Pinterest' && (rc.status == 1 || rc.status == '1')"
+                                target="_blank"> <i class="fa fa-pinterest-p" aria-hidden="true"></i></a> -->
+
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-3 col-sm-12 col-xs-12">
+                    <h3 class="foot-head">{{'KeepInTouch' | translate}}</h3>
+                    <div class="Contact Us">
+                        <p class="section-title add-sec"><a href="https://maps.google.com/?q={{Settings.location}}"
+                                target="_blank"><i class="fa fa-home"
+                                    aria-hidden="true"></i>&nbsp;&nbsp;<span>{{Settings.location}}</span></a></p>
+
+                        <p class="section-title add-sec"><a href="mailto:{{Settings.email_address}}" target="_blank"><i
+                                    class="fa fa-envelope"
+                                    aria-hidden="true"></i>&nbsp;&nbsp;{{Settings.email_address}}</a></p>
+                        <p class="section-title add-sec"><a href="tel:{{Settings.contact_number_one}}"
+                                target="_blank"><i class="fa fa-phone"
+                                    aria-hidden="true"></i>&nbsp;&nbsp;{{Settings.contact_number_one}}</a></p>
+                        <p class="section-title add-sec"><a href="tel:{{Settings.contact_number_two}}"
+                                target="_blank"><i class="fa fa-phone"
+                                    aria-hidden="true"></i>&nbsp;&nbsp;{{Settings.contact_number_two}}</a></p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-12 col-xs-12">
+                    <h3 class="foot-head">{{'Company' | translate}}</h3>
+                    <ul class="footer_links">
+                        <li *ngFor="let item of pages">
+                            <a *ngIf="item.category === 'COMPANY'" (click)="pagesfun(item.slug)"
+                                target="_blank">{{item.name}}</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-3 col-sm-12 col-xs-12">
+                    <h3 class="foot-head">{{'Subscribe' | translate}}</h3>
+                    <div class="sub-email">
+                        <form>
+                            <div class="group-control">
+                                <input ng-pattern="/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/"
+                                    name="email" placeholder="Enter Your Email Address" class="form-control"
+                                    (change)="emailchange($event.target.value)">
+                                <div class="text-center con-sub">
+                                    <button class="btn btn-default subscribes" type="button"
+                                        (click)="onSubmit()">{{'SEND' |
+                                        translate}}</button>
+                                </div>
+                                <div *ngIf="submitted" class="invalid-feedback">
+                                    <div class="error_msg" *ngIf="error_msg">{{error_msg}}</div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12 col-sm-12 col-xs-12 Copyrights">
+                <p class="copyright">{{'Copyright' | translate}} &copy; {{'RightsReserved' | translate}}</p>
+            </div>
+        </div>
+    </div>
+</section>
+<script id="template_toast_ele" type="text/x-template">
+    <div id='template_toast' style="display: none">
+        <div class="horizontal-align">
+            <div class='toast-content'>
+                <div class='toast-title'>
+                    {{'WeekendAlarm' | translate}}
+                </div>
+                <div class='toast-message'> {{'toast_msg' | translate}} </div>
+            </div>
+        </div>
+        <img src="http://npmci.syncfusion.com/development/demos/src/toast/resource/map.jpg" width="100%" height="70%">
+    </div>
+</script>

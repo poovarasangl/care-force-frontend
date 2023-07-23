@@ -1,0 +1,8 @@
+<app-customtable [settings]="settings" [source]="source" [showSearch]="true" [editurl]="editurl"
+    [addbtn_name]="addbtn_name" [addurl]="addurl" [showBulkActions]="add_btn" [deleteurl]="deleteurl"
+    [AddNewItem]="add_btn" (onDeleteChange)="onDeleteChange($event)"
+    (onViewChange)="onViewChange($event)" (onPageChange)="onPageChange($event)"
+    (onSearchChange)="onSearchChange($event)" (onAddnewChange)="onAddnewChange($event)"
+    (onBulkactionChange)="onBulkactionChange($event)" (onitemsPerPageChange)="onitemsPerPageChange($event)">
+</app-customtable>
+<app-spinner [spinner]="spinner"></app-spinner>

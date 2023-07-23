@@ -1,0 +1,57 @@
+<div class="tsk_cont ng-scope">
+    <div class="container">
+        <div class="tsk_dtls ui-subtabs">
+            <div class="tsk_dtls_one">
+                <div class="tsk_dtls_one_tle">
+                    <h2 class="ng-binding">{{'Des_Job' | translate}}</h2>
+                    <span class="ng-binding">{{'Expert_relevent' | translate}}.</span>
+                </div>
+                <div class="tsk_dtls_one_cont">
+                    <div class="tsk_dtls_one_cont_tle ng-binding">
+                        {{'Job_Loc' | translate}}
+                    </div>
+                    <div class="tsk_dtls_one_det_cont">
+                        <div class="tsk_dtls_one_det bor_cont">
+                            <div class="tsk_dtls_one_detl">
+                                <div class="tsk_dtls_one_det_lft">
+                                    <input name="city" class="location_city" type="text"
+                                        [ngModelOptions]="{standalone: true}" [(ngModel)]="address"
+                                        (keydown.enter)="$event.preventDefault()" placeholder="Enter Your Location"
+                                        autocorrect="off" autocapitalize="off" spellcheck="off" type="text" #search>
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf="!address && submit">
+                            <div class="error_msg">
+                                {{'Job_loc_req' | translate}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tsk_dtls_one_cont_tle ng-binding">
+                        {{'Tell_ur_job' | translate}}
+                    </div>
+                    <div class="tsk_dtls_two_det_cont">
+                        <div class="tsk_dtls_two_txtarea">
+                            <textarea
+                                placeholder="Provide Any Additional Instructions For Your CareForce If You Like, For Example, If You Have Any Pets, Where To Park, Or How To Get In."
+                                [(ngModel)]="discription" class="ng-pristine ng-untouched ng-valid ng-empty"
+                                aria-invalid="false" maxlength="350"></textarea>
+                        </div>
+                        <div *ngIf="!discription && submit">
+                            <div class="error_msg">
+                                {{'Abt_jb_req' | translate}}.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tsk_pric_btn">
+                        <span class="tsk_pric_btn_inner">
+                            <a (click)="see_experts()" class="ng-binding">{{'CareForce' | translate}} &amp; {{'Prices' |
+                                translate}}</a>
+                        </span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

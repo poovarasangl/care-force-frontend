@@ -1,0 +1,36 @@
+<section class="handy-home">
+    <section class="handy-home-gallery">
+        <div class="container">
+            <div class="row">
+                <div class="cvr-dv col-md-12 col-sm-12 col-xs-12">
+                    <div class="spcf-dv col-md-2 col-sm-2" *ngFor="let categoryinfo of categories">
+                        <div class="pro1" (click)="subcategory(categoryinfo.slug)">
+                            <a>
+                                <div class="pro-pict">
+                                    <div class="afkl-lazy-wrapper">
+                                        <img class="afkl-lazy-image" src="{{imageUrl}}{{categoryinfo.image}}" CategoryDefaultImage>
+                                    </div>
+                                </div>
+                                <div class="cat-txtt">
+                                    <span>{{categoryinfo.name}}</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="spcf-dv col-md-2 col-sm-2" (click)="homepage()">
+                        <div class="pro1">
+                            <div class="pro-pict text-center morebtn-wrap">
+                                <button type="button" class="btn btn-default view-more ">
+                  <i class="fa fa-hand-o-right blink" aria-hidden="true" style="color: red;"></i>
+                </button>
+                            </div>
+                            <div class="cat-txtt">
+                                <span>{{'Back' | translate}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>

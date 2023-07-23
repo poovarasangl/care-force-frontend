@@ -1,0 +1,92 @@
+<app-breadcrumb></app-breadcrumb>
+<app-spinner [spinner]="spinner"></app-spinner>
+<div class="card mb-4 general-settings">
+    <div class="card-body">
+        <h2 class="mb-4">{{title}} Coupon</h2>
+        <form #form="ngForm" novalidate class="tooltip-label-right" autocomplete="off">
+            <div class="form-group row error-l-50 col-md-12">
+                <div class="form-group col-md-6">
+                    <label>Name</label>
+                    <input type="hidden" class="form-control" name="coupon_id" ngModel #coupon_id="ngModel">
+                    <input type="text" class="form-control" name="name" ngModel required #name="ngModel" [ngClass]="{ 'invalid-input': form.submitted && !name.valid }">
+                    <div *ngIf="!name.valid && form.submitted" class="required-message">Coupon Name is required!
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <label>Code</label>
+                    <input type="text" class="form-control" name="code" ngModel required #code="ngModel" [ngClass]="{ 'invalid-input': form.submitted && !code.valid }">
+                    <div *ngIf="!code.valid && form.submitted" class="required-message">Coupon Code is required!
+                    </div>
+                </div>
+
+            </div>
+            <div class="form-group row error-l-50 col-md-12">
+                <div class="form-group mail col-md-6">
+                    <label>Discount type</label>
+                    <ng-select [items]="[{id: 'Flat', name:'Flat Discount'}, {id:'Percentage', name:'Percentage Discount'}]" bindLabel="name" (change)="discountTypeCheck($event)" bindValue="id" name="discount_type" [clearable]="false" [ngClass]="{ 'invalid-input': form.submitted && !discount_type.valid }"
+                        placeholder="Select Discount type" ngModel required #discount_type="ngModel">
+                    </ng-select>
+                    <div *ngIf="!discount_type.valid && form.submitted" class="required-message">Discount type is required!
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <label *ngIf="removeLabel || discountType == 'Flat'" [ngClass]="{ 'label-hide': discountType == 'Percentage'}">Amount</label>
+                    <label *ngIf="discountType == 'Percentage'">Percentage</label>
+                    <input type="number" min="0" id="amount_percentage" class="form-control" name="amount_percentage" ngModel required #amount_percentage="ngModel" [ngClass]="{ 'invalid-input': form.submitted && !amount_percentage.valid }">
+                    <div *ngIf="!amount_percentage.valid && form.submitted" class="required-message">Amount is required!
+                    </div>
+                </div>
+
+            </div>
+            <div class="form-group row error-l-50 col-md-12">
+                <div class="form-group mail col-md-6">
+                    <label>Usage Limit Per Coupon</label>
+                    <input type="number" min="0" class="form-control" name="total_coupons" ngModel required #total_coupons="ngModel" [ngClass]="{ 'invalid-input': form.submitted && !total_coupons.valid }">
+                    <div *ngIf="!total_coupons.valid && form.submitted" class="required-message">Usage Limit Per Coupon is required!
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <label>Usage Limit Per User</label>
+                    <input type="number" min="0" class="form-control" name="per_user" ngModel required #per_user="ngModel" [ngClass]="{ 'invalid-input': form.submitted && !per_user.valid }">
+                    <div *ngIf="!per_user.valid && form.submitted" class="required-message">Usage Limit Per User is required!
+                    </div>
+                </div>
+
+            </div>
+            <div class="form-group row error-l-50 col-md-12">
+                <div class="form-group col-md-12">
+                    <label>Description</label>
+                    <textarea class="form-control" rows="6" name="description" ngModel required #description="ngModel" [ngClass]="{ 'invalid-input': form.submitted && !description.valid }"></textarea>
+                    <div *ngIf="!description.valid && form.submitted" class="required-message">Description is required!
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row error-l-50 col-md-12">
+                <div class="form-group col-md-4">
+                    <label>Valid From</label>
+                    <input type="text" placeholder="Datepicker" class="form-control" (bsValueChange)="validDateChange($event)" [minDate]="latest_date" name="valid_from" ngModel required #valid_from="ngModel" bsDatepicker [container]="'html'" [bsConfig]="{ adaptivePosition: true, dateInputFormat: 'DD-MM-YYYY' }">
+                    <!-- <input type="date" class="form-control" min='{{latest_date}}' name="valid_from" ngModel required #valid_from="ngModel" [ngClass]="{ 'invalid-input': form.submitted && !valid_from.valid }"> -->
+                    <div *ngIf="!valid_from.valid && form.submitted" class="required-message">Valid From is required!
+                    </div>
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Expiry Date</label>
+                    <input type="text" placeholder="Datepicker" class="form-control" [minDate]="end_date" name="expiry_date" ngModel required #expiry_date="ngModel" bsDatepicker [container]="'html'" [bsConfig]="{ adaptivePosition: true, dateInputFormat: 'DD-MM-YYYY' }">
+                    <!-- <input type="date" class="form-control" min='{{latest_date}}' name="expiry_date" ngModel required #expiry_date="ngModel" [ngClass]="{ 'invalid-input': form.submitted && !expiry_date.valid }"> -->
+                    <div *ngIf="!expiry_date.valid && form.submitted" class="required-message">Expiry Date is required!
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <label>Status</label>
+                    <ng-select [items]="[{id:1, name:'Active'}, {id:2, name:'In-Active'}]" bindLabel="name" bindValue="id" name="status" [ngClass]="{ 'invalid-input': form.submitted && !status.valid }" placeholder="Select status" ngModel required #status="ngModel">
+                    </ng-select>
+                    <div *ngIf="!status.valid && form.submitted" class="required-message">Status is required!</div>
+                </div>
+            </div>
+            <app-state-button [btnClass]="'btn btn-primary btn-lg btn-shadow'" style="float: right;" [currentState]="buttonState" [isDisabled]="buttonDisabled" (click)="onClick()">
+                Submit
+            </app-state-button>
+        </form>
+        <simple-notifications></simple-notifications>
+    </div>
+</div>

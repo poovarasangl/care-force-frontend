@@ -1,0 +1,23 @@
+<section>
+    <div class="container-fluid ng-scope" style="background-color:#fff;">
+        <div class="sub-tabs-menu">
+            <ul class="nav nav-tabs">
+                <li>
+                    <a class="disabled-links" [ngClass]="{'active': jobdetails}"
+                        (click)="viewexperts = false;jobdetails = true" (click)="jobdetailsfun()">
+                        1.Fill Out Job Details
+                    </a>
+                </li>
+                <li>
+                    <a [ngClass]="{'active': viewexperts}" [ngStyle]="{'pointer-events': viewexpertstab}"
+                        (click)="viewexperts = true;jobdetails = false" class="disabled-links new-olds"
+                        (click)="viewexpertsfun()">
+                        2. View CareForce &amp; Prices
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<router-outlet></router-outlet>

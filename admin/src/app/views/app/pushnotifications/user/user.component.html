@@ -1,0 +1,59 @@
+<simple-notifications></simple-notifications>
+<app-customtable [settings]="settings" [source]="source" [addbtn_name]="addbtn_name" [showSearch]="true"
+    [showBulkActions]="false" [SendNotifications]="true" [SendMail]="true" [AddNewItem]="false" [itemsPerPage]="default_limit"
+    (onPageChange)="onPageChange($event)" (onSearchChange)="onSearchChange($event)"
+    (onitemsPerPageChange)="onitemsPerPageChange($event)" (onMailSend)="onMailSend($event)" (onSendNotification)="onSendNotification($event)">
+</app-customtable>
+<app-spinner [spinner]="spinner"></app-spinner>
+<ng-template #Emailtemplate>
+    <div class="modal-body text-center">
+        <h2>Send Mail</h2>
+        <form #form="ngForm" method="post" novalidate class="tooltip-label-right">
+            <div class="modal-body">
+                <div class="form-group  error-l-50">
+                    <label class="control-label"><h6 class="modal-title mb-4">Select Need Template to Send as Mail</h6></label>
+                    <!-- <select class="form-control" name="template" class="form-control" ngModel required #template="ngModel" [ngClass]="{ 'invalid-input': buttonDisabled && !template.valid }">
+                        <option value="" selected="selected"> Select Category</option>
+                        <option *ngFor="let item of emaitemplets" value="{{item._id}}">{{item.name}}</option>
+                    </select>
+                    <div *ngIf="!template.valid && buttonDisabled" class="required-message">Email template is required!
+                    </div> -->
+                    <ng-select [items]="emaitemplets"  [hideSelected]="true"
+                      bindLabel="name" bindValue="_id" name="template" ngModel required #template="ngModel" [ngClass]="{ 'invalid-input': form.submitted && !template.valid }">
+                    </ng-select>
+                    <div *ngIf="!template.valid && form.submitted" class="required-message">Email template is required!</div>
+                </div>
+                
+            </div>
+            <div class="modal-footer btnscont">
+                <!-- <app-state-button [btnClass]="'btn btn-success btn-lg btn-shadow'" [currentState]="buttonState" [isDisabled]="buttonDisabled" (click)="onSubmit(form)">
+                    Send
+                </app-state-button> {{" "}} -->
+                <button type="submit" class="btn btn-outline-success" (click)="onSubmit(form)">Send</button> {{" "}}
+                <button type="button" class="btn btn-danger" (click)="modalRef.hide();">Cancel</button>
+            </div>
+        </form>
+    </div>
+</ng-template>
+
+<ng-template #Messagetemplate>
+    <div class="modal-body text-center">
+        <h2>Send Message</h2>
+        <form #form="ngForm" novalidate class="tooltip-label-right">
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="control-label"><h6 class="modal-title mb-4">Select Template to Send as Notification</h6></label>
+                    <ng-select [items]="messagetemplets"  [hideSelected]="true"
+                      bindLabel="name" bindValue="_id" name="template" ngModel required #template="ngModel" [ngClass]="{ 'invalid-input': form.submitted && !template.valid }">
+                    </ng-select>
+                    <div *ngIf="!template.valid && form.submitted" class="required-message">Message template is required!</div>
+                </div>
+                
+            </div>
+            <div class="modal-footer btnscont">
+                <button type="submit" class="btn btn-outline-success" (click)="onmessageSubmit(form)">Send</button> {{" "}}
+                <button type="button" class="btn btn-danger" (click)="modalRef.hide();">Cancel</button>
+            </div>
+        </form>
+    </div>
+</ng-template>

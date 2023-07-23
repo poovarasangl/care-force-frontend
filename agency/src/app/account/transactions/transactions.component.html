@@ -1,0 +1,121 @@
+<div class="trans-profiles">
+    <div class="container">
+        <div class="view-trans transaction">
+            <div class="trans-packed main-scrolls-trcks">
+                <div class="trans-profiles-header">
+                    <div class="trans-headings">
+                        <h4 class="ng-binding">{{'Transactions' | translate}}</h4>
+                    </div>
+                </div>
+                <div class="scroll-function">
+                    <div class="trans-profiles-inner">
+                        <div class="trans-counters" *ngIf="transactionlist">
+                            <div class="list-transta transcations_byall ng-scope" [ngClass]="{'usertasker': profiledata.role != 'user'}" *ngFor="let item of transactionlist; let i=index">
+                                <div class="scroll-transactions">
+                                    <div class="col-trans-lists">
+                                        <div class="count-order">
+                                            <span class="ng-binding">{{'S.No' | translate}}</span>
+                                            <p class="ng-binding">{{i+1}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-trans-lists">
+                                        <div class="count-book">
+                                            <span class="ng-binding">{{'JobId' | translate}}</span>
+                                            <p class="ng-binding">{{item.booking_id}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-trans-lists">
+                                        <div class="count-task">
+                                            <span class="ng-binding">{{'Job' | translate}}</span>
+                                            <p class="ng-binding">{{item.category.name}}</p>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="item.invoice.amount.total">
+                                        <div class="col-trans-lists ng-scope" *ngIf="item.invoice.amount.extra_amount && item.invoice.amount.coupon">
+                                            <div class="count-action ng-scope">
+                                                <span class="ng-binding">{{'Amount_Discount' | translate}}</span>
+                                                <p class="ng-binding">{{DefaultCurrency.symbol}} {{(item.invoice.amount.total + item.invoice.amount.service_tax + item.invoice.amount.extra_amount - item.invoice.amount.coupon) * DefaultCurrency.value}}</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-trans-lists ng-scope" *ngIf="item.invoice.amount.extra_amount && !item.invoice.amount.coupon">
+                                            <div class="count-action ng-scope">
+                                                <span class="ng-binding">{{'TotalAmount' | translate}}</span>
+                                                <p>{{DefaultCurrency.symbol}}{{(item.invoice.amount.total + item.invoice.amount.service_tax + item.invoice.amount.extra_amount) * DefaultCurrency.value }}
+                                                    <p>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-trans-lists ng-scope" *ngIf="!item.invoice.amount.extra_amount && item.invoice.amount.coupon">
+                                            <div class="count-action ng-scope">
+                                                <span class="ng-binding">{{'Amount_Discount' | translate}}</span>
+                                                <p class="ng-binding">{{DefaultCurrency.symbol}} {{(item.invoice.amount.total + item.invoice.amount.service_tax - item.invoice.amount.coupon) * DefaultCurrency.value}}</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-trans-lists ng-scope" *ngIf="!item.invoice.amount.extra_amount && !item.invoice.amount.coupon">
+                                            <div class="count-action ng-scope">
+                                                <span class="ng-binding">{{'TotalAmount' | translate}}</span>
+                                                <p>{{DefaultCurrency.symbol}}{{(item.invoice.amount.total + item.invoice.amount.service_tax + item.invoice.amount.extra_amount) * DefaultCurrency.value }}
+                                                    <p>
+                                            </div>
+                                        </div>
+
+                                        <div *ngIf="profiledata.role == 'user'" class="col-trans-lists ng-scope">
+                                            <div *ngIf="item.transaction" class="count-action ng-scope">
+                                                <span class="ng-binding">{{'TransactionType' | translate}}</span>
+                                                <p class="ng-binding">{{item.transaction.type}}</p>
+                                            </div>
+                                        </div>
+
+                                        <div *ngIf="profiledata.role == 'tasker'" class="col-trans-lists ng-scope">
+                                            <div *ngIf="!item.invoice.amount.extra_amount" class="count-action ng-scope">
+                                                <span class="ng-binding">{{'YourEarnings' | translate}}</span>
+                                                <p class="ng-binding">{{DefaultCurrency.symbol}} {{(item.invoice.amount.total - item.invoice.amount.admin_commission) * DefaultCurrency.value }}</p>
+                                            </div>
+                                            <div *ngIf="item.invoice.amount.extra_amount" class="count-action ng-scope">
+                                                <span class="ng-binding">{{'YourEarnings' | translate}}</span>
+                                                <p class="ng-binding">{{DefaultCurrency.symbol}} {{((item.invoice.amount.total - item.invoice.amount.admin_commission) + item.invoice.amount.extra_amount) * DefaultCurrency.value }}</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-trans-lists ng-scope" *ngIf="profiledata.role == 'user' && item.transaction">
+                                            <div class="count-action">
+                                                <span class="ng-binding">{{'Payment' | translate}}</span>
+                                                <p class="ng-binding">{{DefaultCurrency.symbol}} {{item.transaction.amount * DefaultCurrency.value }}</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-trans-lists ng-scope" *ngIf="profiledata.role == 'tasker'">
+                                            <div class="count-action">
+                                                <span class="ng-binding">{{'Admin_PaymentStatus' | translate}}</span>
+                                                <p class="ng-binding">{{'No' | translate}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-trans-lists">
+                                        <span class="ng-binding">{{'Action' | translate}}</span>
+                                        <p class="viw-more ng-scope" (click)="view(item)" role="button" tabindex="0"><a class="main-views ng-binding">{{'View' | translate}}</a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="text-align: center;" *ngIf="count > 1" class="pagination_inner clearfix ng-scope">
+                                <app-pagination [totalRecords]="count" [recordsPerPage]="5" (onPageChange)="pagechange($event)">
+                                </app-pagination>
+                            </div>
+                        </div>
+                        <div *ngIf="!transactionlist">
+                            <div class="list-transta ng-scope" style="text-align: center;">
+                                <span class="ng-binding">{{'DontHave_Transactions' | translate}}
+                  !</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<app-modal></app-modal>
+<router-outlet></router-outlet>

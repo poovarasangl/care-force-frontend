@@ -1,0 +1,132 @@
+<app-breadcrumb></app-breadcrumb>
+<app-spinner [spinner]="spinner"></app-spinner>
+<div class="card mb-4 general-settings">
+    <div class="card-body">
+        <h2 class="mb-4"><strong>{{title}}</strong> Sub Admin</h2>
+        <form [formGroup]="subadminForm" class="tooltip-label-right">
+            <div class="form-group row error-l-50 col-md-12">
+                <div class="form-group col-md-12">
+                    <label>User Name</label>
+                    <input type="hidden" class="form-control" name="_id" formControlName="_id">
+                    <input type="text" formControlName="username" class="form-control"
+                        [ngClass]="{ 'invalid-input': submitted && forms.username.errors }" />
+                    <div *ngIf="submitted && forms.username.errors" class="required-message">
+                        <div *ngIf="forms.username.errors.required">Username is required</div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="form-group row error-l-50 col-md-12">
+                <div class="form-group col-md-12">
+                    <label>Name</label>
+                    <input type="text" formControlName="name" class="form-control"
+                        [ngClass]="{ 'invalid-input': submitted && forms.name.errors }" />
+                    <div *ngIf="submitted && forms.name.errors" class="required-message">
+                        <div *ngIf="forms.name.errors.required">Name is required</div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="form-group row error-l-50 col-md-12">
+                <div class="form-group mail col-md-12">
+                    <label>Email</label>
+                    <input type="text" formControlName="email" class="form-control"
+                        [ngClass]="{ 'invalid-input': submitted && forms.email.errors }" />
+                    <div *ngIf="submitted && forms.email.errors" class="required-message">
+                        <div *ngIf="forms.email.errors.required">Email is required</div>
+                        <div *ngIf="forms.email.errors.email">Email must be a valid email address</div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row error-l-50 col-md-12">
+                <div class="form-group col-md-12">
+                    <label>Password</label>
+                    <input type="password" formControlName="password" class="form-control"
+                        [ngClass]="{ 'invalid-input': submitted && forms.password.errors }" />
+                </div>
+            </div>
+            <div class="form-group row error-l-50 col-md-12">
+                <div class="form-group col-md-12">
+                    <label>Confirm Password</label>
+                    <input type="password" formControlName="confirmPassword" class="form-control"
+                        [ngClass]="{ 'invalid-input': submitted && forms.confirmPassword.errors }" />
+                    <div *ngIf="submitted && forms.confirmPassword.errors" class="required-message">
+                        <div *ngIf="forms.confirmPassword.errors.mustMatch">Passwords must match</div>
+                    </div>
+                </div>
+            </div>
+            <div class="row error-l-50">
+                <div class="col-md-12">
+                    <div class="mb-4 custom-checkbox-select-all">
+                        <div class="custom-control custom-checkbox mb-4">
+                            <input type="checkbox" class="custom-control-input" id="customCheckThis"
+                                (change)="selectall($event.target.checked)">
+                            <label class="custom-control-label" for="customCheckThis">Select All</label>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr class="front bg-greensea">
+                                    <th>Management</th>
+                                    <th>View</th>
+                                    <th>Add</th>
+                                    <th>Edit</th>
+                                    <th>Delete</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let menu of privilagesdata; let i = index" class="subadminedit">
+                                    <th>{{menu.name | titlecase }}</th>
+                                    <td>
+                                        <div class="custom-control custom-checkbox mb-2">
+                                            <input type="checkbox" class="custom-control-input"
+                                                id="customCheck-{{i}}-view"
+                                                (change)="$event.target.checked == true ? menu.status.view = 1 : menu.status.view = 0"
+                                                [checked]="menu.status.view">
+                                            <label class="custom-control-label" for="customCheck-{{i}}-view"></label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="custom-control custom-checkbox mb-2">
+                                            <input type="checkbox" class="custom-control-input"
+                                                id="customCheck-{{i}}-add"
+                                                (change)="$event.target.checked == true ? menu.status.add = 1 : menu.status.add = 0"
+                                                [checked]="menu.status.add">
+                                            <label class="custom-control-label" for="customCheck-{{i}}-add"></label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="custom-control custom-checkbox mb-2">
+                                            <input type="checkbox" class="custom-control-input"
+                                                id="customCheck-{{i}}-edit"
+                                                (change)="$event.target.checked == true ? menu.status.edit = 1 : menu.status.edit = 0"
+                                                [checked]="menu.status.edit">
+                                            <label class="custom-control-label" for="customCheck-{{i}}-edit"></label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="custom-control custom-checkbox mb-2">
+                                            <input type="checkbox" class="custom-control-input"
+                                                id="customCheck-{{i}}-delete"
+                                                (change)="$event.target.checked == true ? menu.status.delete = 1 : menu.status.delete = 0"
+                                                [checked]="menu.status.delete">
+                                            <label class="custom-control-label" for="customCheck-{{i}}-delete"></label>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <app-state-button [btnClass]="'btn btn-primary btn-lg btn-shadow'" style="float: right;"
+                [currentState]="buttonState" [isDisabled]="buttonDisabled" (click)="onSubmit()">
+                Submit
+            </app-state-button>
+        </form>
+        <simple-notifications></simple-notifications>
+    </div>
+</div>

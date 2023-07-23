@@ -1,0 +1,50 @@
+<div ui-view="" class="ng-scope">
+    <div class="invt_frnd_dtls ng-scope">
+        <div class="container">
+            <div class="tskr_rgstrn_outer_cont invite">
+                <div class="invt_frnd_dtls_inner">
+                    <div class="invt_frnd_dtls_bx">
+                        <div class="invt_frnd_dtls_hdr">
+                            <div class="invt_frnd_dtls_bx_lft">
+                                <div class="invt_frnd_dtls_tle ng-binding">
+                                    {{'Invite_Friends' | translate}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="invt_frnd_dtls_cont">
+                            <div class="invt_frnd_dtls_inner_cont">
+
+
+                                <div class="invt_frnd_dtls_inner_lft">
+                                    <div class="invt_frnd_inner_lft_tle ng-binding">
+                                        <p>{{'InviteYour' | translate}}
+                                            <br>{{'FriendsVia' | translate}}
+                                        </p>
+                                    </div>
+                                    <div class="invt_frnd_inner_lft_gmail ng-binding" (click)="googleInviteFriends()"
+                                        role="button" tabindex="0">
+                                        {{'Gmail' | translate}}
+                                    </div>
+                                    <div class="invt_frnd_inner_lft_or ng-binding">
+                                        <p>{{'Or' | translate}}</p>
+                                    </div>
+                                    <div class="invt_frnd_inner_lft_fb ng-binding" (click)="facebookInviteFriends()"
+                                        role="button" tabindex="0">
+                                        {{'Facebook' | translate}}
+                                    </div>
+                                </div>
+
+                                <div class="invt_frnd_dtls_inner_rgt">
+                                    <div class="invt_frnd_inner_cont">
+                                        <img src="assets/images/Default/invitefrnd.jpg">
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

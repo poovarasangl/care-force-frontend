@@ -1,0 +1,5 @@
+<app-main-header *ngIf="routerurl != '/login' && routerurl != '/register' && routerurl !='/tasker-register'"></app-main-header>
+<router-outlet></router-outlet>
+<app-alert></app-alert>
+<app-spinner></app-spinner>
+<app-main-footer *ngIf="routerurl != '/login' && routerurl != '/register' && routerurl !='/tasker-register'"></app-main-footer>

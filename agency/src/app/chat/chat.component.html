@@ -1,0 +1,135 @@
+<section ui-view="content" *ngIf="taskdetails">
+    <section>
+        <div class="applyto-tasker accounts">
+            <div class="container">
+                <div class="task-dtls">
+                    <div class="chat_def col-left">
+                        <h1 class="top-texts">{{'Job_Details' | translate}}</h1>
+                        <div class="short-chat">
+                            <span>{{'JobCategory' | translate}}</span>
+                            <p class="job-details-chat">{{taskdetails.category.name}}</p>
+                        </div>
+                        <div *ngIf="currentuser.user_type ==='user'" class="short-chat">
+                            <span>{{'ExpertName' | translate}}</span>
+                            <p class="job-details-chat">{{taskdetails.tasker.username}}</p>
+                        </div>
+                        <div *ngIf="currentuser.user_type !='user'" class="short-chat">
+                            <span>{{'UserName' | translate}}</span>
+                            <p class="job-details-chat">{{taskdetails.user.username}}</p>
+                        </div>
+                        <div class="short-chat">
+                            <span>{{'BookingId' | translate}}</span>
+                            <p class="job-details-chat">{{taskdetails.booking_id}}</p>
+                        </div>
+
+                        <div class="short-chat">
+                            <span>{{'JobDate' | translate}}</span>
+                            <p class="job-details-chat">{{taskdetails.task_details.timestamp | date:'dd/MM/yyyy'}}</p>
+                        </div>
+                        <div class="short-chat">
+                            <span>{{'Day' | translate}}</span>
+                            <p class="job-details-chat">{{taskdetails.task_details.timestamp | date:'EEEE'}}</p>
+                        </div>
+
+                        <div class="short-chat"> 
+                            <span>{{'Amount' | translate}}</span>
+                            <p class="job-details-chat">${{taskdetails.hourly_rate}}</p>
+                        </div>
+                    </div>
+                    <div class="full-holder col-right">
+                        <h1 class="top-texts">{{'Messenger' | translate}}</h1>
+
+                        <div class="chat-list" id="chatscroll" *ngIf="messages">
+                            <div class="chat-cnt" id="userList" *ngFor="let item of messages">
+                                <div class="col-xs-2 chat-col" [ngClass]="{'col-xs-push-10': currentuser.user_id === item.from ? true : false}">
+                                    <a href="#">
+                                        <img src="{{imageUrl}}{{(taskdetails | usernamefilter : item.from).messagerimage}}" class="img-thumbnail img-responsive img-circle ng-scope" UserDefaultImage [ngClass]="{'pull-left': currentuser.user_id === item.from}" [ngClass]="{'pull-right': currentuser.user_id != item.from}">
+                                    </a>
+                                </div>
+                                <div class="col-xs-10 chat-col" [ngClass]="{'col-xs-pull-2': currentuser.user_id === item.from ? true : false}">
+                                    <div class="panel panel-default">
+                                        <div class="panel-body">
+                                            <div>
+                                                <a href="#">{{(taskdetails | usernamefilter : item.from).messagername  | titlecase }}</a>
+                                            </div>
+                                            <div>
+                                                <div *ngIf="item.datatype=='text'">
+                                                    {{item.messages ? item.messages : item.message}}</div>
+                                                <div *ngIf="item.datatype ==='image'" class="img-fle ng-scope">
+                                                    <img width="200" height="200" src="{{imageUrl}}{{item.messages}}" UserDefaultImage>
+                                                </div>
+                                                <div *ngIf="item.datatype === 'audio'" class="audio-fle ng-scope">
+                                                    <audio src="{{imageUrl}}{{item.messages}}" controls="" type="audio/mpeg"></audio>
+                                                </div>
+                                                <div *ngIf="item.datatype === 'video'" class="video-fle ng-scope">
+                                                    <video src="{{imageUrl}}{{item.messages}}" controls="" class="chat_video" md-lightbox=""></video>
+                                                </div>
+                                            </div>
+                                            <div class="label label-info">{{ item.date }}</div>
+                                            <div *ngIf="currentuser.user_id === item.from">
+                                                <div style="margin-top:25px;" class="label label-seccess nt-scn  ng-scope">
+                                                    <span><i class="fa fa-check"
+                                                            aria-hidden="true"></i>{{item.tasker_status === 2 ? 'SEEN' : 'NOT SEEN'}}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="chat-post">
+                            <h2 class="text-center">{{'Something_Say' | translate}}?</h2>
+                            <p *ngIf="typing">{{'Typing' | translate}}...</p>
+                            <div class="chat-box">
+                                <form class="ng-pristine ng-valid" autocomplete="off">
+                                    <div class="input-group">
+                                        <input class="form-control input-large ng-pristine ng-untouched ng-valid ng-empty" [(ngModel)]="message" [ngModelOptions]="{standalone: true}" type="text" (keypress)="typingStatus()" placeholder="Add To The Conversation" id="inputText" aria-invalid="false">
+                                        <div class="slides-toggles-texts">
+                                            <p><i class="fa fa-paperclip fa-1x" aria-hidden="true" (click)="attachment = !attachment;attachment ? true : false;"></i>
+                                            </p>
+                                            <div class="slide-toggles-divs" [ngClass]="{'diff': attachment}">
+                                                <ul style="padding: 10px;">
+                                                    <li (click)="imagefile.click();" role="button" tabindex="0" style="padding: 2px;">
+                                                        <button class="md-fab md-raised md-mini md-button md-ink-ripple" type="button" ng-transclude="" aria-label="Twitter" style="border-radius: 10px;">
+                                                            <span class="glyphicon glyphicon-picture ng-scope"
+                                                                aria-hidden="true"></span>
+                                                        </button>
+                                                    </li>
+                                                    <li (click)="audiofile.click();" role="button" tabindex="0" style="padding: 2px;">
+                                                        <button class="md-fab md-raised md-mini md-button md-ink-ripple" type="button" ng-transclude="" aria-label="Facebook" style="border-radius: 10px;">
+                                                            <span class="glyphicon glyphicon-music ng-scope"
+                                                                aria-hidden="true"></span>
+                                                        </button>
+                                                    </li>
+                                                    <li (click)="videofile.click();" role="button" tabindex="0" style="padding: 2px;">
+                                                        <button class="md-fab md-raised md-mini md-button md-ink-ripple" type="button" ng-transclude="" aria-label="Facebook" style="border-radius: 10px;">
+                                                            <span class="glyphicon glyphicon-facetime-video ng-scope"
+                                                                aria-hidden="true"></span>
+                                                        </button>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <button class="input-group-addon" (click)="send(message)" style="width: 52px;">Post</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+
+                    </div>
+
+                    <input id="imagefile" ui-jq="filestyle" type="file" #imagefile ngf-select="temp=true" (change)="filechange($event);" accept="image/*" ngf-max-size="10MB" ngf-model-invalid="errorFiles" class="ng-hide ng-pristine ng-untouched ng-valid ng-empty" ui-options="{ buttonText: 'Select image', iconName: 'fa fa-file-image-o'}"
+                        ngf-multiple="true" multiple="multiple" aria-invalid="false">
+
+                    <input id="audiofile" ui-jq="filestyle" type="file" #audiofile ngf-select="temp=true" (change)="filechange($event);" accept="audio/*" ngf-max-size="10MB" ngf-model-invalid="errorFiles" class="ng-hide ng-pristine ng-untouched ng-valid ng-empty" ui-options="{ buttonText: 'Select image', iconName: 'fa fa-file-image-o'}"
+                        ngf-multiple="true" multiple="multiple" aria-invalid="false">
+
+                    <input id="videofile" ui-jq="filestyle" type="file" #videofile ngf-select="temp=true" (change)="filechange($event);" accept="video/*" ngf-max-size="10MB" ngf-model-invalid="errorFiles" class="ng-hide ng-pristine ng-untouched ng-valid ng-empty" ui-options="{ buttonText: 'Select image', iconName: 'fa fa-file-image-o'}"
+                        ngf-multiple="true" multiple="multiple" aria-invalid="false">
+                </div>
+            </div>
+        </div>
+    </section>
+</section>

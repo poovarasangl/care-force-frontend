@@ -1,0 +1,53 @@
+<app-breadcrumb></app-breadcrumb>
+<app-spinner [spinner]="spinner"></app-spinner>
+<div class="card mb-4">
+    <div class="card-body">
+        <div class="appearancesettings">
+            <div class="appsitesettings">
+                <form #form="ngForm" novalidate class="tooltip-label-right">
+                    <div class="form-group">
+                        <h6>Banner</h6>
+                        <label class="bgimage">Image</label>
+                        <label class="switch">
+                <input type="checkbox" name="background_option" [checked]="bannerpage && bannerpage.background_option == 2" (change)="backgroundoption($event)">
+                <span class="slider round"></span>
+                </label>
+                        <label class="bgvideo">Video</label>
+                    </div>
+                    <div class="yturl" *ngIf="bannerpage && bannerpage.background_option == 2">
+                        <label>Youtube Embed URL: </label>
+                        <input type="text" class="form-control" name="video" ngModel required #video="ngModel">
+                    </div>
+                    <div class="bannerpageimg" *ngIf="bannerpage && bannerpage.background_option == 1">
+                        <input type="file" class="form-control" name="image" ngModel (change)="getFiles($event, 'backgroundimage')">
+                        <img alt="image" class="banner-image" *ngIf="bannerpage && bannerpage.image && !imagepreview.backgroundimage" src="{{imageUrl}}{{bannerpage.image}}"><br>
+                        <img alt="image" class="banner-image" *ngIf="imagepreview.backgroundimage" [src]="imagepreview.backgroundimage"><br>
+                    </div>
+                    <h6>Login</h6>
+                    <hr>
+                    <div class="loginpageimg">
+                        <input type="file" class="form-control" name="image" ngModel (change)="getFiles($event, 'loginpage')">
+                        <img alt="image" *ngIf="loginpage && loginpage.image && !imagepreview.loginpage" class="banner-image" src="{{imageUrl}}{{loginpage.image}}"><br>
+                        <img alt="image" class="banner-image" *ngIf="imagepreview.loginpage" [src]="imagepreview.loginpage"><br>
+                    </div>
+                    <h6>Admin Login</h6>
+                    <hr>
+                    <div class="Adminloginpageimg">
+                        <input type="file" class="form-control" name="image" ngModel (change)="getFiles($event, 'adminlogin')">
+                        <img alt="image" class="banner-image" *ngIf="adminlogin && adminlogin.image && !imagepreview.adminlogin" src="{{imageUrl}}{{adminlogin.image}}"><br>
+                        <img alt="image" class="banner-image" *ngIf="imagepreview.adminlogin" [src]="imagepreview.adminlogin"><br>
+                    </div>
+                    <div class="colorchanges">
+                        <h5>Color Changes</h5>
+                        <app-color-switcher></app-color-switcher>
+                    </div>
+                    <app-state-button [btnClass]="'btn btn-primary btn-lg btn-shadow'" style="margin-top: 370px;
+            float: right;" [currentState]="buttonState" (click)="onSubmit()" [isDisabled]="buttonDisabled">
+                        Submit
+                    </app-state-button>
+                </form>
+            </div>
+            <simple-notifications></simple-notifications>
+        </div>
+    </div>
+</div>

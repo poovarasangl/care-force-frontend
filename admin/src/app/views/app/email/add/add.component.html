@@ -1,0 +1,74 @@
+<app-breadcrumb></app-breadcrumb>
+<simple-notifications></simple-notifications>
+<app-spinner [spinner]="spinner"></app-spinner>
+<div class="card mb-4 general-settings">
+    <div class="card-body">
+        <h2 class="mb-4">{{title}} Email Template</h2>        
+            <form class="tooltip-label-right" novalidate #form="ngForm">
+            <div class="form-group">
+                <div class="form-group ng-scope">
+                    <label>Template Name</label>
+                    <ng-select bindLabel="name" [items]="emailTemplateName" (click)="onClick()"
+                    bindValue="id" name="templateName" [ngClass]="{ 'invalid-input': buttonDisabled && !templateName.valid }" placeholder="Select Template Name" ngModel required #templateName="ngModel">
+                    </ng-select>    
+                    <div *ngIf="!templateName.valid && buttonDisabled" class="required-message">Email Template Name is required!</div>
+                </div>
+                <div class="form-group ng-scope">
+                    <label>Language</label>
+                    <ng-select bindLabel="name" [items]="emailTemplateLanguage" 
+                    bindValue="id" name="selectLanguage" [ngClass]="{ 'invalid-input': buttonDisabled && !selectLanguage.valid }" placeholder="Select Language" ngModel required #selectLanguage="ngModel">
+                    </ng-select>
+                    <div *ngIf="!selectLanguage.valid && buttonDisabled" class="required-message">Language is required!</div>
+                </div>
+                <div class="form-group ng-scope">
+                    <label for="emailSubject">Email Subject</label>
+                    <input type="text" name="emailSubject" class="form-control" ngModel required #emailSubject="ngModel" [ngClass]="{ 'invalid-input': buttonDisabled && !emailSubject.valid }">
+                    <div *ngIf="!emailSubject.valid && buttonDisabled" class="required-message">Email Subject is required!
+                    </div>
+                </div>
+                <div class="form-group ng-scope">
+                    <label for="senderName">Sender Name</label>
+                    <input type="text" name="senderName" class="form-control" ngModel required #senderName="ngModel" [ngClass]="{ 'invalid-input': buttonDisabled && !senderName.valid }">
+                    <div *ngIf="!senderName.valid && buttonDisabled" class="required-message">Sender Name is required!
+                    </div>
+                </div>
+                <div class="form-group ng-scope">
+                    <span>Dispatch Mail</span><br><br>
+                    <label class="switch">
+                    <input type="checkbox" [checked] = "dispatchMailCheck" name="dispatchMail" class="form-control" ngModel #status="ngModel">
+                    <span class="slider round"></span>
+                </label>
+                </div>
+                <div class="form-group ng-scope">
+                    <span>Subscription Mail Option</span><br><br>
+                    <label class="switch">
+                    <input type="checkbox"  [checked] = "subscriptionCheck" name="subscription" class="form-control" ngModel #status="ngModel">
+                    <span class="slider round"></span>
+                </label>
+                </div>
+                <div class="form-group">
+                    <div class="form-group">
+                        <label>Email Content</label>
+                        <editor apiKey="wqel19pklihbenult7fuqsssltcd8vup4cl0n33y6m3hzghx" [(ngModel)]="emailContantFromTemplate" name="emailContent" [init]="{
+                            height: 300,
+                            menubar: false,
+                            plugins: [
+                              'advlist autolink lists link image charmap print preview anchor',
+                              'searchreplace visualblocks code fullscreen',
+                              'insertdatetime media table paste code wordcount'
+                            ],
+                            toolbar:
+                              'undo redo | formatselect | bold italic backcolor | \
+                              alignleft aligncenter alignright alignjustify | \
+                              bullist numlist outdent indent | removeformat | code'
+                          }"></editor>
+                        <!-- <ckeditor [(ngModel)]="emailContantFromTemplate" name="emailContent" [editor]="Editor"></ckeditor> -->
+                    </div>
+                </div>
+            </div>
+            <app-state-button [btnClass]="'btn btn-primary btn-lg btn-shadow'" style="float: right;" [currentState]="buttonState" [isDisabled]="buttonDisabled" (click)="onSubmit()">
+                Submit
+            </app-state-button>
+        </form>
+    </div>
+</div>

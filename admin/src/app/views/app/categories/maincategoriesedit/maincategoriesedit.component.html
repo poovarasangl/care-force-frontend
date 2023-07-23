@@ -1,0 +1,88 @@
+<app-breadcrumb></app-breadcrumb>
+<app-spinner [spinner]="spinner"></app-spinner>
+<h2 class="mb-4">Add Main Category</h2>
+<form #form="ngForm" novalidate class="tooltip-label-right">
+    <div class="card mb-4 categories">
+        <div class="card-body">
+            <div class="maincat">
+                <div class="form-group">
+                    <label>Category Name</label>
+                    <input type="text" class="form-control" name="name" ngModel required #name="ngModel" (keyup)="catslug($event)" [ngClass]="{ 'invalid-input': form.submitted && !name.valid }">
+                    <div *ngIf="!name.valid && form.submitted" class="required-message">Category Name is required!</div>
+                </div>
+                <div class="form-group ">
+                    <label>Page slug</label>
+                    <p >{{imageUrl}}category/{{maincateditdata.slug}}</p>
+                </div>
+                <div class="form-group">
+                    <label>Category Image</label>
+                    <input type="file" id="file" name="image" class="form-control" accept="image/*" #image ngModel (change)="getFiles($event, 'image')">
+                    <img alt="image" class="preview-image black-image" *ngIf="maincateditdata && maincateditdata.image && !imagepreview.image" src="{{imageUrl}}{{maincateditdata.image}}"><br>
+                    <img alt="image" class="preview-image black-image" *ngIf="imagepreview.image" [src]="imagepreview.image"><br>
+                    <span class="help-block">Allowed files: jpeg, png, jpg. Max file size 1Mb</span>
+                </div>
+                <div class="form-group">
+                    <label>Category In-active Icon(Mobile app)</label>
+                    <input type="file" id="file2" name="icon" class="form-control" accept="image/*" #icon ngModel (change)="getFiles($event, 'icon')">
+                    <img alt="icon" class="preview-image black-image" *ngIf="maincateditdata && maincateditdata.icon && !imagepreview.icon" src="{{imageUrl}}{{maincateditdata.icon}}"><br>
+                    <img alt="icon" class="preview-image black-image" *ngIf="imagepreview.icon" [src]="imagepreview.icon"><br>
+                    <span class="help-block">Allowed files: jpeg, png, jpg. Max file size 1Mb</span>
+                </div>
+                <div class="form-group">
+                    <label>Category Active Icon(Mobile app)</label>
+                    <input type="file" id="file3" name="activeicon" class="form-control" accept="image/*" #activeicon ngModel (change)="getFiles($event, 'activeicon')">
+                    <img alt="activeicon" class="preview-image black-image" *ngIf="maincateditdata && maincateditdata.activeicon && !imagepreview.activeicon" src="{{imageUrl}}{{maincateditdata.activeicon}}"><br>
+                    <img alt="activeicon" class="preview-image black-image" *ngIf="imagepreview.activeicon" [src]="imagepreview.activeicon"><br>
+                    <span class="help-block">Allowed files: jpeg, png, jpg. Max file size 1Mb</span>
+                </div>
+                <div class="form-group">
+                    <h3 class="mb-4">Set Priority</h3>
+                    <label class="switch">
+                        <input type="checkbox" name="priority" [checked]="prioirtystate ? true : false" (change)="prioritychange($event)">
+                        <span class="slider round"></span> 
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card mb-4 categories">
+        <div class="card-body">
+            <div class="seodetails">
+                <h2 class="mb-4">SEO Details</h2>
+                <hr>
+                <div class="form-group">
+                    <label>Page Title</label>
+                    <input type="text" class="form-control" name="title" ngModel required #title="ngModel" [ngClass]="{ 'invalid-input': form.submitted && !title.valid }">
+                    <div *ngIf="!title.valid && form.submitted" class="required-message">Page Title is required!</div>
+                </div>
+                <div class="form-group">
+                    <label>Focus Keyword</label>
+                    <input type="text" class="form-control" name="keyword" ngModel required #keyword="ngModel" [ngClass]="{ 'invalid-input': form.submitted && !keyword.valid }">
+                    <div *ngIf="!keyword.valid && form.submitted" class="required-message">Focus Keyword is required!</div>
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <input type="textbox" class="form-control" name="description" ngModel required #description="ngModel" [ngClass]="{ 'invalid-input': form.submitted && !description.valid }">
+                    <div *ngIf="!description.valid && form.submitted" class="required-message">Description is required!</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card mb-4 categories">
+        <div class="card-body">
+            <div class="status">
+                <div class="form-group">
+                    <label>Status</label>
+                    <ng-select [items]="[{id:'1', name:'Publish'}, {id:'2', name:'Unpublish'}]" bindLabel="name"
+                    bindValue="id" name="status" [ngClass]="{ 'invalid-input': form.submitted && !status.valid }" ngModel required #status="ngModel">
+                    </ng-select>
+                    <div *ngIf="!status.valid && form.submitted" class="required-message">Status is required</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <app-state-button [btnClass]="'btn btn-primary btn-lg btn-shadow'" style="float: right;" [currentState]="buttonState" [isDisabled]="buttonDisabled" (click)="onSubmit()">
+        Submit
+    </app-state-button>
+</form>
+<simple-notifications></simple-notifications>

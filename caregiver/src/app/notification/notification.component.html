@@ -1,0 +1,59 @@
+<section ui-view="content">
+    <section class="quickFixedheight ng-scope">
+        <div class="notificationpage">
+            <div class="container">
+                <div class="acc-head">
+                    <h1 class="top-texts acc-tle ">{{'Notifications' | translate}}</h1>
+                </div>
+                <div class="contains">
+                    <div class="faq-page" style="background: inherit;" *ngIf="notificationlist">
+                        <div class="panel panel-default ng-scope" *ngFor="let item of notificationlist; let i=index">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a class="accordion-toggle collapsed" *ngIf="item.task && item.task[0][0]" href="javascript:void(0)" (click)="expendindex = ( expendindex === i ? '' : i)">
+                                        <span>{{item.task[0][0].category.name}} -
+                                            {{item.task[0][0].booking_id}} </span>
+                                    </a>
+                                    <a class="accordion-toggle collapsed" *ngIf="item.task && !item.task[0][0]" href="javascript:void(0)">
+                                        <span class="ng-binding ng-scope">{{item.rawdata[0].message}}</span>
+                                    </a>
+                                    <a class="accordion-toggle collapsed" href="javascript:void(0)" (click)="expendindex = ( expendindex === i ? '' : i)">
+                                        <i *ngIf="item.task && item.task[0][0]" class="pull-right glyphicon glyphicon-chevron-right" style="margin-top: -20px;" ng-class="{'glyphicon-chevron-down': status.isCustomHeaderOpen, 'glyphicon-chevron-right': !status.isCustomHeaderOpen}"></i>
+
+                                    </a>
+                                </h4>
+                            </div>
+
+                            <div aria-hidden="true" *ngIf="expendindex === i">
+                                <div class="panel-body" *ngIf="item.task && item.task[0][0] && item.task[0][0].category">
+                                    <ul *ngFor="let messages of item.rawdata" class="ng-scope">
+                                        <a *ngIf="currentuser.user_type === 'user'" (click)="jobdetails(item);" style="font-weight: bold;text-decoration: none;cursor: pointer;" class="ng-binding ng-scope">{{item.task[0][0].tasker.username | titlecase}}
+                                            {{messages.message}}<span class="notification-datetime">{{item.createdAt[0] | date : 'medium'}}</span>
+                                        </a>
+                                        <a *ngIf="currentuser.user_type != 'user'" (click)="jobdetails(item);" style="font-weight: bold;text-decoration: none;cursor: pointer;" class="ng-binding ng-scope">{{item.task[0][0].user.username | titlecase}}
+                                            {{messages.message}}<span class="notification-datetime">{{item.createdAt[0] | date : 'medium'}}</span>
+                                        </a>
+                                    </ul>
+                                </div>
+                                <!-- <div class="panel-body">
+                                    <ul *ngFor="let messages of item.rawdata" class="ng-scope">
+                                        <a style="font-weight: bold;text-decoration: none;cursor: pointer;"
+                                            class="ng-binding ng-scope">{{messages.message}}<span class="notification-datetime">{{item.createdAt[0] | date : 'medium'}}</span>
+                                        </a>
+                                    </ul>
+                                </div> -->
+                            </div>
+                        </div>
+                        <app-pagination [totalRecords]="count" [recordsPerPage]="3" (onPageChange)="pagechange($event)">
+                        </app-pagination>
+                    </div>
+                    <div class="faq-page" style="background: inherit;" *ngIf="!notificationlist">
+                        <div class="errormsg">
+                            <div class="panelbody">{{'DontHave_Notifications' | translate}}!</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>

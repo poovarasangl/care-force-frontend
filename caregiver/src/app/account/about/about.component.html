@@ -1,0 +1,89 @@
+<div class="ng-scope">
+    <div class="tskr_prof_dtls ng-scope about">
+        <div class="container">
+            <div class="tskr_rgstrn_outer_cont">
+                <div class="tskr_prof_dtls_inner">
+                    <div class="tskr_prof_dtls_bx">
+                        <div class="tskr_prof_dtls_hdr">
+                            <div class="tskr_prof_dtls_bx_lft">
+                                <div class="tskr_prof_dtls_tle ng-binding">
+                                    {{'About_You' | translate}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="field abouts">
+                             <form name="TaskerAboutForm" [formGroup]="TaskerAboutForm" (ngSubmit)="onSubmit()">
+                                <div class="about-fields">
+                                    <div class="col-md-12 col-xs-12">
+                                        <div class="form-group">
+                                            <textarea type="text" rows="6" cols="100" maxlength="251" formControlName="aboutyou" name="experience" class="form-control profilefield" placeholder="Describe About You (Max 250 chars)"></textarea>
+                                            <div *ngIf="aboutform.aboutyou.errors && submit">
+                                                <div *ngIf="aboutform.aboutyou.errors.required" class="error_msg">
+                                                    {{'Describe_required' | translate}}
+                                                </div>
+                                                <div *ngIf="aboutform.aboutyou.errors.maxlength" class="error_msg">
+                                                    {{'Maximum _character_limitation' | translate}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="about-fields">
+                                    <div class="col-md-12 col-xs-12">
+                                        <div class="form-group">
+                                            <textarea type="text" rows="6" cols="100" maxlength="251" formControlName="aboutexperience" name="experience" class="form-control profilefield" id="exampleInputEmail1" placeholder="Describe About your work experience (Max 250 chars)"></textarea>
+                                            <div *ngIf="aboutform.aboutexperience.errors && submit">
+                                                <div *ngIf="aboutform.aboutexperience.errors.required" class="error_msg">
+                                                    {{'Describe_required' | translate}}
+                                                </div>
+                                                <div *ngIf="aboutform.aboutexperience.errors.maxlength" class="error_msg">
+                                                    {{'Maximum _character_limitation' | translate}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="news-abouts">
+                                    <div class="col-md-2 col-xs-12 ng-scope">
+                                        <button type="submit" class="btn btn-primary savebtn">{{'Save' | translate}}</button>
+                                    </div>
+                                </div>
+                            </form>
+                            <!-- <form name="TaskerAboutForm" [formGroup]="TaskerAboutForm" (ngSubmit)="onSubmit()">
+                                <div class="about-fields">
+                                    <div class="col-md-12 col-xs-12">
+                                        <div class="form-group">
+                                            <textarea type="text" rows="6" cols="100" formControlName="aboutyou" name="experience" class="form-control profilefield" placeholder="Describe About You"></textarea>
+                                            <div *ngIf="aboutform.aboutyou.errors && submit">
+                                                <div class="error_msg">
+                                                    {{'Describe_required' | translate}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="about-fields">
+                                    <div class="col-md-12 col-xs-12">
+                                        <div class="form-group">
+                                            <textarea type="text" rows="6" cols="100" formControlName="aboutexperience" name="experience" class="form-control profilefield" id="exampleInputEmail1" placeholder="Describe About your work experience"></textarea>
+                                            <div *ngIf="aboutform.aboutexperience.errors && submit">
+                                                <div class="error_msg" *ngIf="aboutform.aboutexperience.errors.required">
+                                                    {{'Describe_work_experience' | translate}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="news-abouts">
+                                    <div class="col-md-2 col-xs-12 ng-scope">
+                                        <button type="submit" class="btn btn-primary savebtn">{{'Save' | translate}}</button>
+                                    </div>
+                                </div>
+                            </form> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

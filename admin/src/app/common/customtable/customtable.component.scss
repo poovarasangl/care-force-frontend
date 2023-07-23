@@ -1,0 +1,307 @@
+.ng2-smart-actions ng2-st-tbody-edit-delete {
+    display: none !important;
+}
+
+:host ng2-st-tbody-edit-delete {
+    display: flex !important;
+    height: 100 !important;
+    width: 66% !important;
+    padding-top: 26px;
+}
+
+:host ng2-st-tbody-create-cancel {
+    padding-top: 17px;
+}
+
+:host ng2-smart-table .ng2-smart-actions {
+    width: 100% !important;
+    display: inline-flex !important;
+    height: 100%;
+}
+
+::ng-deep .action-btn:hover,
+.delete-btn:focus {
+    box-shadow: 0 0.5em 0.5em -0.4em var(--hover);
+    transform: translateY(-0.25em);
+}
+
+::ng-deep .action-btn {
+    padding: 12px 15px;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+}
+
+::ng-deep ng2-smart-table-noDataMessage {
+    float: left;
+}
+
+::ng-deep ng2-st-tbody-custom a.ng2-smart-action.ng2-smart-action-custom-custom {
+    padding: 2px;
+}
+
+::ng-deep .action-btn>i {
+    font-size: 13px;
+}
+
+::ng-deep ng2-smart-table-pager {
+    float: right;
+}
+
+.display-options-container {
+    margin-top: 10px;
+}
+
+.modal-dialog .modal-md {
+    margin-top: 200px !important;
+}
+
+.modal-backdrop {
+    margin-top: 200px !important;
+}
+
+.card-cated {
+    width: 100%;
+    float: left;
+    padding: 15px;
+}
+
+.svg-pl {
+    width: 100%;
+    float: left;
+}
+
+.svg-pl i {
+    font-size: 36px;
+    cursor: pointer;
+}
+
+.svg-pl i:focus,
+.svg-pl i:hover {
+    font-size: 36px;
+    cursor: pointer;
+    box-shadow: 0 0.5em 0.5em -0.4em var(--hover);
+    transform: translateY(-0.25em);
+}
+
+.svg-pl p {
+    width: 100%;
+    float: left;
+    font-size: 14px;
+    margin: 6px 0;
+}
+
+.svg-pl h6 {
+    width: 100%;
+    float: left;
+    font-size: 18px;
+    margin: 6px 0;
+    font-weight: 600;
+}
+
+.five-card-design {
+    width: 20%;
+    padding: 0px 15px;
+}
+
+.bg-secondary {
+    background-color: #5a3f37 !important;
+}
+
+::ng-deep tr.ng2-smart-row,
+ ::ng-deep thead {
+    border-bottom: 1px solid #ccc;
+}
+
+::ng-deep thead tr.ng2-smart-titles th:first-child {
+    text-align: center;
+}
+
+.fa .fa-star-o :hover {
+    background-color: red;
+    color: green;
+}
+
+form.tab-forms {
+    width: 100%;
+    float: left;
+    margin-bottom: 20px;
+}
+
+form.tab-forms .col-md-3,
+form.tab-forms .col-md-2 {
+    float: left;
+}
+
+form.tab-forms button.btn {
+    margin-top: 24px;
+    margin-right: 4px;
+}
+
+::ng-deep a.disabled {
+    pointer-events: none;
+    cursor: default;
+}
+
+.dropdown-menu {
+    width: 100%;
+}
+
+ul {
+    font-family: Arial, Verdana;
+    font-size: 14px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+ul li {
+    display: block;
+    position: relative;
+    float: left;
+    width: 100% !important;
+}
+
+li ul {
+    display: none;
+}
+
+ul li a {
+    display: block;
+    text-decoration: none;
+    color: #ffffff;
+    border-top: 1px solid #ffffff;
+    padding: 5px 15px 5px 15px;
+    background: #2C5463;
+    margin-left: 1px;
+    white-space: nowrap;
+}
+
+ul li a:hover {
+    background: #617F8A;
+}
+
+li:hover ul {
+    display: block;
+    position: absolute;
+}
+
+li:hover li {
+    float: none;
+    font-size: 11px;
+}
+
+li:hover a {
+    background: #617F8A;
+}
+
+li:hover li a:hover {
+    background: #95A9B1;
+}
+
+.disabled-div {
+    pointer-events: none;
+}
+
+::ng-deep .status-btn {
+    text-align: center;
+}
+
+::ng-deep button.verify {
+    width: 75px;
+    height: 30px;
+    font-size: small;
+    text-align: center;
+    padding: 6px !important;
+    cursor: pointer;
+    color: white !important;
+    font: -webkit-control !important;
+}
+
+::ng-deep button.unverify {
+    width: 75px;
+    height: 30px;
+    font-size: small;
+    text-align: center;
+    padding: 6px !important;
+    cursor: pointer;
+    color: white !important;
+    font: -webkit-control !important;
+}
+
+::ng-deep button.verify:hover,
+button.verify:focus {
+    box-shadow: 0 0.5em 0.5em -0.4em var(--hover);
+    transform: translateY(-0.25em);
+}
+
+::ng-deep button.unverify:hover,
+button.unverify:focus {
+    box-shadow: 0 0.5em 0.5em -0.4em var(--hover);
+    transform: translateY(-0.25em);
+}
+
+ul.menu-subs li {
+    width: 100%;
+    margin: 0;
+}
+
+ul.menu-subs {
+    width: 100%;
+    float: left;
+    z-index: 9;
+    background-color: #fff!important;
+    border: 1px solid #ddd;
+}
+
+ul.common-subs li a {
+    background-color: #31b0d5 !important;
+    padding: 7px 19px!important;
+}
+
+ul.common-subs li a i {
+    padding: 0 10px!important;
+}
+
+ul.menu-subs li a {
+    font-size: 14px !important;
+    background-color: #fff!important;
+    color: #000;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    cursor: pointer;
+}
+
+ul.menu-subs li a:hover {
+    background-color: #ddd!important;
+}
+
+.al-right {
+    width: 100%;
+    float: right;
+    text-align: right;
+}
+
+.al-right .top-right-button-container.text-zero {
+    width: auto;
+    display: inline-block;
+    padding: 0px 0 0 15px;
+}
+
+ul#dropdown-basic a {
+    background: transparent;
+    color: #000 !important;
+    width: 100%;
+}
+
+​ ul#dropdown-basic li {
+    width: 100%;
+}
+
+ul#dropdown-basic :hover {
+    background-color: #ddd;
+}
+
+​ .only-top li:first-child a {
+    background: #31b0d5 !important;
+}

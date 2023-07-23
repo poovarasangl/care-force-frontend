@@ -1,0 +1,180 @@
+<div class="tsk_cont ng-scope">
+    <div class="container">
+        <div class="tsk_dtls ui-subtabs">
+            <div class="tsk_dtls_two">
+                <div class="tsk_dtls_two_tle_cont">
+                    <div class="tsk_dtls_two_tle ng-binding">
+                        {{'Pick_Expert' | translate}}
+                    </div>
+                    <div class="tsk_dtls_two_stle ng-binding">
+                        {{'chose_exprt' | translate}}
+                    </div>
+                </div>
+            </div>
+            <div class="tsk_dtls_two_cont">
+                <div class="tsk_dtls_two_cont_lft fil_disbl">
+                    <div class="tsk_dtls_two_cont_lft_1">
+                        <div class="tdtcl_1_1 tdtcl_ful_cont">
+                            <div class="tdtcl_1_1_tle tdtcl_tle ng-binding">
+                                {{'SHOWEDBY' | translate}}:
+                            </div>
+                            <div class="tdtcl_1_1_cont">
+                                <select class="tdtcl_slct" (change)="showby($event)">
+                                    <option value="list" class="ng-binding" selected="selected">
+                                        {{'ListView' | translate}}</option>
+                                    <option value="map" class="ng-binding">{{'Mapview' | translate}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="tdtcl_1_2 tdtcl_ful_cont">
+                            <div class="tdtcl_1_2_tle tdtcl_tle">
+                                {{'SORTBY' | translate}}:
+                            </div>
+                            <div class="tdtcl_1_2_cont">
+                                <select class="tdtcl_slct" id="priceValue" #priceValue (change)="pricechange($event)">
+                                    <option value="1" class="ng-binding">{{'price_lowtoHigh' | translate}}</option>
+                                    <option value="-1" class="ng-binding">{{'price_hightolow' | translate}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="tdtcl_1_3 tdtcl_ful_cont">
+                            <div class="tdtcl_1_3_tle tdtcl_tle ng-binding">
+                                {{'JOBDATE' | translate}} &amp; {{'TIME' | translate}}:
+                            </div>
+                            <div class="tdtcl_1_3_cont">
+                                <div class="tdtcl_1_2_cont">
+                                    <select class="tdtcl_slct" (change)="datechange($event)" [(ngModel)]="selectedtime"> 
+                                        <option *ngFor="let item of dateValues" label="{{item | date :'dd-MMMM-yyyy'}}"
+                                            value="{{item | date :'dd-MMMM-yyyy'}}">
+                                            {{item | date :'dd-MMMM-yyyy'}} </option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tdtcl_1_2_cont">
+                            <select class="tdtcl_slct" (change)="timechange($event)">
+                                <option *ngFor="let item of timeValues" label="{{item | date:'h:mm a'}}"
+                                    value="{{item | date:'H:mm'}}">{{item | date:'h:mm a'}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="tsk_dtls_two_cont_lft_2 ng-scope">
+                        <div class="tsk_dtls_two_cont_lft_tle ng-binding">{{'PRICE' | translate}}:</div>
+                        <ng5-slider [(value)]="minValue" [(highValue)]="maxValue" (valueChange)="getpricelimit($event)" (highValueChange)="getpricelimit($event)" [options]="options"></ng5-slider>
+                    </div>
+                </div>
+                <div class="tsk_dtls_two_cont_rgt" *ngIf="count > 0">
+                    <div *ngIf="showby_div === 0">
+                        <div class="tsk_dtls_two_cont_rgt_cont" *ngFor="let item of taskerlist">
+                            <div class="tdtcr_lft">
+                                <div class="tdtcr_lft_img">
+                                    <figure>
+                                        <img src="{{imageUrl}}{{item.avatar}}" UserDefaultImage>
+                                    </figure>
+                                </div>
+                            </div>
+                            <div class="tdtcr_rgt">
+                                <div class="tdtcr_rgt_top">
+                                    <div class="tdtcr_rgt_lft">
+                                        <div class="tdtcr_rgt_lft_name_cont">
+                                            <span class="tdtcr_rgt_lft_name name-hides">
+                                                {{item.username | titlecase }}
+                                            </span>
+                                            <span class="tdtcr_rgt_lft_rating">
+                                                <li style="color: #333;">
+                                                </li>
+                                            </span>
+                                        </div>
+                                        <div class="tdtcr_rgt_lft_rvw ng-binding">
+                                            <div *ngIf="item.avg_review > 0"><span class="ng-binding">{{item.avg_review | number : '1.1-1'}}</span> {{'Reviews' | translate}}</div>
+                                            <div *ngIf="item.avg_review == 0"><span class="ng-binding">{{item.avg_review}}</span> {{'Reviews' | translate}}</div>
+                                        </div>
+                                    </div>
+                                    <div class="tdtcr_rgt_rgt">
+                                        <div class="tdtcr_rgt_rgt_price ng-binding">
+                                            <span class="currency-dolls ng-binding">{{DefaultCurrency.symbol}}&nbsp;</span>{{item.taskerskills.hour_rate * DefaultCurrency.value | number:'1.2-2'}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tdtcr_rgt_down">
+                                    <div class="tdtcr_rgt_down_btn nw_pro_fonts">
+                                        <a (click)="ChooseExpert(item)" class="actv_dwn_btn dwn_btns ng-binding">
+                                            {{'ChooseExpert' | translate}}
+                                        </a>
+                                        <a (click)="viewprofilefun(item.username)" target="_blank" class="dwn_btn dwn_btns ng-binding">
+                                            {{'ViewProfile' | translate}}
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="showby_div === 0 && count && count > 2">
+                        <div class="col-lg-8 col-md-10 ml-auto mr-auto">
+                            <div class="float-right" style="text-align: center;">
+                                <app-pagination [totalRecords]="count" [activepagenumber]="activepagenumber" [recordsPerPage]="3" (onPageChange)="pagechange($event)"></app-pagination>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 map-view tskr-detail-inmap ng-scope" *ngIf="showby_div === 1">
+                        <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [disableDefaultUI]="false" [zoomControl]="false">
+                            <agm-marker class="agm-map-marker" *ngFor="let item of maplist; let i = index" [latitude]="item.location.lat" [longitude]="item.location.lng" [iconUrl]="{url:getimage(item.avatar,i), scaledSize: {
+                                    width: 40,
+                                    height: 40
+                                }}">
+                                <agm-info-window>
+                                    <div class="tskr-padd tsk-mapview ng-scope">
+                                        <div class="tskr-vew-part1">
+                                            <div class="profimg-holder img-only col-md-3">
+                                                <figure>
+                                                    <figure>
+                                                        <img src="{{imageUrl}}{{item.avatar}}" UserDefaultImage style="border-radius: 70px;width: 50%;">
+                                                    </figure>
+                                                </figure>
+                                                <div class="profimg-holder details-only col-md-6">
+                                                    <ul class="factloop">
+                                                        <h3 class="ng-binding" style=" text-transform: capitalize;color: #67098f;">
+                                                            {{item.username}}</h3>
+                                                        <li class="amt-mpv">
+                                                            <i></i>
+                                                            <p class="ng-binding">
+                                                                <b class="ng-binding" style="color:#3f4451;font-size:25px;">
+                                                                    ${{item.taskerskills.hour_rate}} </b>
+                                                            </p>
+                                                        </li>
+                                                        <!--*ngFor="let item of counter(item.avg_review);let i = index"-->
+                                                        <i style="color: #333;" class="map-reviews" aria-valuetext="one" role="button" tabindex="0" title="one">{{item.avg_review}}</i>
+                                                        <li style="color: #f60;">
+                                                            <p class="ng-binding" style="color:#ffc107;">
+                                                                <i class="fa fa-map-marker "></i>{{item.availability_address}}
+                                                            </p>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 tskr-vew tskr-vew-part2">
+                                            <a class="hirebtn confirm-task" (click)="ChooseExpert(item)">
+                                                <span class="muted ng-binding">{{'ChooseExpert' | translate}}</span>
+                                            </a>
+                                            <a class="hirebtn viewprfl-btn" target="_blank" (click)="viewprofilefun(item.username)">
+                                                <span class="muted ng-binding"> {{'ViewProfile' | translate}}</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </agm-info-window>
+                            </agm-marker>
+                        </agm-map>
+                    </div>
+                </div>
+                <div *ngIf="count === 0" class="tsk_dtls_two_cont_rgt" style="margin-top: 15%;">
+                    <div class="errormsg">
+                        <div class="panelbody">{{'no_exprt' | translate}}!</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

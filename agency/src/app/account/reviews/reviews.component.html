@@ -1,0 +1,82 @@
+<div class="trans-profiles">
+    <div class="container">
+        <div class="view-trans reviews">
+            <div class="trans-packed main-scrolls-trcks">
+                <div class="trans-profiles-header">
+                    <div class="trans-headings review-heading">
+                        <h4 class="ng-binding">{{'Reviews' | translate}}</h4>
+                    </div>
+                    <div class="tskrdet_dtls_bx_rgt views-by">
+                        <div class="taskrdet_bx_links">
+                            <div class="tskrdet_dtls_link" [ngClass]="{'reviewactive': ReviewsToYou}" (click)="ReviewsToYou = true;ReviewsByYou = false; reviewtoyou();" role="button" tabindex="0">
+                                <a class="ng-binding">{{'ReviewsToYou' | translate}}</a>
+                            </div>
+                            <div class="tskrdet_dtls_link" role="button" tabindex="0" (click)="ReviewsToYou = false;ReviewsByYou = true; reviewyou();" [ngClass]="{'reviewactive': ReviewsByYou}">
+                                <a class="ng-binding">{{'ReviewsByYou' | translate}}</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="scroll-function">
+                    <div class="trans-profiles-inner">
+                        <div class="trans-counters ng-scope" *ngIf="reviewlist">
+                            <div class="list-transta reviews_tabs ng-scope" *ngFor="let item of reviewlist; let i=index">
+                                <div class="scroller">
+                                    <div class="col-trans-lists">
+                                        <div class="count-order">
+                                            <span class="ng-binding">{{'S.No' | translate}}</span>
+                                            <p class="ng-binding review-data">{{i+1}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-trans-lists">
+                                        <div class="count-book">
+                                            <span class="ng-binding">{{'JobId' | translate}}</span>
+                                            <p class="ng-binding review-data">{{item.task.booking_id}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-trans-lists">
+                                        <div class="count-task">
+                                            <span class="ng-binding">{{'Job' | translate}}</span>
+                                            <p class="ng-binding review-data" *ngIf="item.task.category">{{item.task.category.name}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-trans-lists ng-scope" *ngIf="item.type ==='user'">
+                                        <div class=" count-action">
+                                            <span class="ng-binding">{{'User' | translate}}</span>
+                                            <p class="ng-binding review-data">{{item.task.user.username}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-trans-lists ng-scope" *ngIf="item.type !='user'">
+                                        <div class=" count-action">
+                                            <span class="ng-binding">{{'Tasker' | translate}}</span>
+                                            <p class="ng-binding review-data">{{item.task.tasker.username}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-trans-lists">
+                                        <div class="count-action">
+                                            <span class="ng-binding">{{'Date' | translate}}</span>
+                                            <p class="ng-binding review-data">{{item.createdAt | date:'MMM,dd,yyyy'}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-trans-lists">
+                                        <span class="ng-binding">{{'Action' | translate}}</span>
+                                        <p class="viw-more" (click)="view(item)" role="button" tabindex="0"><a class="main-views ng-binding">View</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <input type="text" value="34985793408" style="display: none;" #reviewmodal>
+                        <div class="" *ngIf="!reviewlist">
+                            <div class="emptyfie" style="text-align: center;">
+                                <span class="ng-binding">{{'You_NotReceivedReviews' | translate}}</span>
+                            </div>
+                        </div>
+                        <app-pagination style="float: right;" *ngIf="count > 1" [activepagenumber]="activepagenumber" [totalRecords]="count"
+                            [recordsPerPage]="2" (onPageChange)="pagechange($event)">
+                          </app-pagination>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <app-modal></app-modal>

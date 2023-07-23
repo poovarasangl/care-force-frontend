@@ -1,0 +1,76 @@
+<app-breadcrumb></app-breadcrumb>
+<app-spinner [spinner]="spinner"></app-spinner>
+<div class="contact-us">
+    <div class="contact-viewpage">
+        <div class="heading">
+            <div class="head-content">
+                <h3>Email :<strong class="editdata-email"> {{editdata.email}}</strong></h3>
+                <h6>Sent on: {{editdata.updatedAt}}</h6>
+            </div>
+            <div class="reply-mail">
+                <button class="btn btn-info" (click)="openModal(template)"><i class="iconsminds-mail-reply"></i>Reply Mail</button>
+            </div>
+        </div>
+        <hr>
+        <div class="content">
+            <p><strong>Name : {{editdata.name}}</strong></p>
+            <p><strong>Mobile : {{editdata.mobile}}</strong></p>
+            <p><strong>Subject : {{editdata.subject}}</strong></p>
+            <p><strong>Message : {{editdata.message}}</strong></p>
+        </div>
+    </div>
+</div>
+<simple-notifications></simple-notifications>
+<ng-template #template>
+    <!-- <form #form="ngForm" novalidate class="tooltip-label-right" (ngSubmit)="onSubmit()"> -->
+    <div class="modal-header">
+
+        <h4 class="modal-title pull-left">Reply Email</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+        <div class="modal-body">
+            <div class="email-body">
+                <h6>Subject</h6>
+                <input type="text" name="subject" required [(ngModel)]="replymail.subject" style="
+                color: #616f77;
+                width: 100%;
+                height: 30px;
+                outline: 0;
+                vertical-align: top;
+                background-color: #fff;
+                filter: none !important;
+                -webkit-box-shadow: none;
+                box-shadow: none;
+                border-radius: 2px;
+                border: 1px solid #dbe0e2;
+                -webkit-transition: all 0.2s linear;
+                -moz-transition: all 0.2s linear;
+                transition: all 0.2s linear;" />
+                <div *ngIf="replymail.subject =='' && formfield == 0" class="required-message">Subject is required!</div>
+                <h6>Message</h6>
+                <textarea name="message" [(ngModel)]="replymail.message" style="
+                color: #616f77;
+                width: 100%;
+                height: 70px;
+                outline: 0;
+                vertical-align: top;
+                background-color: #fff;
+                filter: none !important;
+                -webkit-box-shadow: none;
+                box-shadow: none;
+                border-radius: 2px;
+                border: 1px solid #dbe0e2;
+                -webkit-transition: all 0.2s linear;
+                -moz-transition: all 0.2s linear;
+                transition: all 0.2s linear;"></textarea>
+                <div *ngIf="replymail.message =='' && formfield == 0" class="required-message">Message is required!</div>
+            </div>
+            <div class="buttons">
+                <button type="button" class="btn btn-primary" (click)="modalRef.hide()">Cancel</button>
+                <button type="button" class="btn btn-primary" (click)="onSubmit()">Send</button>
+            </div>
+        </div>
+    
+</ng-template>

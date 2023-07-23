@@ -1,0 +1,186 @@
+@import 'https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/9.0.6/css/intlTelInput.css'
+.error_msg
+    color: #67098f
+.tskr_prof_dtls_cont
+    display: inline-block
+    width: 100%
+    float: left
+    padding: 20px 0px 20px 0px
+.tskr_prof_dtls_btn .btn
+    padding: 6px 24px
+.tskr_prof_dtls_btn
+    display: inline-block
+    color: #67098f
+.tskr_prof_dtls_hdr>div,.tskr_pass_dtls_hdr>div,.tskrdet_dtls_hdr>div
+    letter-spacing: normal
+    word-spacing: normal
+.tskr_prof_dtls_hdr,.tskr_pass_dtls_hdr,.tskrdet_dtls_hdr,.invt_frnd_dtls_hdr,
+.wallet_dtls_hdr
+    letter-spacing: -0.31em
+    word-spacing: -0.31em
+    padding: 20px 0
+    border-bottom: 1px solid #c5b8b8
+.tskr_prof_dtls_bx_rgt,.wallet_dtls_bx_rgt
+    display: inline-block
+    width: 50%
+    text-align: right
+.tskr_prof_dtls_bx_lft,.wallet_dtls_bx_lft
+    display: inline-block
+    width: 50%
+.tskr_prof_dtls_tle,.tskr_pass_dtls_tle,.tskrdet_dtls_tle,.invt_frnd_dtls_tle,.wallet_dtls_tle
+    font-size: 20px
+    word-spacing: normal
+    letter-spacing: normal
+.tskr_prof_dtls_inner,.tskr_pass_dtls_inner,.tskrdet_dtls_inner,.invt_frnd_dtls_inner,
+.wallet_dtls_inner
+    background: #fff
+    padding: 0 24px
+    display: inline-block
+    width: 100%
+    border: 1px solid #c5b8b8
+    border-radius: 5px
+    position: relative
+.tskr_prof_dtls,.tskr_pass_dtls,.tskrdet_dtls,.invt_frnd_dtls,.wallet_dtls
+    background: #f9fafb
+    display: inline-block
+    width: 100%
+    padding: 40px 0
+span.tskr_prof_dtls_name
+    display: inline-block
+    
+.tskr_prof_dtls_innercont>div span.tskr_prof_dtls_name
+    width: 97%
+    word-break: break-all
+    white-space: initial
+.tskr_prof_dtls_cont_val .tskr_prof_dtls_icon
+    width: 24px
+    display: inline-block
+    vertical-align: top
+.tskr_prof_dtls_innercont>div
+    letter-spacing: normal
+    word-spacing: normal
+.tskr_prof_dtls_cont_val
+    width: 50%
+    float: left
+    display: inline-block
+    padding-bottom: 24px
+    color: #222222
+    font-size: 16px
+    white-space: nowrap
+button.btn.def_btn
+    border: 1px solid #67098f
+    background: transparent
+    color: #67098f
+    border-radius: 50px
+button.btn.def_btn.actives:after
+    position: absolute
+    content: ''
+    width: 100%
+    left: 0px
+    border: 1px solid
+    bottom: -15px
+    right: 0px
+button.btn.def_btn.main-src
+    position: absolute
+    top: 20px
+    right: 25px
+.wallet_rgt_btns_rgt button.btn.def_btn
+    width: 100%
+    padding: 12px 0px
+    border-radius: 0
+    font-size: 15px
+    background: #67098f
+    color: #fff
+    border: 1px solid #67098f
+.wallet_dtls_btn button.btn.def_btn.actives
+    color: #67098f
+    background: transparent
+    box-shadow: none
+    position: relative
+.wallet_rgt_btns_rgt button.btn.def_btn
+    border: none
+    font-size: 15px
+    width: 100%
+button.btn.def_btn.def_link
+    color: #222
+button.btn.def_btn.act_link
+    color: #67098f
+.wallet_dtls_btn button.btn.def_btn
+    border: none
+    font-size: 15px
+    color: #222
+.tskrdet_dtls_btm_btn .btn.def_btn
+    border-radius: 50px
+
+    &.no_bor
+        border: none
+.all-btns
+    float: left
+    width: 100%
+    margin-bottom: 20px
+.tskr_prof_dtls .all-btns .savebtn
+    margin-left: 6px
+.fa-star:before
+    color: #fdcc0d
+// .tskr_prof_dtls .all-btns .cancelbtn,.tskr_prof_dtls .all-btns .savebtn
+//     width: 75px
+.cancelbtn
+    background-color: #fff
+    color: #67098f
+    border: 1px solid #67098f
+    padding: 12px
+.savebtn
+    background-color: #67098f
+    color: #fff
+    border: 1px solid #67098f
+    padding: 12px
+.modal-header
+    background-color: #67098f
+.swal2-popup
+    width: 40em !important
+.swal-button-container >.logout
+    margin: 5px
+    display: inline-block
+    position: relative
+    float: right !important
+.imagefield
+    display: grid
+    grid-template-columns: 1fr 1fr
+    grid-gap: 10px
+.virtualfield
+    display: grid
+    grid-template-columns: 1fr 1fr
+    grid-gap: 10px
+.namefield
+    display: grid
+    grid-template-columns: 1fr 1fr
+    grid-gap: 10px
+.col-xs-6
+    width: 98%
+.col-md-2 .col-xs-12 .profilebtn
+    width: 8%
+button.btn.def_btn.main-src.ng-binding, button.btn.def_btn.ng-scope , button.btn.btn-defult.cancelbtn, button.btn.btn-primary.savebtn.ng-binding
+    outline: none
+.col-md-2
+    width: 8.666667%
+@media ( max-width: 767px  )
+    .tskr_prof_dtls_cont_val 
+        display: block
+    .tskr_prof_dtls_cont_val
+        width: 100%
+    .tskr_prof_dtls_inner
+        width: 100%
+    input.form-control.profilefield.ng-untouched.ng-pristine.ng-valid
+        width: 100%
+    .col-xs-6 
+        width: auto
+    .imagefield, .virtualfield, .namefield
+        display: block
+    .col-md-2 
+        width: 40%
+    .tskr_prof_dtls.ng-scope
+        padding: 15px 0px
+    .all-btns
+        margin-top: 6%
+    .btn-primary 
+        margin: 0px !important

@@ -1,0 +1,322 @@
+<!-- <div class="login_contt_tle tb_contt_tle">{{'REGISTER' | translate}}</div> -->
+<div class="register-page">
+  <div class="container">
+    <div class="card">
+      <div class="card-header">{{'REGISTER' | translate}}</div>
+      <div class="card-body">
+        <form #form="ngForm" novalidate autocomplete="off">
+          <div class="row">
+            <!-- <div class="col-sm-12"> -->
+            <div class="form-group col-md-6">
+              <label>First Name</label>
+              <input type="hidden" class="form-control" name="user_id" ngModel #user_id="ngModel">
+              <input type="text" class="form-control" name="firstname" ngModel required #firstname="ngModel"
+                [ngClass]="{ 'invalid-input': form.submitted && !firstname.valid }">
+              <div *ngIf="!firstname.valid && form.submitted" class="required-message">First Name is required!
+              </div>
+            </div>
+            <div class="form-group col-md-6">
+              <label>Last Name</label>
+              <input type="text" class="form-control" name="lastname" ngModel required #lastname="ngModel"
+                [ngClass]="{ 'invalid-input': form.submitted && !lastname.valid }">
+              <div *ngIf="!lastname.valid && form.submitted" class="required-message">Last Name is required!
+              </div>
+            </div>
+            <div class="form-group mail col-md-6">
+              <label>Email</label>
+              <input type="email" class="form-control" name="email" ngModel required email #email="ngModel"
+                [ngClass]="{ 'invalid-input': form.submitted && !email.valid }"
+                ng-pattern="/^[_a-zA-Z0-9]+(\.[_a-zA-Z0-9]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,10})$/">
+              <div *ngIf="!email.valid && form.submitted" class="required-message">Email is required!
+              </div>
+            </div>
+            <div class="form-group col-md-6">
+              <label>Phone</label>
+              <input type="tel" id="tel" ng2TelInput class="form-control" (ng2TelOutput)="getNumber($event)"
+                (intlTelInputObject)="telInputObject($event)" [ng2TelInputOptions]="{initialCountry: 'in'}"
+                (countryChange)="oncountryChange($event)" name="phone" ngModel required #phone="ngModel"
+                [ngClass]="{ 'invalid-input': form.submitted && !phone.valid }">
+              <input type="text" id="result" style="display: none;" #mobilenumber>
+              <div *ngIf="!phone.valid && form.submitted" class="required-message">Phone is required!
+              </div>
+            </div>
+            <!-- </div> -->
+            <!-- <div class="col-sm-12"> -->
+            <!-- <div class="col-md-6">
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="text" class="form-control" name="password" minlength="6" maxlength="12" pattern="^[a-zA-Z0-9!@#\$%\^\&*\)\(+=._-]{8,}$" ngModel required password #password="ngModel" [ngClass]="{ 'invalid-input': form.submitted && !password.valid }" >
+                    <div *ngIf="!password.valid && form.submitted" class="required-message">Passwod is required!
+                    </div>
+                    <div *ngIf="password.invalid && (password.dirty || password.touched)">
+                        <div *ngIf="password.errors && password.errors.required" class="required-message">Passwod is required!
+                        </div>
+                        <div *ngIf="password.errors && password.errors.minlength" class="required-message">Passwod is minimum lenth 6!
+                        </div>
+                        <div *ngIf="password.errors && password.errors.maxlength" class="required-message">Passwod is maximum length 12!
+                        </div>
+                        <div *ngIf="password.errors && password.errors.pattern" class="required-message">Passwod Must Contain Atleast One uppercase,One lower case,One Numeric digit.
+                        </div>
+                    </div>
+                </div>
+              </div> -->
+            <div class="form-group col-sm-6">
+              <label for="">Address</label>
+              <input type="text" class="form-control" name="formatted_address" id="formatted_address" required ngModel
+                #formatted_address="ngModel" (keydown.enter)="$event.preventDefault()" class="form-control"
+                [(ngModel)]="address.formatted_address" placeholder="Search Nearest Location" autocorrect="off"
+                autocapitalize="off" spellcheck="off" #search>
+              <div *ngIf="!formatted_address.valid && form.submitted" class="required-message">Address is required!
+              </div>
+            </div>
+            <div class="form-group col-sm-6">
+              <label for="">City</label>
+              <input type="text" class="form-control" [(ngModel)]="address.city" required ngModel #city="ngModel"
+                name="city" id="city" placeholder="Enter City">
+              <div *ngIf="!city.valid && form.submitted" class="required-message">City Name is
+                required!
+              </div>
+            </div>
+            <div class="form-group col-sm-6">
+              <label for="">Post Code</label>
+              <input type="text" class="form-control" [(ngModel)]="address.zipcode" required ngModel #zipcode="ngModel"
+                name="zipcode" id="zipcode" placeholder="Enter zipcode">
+              <div *ngIf="!zipcode.valid && form.submitted" class="required-message">Post code is
+                required!
+              </div>
+            </div>
+            <div class="form-group col-sm-6">
+              <label for="">category</label>
+              <select class="form-control" ngModel #childid="ngModel" id="childid" name="childid"
+                (change)="Categorychange($event);" required>
+                <option class="special" value="" disabled hidden>
+                  {{ 'main_cat' | translate }}</option>
+                <option class="special" *ngFor="let item of Category" [value]=item._id>
+                  {{item.name}}
+                </option>
+              </select>
+              <div *ngIf="!childid.valid && form.submitted" class="required-message">Category is
+                required!
+              </div>
+            </div>
+            <!-- </div> -->
+          </div>
+          <!-- <div> -->
+            <button type="submit" (click)="onSubmit()">Submit</button>
+          <!-- </div> -->
+        </form>
+      </div>
+      <div class="card-footer">
+        <span style="width:100%;display:flex;gap:5px;justify-content: center;margin-top: 10px;">
+          <a class="regi-btn" [routerLink]="['/login']">{{'Login' | translate}}</a> |
+          <a [routerLink]="['']" class="regi-btn"><i class="fa fa-home" aria-hidden="true"></i></a>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- <div class="inventory-body" [ngStyle]="{'background-image': 'url(' +appearance.image + ')'}">
+<div class="inventory-body">
+  this.imageUrl+this.appearance.image
+  <div>
+    <div class="login_contt tb_contt rsgtr-tb">
+      <tabset #staticTabs>
+        <tab heading="{{'User' | translate}}" (selectTab)="onSelect($event)">
+          <div id="Userreg" [ngClass]="{active: Userreg}" [ngStyle]="{height: TaskerReg ?'0px':''}"
+            *ngIf="phonecheckform">
+            <div class="usr_lgn lgn_dtls tsk_lgn">
+              <div class="inpt_fld">
+                <div class="typ_inpt slider userregtype" *ngIf="Getotp === 1">
+                  <form [formGroup]="Phonecheck" class="loginform" (ngSubmit)="onSubmit()" autocomplete="off">
+                    <span class="inps-fr inps-fr-lft">
+                      <input type="tel" id="phone" class="form-control phonenumber" maxlength="10" [(ngModel)]="number"
+                        formControlName="phone">
+                      <input type="text" id="result" style="display: none;" #mobilenumber>
+                      <div *ngIf="submittedphone" class="invalid-feedback">
+                        <div class="error_msg err_class" *ngIf="mobilelength">{{mobilelength}}</div>
+                      </div>
+                    </span>
+                    <span class="inps-fr inps-fr-rgt">
+                      <button type="submit" *ngIf="getotp_btn === 0" class="btn btn-info" defaultbutton>{{'GetOTP' |
+                        translate}}</button>
+                      <button class="btn btn-info" *ngIf="getotp_btn === 1" type="button" defaultbutton disabled>
+                        <i class="fa fa-circle-o-notch fa-spin"></i>&nbsp; {{'Loading' | translate}}
+                      </button>
+                    </span>
+                  </form>
+                </div>
+                <div class="typ_inpt" *ngIf="Getotp === 2">
+                  <form [formGroup]="Phonecheck" (ngSubmit)="verifyotp()" autocomplete="off">
+                    <span class="inps-fr inps-fr-lft">
+                      <input type="text" class="form-control" formControlName="otp" placeholder="ONE-TIME PASSWORD"
+                        [(ngModel)]="otpvalue">
+                      <div class="error_msg err_class" *ngIf="otperror">{{otperror}}</div>
+                    </span>
+                    <span class="inps-fr inps-fr-rgt">
+                      <div class="btn_fld">
+                        <div class="typ_btn">
+                          <button type="submit" class="btn btn-success" *ngIf="verifyotp_btn === 0"
+                            defaultbutton>{{'VerifyOTP' | translate}}</button>
+                          <button class="btn btn-success" *ngIf="verifyotp_btn === 1" type="button" defaultbutton
+                            disabled>
+                            <i class="fa fa-circle-o-notch fa-spin"></i>&nbsp; {{'Loading' | translate}}
+                          </button>
+                        </div>
+                      </div>
+                    </span>
+                    <a class="resent-otp-text" (click)="resendOtp('user')">{{'ResendOTP' | translate}}?</a>
+                  </form>
+                </div>
+              </div><br>
+            </div>
+          </div>
+          <form class="profile-settings" [formGroup]="Registerform" (ngSubmit)="Register()" autocomplete="off"
+            *ngIf="registerpage">
+            <div class="inpt_fld new_form">
+              <div class="typ_inpt reg-num ng-scope">
+                <span class="inps-fr  inps-fr-lft">
+                  <input type="text" name="firstname" pattern="^[a-zA-Z]*$" placeholder="First Name"
+                    formControlName="firstname">
+                  <div *ngIf="submitted && registrationform.firstname.errors" class="invalid-feedback">
+                    <div class="error_msg err_class" *ngIf="registrationform.firstname.errors.required">
+                      {{'Firstnamereq' | translate}}
+                    </div>
+                    <div class="error_msg err_class" *ngIf="registrationform.firstname.errors.pattern">
+                      {{'First_Name_mustchar' | translate}}
+                    </div>
+                  </div>
+                </span>
+                <span class="inps-fr inps-fr-rgt">
+                  <input type="text" name="lastname" pattern="^[a-zA-Z]*$" maxlength="15" placeholder="Last Name"
+                    formControlName="lastname">
+                  <div *ngIf="submitted && registrationform.lastname.errors" class="invalid-feedback">
+                    <div class="error_msg err_class" *ngIf="registrationform.lastname.errors.required">
+                      {{'Lastname_req' | translate}}
+                    </div>
+                    <div class="error_msg err_class" *ngIf="registrationform.lastname.errors.pattern">
+                      {{'Last_Name_mustchar' | translate}}
+                    </div>
+                  </div>
+                </span>
+              </div>
+              <div class="typ_inpt reg-num ng-scope ng-enter-prepare">
+                <span class="inps-fr inps-fr-lft">
+                  <input placeholder="Email Address" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
+                    formControlName="email" [(ngModel)]="email" (change)="emailcheck($event)">
+                  <div *ngIf="submitted && registrationform.email.errors" class="invalid-feedback">
+                    <div class="error_msg err_class" *ngIf="registrationform.email.errors.required">
+                      {{'email_req' | translate}}</div>
+                    <div class="error_msg err_class" *ngIf="registrationform.email.errors.pattern">
+                      {{'valid_email' | translate}}</div>
+                  </div>
+                </span>
+                <span class="inps-fr inps-fr-rgt ng-scope" ng-if="RGC.settings.referral.status == 1">
+                  <input type="text" placeholder="Referral Code" maxlength="25" formControlName="referalcode"
+                    name="referalcode">
+                  <div *ngIf="submitted && registrationform.referalcode.errors" class="invalid-feedback">
+                    <div class="error_msg err_class" *ngIf="registrationform.referalcode.errors.maxlength">
+                      {{'Maximum_limit' | translate}}</div>
+                  </div>
+                </span>
+              </div>
+              <div class="ng-scope">
+                <span>
+                  <input class="check_ng_scope" type="checkbox" name="checkbox" formControlName="checkbox">
+                  <small class="logtext">
+                    {{'BySigningUp_Agree' | translate}}
+                    <a [routerLink]="['/page/termsandconditions']" target="_blank" class="ng-binding">{{'TermsofUse' |
+                      translate}}</a>
+                    {{'And' | translate}}
+                    <a [routerLink]="['/page/privacypolicy']" target="_blank" class="ng-binding">{{'PrivacyPolicy' |
+                      translate}}.</a>
+
+                    <div *ngIf="submitted && registrationform.checkbox.errors" class="invalid-feedback">
+                      <div class="error_msg err_class" *ngIf="registrationform.checkbox.errors.required">
+                        {{'Click_checkbox' | translate}}.
+                      </div>
+                    </div>
+                  </small>
+                </span>
+              </div>
+              <div class="social_btn reg-log ng-scope">
+                <div class="social_btn_home">
+                  <button class="rgstr-btn" *ngIf="regeater_btn === 0" type="submit" defaultbutton>
+                    <span class="ng-binding">{{'Register' | translate}}</span>
+                  </button>
+                  <button class="rgstr-btn" *ngIf="regeater_btn === 1" type="button" defaultbutton disabled>
+                    <i class="fa fa-circle-o-notch fa-spin"></i>&nbsp; {{'Loading' | translate}}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </tab>
+        <tab heading="{{'Tasker' | translate}}" (selectTab)="onSelect($event)">
+          <div class="">
+
+          </div>
+          <div id="TaskerReg" [ngClass]="{active: TaskerReg}" [ngStyle]="{height: Userreg ?'0px':''}">
+            <div class="usr_lgn lgn_dtls tsk_lgn">
+              <div class="inpt_fld">
+                <div class="typ_inpt slider" *ngIf="Getotp === 11">
+                  <form [formGroup]="Phonecheck" class="logintaskerform" (ngSubmit)="onSubmit()" autocomplete="off">
+                    <span class="inps-fr inps-fr-lft">
+                      <input type="tel" id="phone" class="form-control tasker" maxlength="10" [(ngModel)]="number"
+                        formControlName="phone">
+                      <input type="text" class="result" style="display: none;" #mobilenumber>
+                      <div *ngIf="submittedphone" class="invalid-feedback">
+                        <div class="error_msg err_class" *ngIf="mobilelength">{{mobilelength}}</div>
+                      </div>
+                    </span>
+                    <span class="inps-fr inps-fr-rgt">
+                      <div class="btn_fld">
+                        <div class="typ_btn">
+                          <button type="submit" *ngIf="getotp_btn === 0" class="btn btn-info" defaultbutton>{{'GetOTP' |
+                            translate}}</button>
+                          <button class="btn btn-info" *ngIf="getotp_btn === 1" type="button" defaultbutton disabled>
+                            <i class="fa fa-circle-o-notch fa-spin"></i>&nbsp; {{'Loading' | translate}}
+                          </button>
+                        </div>
+                      </div>
+                    </span>
+                  </form>
+                </div>
+                <div class="typ_inpt" *ngIf="Getotp === 22">
+                  <form [formGroup]="Phonecheck" (ngSubmit)="verifyotp()" autocomplete="off">
+                    <span class="inps-fr inps-fr-lft">
+                      <input type="text" class="form-control" formControlName="otp" placeholder="ONE-TIME PASSWORD"
+                        [(ngModel)]="otpvalue">
+                      <div class="error_msg err_class" *ngIf="otperror">{{otperror}}</div>
+                    </span>
+                    <span class="inps-fr inps-fr-rgt">
+                      <div class="btn_fld">
+                        <div class="typ_btn">
+                          <button type="submit" class="btn btn-success" *ngIf="verifyotp_btn === 0"
+                            defaultbutton>{{'VerifyOTP' | translate}}</button>
+                          <button class="btn btn-success" *ngIf="verifyotp_btn === 1" type="button" defaultbutton
+                            disabled>
+                            <i class="fa fa-circle-o-notch fa-spin"></i>&nbsp; {{'Loading' | translate}}
+                          </button>
+                        </div>
+                      </div>
+                    </span>
+                    <a class="resent-otp-text" (click)="resendOtp('tasker')">{{'ResendOTP' | translate}}?</a>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </tab>
+        <div class="form-group">
+          <p style="width:100%;text-align:center;margin:0;">{{'DontHav_Account' | translate}}?
+            <span style="width:100%;display:flex;gap:5px;justify-content: center;margin-top: 10px;">
+              <a class="regi-btn" [routerLink]="['/login']">{{'Login' | translate}}</a> |
+              <a [routerLink]="['']" class="regi-btn"><i class="fa fa-home" aria-hidden="true"></i></a>
+            </span>
+            <a [routerLink]="['']" class="regi-btn">{{'BackToHome' | translate}}</a>
+          </p>
+        </div>
+      </tabset>
+    </div>
+  </div>
+</div> -->

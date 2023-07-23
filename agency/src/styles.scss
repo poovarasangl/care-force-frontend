@@ -1,0 +1,453 @@
+/* You can add global styles to this file, and also import other style files */
+
+html,
+body,
+app-root {
+    height: 100%;
+    margin: 0;
+    scroll-behavior: smooth;
+}
+
+agm-map {
+    height: 300px
+}
+
+.swal2-popup {
+    font-size: 15px !important;
+}
+
+.swal2-container.swal2-center.swal2-backdrop-show {
+    z-index: 99999;
+}
+
+.btncolor {
+    background: linear-gradient(180deg, #318fef, #6300a9) !important;
+    width: 100%;
+}
+
+li {
+    list-style: none;
+}
+
+html {
+    height: 100%;
+    scroll-behavior: smooth;
+}
+
+a {
+    cursor: pointer;
+}
+
+.modal {
+    top: 65px;
+}
+
+#snackbar {
+    visibility: hidden;
+    min-width: 250px;
+    height: 60px;
+    margin-left: -125px;
+    text-align: center;
+    border-radius: 2px;
+    padding: 16px;
+    position: fixed;
+    z-index: 99999;
+    right: 20px;
+    top: 20px;
+    font-size: 17px;
+}
+
+.error_msg {
+    color: #67098f;
+}
+
+html {
+    height: 100%;
+}
+
+.loader {
+    position: absolute;
+    top: calc(50% - 32px);
+    left: calc(50% - 32px);
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    perspective: 800px;
+    position: fixed;
+    top: 50%;
+    right: 50%;
+    bottom: 50%;
+    left: 50%;
+    opacity: 0.75;
+    z-index: 900;
+}
+
+.inner {
+    position: absolute;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.inner.one {
+    left: 0%;
+    top: 0%;
+    animation: rotate-one 1s linear infinite;
+    border-bottom: 3px solid #67098f;
+}
+
+.inner.two {
+    right: 0%;
+    top: 0%;
+    animation: rotate-two 1s linear infinite;
+    border-right: 3px solid #67098f;
+}
+
+.inner.three {
+    right: 0%;
+    bottom: 0%;
+    animation: rotate-three 1s linear infinite;
+    border-top: 3px solid #67098f;
+}
+
+@keyframes rotate-one {
+    0% {
+        transform: rotateX(35deg) rotateY(-45deg) rotateZ(0deg);
+    }
+
+    100% {
+        transform: rotateX(35deg) rotateY(-45deg) rotateZ(360deg);
+    }
+}
+
+@keyframes rotate-two {
+    0% {
+        transform: rotateX(50deg) rotateY(10deg) rotateZ(0deg);
+    }
+
+    100% {
+        transform: rotateX(50deg) rotateY(10deg) rotateZ(360deg);
+    }
+}
+
+@keyframes rotate-three {
+    0% {
+        transform: rotateX(35deg) rotateY(55deg) rotateZ(0deg);
+    }
+
+    100% {
+        transform: rotateX(35deg) rotateY(55deg) rotateZ(360deg);
+    }
+}
+
+
+/* devanagari */
+
+@font-face {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Poppins Regular'), local('Poppins-Regular'), url(https://fonts.gstatic.com/s/poppins/v9/pxiEyp8kv8JHgFVrJJbecmNE.woff2) format('woff2');
+    unicode-range: U+0900-097F, U+1CD0-1CF6, U+1CF8-1CF9, U+200C-200D, U+20A8, U+20B9, U+25CC, U+A830-A839, U+A8E0-A8FB;
+}
+
+
+/* latin-ext */
+
+@font-face {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Poppins Regular'), local('Poppins-Regular'), url(https://fonts.gstatic.com/s/poppins/v9/pxiEyp8kv8JHgFVrJJnecmNE.woff2) format('woff2');
+    unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+
+/* latin */
+
+@font-face {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Poppins Regular'), local('Poppins-Regular'), url(https://fonts.gstatic.com/s/poppins/v9/pxiEyp8kv8JHgFVrJJfecg.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+body {
+    font-family: 'Poppins';
+}
+
+.test {
+    overflow: hidden;
+}
+
+.test::before {
+    content: "";
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 999;
+}
+
+@media (max-width: 767px) {
+    #snackbar {
+        top: 70px;
+        font-size: 12px;
+    }
+}
+
+.theme-red .bs-datepicker-head {
+    background-color: #fe5603 !important;
+}
+
+.theme-red .bs-datepicker-body table td.week span {
+    color: #fe5603 !important;
+}
+
+.typ_inpt input {
+    height: 38px;
+    box-shadow: 2px 2px transparent;
+    border-radius: 4px !important;
+}
+
+.form-control {
+    height: 38px;
+}
+
+
+.handy-lang-section select {
+    width: 49% !important;
+}
+
+
+ul.app-main {
+    float: left;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+ul.app-main li {
+    display: inline-block;
+    padding: 0px 10px 0 0;
+}
+
+section.handy-home-footer {
+    width: 100%;
+    float: left;
+}
+
+.footer h3 {
+    float: left;
+    width: 100%;
+    margin-bottom: 24px;
+}
+
+.cvr-dv {
+    padding: 0;
+}
+
+.pay-ment-sec:hover .circle-content h4,
+.pay-ment-sec:hover .circle-content p {
+    color: #fff;
+}
+
+.circle-content {
+    min-height: 238px;
+}
+
+.right_prof .btn:hover {
+    background: white !important;
+    color: #67098f !important;
+}
+
+.form-control {
+    box-shadow: inset 0 1px 1px #00000000 !important;
+}
+
+.virtualfield .intl-tel-input {
+    width: 100%;
+}
+
+button.btn.def_btn:hover {
+    border: 1px solid #67098f;
+    background: #67098f;
+    color: #ffffff;
+    border-radius: 50px;
+}
+
+.form-group label {
+    display: inline-block;
+    max-width: 100%;
+    margin-bottom: 5px;
+    font-weight: 600;
+    width: 100%;
+    color: #4b4b4b;
+    font-size: 14px;
+}
+
+.cancelbtn {
+    background-color: #fff;
+    color: #67098f;
+    border: 1px solid #67098f;
+    padding: 6px 17px;
+    font-size: 14px;
+}
+
+.cancelbtn:hover {
+    background-color: #67098f;
+    color: #ffffff;
+    border: 1px solid #67098f;
+}
+
+.savebtn {
+    background-color: #67098f;
+    color: #fff;
+    border: 1px solid #67098f;
+    padding: 6px 17px;
+    font-size: 14px;
+}
+
+.savebtn:hover {
+    background-color: #ffffff;
+    color: #67098f;
+    border: 1px solid #67098f;
+    padding: 6px 17px;
+    font-size: 14px;
+}
+
+.emptyfie span {
+    font-size: 15px;
+}
+
+.list-transta span {
+    font-size: 15px !important;
+}
+
+.tskr_prof_dtls_cont_val .tskr_prof_dtls_icon i {
+    color: #67098f;
+}
+
+.tskr_prof_dtls_innercont>div span.tskr_prof_dtls_name {
+    font-size: 14px;
+}
+
+mark {
+    background: #F5F5F5 !important;
+    color: red !important;
+    line-height: 1.6;
+    font-family: "Poppins";
+    font-size: 14px !important;
+    padding: 6px 20px !important;
+}
+
+.prof_det {
+    padding-left: 30px;
+}
+
+.task-dtls .chat_def h1,
+.col-right h1 {
+    font-size: 22px !important;
+    font-weight: 600 !important;
+    float: left !important;
+    width: 100%;
+}
+
+h4.panel-title a.accordion-toggle span {
+    position: relative;
+    top: 11px;
+    height: 24px;
+}
+
+.custom-table {
+    width: 100%;
+    float: left;
+    white-space: nowrap;
+    overflow: auto;
+}
+
+a.btn-view {
+    border-radius: 4px;
+    border: 1px solid #67098f;
+    padding: 4px 20px;
+    text-decoration: none;
+    font-size: 14px;
+    background-color: #67098f;
+    color: #fff;
+    font-weight: 500;
+    display: inline-block;
+}
+
+a.btn-view:hover {
+    background-color: #ffffff;
+    color: #67098f;
+}
+
+a.btn-delete {
+    border-radius: 4px;
+    border: 1px solid #7e7e7e;
+    padding: 4px 20px;
+    text-decoration: none;
+    font-size: 14px;
+    background-color: #7e7e7e;
+    color: #fff;
+    font-weight: 500;
+    display: inline-block;
+}
+
+a.btn-delete:hover {
+    background-color: #ffffff;
+    color: #7e7e7e;
+}
+
+.short-chat {
+    float: left;
+    width: 100%;
+    padding: 0px 0px 15px;
+}
+
+.job-details-chat {
+    width: 55%;
+}
+
+.notification-datetime {
+    font-size: 12px;
+    color: #7a7a7a;
+}
+
+.close:hover {
+    color: #fff;
+    opacity: 1;
+}
+
+button.close {
+    opacity: 1;
+    font-size: 18px;
+    font-weight: 600;
+    color: #fff;
+}
+
+.modal-body ul.view-detail-pop {
+    padding: 0;
+}
+.btn-care {
+    background: #67098f;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 15px;
+    padding: 10px 45px;
+    transition: .2s;
+    display: block;
+}
+
+.btn-care:hover {
+    color: #fff;
+    border: none;
+    transition: .2s all;
+    background: linear-gradient(180deg, #318fef, #6300a9);
+}
+
+@import './responsive.scss';

@@ -1,0 +1,32 @@
+::ng-deep .star {
+    visibility: hidden;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+::ng-deep .star:before {
+    content: "\2605";
+    position: absolute;
+    visibility: visible;
+}
+
+::ng-deep .star:checked:before {
+    content: "\2606";
+    position: absolute;
+}
+
+::ng-deep span.start-rate i {
+    font-size: 18px;
+}
+
+::ng-deep span.start-rate i.fa.fa-star {
+    color: #ffc107;
+}
+
+::ng-deep i.iconsminds-management {
+    margin-left: -2px !important;
+}
+
+::ng-deep i.iconsminds-smartphone-4 {
+    margin-left: -2px !important;
+}

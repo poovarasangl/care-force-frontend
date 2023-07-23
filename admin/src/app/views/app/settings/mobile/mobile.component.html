@@ -1,0 +1,69 @@
+<app-breadcrumb></app-breadcrumb>
+<app-spinner [spinner]="spinner"></app-spinner>
+<div class="card mb-4">
+    <div class="card-body">
+        <h2 class="mb-4">FCM Settings</h2>
+        <p>For IOS Mobile</p>
+        <hr>
+        <form #form="ngForm" novalidate class="tooltip-label-right">
+            <div class="form-group">
+                <label>Mode</label>
+            <ng-select [items]="[{id:'0', name:'Development'}, {id:'1', name:'Production'}]" bindLabel="name"
+            bindValue="id" name="mode" [ngClass]="{ 'invalid-input': form.submitted && !mode.valid }" ngModel required #mode="ngModel">
+            </ng-select>
+                <div *ngIf="!mode.valid && form.submitted" class="required-message">Mode is required</div>
+            </div>
+            <div class="row-one">
+                <div class="form-group error-l-50">
+                    <label>User FCM API Key</label>
+                    <input type="text" class="form-control" name="user_bundle_id" ngModel required #user_bundle_id="ngModel" [ngClass]="{ 'invalid-input': form.submitted && !user_bundle_id.valid }">
+                    <div *ngIf="!user_bundle_id.valid && form.submitted" class="required-message">User FCM API Key is required!</div>
+                </div>
+                <div class="form-group error-l-50">
+                    <label>Tasker FCM API Key</label>
+                    <input type="text" class="form-control" name="tasker_bundle_id" ngModel required #tasker_bundle_id="ngModel" [ngClass]="{ 'invalid-input': form.submitted && !tasker_bundle_id.valid }">
+                    <div *ngIf="!tasker_bundle_id.valid && form.submitted" class="required-message">Tasker FCM API Key is required!</div>
+                </div>
+                <div class="form-group error-l-50">
+                    <label>User Map API Key</label>
+                    <input type="text" class="form-control" name="mapuserios" ngModel required #mapuserios="ngModel" [ngClass]="{ 'invalid-input': form.submitted && !mapuserios.valid }">
+                    <div *ngIf="!mapuserios.valid && form.submitted" class="required-message">User Map API Key is required!</div>
+                </div>
+                <div class="form-group error-l-50">
+                    <label>Tasker Map API Key</label>
+                    <input type="text" class="form-control" name="maptaskerios" ngModel required #maptaskerios="ngModel" [ngClass]="{ 'invalid-input': form.submitted && !maptaskerios.valid }">
+                    <div *ngIf="!maptaskerios.valid && form.submitted" class="required-message">Tasker Map API Key is required!</div>
+                </div>
+            </div>
+            <h2 class="mb-4 row-two-head">FCM Settings</h2>
+            <p>For Android Mobile</p>
+            <hr>
+            <div class="row-two">
+                <div class="form-group error-l-50">
+                    <label>User FCM API Key</label>
+                    <input type="text" class="form-control" name="user" ngModel required #user="ngModel" [ngClass]="{ 'invalid-input': form.submitted && !user.valid }">
+                    <div *ngIf="!user.valid && form.submitted" class="required-message">User FCM API Key is required!</div>
+                </div>
+                <div class="form-group error-l-50">
+                    <label>Tasker FCM API Key</label>
+                    <input type="text" class="form-control" name="tasker" ngModel required #tasker="ngModel" [ngClass]="{ 'invalid-input': form.submitted && !tasker.valid }">
+                    <div *ngIf="!tasker.valid && form.submitted" class="required-message">Tasker FCM API Key is required!</div>
+                </div>
+                <div class="form-group error-l-50">
+                    <label>User Map API Key</label>
+                    <input type="text" class="form-control" name="mapuserandroid" ngModel required #mapuserandroid="ngModel" [ngClass]="{ 'invalid-input': form.submitted && !mapuserandroid.valid }">
+                    <div *ngIf="!mapuserandroid.valid && form.submitted" class="required-message">User Map API Key is required!</div>
+                </div>
+                <div class="form-group error-l-50">
+                    <label>Tasker Map API Key</label>
+                    <input type="text" class="form-control" name="maptaskerandroid" ngModel required #maptaskerandroid="ngModel" [ngClass]="{ 'invalid-input': form.submitted && !maptaskerandroid.valid }">
+                    <div *ngIf="!maptaskerandroid.valid && form.submitted" class="required-message">Tasker Map API Key is required!</div>
+                </div>
+            </div>
+            <app-state-button [btnClass]="'btn btn-primary btn-lg btn-shadow'" style="float: right;" [currentState]="buttonState" [isDisabled]="buttonDisabled" (click)="onSubmit()">
+                Submit
+            </app-state-button>
+        </form>
+    </div>
+    <simple-notifications></simple-notifications>
+</div>

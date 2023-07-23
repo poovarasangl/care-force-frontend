@@ -1,0 +1,104 @@
+<app-breadcrumb></app-breadcrumb>
+<app-spinner [spinner]="spinner"></app-spinner>
+<div class="card mb-4">
+    <div class="card-body">
+        <h6 class="mb-4">{{title}} Page
+        </h6>
+        <form #form="ngForm" method="post" novalidate class="tooltip-label-right">
+            <div class="form-group error-l-50">
+                <label>Page Name</label>
+                <input type="hidden" class="form-control" name="page_id" value="" ngModel #page_id="ngModel">
+                <input type="text" class="form-control" name="name" (change)="slugdata($event.target.value)" ngModel required #name="ngModel" [ngClass]="{ 'invalid-input': form.submitted && !name.valid }">
+                <div *ngIf="!name.valid && form.submitted" class="required-message">Page Title is required!</div>
+            </div>
+            <div class="form-group error-l-50">
+                <label>Page Slug</label>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="url-sec">{{pageUrl}}page/{{slugurl}}</div>
+                    </div>
+                    <div class="col-md-4" *ngIf="slugchange">
+                        <input type="text"  class="form-control" name="slug" (change)="slugchanges($event.target.value)" ngModel required #slug="ngModel" [ngClass]="{ 'invalid-input': form.submitted && !slug.valid }">
+                        <div *ngIf="!slug.valid && form.submitted" class="required-message">Page Slug is required!</div>
+                    </div>
+                    <div class="col-md-2">
+                        <a href="javascript:;" (click)="slugedit()" class="btn btn-default btn-rounded-20 btn-xs pull-right"><em class="fa fa-pencil"></em></a>
+                        <!-- <div class="action-btn badge badge-pill badge-secondary"><i class="glyph-icon simple-icon-note"></i></div> -->
+                    </div>
+                </div>
+            </div>
+            <div class="form-group error-l-50">
+                <label>Page Description</label>
+                <editor apiKey="wqel19pklihbenult7fuqsssltcd8vup4cl0n33y6m3hzghx" name="description" ngModel required #description="ngModel" [init]="{
+                    height: 300,
+                    menubar: false,
+                    plugins: [
+                      'advlist autolink lists link image charmap print preview anchor',
+                      'searchreplace visualblocks code fullscreen',
+                      'insertdatetime media table paste code wordcount'
+                    ],
+                    toolbar:
+                      'undo redo | formatselect | bold italic backcolor | \
+                      alignleft aligncenter alignright alignjustify | \
+                      bullist numlist outdent indent | removeformat | code'
+                  }" [ngClass]="{ 'invalid-input': form.submitted && !description.valid }"></editor>
+                <!-- <quill-editor name="description" ngModel required #description="ngModel" [placeholder]="''" [ngClass]="{ 'invalid-input': form.submitted && !description.valid }"></quill-editor> -->
+                <div *ngIf="!description.valid && form.submitted" class="required-message">Page Description is required!</div>
+            </div>
+            <div class="form-group row error-l-50 col-md-12">
+                <div class="col-md-6">
+                <label>Category Title</label>
+                <label class="form-group has-float-label">
+                    <ng-select [items]="categorytitle"  [hideSelected]="true"
+                      bindLabel="name" bindValue="name" name="footer_title" [ngClass]="{ 'invalid-input': form.submitted && !footer_title.valid }" ngModel required #footer_title="ngModel">
+                    </ng-select>
+                   
+                  </label>
+                <div *ngIf="!footer_title.valid && form.submitted" class="required-message">Category title is required!</div>
+                </div>
+                <div class="col-md-6">
+                    <label>Status</label>
+                    <ng-select [items]="[{id:'1', name:'Publish'}, {id:'2', name:'Unpublish'}]" bindLabel="name"
+                    bindValue="id" name="publish" [ngClass]="{ 'invalid-input': form.submitted && !publish.valid }" ngModel required #publish="ngModel">
+                    </ng-select>
+                    <div *ngIf="!publish.valid && form.submitted" class="required-message">Status is required!</div>
+                </div>
+            </div>
+            
+            <h4>Seo Details</h4>
+            <div class="form-group error-l-50">
+                <label>Page Title</label>
+                <input type="text" class="form-control" name="pageTitle" ngModel required #pageTitle="ngModel" [ngClass]="{ 'invalid-input': form.submitted && !pageTitle.valid }">
+                <div *ngIf="!pageTitle.valid && form.submitted" class="required-message">Page Seo Title is required!</div>
+            </div>
+            <div class="form-group error-l-50">
+                <label>Focus Keyword</label>
+                <input type="text" class="form-control" name="focusKeyword" ngModel required #focusKeyword="ngModel" [ngClass]="{ 'invalid-input': form.submitted && !focusKeyword.valid }">
+                <div *ngIf="!focusKeyword.valid && form.submitted" class="required-message">Page Seo Slug is required!</div>
+            </div>
+            <div class="form-group error-l-50">
+                <label>Description</label>
+                <editor apiKey="wqel19pklihbenult7fuqsssltcd8vup4cl0n33y6m3hzghx" name="seo_description" ngModel required #seo_description="ngModel" 
+                [init]="{
+                    height: 300,
+                    menubar: false,
+                    plugins: [
+                      'advlist autolink lists link image charmap print preview anchor',
+                      'searchreplace visualblocks code fullscreen',
+                      'insertdatetime media table paste code wordcount'
+                    ],
+                    toolbar:
+                      'undo redo | formatselect | bold italic backcolor | \
+                      alignleft aligncenter alignright alignjustify | \
+                      bullist numlist outdent indent | removeformat | code'
+                  }" [ngClass]="{ 'invalid-input': form.submitted && !seo_description.valid }"></editor>
+                <!-- <quill-editor name="seo_description" ngModel required #seo_description="ngModel" [ngClass]="{ 'invalid-quill-editor': form.submitted && !seo_description.valid }" [placeholder]="''"></quill-editor> -->
+                <div *ngIf="!seo_description.valid && form.submitted" class="required-message">Page Seo Description is required!</div>
+            </div>
+            <app-state-button [btnClass]="'btn btn-primary btn-lg btn-shadow'" [currentState]="buttonState" [isDisabled]="buttonDisabled" (click)="onSubmit()">
+                Submit
+            </app-state-button>
+        </form>
+        <simple-notifications></simple-notifications>
+    </div>
+</div>

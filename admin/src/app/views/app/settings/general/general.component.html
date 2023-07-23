@@ -1,0 +1,275 @@
+<app-breadcrumb></app-breadcrumb>
+<app-spinner [spinner]="spinner"></app-spinner>
+<div class="card mb-4 general-settings">
+    <div class="card-body">
+        <h2 class="mb-4">General Settings</h2>
+
+        <form #form="ngForm" novalidate class="tooltip-label-right">
+            <div class="grid-class">
+                <div class="form-group ">
+                    <label>Site Title</label>
+                    <input type="text" class="form-control" name="site_title" ngModel required #site_title="ngModel" [ngClass]="{ 'invalid-input': form.submitted && !site_title.valid }">
+                    <div *ngIf="!site_title.valid && form.submitted" class="required-message">Site Title is required!
+                    </div>
+                </div>
+                <div class="form-group mail">
+                    <label>E-mail Address</label>
+                    <input type="email" class="form-control" name="email_address" ngModel required email #email_address="ngModel" [ngClass]="{ 'invalid-input': form.submitted && !email_address.valid }">
+                    <div *ngIf="!email_address.valid && form.submitted" class="required-message">Email is required!
+                    </div>
+                    <!-- <div *ngIf="!email_address.errors?.pattern && form.submitted" class="required-message">Email invalid!</div> -->
+                </div>
+                <div class="form-group Contact">
+                    <label>Contact Number(1)</label>
+                    <input type="text" class="form-control" name="contact_number_one" ngModel required #contact_number_one="ngModel" [ngClass]="{ 'invalid-input': form.submitted && !contact_number_one.valid }">
+                    <div *ngIf="!contact_number_one.valid && form.submitted" class="required-message">Contact number is required!
+                    </div>
+                </div>
+            </div>
+            <div class="grid-class">
+                <div class="form-group Contact-two">
+                    <label>Contact Number(2)</label>
+                    <input type="text" class="form-control" name="contact_number_two" ngModel required #contact_number_two="ngModel" [ngClass]="{ 'invalid-input': form.submitted && !contact_number_two.valid }">
+                </div>
+                <div class="form-group">
+                    <label>Site URL</label>
+                    <input type="url" class="form-control" name="site_url" ngModel required #site_url="ngModel" [ngClass]="{ 'invalid-input': form.submitted && !site_url.valid }">
+                    <div *ngIf="!site_url.valid && form.submitted" class="required-message">Site URL is required!</div>
+                </div>
+                <div class="form-group">
+                    <label>Site Location</label>
+                    <input type="text" class="form-control" name="location" ngModel required #location="ngModel" [ngClass]="{ 'invalid-input': form.submitted && !location.valid }">
+                    <div *ngIf="!location.valid && form.submitted" class="required-message">Site Location is required!
+                    </div>
+                </div>
+            </div>
+            <div class="grid-class">
+                <div class="form-group">
+                    <label>Service Tax (%)</label>
+                    <input type="text" class="form-control" name="service_tax" ngModel required #service_tax="ngModel" [ngClass]="{ 'invalid-input': form.submitted && !service_tax.valid }">
+                    <div *ngIf="!service_tax.valid && form.submitted" class="required-message">service tax is required!
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Tasker Availability radius</label>
+                    <input type="text" class="form-control" name="tasker_radius" ngModel required #tasker_radius="ngModel" [ngClass]="{ 'invalid-input': form.submitted && !tasker_radius.valid }">
+                    <div *ngIf="!tasker_radius.valid && form.submitted" class="required-message">Tasker Availability radius is required!</div>
+                </div>
+                <div class="form-group">
+                    <label>Distance By</label>
+                    <select class="custom-select" name="distanceby" ngModel required #distanceby="ngModel" [ngClass]="{ 'invalid-input': form.submitted && !distanceby.valid }">
+                        <option value="km">Kilometer</option>
+                        <option value="mi">Mile</option>
+                    </select>
+                    <div *ngIf="!distanceby.valid && form.submitted" class="required-message">Distance By is required</div>
+                </div>
+            </div>
+            <div class="grid-class">
+                <div class="form-group">
+                    <label>Billing cycle (In Days)</label>
+                    <input type="number" class="form-control" name="billingcycle" ngModel required #billingcycle="ngModel" [ngClass]="{ 'invalid-input': form.submitted && !billingcycle.valid }">
+                    <div *ngIf="!billingcycle.valid && form.submitted" class="required-message">Billing cycle is required!
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Pending Task Alert Time Minimum(In minutes)</label>
+                    <input type="number" class="form-control" name="minaccepttime" ngModel required #minaccepttime="ngModel" [ngClass]="{ 'invalid-input': form.submitted && !minaccepttime.valid }">
+                    <div *ngIf="!minaccepttime.valid && form.submitted" class="required-message">Pending Task Alert Time is required!</div>
+                </div>
+                <div class="form-group">
+                    <label>Job Left Alert Time(In minutes)</label>
+                    <input type="number" class="form-control" name="accepttime" ngModel required #accepttime="ngModel" [ngClass]="{ 'invalid-input': form.submitted && !accepttime.valid }">
+                    <div *ngIf="!accepttime.valid && form.submitted" class="required-message">Job Left Alert Time is required!
+                    </div>
+                </div>
+            </div>
+            <div class="grid-class">
+                <div class="form-group">
+                    <label>Booking Id Prefix</label>
+                    <input type="text" class="form-control" name="bookingIdPrefix" ngModel required #bookingIdPrefix="ngModel" [ngClass]="{ 'invalid-input': form.submitted && !bookingIdPrefix.valid }">
+                    <div *ngIf="!bookingIdPrefix.valid && form.submitted" class="required-message">Booking Id Prefix is required!
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Timezone</label>
+                    <select class="form-control" name="time_zone" ngModel required #time_zone="ngModel">
+                        <option *ngFor="let item of tzNames">{{item}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="grid-class">
+                <div class="form-group">
+                    <label>Date Format</label>
+                    <div *ngFor="let item of dateradiobtn" class="custom-control custom-radio">
+                        <input class="custom-control-input" *ngIf="item.name !=''" type="radio" value="{{item.value}}" name="date_format" (change)="RadioChange(item.value,'date')" ngModel id="{{item.name}}" #date_format="ngModel" checked="{{item.checked}}">
+                        <label class="custom-control-label" for="{{item.name}}" *ngIf="item.name !=''">
+                            {{currentdate | date : item.name}}
+                        </label>
+                        <input class="custom-control-input" *ngIf="item.name ==''" type="radio" value="{{customeDate}}" name="date_format" (change)="RadioChange(customeDate,'date')" ngModel id="customdd" checked="{{coustomDateRadiobtn}}" #date_format="ngModel">
+                        <label class="custom-control-label" for="customdd" *ngIf="item.name ==''">
+                            Custom
+                            <input type="text" [value]="customeDate" *ngIf="item.name ==''"
+                                (keyup)="onKeyup($event.target.value,'date')" #cutomDateInput>
+                            {{currentdate | date: customeDate}}
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Time Format</label>
+                    <div *ngFor="let item of timeradiobtn" class="custom-control custom-radio">
+                        <input class="custom-control-input" *ngIf="item.name !=''" type="radio" value="{{item.value}}" name="time_format" (change)="RadioChange(item.value,'time')" ngModel id="{{item.name}}" #time_format="ngModel" checked="{{item.checked}}">
+                        <label class="custom-control-label" for="{{item.name}}" *ngIf="item.name !=''">
+                            {{currentdate | date : item.name}}
+                        </label>
+                        <input class="custom-control-input" *ngIf="item.name ==''" type="radio" value="{{customTime}}" name="time_format" (change)="RadioChange(customTime,'time')" ngModel id="customddTime" checked="{{coustomeTimeRadiobtn}}" #time_format="ngModel">
+                        <label class="custom-control-label" for="customddTime" *ngIf="item.name ==''">
+                            Custom
+                            <input type="text" [value]="customTime" *ngIf="item.name ==''" (keyup)="onKeyup($event.target.value,'time')"
+                                #cutomTimeInput>
+                            {{currentdate | date: customTime}}
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="grid-class">
+                <div class="form-group">
+                    <label>Dark Logo</label>
+                    <input type="file" id="file" name="logo" class="form-control" #logo ngModel (change)="getFiles($event, 'logo')">
+                    <img alt="Darklogo" class="dark-logo" *ngIf="settingsData && settingsData.logo && !imagepreview.logo" src="{{imageUrl}}{{settingsData.logo}}"><br>
+                    <img alt="Darklogo" class="preview-logo" *ngIf="imagepreview.logo" [src]="imagepreview.logo"><br>
+                    <span class="help-block">Allowed files: jpeg, png, jpg. Max file size 1Mb</span>
+                    <!-- <div *ngIf="!logo.valid && form.submitted && settingsData && !settingsData.logo" class="invalid-input required-message">Darklogo is required!</div> -->
+                </div>
+                <div class="form-group">
+                    <label>Light Logo</label>
+                    <input type="file" id="file2" name="light_logo" class="form-control" #light_logo ngModel (change)="getFiles($event, 'light_logo')">
+                    <img alt="Light logo" class="dark-logo" *ngIf="settingsData && settingsData.logo && !imagepreview.light_logo" src="{{imageUrl}}{{settingsData.light_logo}}"><br>
+                    <img alt="Light logo" class="preview-logo" *ngIf="imagepreview.light_logo" [src]="imagepreview.light_logo"><br>
+                    <span class="help-block">Allowed files: jpeg, png, jpg. Max file size 1Mb</span>
+                    <!-- <div *ngIf="!light_logo.valid && form.submitted && settingsData && !settingsData.light_logo" class="required-message">Light logo is required!</div> -->
+                </div>
+                <div class="form-group">
+                    <label>Favicon</label>
+                    <input type="file" id="file3" name="favicon" class="form-control" #favicon ngModel (change)="getFiles($event, 'favicon')">
+                    <img alt="Favicon" class="dark-logo" *ngIf="settingsData && settingsData.logo && !imagepreview.favicon" src="{{imageUrl}}{{settingsData.favicon}}"><br>
+                    <img alt="Favicon" class="preview-logo" *ngIf="imagepreview.favicon" [src]="imagepreview.favicon"><br>
+                    <span class="help-block">Allowed files: jpeg, png, jpg. Max file size 1Mb</span>
+                    <!-- <div *ngIf="!favicon.valid && form.submitted && settingsData && !settingsData.favicon" class="required-message">Favicon is required!</div> -->
+                </div>
+            </div>
+
+            <div class="grid-class-resttime">
+                <div class="form-group">
+                    <h3 class="mb-4">Rest Time</h3>
+                    <label class="switch">
+                        <input type="checkbox" name="resttime" *ngIf="settingsData && settingsData.resttime" [checked]="settingsData.resttime.status === 1 ? true : false" (change)="resttimechange($event)">
+                        <span class="slider round"></span> 
+                    </label>
+                </div>
+                <div class="custom-control custom-radio rest-radio" *ngIf="resttimeinput">
+                    <input type="radio" value="minutes" name="resttime-radio" class="form-control" #minutes ngModel class="custom-control-input" [checked]="settingsData.resttime.option === 'minutes' ? true : false">
+                    <label class="custom-control-label" for="minutes">30 Minutes
+                      </label>
+                </div>
+                <div class="custom-control custom-radio rest-radio" *ngIf="resttimeinput">
+                    <input type="radio" value="hour" name="resttime-radio" class="form-control" #hour ngModel class="custom-control-input" [checked]="settingsData.resttime.option === 'hour' ? true : false">
+                    <label class="custom-control-label" for="customRadio2">1 Hours
+                      </label>
+                </div>
+            </div>
+            <h3 class="mb-4">Wallet Settings</h3>
+            <hr>
+            <div class="grid-class walletgrid">
+                <div class="walletoption">
+                    <p class="labelword">Wallet Option</p>
+                    <label class="switch">
+                        <input type="checkbox" name="wallet_status" *ngIf="settingsData && settingsData.wallet" [checked]="settingsData.wallet.status == 1 ? true : false" (change)="walletoption($event)">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label>Minimum</label>
+                    <input type="number" class="form-control" name="wallet_minimum" ngModel required #wallet_minimum="ngModel" [disabled]="!walletoptioninput">
+                    <div *ngIf="walletoptioninput && !wallet_minimum.valid && form.submitted" class="required-message">Minimum number is required!
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Maximum</label>
+                    <input type="number" class="form-control" name="wallet_maximum" ngModel required #wallet_maximum="ngModel" [disabled]="!walletoptioninput">
+                    <div *ngIf="walletoptioninput && !wallet_maximum.valid && form.submitted" class="required-message">Maximum number is required!
+                    </div>
+                </div>
+            </div>
+            <div class="settingcomission">
+                <h3 class="mb-4">Commission Settings</h3>
+                <hr>
+                <p class="labelword">Category Based commission</p>
+                <label class="switch">
+                <input type="checkbox" name="" *ngIf="settingsData && settingsData.categorycommission"
+                    [checked]="settingsData.categorycommission.status == 1 ? true : false" (change)="commissionchange($event)">
+                <span class="slider round"></span>
+            </label>
+                <div class="form-group">
+                    <label>Admin Commission (%)</label>
+                    <input type="number" class="form-control" name="admin_commission" ngModel required #admin_commission="ngModel" [ngClass]="{ 'invalid-input': form.submitted && !admin_commission.valid }">
+                    <div *ngIf="!admin_commission.valid && form.submitted" class="required-message">Admin Commission is required!
+                    </div>
+                </div>
+            </div>
+            <div class="cashsetiing">
+                <h3 class="mb-4">Cash Settings</h3>
+                <hr>
+                <p class="labelword">Cash Option</p>
+                <label class="switch">
+                <input type="checkbox" [checked]="settingsData && settingsData.pay_by_cash ? true : false &&  settingsData.pay_by_cash.status == '1' ? true : false" (change)=paybycashevent($event)>
+                <span class="slider round"></span>
+            </label>
+            </div>
+            <h3 class="mb-4">Referral Settings</h3>
+            <hr>
+            <div class="grid-class">
+                <div class="referraloption">
+
+                    <p class="labelword">Referral Option</p>
+                    <label class="switch">
+                        <input type="checkbox" *ngIf="settingsData && settingsData.document_upload"
+                            [checked]="settingsData.referral.status == '1' ? true : false" (change)="referralinput($event)">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label>Referral Amount</label>
+                    <input type="number" class="form-control" name="referral" ngModel required #referral="ngModel" [disabled]="!referraloptioninput">
+                    <!-- <div *ngIf="!referral.valid && form.submitted" class="required-message">Referral Amount is required! -->
+                    <!-- </div> -->
+                </div>
+                <div class="form-group">
+                    <label>Referrer Amount</label>
+                    <input type="number" class="form-control" name="referrer" ngModel required #referrer="ngModel" [disabled]="!referraloptioninput">
+                    <!-- <div *ngIf="!referrer.valid && form.submitted" class="required-message">Referrer Amount is required! -->
+                    <!-- </div> -->
+                </div>
+            </div>
+            <h3>Google Map API Setting</h3>
+            <hr>
+            <div class="form-group">
+                <input type="text" class="form-control" name="map_api" ngModel required #map_api="ngModel" [ngClass]="{ 'invalid-input': form.submitted && !map_api.valid }">
+                <div *ngIf="!map_api.valid && form.submitted" class="required-message">Google Map API is required!</div>
+            </div>
+            <h3 class="mb-4">Document Setting</h3>
+            <hr>
+            <div>
+                <p class="labelword">Document Upload Option</p>
+                <label class="switch">
+                    <input type="checkbox" name="document_upload" *ngIf="settingsData && settingsData.document_upload"
+                        [checked]="settingsData.document_upload.status ? true : false" (change)="documentoption($event)">
+                    <span class="slider round"></span>
+                </label>
+            </div>
+            <app-state-button [btnClass]="'btn btn-primary btn-lg btn-shadow'" style="float: right;" [currentState]="buttonState" [isDisabled]="buttonDisabled" (click)="onSubmit()">
+                Submit
+            </app-state-button>
+        </form>
+    </div>
+    <simple-notifications></simple-notifications>
+</div>

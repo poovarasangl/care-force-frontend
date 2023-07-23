@@ -1,0 +1,282 @@
+
+.progress-section 
+	width: 100% 
+	background: #fff 
+	padding-top: 25px
+#msform 
+	text-align: center 
+	position: relative 
+	fieldset 
+		background: #fff 
+		width: 100% 
+		position: relative 
+		height: calc(100vh - 240px) 
+		&:not(:first-of-type) 
+			display: none 
+.form-card 
+	text-align: left 
+.progress-btns 
+	width: 100% 
+	display: flex 
+	align-items: center 
+	justify-content: space-between 
+	margin-top: 10px 
+	box-shadow: 0 -3px 6px #64646429 
+	background: #fff 
+	padding: 20px 
+	border-radius: 15px 15px 0 0 
+	position: absolute 
+	bottom: 0 
+	z-index: 1 
+	.next 
+		background: #6330f6 
+		&:hover 
+			background-color: #311B92 
+	.previous 
+		background: #616161 
+		&:hover 
+			background-color: #311B92 
+.progress-btns .next,
+.progress-btns .previous 
+	width: 100px 
+	height: 45px 
+	border: none 
+	border-radius: 25px 
+	cursor: pointer 
+	color: #fff 
+	font-size: 14px 
+	font-weight: 500 
+.card 
+	z-index: 0 
+	border: none 
+	position: relative 
+.fs-title 
+	font-size: 20px 
+	color: #424242 
+	margin-bottom: 15px 
+	font-weight: 600 
+	text-align: left 
+.purple-text 
+	color: #6330f6 
+	font-weight: normal 
+.steps 
+	font-size: 20px 
+	color: #808080 
+	margin-bottom: 15px 
+	font-weight: 500 
+	text-align: right 
+	span 
+		color: #6330f6 
+#progressbar 
+	width: 100% 
+	padding: 20px 
+	border: 1px solid #E9E9E9 
+	border-radius: 15px 
+	display: flex 
+	justify-content: center
+	margin-bottom: 0 
+	overflow: hidden 
+	color: #d3d3d3 
+	box-shadow: 0 3px 16px #0000001a 
+	li 
+		list-style-type: none 
+		font-size: 15px 
+		width: 33% 
+		position: relative 
+		&.active 
+			color: #6330f6 
+		strong 
+			font-weight: 500 
+		&:before 
+			width: 50px 
+			height: 50px 
+			line-height: 45px 
+			display: block 
+			font-size: 20px 
+			color: #ffffff 
+			background: #d3d3d3 
+			border-radius: 50% 
+			margin: 0 auto 10px auto 
+			padding: 2px 
+		&:after 
+			content: '' 
+			width: 100% 
+			height: 2px 
+			background: #d3d3d3 
+			position: absolute 
+			left: 0 
+			top: 25px 
+			z-index: -1 
+	#category 
+		&:before 
+			font-family: FontAwesome 
+			content: "\f0ad" 
+	#location 
+		&:before 
+			font-family: FontAwesome 
+			content: "\f041" 
+	#expert 
+		&:before 
+			font-family: FontAwesome 
+			content: "\f234" 
+	#confirm 
+		&:before 
+			font-family: FontAwesome 
+			content: "\f128" 
+	#success 
+		&:before 
+			font-family: FontAwesome 
+			content: "\f00c" 
+#progressbar li.active:before,
+#progressbar li.active:after 
+	background: #6330f6 
+.tick-box 
+	width: 240px 
+	height: 240px 
+	display: block 
+	margin: 0 auto 
+	& + h5 
+		font-size: 18px 
+		font-weight: 500 
+.fit-image 
+	width: 100% 
+	object-fit: cover 
+.property-data-list 
+	gap: 15px 
+	margin-top: 20px 
+	display: flex 
+	flex-direction: column 
+	flex-wrap: wrap 
+	.search-drop 
+		width: 400px 
+		height: 65px 
+		border: 1px solid #D8D8D8 
+		border-radius: 50px 
+		padding: 5px 25px 
+		display: flex 
+		justify-content: space-between 
+		align-items: center 
+		flex-wrap: wrap 
+		label 
+			font-size: 12px 
+			width: 100% 
+			margin: 0 
+.property-data-list .search-drop label+select,
+.property-data-list .search-drop label+input 
+	border: none 
+	font-size: 13px 
+	padding: 0 
+	width: 100% 
+	font-weight: 500 
+	height: 20px 
+	color: #080B10 
+	&:focus
+		outline: none
+.top-services 
+	width: 100% 
+	height: 220px 
+	overflow: auto 
+	display: flex 
+	justify-content: flex-start 
+	gap: 10px 
+	flex-wrap: wrap 
+	padding: 10px 0 
+	scrollbar-color: #6330f6 #80808030 
+	scrollbar-width: thin !important 
+::-webkit-scrollbar 
+	width: 4px 
+	height: 50px 
+::-webkit-scrollbar-track 
+	box-shadow: inset 0 0 5px #808080 
+	border-radius: 10px 
+::-webkit-scrollbar-thumb 
+	background: #6330f6 
+	border-radius: 10px 
+	&:hover 
+		background: #6330f6 
+::-webkit-scrollbar-button 
+	height: auto 
+.top-info 
+	width: 24% 
+	padding: 15px 
+	border: 1px solid #E9E9E9 
+	border-radius: 10px 
+	display: flex 
+	flex-direction: column 
+.top-list-head 
+	width: 100% 
+.top-img 
+	width: 100px 
+	height: 100px 
+	margin: 0 auto 10px 
+	img 
+		width: 100% 
+		height: 100% 
+		object-fit: cover 
+		border-radius: 50% 
+		overflow: hidden 
+.top-top 
+	width: 100% 
+	text-align: center 
+	p 
+		margin-bottom: 8px 
+.top-name 
+	font-size: 20px 
+	font-weight: 500 
+.top-list-info 
+	width: 100% 
+	display: flex 
+	justify-content: space-between 
+	flex-wrap: wrap 
+	padding-top: 10px 
+	border-top: 1px solid #eee 
+.top-data 
+	margin-bottom: 10px 
+	span 
+		font-size: 12px 
+		font-weight: 500 
+	p 
+		margin: 0 
+		font-size: 14px 
+		img 
+			width: 18px 
+			display: inline-block 
+			margin-right: 5px 
+
+.expert-select
+	background: #e2d7ff
+	border: 1px solid #6330f6
+	position: relative
+	&::after
+		content: ''
+		position: absolute
+		background: url(../../../assets/icons/select.png) no-repeat
+		background-size: contain
+		width: 24px
+		height: 24px
+		top: 5px
+		right: 5px
+		z-index: 1
+
+.property-data-list.experts-date
+	flex-direction: row
+
+.success-pop .modal-content
+	box-shadow: none
+	.modal-body
+		padding: 30px
+		.purple-text
+			font-size: 30px
+			margin-bottom: 50px
+
+@media ( max-width: 767px )
+	.progress-section
+		padding-top: 80px
+	.top-info
+		width: 48%
+	#msform  
+		fieldset 
+			height: calc(100vh - 225px) 
+	.property-data-list.experts-date
+		.search-drop
+			width: 48%

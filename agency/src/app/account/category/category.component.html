@@ -1,0 +1,58 @@
+<div ui-view="" class="ng-scope">
+    <div class="trans-profiles ng-scope">
+        <div class="container">
+            <div class="view-trans category">
+                <div class="trans-packed main-scrolls-trcks">
+                    <div class="trans-profiles-header">
+                        <div class="trans-headings">
+                            <h4 class="ng-binding">{{'Category' | translate}}
+                                <span>
+                                    <button type="button" class="btn btn-primary add-cats-pages deactive-btn ng-binding"
+                                        (click)="showModal()">{{'Add_Category' | translate}}
+                                    </button>
+                                </span>
+                            </h4>
+                        </div>
+                    </div>
+                    <div class="scroll-function">
+                        <div class="trans-profiles-inner">
+                            <div class="trans-counters">
+                                <div class="list-transta ng-scope" *ngFor="let item of profiledata.taskerskills; let i = index">
+                                    <div class="scroller-catogory">
+                                        <div class="col-trans-lists">
+                                            <div class="count-order">
+                                                <span class="ng-binding">{{'S.No' | translate}}</span>
+                                                <p class="ng-binding">{{i+1}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-trans-lists">
+                                            <div class="count-book">
+                                                <span class="ng-binding">{{'Category' | translate}}</span>
+                                                <p class="ng-binding">{{getcategoryname(item.categoryid)}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-trans-lists ng-scope" ng-if="category.status == 1">
+                                            <div class="count-task">
+                                                <span class="ng-binding">Status</span>
+                                                <p class="ng-binding" *ngIf="item.status">{{'Verified' | translate}}</p>
+                                                <p class="ng-binding" *ngIf="!item.status">{{'Unverified'| translate}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-trans-lists actions_task">
+                                            <span class="ng-binding">{{'Actions' | translate}}</span>
+                                            <div class="cat_acts_nrs">
+                                                <p class="viw-more" (click)="editcategory(item)" role="button" tabindex="0"><a class="main-views ng-binding">{{'Edit' | translate}}</a></p>
+                                                <p class="viw-more" (click)="deletecategory(item.categoryid)" role="button" tabindex="0"><a class="main-views ng-binding">{{'Delete' | translate}}</a></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<app-modal></app-modal>

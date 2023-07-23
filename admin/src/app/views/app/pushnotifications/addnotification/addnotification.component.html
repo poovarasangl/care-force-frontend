@@ -1,0 +1,83 @@
+<app-breadcrumb></app-breadcrumb>
+<app-spinner [spinner]="spinner"></app-spinner>
+<div class="card mb-4 general-settings">
+    <div class="card-body">
+        <h2 class="mb-4">{{title}} Notification</h2>
+        <form #form="ngForm" method="post" novalidate class="tooltip-label-right">
+            <div class="form-group ng-scope">
+                <label>Notification Type</label>
+                <ng-select bindLabel="name" [items]="[{id:'email', name:'Email'}, {id:'message', name:'Message'}]" (click)="typeChange()"
+                bindValue="id" [readonly]="title == 'Edit'" name="notificationType" [ngClass]="{ 'invalid-input': form.submitted && !notificationType.valid }" placeholder="Select Template Name" ngModel required #notificationType="ngModel">
+                </ng-select>    
+                <div *ngIf="!notificationType.valid && form.submitted" class="required-message">Notification title is required!</div>
+            </div>
+            <input type="hidden" name="templet_id" class="form-control" ngModel #templet_id="ngModel">
+            <div class="form-group ng-scope" *ngIf="typeOfNotification == 'message'">
+                <label for="messagetitle">Message Title</label>
+                <input type="text" name="messagetitle" class="form-control" ngModel required #messagetitle="ngModel" [ngClass]="{ 'invalid-input': form.submitted && !messagetitle.valid }">
+                <div *ngIf="!messagetitle.valid && form.submitted" class="required-message">Message title is required!
+                </div>
+            </div>
+            <div class="form-group ng-scope" *ngIf="typeOfNotification == 'message'">
+                <label for="messagesubject">Message Subject</label>
+                <input type="text" name="messagesubject" class="form-control" ngModel required #messagesubject="ngModel" [ngClass]="{ 'invalid-input': form.submitted && !messagesubject.valid }">
+                <div *ngIf="!messagesubject.valid && form.submitted" class="required-message">Message Subject is required!
+                </div>
+            </div>
+            <div class="form-group ng-scope" *ngIf="typeOfNotification == 'message'">
+                <label for="messagecontent">Description</label>
+                <textarea type="text" name="messagecontent" class="form-control" ngModel required #messagecontent="ngModel" [ngClass]="{ 'invalid-input': form.submitted && !messagecontent.valid }"></textarea>
+                <div *ngIf="!messagecontent.valid && form.submitted" class="required-message">Message content is required!
+                </div>
+            </div>
+            <div class="form-group ng-scope" *ngIf="typeOfNotification == 'email'">
+                <label for="templateTitle">Template Title</label>
+                <input type="text" name="templateTitle" class="form-control" ngModel required #templateTitle="ngModel" [ngClass]="{ 'invalid-input': form.submitted && !templateTitle.valid }">
+                <div *ngIf="!templateTitle.valid && form.submitted" class="required-message">Template title is required!
+                </div>
+            </div>
+            <div class="form-group ng-scope" *ngIf="typeOfNotification == 'email'">
+                <label for="emailSubject">Email Subject</label>
+                <input type="text" name="emailSubject" class="form-control" ngModel required #emailSubject="ngModel" [ngClass]="{ 'invalid-input': form.submitted && !emailSubject.valid }">
+                <div *ngIf="!emailSubject.valid && form.submitted" class="required-message">Email Subject is required!
+                </div>
+            </div>
+            <div class="form-group ng-scope" *ngIf="typeOfNotification == 'email'">
+                <label for="senderName">Sender Name</label>
+                <input type="text" name="senderName" class="form-control" ngModel required #senderName="ngModel" [ngClass]="{ 'invalid-input': form.submitted && !senderName.valid }">
+                <div *ngIf="!senderName.valid && form.submitted" class="required-message">Sender Name is required!
+                </div>
+            </div>
+            <div class="form-group ng-scope" *ngIf="typeOfNotification == 'email'">
+                <label for="senderAddress">Sender Email</label>
+                <input type="text" name="senderemail" class="form-control" ngModel required #senderemail="ngModel" [ngClass]="{ 'invalid-input': form.submitted && !senderemail.valid }">
+                <div *ngIf="!senderemail.valid && form.submitted" class="required-message">Sender Email is required!
+                </div>
+            </div>
+            <div class="form-group" *ngIf="typeOfNotification == 'email'">
+                    <label for="emailContent">Email Content</label>
+                    <editor apiKey="wqel19pklihbenult7fuqsssltcd8vup4cl0n33y6m3hzghx" ngModel required #emailContent="ngModel" name="emailContent" 
+                    [init]="{
+                        height: 300,
+                        menubar: false,
+                        plugins: [
+                          'advlist autolink lists link image charmap print preview anchor',
+                          'searchreplace visualblocks code fullscreen',
+                          'insertdatetime media table paste code wordcount'
+                        ],
+                        toolbar:
+                          'undo redo | formatselect | bold italic backcolor | \
+                          alignleft aligncenter alignright alignjustify | \
+                          bullist numlist outdent indent | removeformat | code'
+                      }"></editor>
+                    <!-- <ckeditor [(ngModel)]="emailContentData" name="emailContent" ngModel required #emailContent="ngModel"[editor]="Editor"></ckeditor> -->
+                    <div *ngIf="!emailContent.valid && form.submitted" class="required-message">Email Content is required!
+                    </div>
+            </div>
+            <app-state-button [btnClass]="'btn btn-primary btn-lg btn-shadow'" style="float: right;" [currentState]="buttonState" [isDisabled]="form.submitted" (click)="onSubmit()">
+                Submit
+            </app-state-button>
+        </form>
+        <simple-notifications></simple-notifications>
+    </div>
+</div>

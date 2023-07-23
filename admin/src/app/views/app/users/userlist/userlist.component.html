@@ -1,0 +1,10 @@
+<app-customtable [settings]="settings" [source]="source" [count]="count" [editurl]="editurl" [viewurl]="viewurl"
+    [addurl]="addurl" [ExportItem]="Export_btn" [addbtn_name]="addbtn_name" [showSearch]="true" [showBulkActions]="true"
+    [AddNewItem]="add_btn" [deleteurl]="deleteurl" (onPageChange)="onPageChange($event)" [card_details]="card_details"
+    [itemsPerPage]="default_limit" (onDeleteChange)="onDeleteChange($event)" (onSearchChange)="onSearchChange($event)"
+    (onitemsPerPageChange)="onitemsPerPageChange($event)" (onheaderCardChange)="onheaderCardChange($event)"
+    (onDeleteChange)="onDeleteChange($event)" (onRestore)="onRestore($event)" (onForcedelete)="onForcedelete($event)"
+    (onexportemit)="onexportemit($event)">
+</app-customtable>
+<simple-notifications></simple-notifications>
+<app-spinner [spinner]="spinner"></app-spinner>

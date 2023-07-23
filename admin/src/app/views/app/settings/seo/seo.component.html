@@ -1,0 +1,38 @@
+<app-breadcrumb></app-breadcrumb>
+<app-spinner [spinner]="spinner"></app-spinner>
+<div class="card mb-4">
+    <div class="card-body">
+        <h6 class="mb-4">Default SEO Settings
+        </h6>
+
+        <form #form="ngForm" novalidate class="tooltip-label-right">
+            <div class="grid-class">
+                <div class="form-group error-l-50">
+                    <label>SEO Title</label>
+                    <input type="text" class="form-control" name="seo_title" ngModel required #seo_title="ngModel" [ngClass]="{ 'invalid-input': form.submitted && !seo_title.valid }">
+                    <div *ngIf="!seo_title.valid && form.submitted" class="required-message">SEO Title is required!</div>
+                </div>
+                <div class="form-group error-l-50">
+                    <label>Focus Keyword</label>
+                    <input type="text" class="form-control" name="focus_keyword" ngModel required #focus_keyword="ngModel" [ngClass]="{ 'invalid-input': form.submitted && !focus_keyword.valid }">
+                    <div *ngIf="!focus_keyword.valid && form.submitted" class="required-message">Focus Keyword is required!</div>
+                </div>
+                <div class="form-group error-l-50">
+                    <label>Meta Description</label>
+                    <input type="text" class="form-control" name="meta_description" ngModel required #meta_description="ngModel" [ngClass]="{ 'invalid-input': form.submitted && !meta_description.valid }">
+                    <div *ngIf="!meta_description.valid && form.submitted" class="required-message">Meta Description is required!</div>
+                </div>
+            </div>
+            <h6>Webmaster Tools</h6>
+            <div class="form-group error-l-50">
+                <label>Google Analytics</label>
+                <input type="text" class="form-control" name="google_analytics" ngModel required #google_analytics="ngModel" [ngClass]="{ 'invalid-input': form.submitted && !google_analytics.valid }">
+                <div *ngIf="!google_analytics.valid && form.submitted" class="required-message">Google Analytics is required!</div>
+            </div>
+            <app-state-button [btnClass]="'btn btn-primary btn-lg btn-shadow'" [currentState]="buttonState" [isDisabled]="buttonDisabled" (click)="onSubmit()">
+                Submit
+            </app-state-button>
+        </form>
+    </div>
+    <simple-notifications></simple-notifications>
+</div>

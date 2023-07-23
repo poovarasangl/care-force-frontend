@@ -1,0 +1,80 @@
+<app-breadcrumb></app-breadcrumb>
+<app-spinner [spinner]="spinner"></app-spinner>
+<div class="card mb-4">
+    <div class="card-body">
+        <h2 class="mb-4">Sandbox Credentials</h2>
+
+        <form #form="ngForm" novalidate class="tooltip-label-right">
+            <div *ngIf="paymentdata && paymentdata.alias == 'stripe'">
+                <div class="grid-class">
+                    <div class="form-group error-l-50">
+                        <label>Publish Key</label>
+                        <input type="text" class="form-control" name="sandbox_publish_key" ngModel required #sandbox_publish_key="ngModel" [ngClass]="{ 'invalid-input': form.submitted && !sandbox_publish_key.valid }">
+                        <div *ngIf="!sandbox_publish_key.valid && form.submitted" class="required-message">Publish Key is required!</div>
+                    </div>
+                    <div class="form-group error-l-50">
+                        <label>Secret Key</label>
+                        <input type="text" class="form-control" name="sandbox_secret_key" ngModel required #sandbox_secret_key="ngModel" [ngClass]="{ 'invalid-input': form.submitted && !sandbox_secret_key.valid }">
+                        <div *ngIf="!sandbox_secret_key.valid && form.submitted" class="required-message">Secret Key is required!</div>
+                    </div>
+                </div>
+                <h2>Live Credentials</h2>
+                <div class="form-group error-l-50">
+                    <label>Publish Key</label>
+                    <input type="text" class="form-control" name="live_publish_key" ngModel required #live_publish_key="ngModel" [ngClass]="{ 'invalid-input': form.submitted && !live_publish_key.valid }">
+                    <div *ngIf="!live_publish_key.valid && form.submitted" class="required-message">Publish Key is required!</div>
+                </div>
+                <div class="form-group error-l-50">
+                    <label>Secret Key</label>
+                    <input type="text" class="form-control" name="live_secret_key" ngModel required #live_secret_key="ngModel" [ngClass]="{ 'invalid-input': form.submitted && !live_secret_key.valid }">
+                    <div *ngIf="!live_secret_key.valid && form.submitted" class="required-message">Secret Key is required!</div>
+                </div>
+            </div>
+            <div *ngIf="paymentdata && paymentdata.alias == 'paypal'">
+                <div class="grid-class">
+                    <div class="form-group error-l-50">
+                        <label>Client ID</label>
+                        <input type="text" class="form-control" name="client_id" ngModel required #client_id="ngModel" [ngClass]="{ 'invalid-input': form.submitted && !client_id.valid }">
+                        <div *ngIf="!client_id.valid && form.submitted" class="required-message">Client ID is required!</div>
+                    </div>
+                    <div class="form-group error-l-50">
+                        <label>Client Secret</label>
+                        <input type="text" class="form-control" name="client_secret" ngModel required #client_secret="ngModel" [ngClass]="{ 'invalid-input': form.submitted && !client_secret.valid }">
+                        <div *ngIf="!client_secret.valid && form.submitted" class="required-message">Client Secret is required!</div>
+                    </div>
+                </div>
+                <h2>Live Credentials</h2>
+                <div class="form-group error-l-50">
+                    <label>Publish Key</label>
+                    <input type="text" class="form-control" name="live_client_id" ngModel required #live_client_id="ngModel" [ngClass]="{ 'invalid-input': form.submitted && !live_client_id.valid }">
+                    <div *ngIf="!live_client_id.valid && form.submitted" class="required-message">Publish Key is required!</div>
+                </div>
+                <div class="form-group error-l-50">
+                    <label>Client Secret</label>
+                    <input type="text" class="form-control" name="live_client_secret" ngModel required #live_client_secret="ngModel" [ngClass]="{ 'invalid-input': form.submitted && !live_client_secret.valid }">
+                    <div *ngIf="!live_client_secret.valid && form.submitted" class="required-message">Client Secret is required!</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Payment Mode</label>
+                <select class="custom-select" name="mode" ngModel required #mode="ngModel">
+                    <option value="live">Live</option>
+                    <option value="sandbox">Sandbox</option>
+              
+            </select>
+                <div *ngIf="!mode.valid && form.submitted" class="required-message">Payment Mode is required</div>
+            </div>
+            <div class="form-group">
+                <label>Enable/Disable</label>
+                <ng-select [items]="[{id:'1', name:'Publish'}, {id:'2', name:'Unpublish'}]" bindLabel="name"
+                bindValue="id" name="status" [ngClass]="{ 'invalid-input': form.submitted && !status.valid }" ngModel required #status="ngModel">
+                </ng-select>
+                <div *ngIf="!mode.valid && form.submitted" class="required-message">Option is required</div>
+            </div>
+            <app-state-button style="float: right;" [btnClass]="'btn btn-primary btn-lg btn-shadow'" [currentState]="buttonState" [isDisabled]="buttonDisabled" (click)="onSubmit()">
+                Submit
+            </app-state-button>
+        </form>
+    </div>
+    <simple-notifications></simple-notifications>
+</div>

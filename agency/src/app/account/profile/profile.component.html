@@ -1,0 +1,210 @@
+<div class="ng-scope">
+    <div class="tskr_prof_dtls ng-scope profile" *ngIf="viewpage">
+        <div class="container container-tab">
+            <div class="tskr_rgstrn_outer_cont">
+                <div class="tskr_prof_dtls_inner">
+                    <div class="tskr_prof_dtls_bx">
+                        <div class="tskr_prof_dtls_hdr">
+                            <div class="tskr_prof_dtls_bx_lft">
+                                <div class="tskr_prof_dtls_tle ">
+                                    {{'Account' | translate}}
+                                </div>
+                            </div>
+                            <div class="tskr_prof_dtls_bx_rgt">
+                                <div class="tskr_prof_dtls_btn">
+                                    <button class="btn def_btn  ng-scope" (click)="EditProfileBtn()" ng-if="editBtn">
+										{{'Edit' | translate}}
+									</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="show">
+                            <div class="tskr_prof_dtls_cont">
+                                <div class="tskr_prof_dtls_innercont">
+                                    <div class="tskr_prof_dtls_cont_val">
+                                        <span class="tskr_prof_dtls_icon">
+											<i class="fa fa-user" aria-hidden="true"></i>
+										</span>
+                                        <span class="tskr_prof_dtls_name ">
+											{{profile.username | titlecase}}
+										</span>
+                                    </div>
+                                    <div class="tskr_prof_dtls_cont_val">
+                                        <span class="tskr_prof_dtls_icon">
+											<i class="fa fa-envelope" aria-hidden="true"></i>
+										</span>
+                                        <span class="tskr_prof_dtls_name ">
+											{{profile.email}}
+										</span>
+                                    </div>
+                                    <div class="tskr_prof_dtls_cont_val">
+                                        <span class="tskr_prof_dtls_icon">
+											<i class="fa fa-phone" aria-hidden="true"></i>
+										</span>
+                                        <span class="tskr_prof_dtls_name ">
+											{{profile.phone.code}} {{profile.phone.number}}
+										</span>
+                                    </div>
+                                    <div *ngIf="profile.availability_address" class="tskr_prof_dtls_cont_val ng-scope">
+                                        <span class="tskr_prof_dtls_icon">
+											<i class="fa fa-map-marker" aria-hidden="true"></i>
+										</span>
+                                        <span class="tskr_prof_dtls_name ">
+											{{profile.availability_address}}
+										</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="tskr_prof_dtls ng-scope" *ngIf="editpage">
+        <div class="container">
+            <div class="tskr_rgstrn_outer_cont">
+                <div class="tskr_prof_dtls_inner">
+                    <div class="tskr_prof_dtls_bx">
+                        <div class="tskr_prof_dtls_hdr">
+                            <div class="tskr_prof_dtls_bx_lft">
+                                <div class="tskr_prof_dtls_tle ">
+                                    {{'Account' | translate}}
+                                </div>
+                            </div>
+                            <div class="tskr_prof_dtls_bx_rgt">
+                                <div class="tskr_prof_dtls_btn">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="field ng-scope" ng-if="editProfile">
+                            <div class="tskr_prof_dtls_bx_rgt fl_rght">
+                                <div class="tskr_prof_dtls_btn ">
+                                    <button class="btn def_btn main-src " (click)="CancelEditBtn()">
+										{{'View' | translate}} 
+									</button>
+                                </div>
+                            </div>
+                            <form [formGroup]="updateAccountForm" class="loginform" (ngSubmit)="onSubmit()" autocomplete="off" enctype="multipart/form-data">
+                                <div class="col-md-12 col-xs-12 accdetails">
+                                    <div class="col-md-6 col-xs-6">
+                                        <div class="namefield">
+                                            <div class="form-group">
+                                                <label for="exampleInputName2" class="">{{'FirstName' | translate}}</label>
+                                                <input type="text" class="form-control profilefield" formControlName="firstname" pattern="^[a-zA-Z]*$" [(ngModel)]="profile.firstname">
+                                                <div *ngIf="submitted && f.firstname.errors" class="invalid-feedback">
+                                                    <div class="error_msg" *ngIf="f.firstname.errors.required">{{'Firstnamereq' | translate}}</div>
+                                                    <div class="error_msg" *ngIf="f.firstname.errors.pattern">{{'First_Name_mustchar' | translate}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="exampleInputName2" class="">{{'LastName' | translate}}</label>
+                                                <input type="text" class="form-control profilefield" formControlName="lastname" pattern="^[a-zA-Z]*$" [(ngModel)]="profile.lastname">
+                                                <div *ngIf="submitted && f.lastname.errors" class="invalid-feedback">
+                                                    <div class="error_msg" *ngIf="f.lastname.errors.required">{{'Lastname_req' | translate}}</div>
+                                                    <div class="error_msg" *ngIf="f.lastname.errors.pattern">{{'Last_Name_mustchar' | translate}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="virtualfield">
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1" class="">{{'EmailAddress' | translate}}</label>
+                                                <input type="email" name="email" class="form-control profilefield" formControlName="email" readonly [(ngModel)]="profile.email">
+                                                <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                                                    <div class="error_msg" *ngIf="f.email.errors.required">{{'email_req' | translate}}
+                                                    </div>
+                                                    <div class="error_msg" *ngIf="f.email.errors.email">{{'valid_email' | translate}}</div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1" class="">{{'Mob_no' | translate}}</label><br>
+                                                <input type="tel" id="phone" class="form-control phonenumber" [(ngModel)]="profile.phone.number" formControlName="phone">
+                                                <input type="text" id="result" style="display: none;" #mobilenumber>
+                                                <div *ngIf="submitted && f.phone.errors" class="invalid-feedback">
+                                                    <div class="error_msg" *ngIf="f.phone.errors.required">{{'ph_req' | translate}}
+                                                    </div>
+                                                </div>
+                                                <div *ngIf="submitted">
+                                                    <div class="error_msg" *ngIf="mobilelength">{{mobilelength}}</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="imagefield">
+                                            <div class="form-group"><br>
+                                                <label for="exampleInputEmail1" class="">{{'prf_pic' | translate}}</label>
+                                                <div class="chose-files">
+                                                    <label for="avatar-img" class="avatar-img-up  form-control">
+														<i class="fa fa-upload" aria-hidden="true"></i> {{'upld_prfpic' | translate}}</label>
+                                                    <input id="avatar-img" type="file" formControlName="profile" class="" style="display: none;" accept='image/*' (change)="imagechangefun($event)">
+                                                    <span style="color: rgb(0, 0, 0);" [ngStyle]="{color: imagevalidation}">
+														{{'allwd_pic' | translate}}
+													</span>
+                                                </div>
+                                            </div>
+                                            <div class="m-10 ml-10 ng-scope">
+                                                <div class="p-10 bg-white b-a b-solid inline-block crp_img">
+                                                    <div *ngIf="previewUrl">
+                                                        <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true" [aspectRatio]="4 / 4" [resizeToWidth]="256" format="png" (imageCropped)="imageCropped($event)" (imageLoaded)="imageLoaded()" (cropperReady)="cropperReady()" (loadImageFailed)="loadImageFailed()">
+                                                        </image-cropper>
+                                                    </div>
+                                                    <div *ngIf="previewUrl else commenimage">
+                                                        <img style="max-width: 100% !important; width: 150px;" [src]="previewUrl" />
+                                                    </div>
+                                                    <ng-template #commenimage>
+                                                        <img style="max-width: 100% !important; width: 150px;" *ngIf="profile.avatar" src="{{imageurl}}{{profile.avatar}}" UserDefaultImage>
+                                                        <img style="max-width: 100% !important; width: 150px;" *ngIf="!profile.avatar" src="assets/images/Default/user.jpg">
+                                                    </ng-template>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="all-btns">
+                                            <div class="col-md-2 col-xs-12 profilebtn">
+                                                <button type="button" class="btn btn-defult cancelbtn" (click)="CancelEditBtn()">{{'Cancel' | translate}}</button>
+                                            </div>
+                                            <div class="col-md-2 col-xs-12 ng-scope profilebtn">
+                                                <button type="submit" class="btn btn-primary savebtn " *ngIf="save_btn == 0">{{'Save' | translate}}</button>
+                                                <button class="btn btn-primary savebtn " *ngIf="save_btn == 1" type="button" disabled>
+													<i class="fa fa-circle-o-notch fa-spin"></i>&nbsp; {{'Loading' | translate}}
+												</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Otp verification-->
+<div class="modal" [ngStyle]="{display: verify}" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true" (click)="closemodal()">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">{{'OTP_Verification' | translate}}</h4>
+            </div>
+            <div class="modal-body">
+                <label class="control-label" style="margin-top: 15px;float: left;">{{'EnterOTP' | translate}}:</label>
+                <div class="form-group">
+                    <input type="text" [(ngModel)]="otp" class="form-control profilefield" placeholder="One-Time Password" style="margin-top: 12px;width: 30%; margin-left: 100px;">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" style="float: left;" *ngIf="resend_btn == 0" (click)="resendotp()">{{'ResendOTP' | translate}}</button>
+                <button class="btn btn-primary" style="float: left;" *ngIf="resend_btn == 1" type="button" disabled>
+					<i class="fa fa-circle-o-notch fa-spin"></i>&nbsp; {{'Loading' | translate}}
+				</button>
+                <button type="button" class="btn btn-primary" *ngIf="verify_btn == 0" (click)="verifyotp()">{{'VerifyOTP' | translate}}</button>
+                <button class="btn btn-primary" style="float: left;" *ngIf="verify_btn == 1" type="button" disabled>
+					<i class="fa fa-circle-o-notch fa-spin"></i>&nbsp; {{'Loading' | translate}}
+				</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Otp verification-->

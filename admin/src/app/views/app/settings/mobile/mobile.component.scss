@@ -1,0 +1,15 @@
+.row-one {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+}
+
+.row-two {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+}
+
+.row-two-head {
+    margin-top: 20px;
+}

@@ -1,0 +1,153 @@
+<app-breadcrumb></app-breadcrumb>
+<app-spinner [spinner]="spinner"></app-spinner>
+<div class="job-details new-earnings">
+    <div class="card mb-4">
+        <div class="card-body">
+            <h2 class="mb-4">Tasker Details</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <h3>Tasker Name : <span class="tasker_name">{{tasker_name}}</span> </h3>
+                    <h3>Stripe Id : <span class="stripe_id">{{stripe_id}}</span> </h3>
+                </div>
+                <div class="col-md-6">
+                    <h3>Details : <span class="booking-id"></span> </h3>
+                    <h6>Total Appointment : <span class="">{{appointment}}</span> </h6>
+                    <h6>Total Amount : <span class="">{{defaultcurrencysymbol}} {{tasker_earning}}</span> </h6>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <tabset [justified]="true">
+        <tab heading="Earnings List ">
+            <div class="card mb-4">
+                <app-customtable [settings]="settings" [count]="count" [source]="source" [showSearch]="true"
+                    [showBulkActions]="false" [AddNewItem]="false" (onPageChange)="onPageChange($event)"
+                    (onSearchChange)="onSearchChange($event)" (onBulkactionChange)="onBulkactionChange($event)"
+                    (onitemsPerPageChange)="onitemsPerPageChange($event)" (ontaskerPayout)="ontaskerPayout($event)">
+                </app-customtable>
+            </div>
+        </tab>
+        <tab heading="Summary">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <div class="details">
+                        <div class="userdetails card mb-4">
+                            <div class="custon-sec">
+                                <div class="row">
+                                    <div class="col-md-6"><span class="content-title">
+                                            <h5>Total Amount <span class="aqu-met"> : </span></h5>
+                                        </span></div>
+                                    <div class="col-md-6"><span class="content-text">{{" "}} {{defaultcurrencysymbol}}
+                                            {{total_amount}}</span></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6"><span class="content-title">
+                                            <h5>Service Tax <span class="aqu-met"> : </span></h5>
+                                        </span></div>
+                                    <div class="col-md-6"><span class="content-text"> {{"  "}} {{defaultcurrencysymbol}}
+                                            {{servicetax}}</span></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6"><span class="content-title">
+                                            <h5>Coupon Used <span class="aqu-met"> : </span></h5>
+                                        </span></div>
+                                    <div class="col-md-6"><span class="content-text"> {{"-"}} {{defaultcurrencysymbol}}
+                                            {{coupon}}</span></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6"><span class="content-title">
+                                            <h5>Net Total Amount <span class="aqu-met"> : </span></h5>
+                                        </span></div>
+                                    <div class="col-md-6"><span class="content-text"> {{"  "}} {{defaultcurrencysymbol}}
+                                            {{net_total}} ( Incl Service Tax )</span></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6"><span class="content-title">
+                                            <h5>Miscellaneous Charges <span class="aqu-met"> : </span></h5>
+                                        </span></div>
+                                    <div class="col-md-6"><span class="content-text"> {{"  "}} {{defaultcurrencysymbol}}
+                                            {{extra_amount}}</span></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6"><span class="content-title">
+                                            <h5>Grand Total Amount <span class="aqu-met"> : </span></h5>
+                                        </span></div>
+                                    <div class="col-md-6"><span class="content-text"> {{"  "}} {{defaultcurrencysymbol}}
+                                            {{grandtotal}}</span></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6"><span class="content-title">
+                                            <h5>Admin Commission <span class="aqu-met"> : </span></h5>
+                                        </span></div>
+                                    <div class="col-md-6"><span class="content-text"> {{"  "}} {{defaultcurrencysymbol}}
+                                            {{admin_commission}}</span></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6"><span class="content-title">
+                                            <h5>Tasker Earning <span class="aqu-met"> : </span></h5>
+                                        </span></div>
+                                    <div class="col-md-6"><span class="content-text"> {{"  "}} {{defaultcurrencysymbol}}
+                                            {{tasker_earning}}</span></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6"><span class="content-title">
+                                            <h5>Amount to be given by Admin to Tasker <span class="aqu-met"> : </span>
+                                            </h5>
+                                        </span></div>
+                                    <div class="col-md-6"><span class="content-text"> {{"  "}} {{defaultcurrencysymbol}}
+                                            {{notpaid_tasker_earning}}</span></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6"><span class="content-title">
+                                            <h5>Amount to be given by Tasker to Admin <span class="aqu-met"> : </span>
+                                            </h5>
+                                        </span></div>
+                                    <div class="col-md-6"><span class="content-text"> {{"  "}} {{defaultcurrencysymbol}}
+                                            {{notpaid_admin_commission}}</span></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6"><span class="content-title">
+                                            <h5>Tasker Settled Amount <span class="aqu-met"> : </span></h5>
+                                        </span></div>
+                                    <div class="col-md-6"><span class="content-text"> {{"  "}} {{defaultcurrencysymbol}}
+                                            {{tasker_settled_amt}}</span></div>
+                                </div>
+                                <div class="row" *ngIf="diffcount != 0">
+                                    <div class="col-md-6"><span class="content-title">
+                                            <h5>Hence, {{by}} have to settle an amount of
+                                                <span style="color:darkgreen">{{defaultcurrencysymbol}}{{tobepay}}
+                                                </span> to {{to}}</h5>
+                                        </span></div>
+                                    <div class="col-md-6"><span class="content-text"> <input
+                                                class="btn btn-info btn-ef btn-ef-5 btn-ef-5a j_tab"
+                                                (click)="updatepay()" value="Update Payee" type="button"></span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </tab>
+    </tabset>
+    <simple-notifications></simple-notifications>
+</div>
+
+<!-- <modal-confirm></modal-confirm> -->
+<button type="button" class="payout-btn" (click)="openModal(template)" style="display: none;"></button>
+<ng-template #template>
+    <div class="modal-body text-center">
+        <h6 class="modal-title mb-4">Are you sure proced to pay.</h6>
+        <button type="button" class="btn btn-outline-primary" (click)="confirm()">yes</button> {{" "}}
+        <button type="button" class="btn btn-primary" (click)="modalRef.hide();">No</button>
+    </div>
+</ng-template>
+
+<button type="button" class="updatepay-btn" (click)="openModal(template1)" style="display: none;"></button>
+<ng-template #template1>
+    <div class="modal-body text-center">
+        <h6 class="modal-title mb-4">Are you sure proced to pay.</h6>
+        <button type="button" class="btn btn-outline-primary" (click)="paytasker()">yes</button> {{" "}}
+        <button type="button" class="btn btn-primary" (click)="modalRef.hide();">No</button>
+    </div>
+</ng-template>

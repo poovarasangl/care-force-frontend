@@ -1,0 +1,115 @@
+<!-- <div class="inventory-body" [ngStyle]="{'background-image': 'url(' +appearance.image + ')'}"> -->
+<div class="inventory-body">
+  <!--this.imageUrl+this.appearance.image-->
+  <div class="login_contt tb_contt rsgtr-tb">
+    <div class="login_contt_tle tb_contt_tle">{{'Login' | translate}}</div>
+    <ul class="nav nav-tabs">
+      <li class="active"><a data-toggle="tab" (click)="tab1();" href="#Caregiver">{{'Caregiver' | translate}}</a></li>
+      <!-- <li class="active"><a data-toggle="tab" (click)="tab2();">{{'CareForce' | translate}}</a>
+      </li> -->
+    </ul>
+    <div class="tab-content">
+      <div id="Userlogin" *ngIf="Userreg" [ngClass]="{active: Userreg}" [ngStyle]="{height: TaskerReg ?'0px':''}">
+        <div class="usr_lgn lgn_dtls tsk_lgn">
+          <div class="inpt_fld">
+            <div class="typ_inpt slider usertype" *ngIf="Getotp === 1">
+              <form [formGroup]="Loginform" class="loginform" (ngSubmit)="onSubmituser()" autocomplete="off">
+                <span class="inps-fr inps-fr-lft">
+                  <input type="tel" id="phone" class="form-control phonenumber" [(ngModel)]="number"
+                    formControlName="phone">
+                  <input type="text" id="result" style="display: none;" #mobilenumber>
+                  <div *ngIf="submitted" class="invalid-feedback">
+                    <div class="error_msg" *ngIf="mobilelength">{{mobilelength}}</div>
+                  </div>
+                </span>
+                <span class="inps-fr inps-fr-rgt">
+                  <button type="submit" *ngIf="getotp_btn === 0" class="btn btn-info" defaultbutton>{{'GetOTP' |
+                    translate}}</button>
+                  <button class="btn btn-info" *ngIf="getotp_btn === 1" type="button" defaultbutton disabled>
+                    <i class="fa fa-circle-o-notch fa-spin"></i>&nbsp; {{'Loading' | translate}}
+                  </button>
+                </span>
+              </form>
+            </div>
+            <div class="typ_inpt" *ngIf="Getotp === 2">
+              <form [formGroup]="Loginform" (ngSubmit)="verifyotp()" autocomplete="off">
+                <span class="inps-fr inps-fr-lft">
+                  <input type="text" class="form-control" formControlName="otp" placeholder="ONE-TIME PASSWORD"
+                    [(ngModel)]="otpvalue">
+                </span>
+                <span class="inps-fr inps-fr-rgt">
+                  <div class="btn_fld">
+                    <div class="typ_btn">
+                      <button type="submit" class="btn btn-success" *ngIf="verifyotp_btn === 0" defaultbutton>Verify
+                        OTP</button>
+                      <button class="btn btn-success" *ngIf="verifyotp_btn === 1" type="button" defaultbutton disabled>
+                        <i class="fa fa-circle-o-notch fa-spin"></i>&nbsp; {{'Loading' | translate}}
+                      </button>
+                    </div>
+                  </div>
+                </span>
+                <a class="resent-otp-text" (click)="resendOtp('user')">{{'ResendOTP' | translate}}?</a>
+              </form>
+            </div>
+          </div><br>
+        </div>
+      </div>
+      <!-- <div id="Taskerlogin" *ngIf="TaskerReg" [ngClass]="{active: TaskerReg}" [ngStyle]="{height: Userreg ?'0px':''}">
+        <div class="usr_lgn lgn_dtls tsk_lgn">
+          <div class="inpt_fld">
+            <div class="typ_inpt slider" *ngIf="Getotp === 11">
+              <form [formGroup]="Loginform" class="logintaskerform" (ngSubmit)="onSubmituser()" autocomplete="off">
+                <span class="inps-fr inps-fr-lft">
+                  <input type="tel" id="phone" class="form-control tasker" [(ngModel)]="number" formControlName="phone">
+                  <input type="text" class="result" style="display: none;" #mobilenumber>
+                  <div *ngIf="submitted" class="invalid-feedback">
+                    <div class="error_msg" *ngIf="mobilelength">{{mobilelength}}</div>
+                  </div>
+                </span>
+                <span class="inps-fr inps-fr-rgt">
+                  <div class="btn_fld">
+                    <div class="typ_btn">
+                      <button type="submit" *ngIf="getotp_btn === 0" class="btn btn-info" defaultbutton>{{'GetOTP' |
+                        translate}}</button>
+                      <button class="btn btn-info" *ngIf="getotp_btn === 1" type="button" defaultbutton disabled>
+                        <i class="fa fa-circle-o-notch fa-spin"></i>&nbsp; {{'Loading' | translate}}
+                      </button>
+                    </div>
+                  </div>
+                </span>
+              </form>
+            </div>
+            <div class="typ_inpt" *ngIf="Getotp === 22">
+              <form [formGroup]="Loginform" (ngSubmit)="verifyotp()" autocomplete="off">
+                <span class="inps-fr inps-fr-lft">
+                  <input type="text" class="form-control" formControlName="otp" placeholder="ONE-TIME PASSWORD"
+                    [(ngModel)]="otpvalue">
+                </span>
+                <span class="inps-fr inps-fr-rgt">
+                  <div class="btn_fld">
+                    <div class="typ_btn">
+                      <button type="submit" class="btn btn-success" *ngIf="verifyotp_btn === 0"
+                        defaultbutton>{{'VerifyOTP' | translate}}</button>
+                      <button class="btn btn-success" *ngIf="verifyotp_btn === 1" type="button" defaultbutton disabled>
+                        <i class="fa fa-circle-o-notch fa-spin"></i>&nbsp; {{'Loading' | translate}}
+                      </button>
+                    </div>
+                  </div>
+                </span>
+                <a class="resent-otp-text" (click)="resendOtp('tasker')">{{'ResendOTP' | translate}}?</a>
+              </form>
+            </div>
+          </div><br>
+        </div>
+      </div> -->
+      <div class="form-group footermenu">
+        <p style="width:100%;text-align:center;margin:0;">{{'DontHav_Account' | translate}}?
+          <span style="width:100%;display:flex;gap:5px;justify-content: center;margin-top: 10px;">
+            <a class="regi-btn" [routerLink]="['/register']">{{'Register' | translate}}</a> |
+            <a [routerLink]="['']" class="regi-btn"><i class="fa fa-home" aria-hidden="true"></i></a>
+          </span>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

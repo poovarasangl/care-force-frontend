@@ -1,0 +1,34 @@
+<app-breadcrumb></app-breadcrumb>
+<app-spinner [spinner]="spinner"></app-spinner>
+<div class="card mb-4">
+    <div class="card-body">
+        <form #form="ngForm" novalidate class="tooltip-label-right">
+            <div class="form-group error-l-50">
+                <label>Account SID</label>
+                <input type="text" class="form-control" name="account_sid" ngModel required #account_sid="ngModel" [ngClass]="{ 'invalid-input': form.submitted && !account_sid.valid }">
+                <div *ngIf="!account_sid.valid && form.submitted" class="required-message">Account SID is required!</div>
+            </div>
+            <div class="form-group error-l-50">
+                <label>Authentication Token</label>
+                <input type="text" class="form-control" name="authentication_token" ngModel required #authentication_token="ngModel" [ngClass]="{ 'invalid-input': form.submitted && !authentication_token.valid }">
+                <div *ngIf="!authentication_token.valid && form.submitted" class="required-message">Authentication Token is required!</div>
+            </div>
+            <div class="form-group error-l-50">
+                <label>Default Phone Number</label>
+                <input type="text" class="form-control" name="default_phone_number" ngModel required #default_phone_number="ngModel" [ngClass]="{ 'invalid-input': form.submitted && !default_phone_number.valid }">
+                <div *ngIf="!default_phone_number.valid && form.submitted" class="required-message">Default Phone Number is required!</div>
+            </div>
+            <div class="form-group">
+                <label>Mode</label>
+                <ng-select [items]="[{id:'development', name:'Development'}, {id:'production', name:'Production'}]" bindLabel="name"
+                bindValue="id" name="mode" [ngClass]="{ 'invalid-input': form.submitted && !mode.valid }" ngModel required #mode="ngModel">
+                </ng-select>
+                <div *ngIf="!mode.valid && form.submitted" class="required-message">Payment Mode is required</div>
+            </div>
+            <app-state-button style="float: right;" [btnClass]="'btn btn-primary btn-lg btn-shadow'" [currentState]="buttonState" [isDisabled]="buttonDisabled" (click)="onSubmit()">
+                Submit
+            </app-state-button>
+        </form>
+    </div>
+    <simple-notifications></simple-notifications>
+</div>

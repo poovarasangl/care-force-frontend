@@ -1,0 +1,233 @@
+<div ui-view="" class="ng-scope">
+  <div class="tskrdet_dtls ng-scope">
+    <div class="container">
+      <div class="tskr_rgstrn_outer_cont job">
+        <div class="tskrdet_dtls_inner">
+          <div class="tskrdet_dtls_bx">
+            <div class="tskrdet_dtls_hdr">
+              <div class="tskrdet_dtls_bx_lft">
+                <div class="tskrdet_dtls_tle ng-binding">
+                  {{'Job_Details' | translate}}
+                </div>
+              </div>
+              <div class="tskrdet_dtls_bx_rgt">
+                <div class="taskrdet_bx_links">
+                  <div class="tskrdet_dtls_link sub_links" [ngClass]="{'new-active': assigned}" id="assigned"
+                    role="button" tabindex="0"><a (click)="getTaskLists('assigned')" class="ng-binding">{{'Assigned' |
+                      translate}}</a>
+                  </div>
+                  <div class="tskrdet_dtls_link sub_links" id="ongoing" [ngClass]="{'new-active': ongoing}"
+                    (click)="getTaskLists('ongoing')" role="button" tabindex="0"><a class="ng-binding">{{'Ongoing' |
+                      translate}}</a>
+                  </div>
+                  <div class="tskrdet_dtls_link sub_links" id="paymentpending"
+                    [ngClass]="{'new-active': paymentpending}" (click)="getTaskLists('paymentpending')" role="button"
+                    tabindex="0"><a class="ng-binding">{{'Payment_Pending' | translate}}</a>
+                  </div>
+                  <div class="tskrdet_dtls_link sub_links" id="completed" [ngClass]="{'new-active': completed}"
+                    (click)="getTaskLists('completed')" role="button" tabindex="0"><a class="ng-binding">{{'Completed' |
+                      translate}}</a>
+                  </div>
+                  <div class="tskrdet_dtls_link sub_links" id="cancelled" [ngClass]="{'new-active': cancelled}"
+                    (click)="getTaskLists('cancelled')" role="button" tabindex="0"><a class="ng-binding">{{'Cancelled' |
+                      translate}}</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="tskrdet_dtls_conts complete_cont">
+              <div class="full-db">
+                <div class="list-one">
+                  <h3 class="ng-binding">{{'From' | translate}} </h3>
+                  <ul class="day-list dte-pkr">
+                    <div class="input-group date">
+                      <input type="text" id="datepicker" date-picker placeholder="DD-MM-YYYY"
+                        class="form-control dateinput" autocomplete="off" (dateselected)="dateSelected($event)"
+                        [singleDatePicker]="true" [(ngModel)]="fromdate" />
+                      <span class="input-group-addon-icon"><i class="glyphicon glyphicon-calendar"></i></span>
+                    </div>
+                  </ul>
+                </div>
+                <div class="list-one">
+                  <h3 class="ng-binding">{{'To' | translate}} </h3>
+                  <ul class="day-list dte-pkr">
+                    <div class="input-group date">
+                      <input type="text" id="datepicker2" date-picker placeholder="DD-MM-YYYY"
+                        class="form-control dateinput" autocomplete="off" (dateselected)="dateSelectedend($event)"
+                        [singleDatePicker]="true" [(ngModel)]="todate" />
+                      <span class="input-group-addon-icon"><i class="glyphicon glyphicon-calendar"></i></span>
+                    </div>
+                  </ul>
+                </div>
+                <div class="list-one assign-id">
+                  <h3 class="ng-binding"> {{'Job_Id' | translate}}:</h3>
+                  <input type="text" [(ngModel)]="jobid" class="form-control dateinput jobid-input">&nbsp;
+                  <button class="btn btn-primary deactive-btn" (click)="searchtask()">{{'Search' |
+                    translate}}</button>&nbsp;
+                  <button class="btn btn-primary deactive-btn" (click)="clearSearch()">{{'Clear' | translate}}</button>
+                </div>
+              </div>
+              <div class="tskrdet_dtls_innerconts iconsetup">
+                <div class="ng-scope" *ngIf="count === 0">
+                  <ul class="tablesection">
+                    <div class="emptyfie"><i class="fa fa-tasks" aria-hidden="true"></i><span
+                        class="ng-binding">{{'YouHaveNo' | translate}}
+                        {{task =='paymentpending' ? 'Payment Pending' : task | titlecase}} {{'Jobs' | translate}}</span>
+                    </div>
+                  </ul>
+                </div>
+                <div *ngIf="tasklist" class="tasklistitems">
+                  <div class="tskrdet_dtls_bxs ng-scope" *ngFor="let item of tasklist">
+                    <div class="tskrdet_dtls_inner_bxs">
+                      <div class="tskrdet_dtls_bxs_lft">
+                        <span class="tle ng-binding" *ngIf="item.category&& item.category.name">
+                          {{item.category.name}} - {{item.booking_id}}
+                        </span>
+                      </div>
+                      <div class="tskrdet_dtls_bxs_rgt">
+                        <div class="tskrdet_dtls_bxs_rgt_inner">
+                          <div class="tskrdet_dtls_bxs_rgt_img" *ngIf="currentuser.user_type === 'user'">
+                            <img src="{{imageUrl}}{{item.tasker.avatar}}" UserDefaultImage>
+                          </div>
+                          <div class="tskrdet_dtls_bxs_rgt_img" *ngIf="currentuser.user_type != 'user'">
+                            <img src="{{imageUrl}}{{item.user.avatar}}" UserDefaultImage>
+                          </div>
+                          <div class="pos-relative">
+                            <button class="btn def_btn ng-binding ng-scope"
+                              *ngIf="item.status === 1 && currentuser.user_type != 'user'"
+                              (click)="confirm(item)">{{'Confirm' | translate}}</button>
+                            <button class="btn def_btn ng-binding ng-scope"
+                              *ngIf="item.status === 1 && currentuser.user_type != 'user'"
+                              (click)="canceltask(item._id,8,'canceljob')">{{'Reject' | translate}}</button>
+                            <button class="btn def_btn ng-binding ng-scope"
+                              *ngIf="item.status === 2 && currentuser.user_type != 'user'"
+                              (click)="startoff(item)">{{'StartOff' | translate}}</button>
+                            <button class="btn def_btn ng-binding ng-scope"
+                              *ngIf="item.status === 3 && currentuser.user_type != 'user'"
+                              (click)="arrived(item)">{{'Arrived' | translate}}</button>
+                            <button class="btn def_btn ng-binding ng-scope"
+                              *ngIf="item.status === 4 && currentuser.user_type != 'user'"
+                              (click)="startjob(item)">{{'Start_Job' | translate}}</button>
+                            <button class="btn def_btn ng-binding ng-scope"
+                              *ngIf="item.status === 5 && currentuser.user_type != 'user'"
+                              (click)="Complete(item)">{{'Complete' | translate}}</button>
+                            <button class="btn def_btn ng-binding ng-scope"
+                              *ngIf="item.status === 6 && currentuser.user_type === 'user'"
+                              (click)="ProceedToPay(item)">{{'ProceedPay' | translate}}</button>
+                            <button class="btn def_btn ng-binding ng-scope"
+                              *ngIf="(item.status === 6 || item.status === 7) && currentuser.user_type === 'user'"
+                              [disabled]="item.ratting && item.ratting.user_status === 1"
+                              (click)="review(item)">{{'ReviewTasker' | translate}}</button>
+                            <button class="btn def_btn ng-binding ng-scope"
+                              [disabled]="item.ratting && item.ratting.tasker_status === 1"
+                              *ngIf="(item.status === 6 || item.status === 7) && currentuser.user_type != 'user'"
+                              (click)="review(item)">{{'ReviewUser' | translate}}</button>
+                            <button class="btn def_btn ng-binding ng-scope"
+                              *ngIf="item.status === 2 || item.status === 3 || item.status === 4 || item.status === 5 || item.status === 6"
+                              (click)="openchat(item)">{{'Chat' | translate}}</button>
+                            <button class="btn def_btn ng-binding ng-scope"
+                              *ngIf="item.status === 1 && currentuser.user_type === 'user'"
+                              (click)="canceltask(item._id,8,'canceljob')">{{'Cancel' | translate}}</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="tskrdet_dtls_inner_bottom">
+                      <div class="tskrdet_dtls_inner_btm">
+                        <div class="tskrdet_dtls_btm_left">
+                          <div class="tskrdet_dtls_btm_date">
+                            <div class="dtls_btm_date ng-binding">
+                              {{item.task_details.timestamp | date:'dd'}}
+                            </div>
+                            <div class="dtls_btm_mnth ng-binding">
+                              {{item.task_details.timestamp | date:'MMM'}}
+                            </div>
+                          </div>
+                          <!-- address -->
+                          <div class="tskrdet_dtls_btm_loc job-completetion">
+                            <span class="icon">
+                              <i class="fa fa-map-marker" aria-hidden="true"></i>
+                            </span>
+                            <span class="name ng-binding">
+                              {{item.address}}
+                            </span>
+                          </div>
+                          <div>
+                            <div class="tskrdet_dtls_btm_prc ng-scope"
+                              *ngIf="(item.status == 6 || item.status == 7) && (item.invoice.amount.balance_amount==0) ">
+                              <span class="name ng-binding">
+                                <span style="color: #67098f;font-size: 16px;padding-right: 5px;"
+                                  class="ng-binding">{{DefaultCurrency.symbol}}</span>
+                                {{(item.invoice.amount.grand_total - (item.invoice.amount.coupon || 0)) *
+                                DefaultCurrency.value | number:'1.2-2'
+                                }}
+                              </span>
+                            </div>
+                            <div class="tskrdet_dtls_btm_prc ng-scope"
+                              *ngIf="(item.status == 6 || item.status == 7) && (item.invoice.amount.balance_amount !=0 ) ">
+                              <span class="name ng-binding">
+                                <span style="color: #67098f;font-size: 16px;padding-right: 5px;"
+                                  class="ng-binding">{{DefaultCurrency.symbol}}</span>
+                                {{(item.invoice.amount.grand_total - (item.invoice.amount.coupon || 0)) *
+                                DefaultCurrency.value | number:'1.2-2'
+                                }}
+                              </span>
+                            </div>
+                          </div>
+                          <div class="tskrdet_dtls_btm_status ">
+                            <span class="icon">
+                              <i class="fa fa-clock-o" aria-hidden="true"></i>
+                            </span>
+                            <span class="name ng-binding ng-scope" *ngIf="item.status === 1">
+                              {{'Pending' | translate}}
+                            </span>
+                            <span class="name ng-binding ng-scope" *ngIf="item.status === 6">
+                              {{'PaymentPending' | translate}}
+                            </span>
+                            <span class="name ng-binding ng-scope" *ngIf="item.status === 7">
+                              {{'PaymentCompleted' | translate}}
+                            </span>
+                            <span class="name ng-binding ng-scope" *ngIf="item.status === 8">
+                              {{'JobCancelled' | translate}}
+                            </span>
+                            <span class="name ng-binding ng-scope" *ngIf="item.status === 2">
+                              {{'Accepted' | translate}}
+                            </span>
+                            <span class="name ng-binding ng-scope" *ngIf="item.status === 3">
+                              {{'StartOff' | translate}}
+                            </span>
+                            <span class="name ng-binding ng-scope" *ngIf="item.status === 4">
+                              {{'Arrived' | translate}}
+                            </span>
+                            <span class="name ng-binding ng-scope" *ngIf="item.status === 5">
+                              {{'JobStarted' | translate}}
+                            </span>
+                          </div>
+                        </div>
+                        <div class="tskrdet_dtls_btm_right">
+                          <div class="tskrdet_dtls_btm_btns settlement">
+                            <div class="tskrdet_dtls_btm_btn">
+                              <button class="btn def_btn ng-binding ng-scope show_details"
+                                (click)="showdetails(item,'jobDetails')"
+                                *ngIf="!(item.status === 9 || item.status === 10)">
+                                {{'Show_Details' | translate}}
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <app-pagination *ngIf="count > 0" [activepagenumber]="activepagenumber" [totalRecords]="count"
+                    [recordsPerPage]="5" (onPageChange)="pagechange($event)">
+                  </app-pagination>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-modal></app-modal>

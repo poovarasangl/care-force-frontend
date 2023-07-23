@@ -1,0 +1,283 @@
+<app-breadcrumb></app-breadcrumb>
+<simple-notifications></simple-notifications>
+
+<div class="card mb-4 ">
+    <div class="card-body">
+        <tabset [justified]="true" #ExpertsTabs>
+            <tab heading="Personal Information">
+                <div class="personalinfoform">
+                    <form #form="ngForm" novalidate class="tooltip-label-right">
+                        <div class="form-group row error-l-50 col-md-12">
+                            <div class="form-group col-md-6">
+                                <label>First Name</label>
+                                <input type="hidden" class="form-control" name="user_id" ngModel #user_id="ngModel">
+                                <input type="text" class="form-control" name="firstname" ngModel required #firstname="ngModel" [ngClass]="{ 'invalid-input': nextrue && !firstname.valid }">
+                                <div *ngIf="!firstname.valid && nextrue" class="required-message">First Name is required!
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label>Last Name</label>
+                                <input type="text" class="form-control" name="lastname" ngModel required #lastname="ngModel" [ngClass]="{ 'invalid-input': nextrue && !lastname.valid }">
+                                <div *ngIf="!lastname.valid && nextrue" class="required-message">Last Name is required!
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label>Gender</label>
+                                <select class="custom-select" name="gender" ngModel required #gender="ngModel" [ngClass]="{ 'invalid-input': nextrue && !gender.valid }">
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <option value="female">Rather not to say</option>
+                            </select>
+                                <div *ngIf="!gender.valid && nextrue" class="required-message">Gender is required!</div>
+                            </div>
+                            <div class="col-md-6">
+                                <label>DOB</label>
+                                <input type="text" placeholder="Datepicker" class="form-control" name="basicDate" ngModel #basicDate="ngModel" bsDatepicker [container]="'html'" [bsConfig]="{ adaptivePosition: true, dateInputFormat: 'DD-MM-YYYY' }" [ngClass]="{ 'invalid-input': nextrue && !basicDate.valid }">
+                            </div>
+                            <div *ngIf="!basicDate.valid && nextrue" class="required-message">Date is required!</div>
+                        </div>
+                        <div class="form-group row error-l-50 col-md-12">
+                            <div class="form-group mail col-md-6">
+                                <label>Email</label>
+                                <input type="email" class="form-control" name="email" ngModel required email #email="ngModel" [ngClass]="{ 'invalid-input': nextrue && !email.valid }" ng-pattern="/^[_a-zA-Z0-9]+(\.[_a-zA-Z0-9]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,10})$/">
+                                <div *ngIf="!email.valid && nextrue" class="required-message">Email is required!
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6 phone-input-class">
+                                <label>Phone</label>
+                                <input type="tel" id="tel" ng2TelInput class="form-control" (countryChange)="oncountryChange($event)" [maxLength]="10" [ng2TelInputOptions]="{initialCountry: 'in'}" name="phone" ngModel required #phone="ngModel" [ngClass]="{ 'invalid-input': nextrue && !phone.valid }">
+                                <div *ngIf="!phone.valid && nextrue" class="required-message">Phone is required!
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row error-l-50 col-md-12">
+                            <div class="col-md-6">
+                                <div class="form-group imagesection">
+                                    <label>Profile Picture</label>
+                                    <input type="file" id="file" name="user_pic" class="form-control" ngModel #user_pic="ngModel" (change)="getFiles($event, 'image', 'image')">
+                                    <img alt="avatar-pic" class="preview-pic" *ngIf="imagepreview.image" [src]="imagepreview.image"><br>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label>Status</label>
+                                <ng-select [items]="[{id:'1', name:'Verified'}, {id:'2', name:'Unverified'}, {id:'3', name: 'Pending'}]" bindLabel="name" bindValue="id" name="status" [ngClass]="{ 'invalid-input': form.submitted && !status.valid }" ngModel required #status="ngModel">
+                                </ng-select>
+                                <div *ngIf="!status.valid && nextrue" class="required-message">Status is required!</div>
+                            </div>
+                        </div>
+                    </form>
+                    <app-state-button [btnClass]="'btn btn-primary btn-lg btn-shadow'" style="float: right;" [currentState]="buttonState" [isDisabled]="buttonDisabled" (click)="selectTab(1)">
+                        Next
+                    </app-state-button>
+                </div>
+            </tab>
+            <tab heading="About">
+                <div class="About">
+                    <form #qusform="ngForm" novalidate class="tooltip-label-right">
+                        <h6>Profile</h6>
+                        <div class="form-group row error-l-50 col-md-12" *ngFor="let questions of questionslist">
+                            <div class="form-group col-md-12">
+                                <label>{{questions.question}}</label>
+                                <textarea class="form-control" name="questions.answer" [(ngModel)]="questions.answer"></textarea>
+                            </div>
+                        </div>
+                    </form>
+                    <app-state-button [btnClass]="'btn btn-primary btn-lg btn-shadow'" style="float: right;" [currentState]="buttonState" [isDisabled]="buttonDisabled" (click)="selectTab(2)">
+                        Next
+                    </app-state-button>
+                </div>
+            </tab>
+            <tab heading="Category">
+                <div class="cat-row">
+                    <div class="cat-headings">
+                        <h6>Category Settings</h6>
+                        <p>Your Category</p>
+                    </div>
+                    <div class="cat-button">
+                        <button class="add-category btn btn-success" (click)="openModal(template)">Add Category</button>
+                    </div>
+                </div>
+                <hr>
+                <div class="added-cat" *ngIf ='addedcategory&& addedcategory.length>0'>
+                    <div class="added-cat-arr" *ngFor="let categories of addedcategory">
+                        <span class="added-cat-name">{{addedcat(categories.childid)}}</span>
+                        <span class="added-cat-icon">
+                            <a><i class="fa fa-trash" (click)="removecat(categories.categoryid)"></i></a>
+                        </span>
+                    </div>
+                </div>
+                <app-state-button [btnClass]="'btn btn-primary btn-lg btn-shadow'" style="float: right;" [currentState]="buttonState" [isDisabled]="buttonDisabled" (click)="selectTab(3)">
+                    Next
+                </app-state-button>
+            </tab>
+            <tab heading="Availability">
+                <div class="ng-scope margn-tp-form">
+                    <p>Select business days/hours</p>
+                    <div class="trans-profiles ng-scope">
+                        <div class="container">
+                            <div class="view-trans">
+                                <div class="trans-packed main-scrolls-trcks">
+                                    <div class="trans-profiles-header">
+                                        <div class="trans-headings">
+                                            <h4 class="ng-binding">Availability</h4>
+                                        </div>
+                                    </div>
+                                    <div class="scroll-function">
+                                        <div class="trans-profiles-inner acc-av">
+                                            <span class="inner-subs-parsds availtitle ng-binding">Select Business Days</span>
+                                            <div class="date_whl_day ng-scope" style="float: right;">
+                                                <span class="date_whl_input">
+                            <input type="checkbox" name="wholeweek"
+                            [checked]=""
+                                (change)="wholeweek($event);" #allWeek
+                                class="ng-valid ng-dirty ng-valid-parse ng-empty ng-touched"
+                                aria-invalid="false"> </span>
+                                                <label>Whole Week </label>
+                                            </div>
+                                            <br>
+                                            <div class="main_cont_cont">
+                                                <accordion [isAnimated]="true" *ngFor="let item of dayslist;let i = index;">
+                                                    <accordion-group heading="{{item.Day}}">
+                                                        <button class="whole-day-btn" accordion-heading type="button">
+                                                            <span class="">
+                                                                <input class="badge badge-secondary float-right pull-right" (click)="WholeDayselet($event, item.Day)" type="checkbox" name="day" value="{{item.Day}}" [checked]="item.wholeday === 1 ? true : false">
+                                                                  <span class="dayselect">Whole Day</span>
+                                                            </span>
+                                                          </button>
+                                                        <div class="timings ng-scope" *ngFor="let list of item.timelist;let i = index;">
+                                                            <div class="time_value ng-scope">
+                                                                <input type="checkbox" value="{{list.time}}" name="{{list.time}}+{{i}}" (click)="timeslot($event,item,list)" aria-invalid="false" [checked]="list.selected">
+                                                                <label for="{{list.time}}" class="ng-binding">{{list.time}}</label>
+                                                            </div>
+                                                        </div>
+                                                    </accordion-group>
+                                                </accordion>
+                                                <hr>
+                                                <div class="card mb-4">
+                                                    <div class="agm-map">
+                                                        <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="zoom">
+                                                            <agm-marker [latitude]="latitude" [longitude]="longitude" [markerDraggable]="true" (dragEnd)="markerDragEnd($event)"></agm-marker>
+                                                        </agm-map>
+                                                    </div>
+                                                    <div class="list-transta rds-max">
+                                                        <span class="inner-subs-parsds ng-binding">Work Location</span>
+                                                        <div class="botom-fuls">
+                                                            <form #addressform="ngForm" novalidate>
+                                                                <input type="text" class="form-control" (keydown.enter)="$event.preventDefault()" class="form-control" [(ngModel)]="address" [ngModelOptions]="{standalone: true}" placeholder="Search Nearest Location" autocorrect="off" autocapitalize="off" spellcheck="off"
+                                                                    type="text" #search>
+                                                                <!-- <div class="error_msg">
+                                                                Please Enter Address
+                                                            </div> -->
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <style class="ng-scope">
+                                .green {
+                                    color: green !important;
+                                }
+                                
+                                .red {
+                                    color: red !important;
+                                }
+                            </style>
+                        </div>
+                    </div>
+                </div>
+                <app-state-button [btnClass]="'btn btn-primary btn-lg btn-shadow'" style="float: right;" [currentState]="buttonState" [isDisabled]="buttonDisabled" (click)="selectTab(4)">
+                    Next
+                </app-state-button>
+            </tab>
+            <tab heading="Caregiver Documents">
+                <form *ngIf="documenttaskerForm" [formGroup]="documenttaskerForm" novalidate class="tooltip-label-right">
+                    <div class="taskerdoc" *ngFor="let item of documentslist">
+                        <span class="docname">{{item.name}}</span><span class="madatory-icon" *ngIf="item.mandatory == 1">*</span>
+                        <span class="docimage imagesection">
+                        <div class="front-image">
+                            <label>{{item.name}} Front Image</label>
+                            <input type="file" id="{{item.replace_name}}" name="{{item.replace_name}}" formControlName="{{item.replace_name}}" class="form-control" (change)="getFiles($event, item, 'front')" [ngClass]="{ 'invalid-input': documenttaskerForm.controls[item.replace_name].status === 'INVALID' && docreq }">
+                            <div class="require-mandatory">
+                                <div *ngIf="documenttaskerForm.controls[item.replace_name].status === 'INVALID' && docreq" class="required-message">Front Image is required!</div>
+                            </div>
+                        </div>
+                        <div class="back-image">
+                            <label>{{item.name}} Back Image</label>
+                            <input type="file" id="{{item.replace_name_back}}" name="{{item.replace_name_back}}" class="form-control" formControlName="{{item.replace_name_back}}" (change)="getFiles($event, item, 'back')" [ngClass]="{ 'invalid-input': documenttaskerForm.controls[item.replace_name_back].status === 'INVALID' && docreq }">
+                            <div class="require-mandatory">
+                                <div *ngIf="documenttaskerForm.controls[item.replace_name_back].status === 'INVALID' && docreq" class="required-message">Back Image is required!</div>
+                            </div>
+                        </div>
+                    <!-- <img alt="avatar-pic" class="preview-pic" *ngIf="imagepreview.doc" [src]="imagepreview.doc"><br> -->
+                   </span>
+                        <!-- <hr> -->
+                    </div>
+                </form>
+                <app-state-button [btnClass]="'btn btn-primary btn-lg btn-shadow'" style="float: right;" [currentState]="buttonState" [isDisabled]="buttonDisabled" (click)="onSubmit()">
+                    Submit
+                </app-state-button>
+            </tab>
+        </tabset>
+    </div>
+</div>
+
+<!-- MODALS FOR CATEGORY -->
+
+<ng-template #template>
+    <div class="text-center">
+        <form #catform="ngForm" novalidate class="tooltip-label-right">
+            <div class="modal-body">
+                <!-- <div class="form-group">
+                    <label class="control-label"> Main Category</label>
+                    <select class="form-control" name="categoryid" class="form-control" ngModel required #categoryid="ngModel" (change)="Categorychange($event);" [ngClass]="{ 'invalid-input': catform.submitted && !categoryid.valid }"> 
+                    <option value="" selected="selected"> Select Category</option>
+                    <option *ngFor="let item of categorylist" value="{{item._id}}">{{item.name}}</option>
+                </select>
+                    <label *ngIf="!categoryid.valid && catform.submitted" class="required-message">Category
+                        name is required.</label>
+                </div> -->
+                <div class="form-group" >
+                    <label class="control-label">Main Category</label>
+                    <select class="form-control" name="childid" class="form-control" ngModel required #childid="ngModel"  (change)="Categorychange($event)" [ngClass]="{ 'invalid-input': catform.submitted && !childid.valid }">
+                    <option value=""> Select Category</option>
+                    <option  *ngFor="let item of categorylist" value="{{item._id}}">{{item.name}}</option>
+                </select>
+                    <label *ngIf="!childid.valid && catform.submitted" class="required-message">Subcategory name is required.</label>
+                </div>
+                <div class="form-group">
+                    <div class="form-group" *ngIf="ratetype && ratetype == 'Flat'">
+                        <label for="flatRate">{{ratetype}} Rate</label>
+                        <div class="input-group">
+                            <span class="input-group-addon currency-defa-sym"> {{defaultcurrencysymbol.symbol}} </span>
+                            <input type="number" name="hour_rate" class="form-control entry-blocked" disabled [(ngModel)]="commission">
+                        </div>
+                    </div>
+                    <div class="form-group" *ngIf="ratetype && ratetype == 'Hourly'">
+                        <label for="HourlyRate">Set {{ratetype}} Rate (Minimum Hourly Rate is {{defaultcurrencysymbol.symbol}} {{commission}})
+                    </label>
+                        <div class="input-group">
+                            <span class="input-group-addon currency-defa-sym"> {{defaultcurrencysymbol.symbol}} </span>
+                            <input type="number" name="hour_rate" class="form-control" ngModel required #hour_rate="ngModel" (keyup)="minimumrate($event)">
+                        </div>
+                        <div *ngIf="showerror" class="required-message">Minimum hourly rate is {{defaultcurrencysymbol.symbol}}{{commission}}</div>
+                    </div>
+                </div>
+                <div class="form-group" *ngIf="ratetype && ratetype != 'undefined'">
+                    <label class="control-label">Level Of Experience</label>
+                    <select class="form-control" name="experience" class="form-control" ngModel required #experience="ngModel">
+                    <option value="" selected="selected">Select Your Experience</option>
+                    <option *ngFor="let item of activeexplist" value="{{item._id}}">{{item.name}}</option>
+                </select>
+                </div>
+            </div>
+            <div class="modal-footer btnscont">
+                <button type="button" class="btn btn-outline-primary" (click)="confirm(catform)">Save</button> {{" "}}
+                <button type="button" class="btn btn-primary" (click)="modalRef.hide();">Cancel</button>
+            </div>
+        </form>
+    </div>
+</ng-template>

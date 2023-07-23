@@ -1,0 +1,161 @@
+<div (window:resize)="onResize($event)">
+    <section class="handy-home" *ngIf="!currentuser">
+        <div class="handyheader-heightfiller">
+        </div>
+        <section class="handy-home-header">
+            <div id="Scrollable" class="sidenav-wrap" [ngClass]="{'active': sidebardiv}"
+                [ngStyle]="{'left': sidebardiv ? '0px' : '-150%'}" style="left: 0px;">
+                <h2 id="close" (click)="homepage()"> <img src="assets/images/logo/careforce.png"></h2>
+                <ul class="ng-scope" style="padding: 0;">
+                    <li><a class="ng-binding" (click)="login()"><em class="fa fa-user-o"
+                                aria-hidden="true"></em>{{'Login'
+                            | translate}}</a>
+                    </li>
+                    <li><a class="ng-binding" (click)="register()"><em class="fa fa-sign-in"
+                                aria-hidden="true"></em>{{'Join for us' | translate}}</a></li>
+                </ul>
+                <div class="after_side_login_cont">
+                    <div class="after_side_login_innercont">
+                    </div>
+                </div>
+            </div>
+            <nav class="navbar">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" [ngClass]="{'collapsed': sidebardiv}" id="open"
+                            (click)="navbarbtn()">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" (click)="homepage()">
+                            <img style="width: auto;max-height: 45px;" src="assets/images/logo/careforce.png"
+                                class="mob-lg">
+                        </a>
+                    </div>
+                    <div class="collapse navbar-collapse" id="myNavbar">
+                        <ul class="nav navbar-nav navbar-right logintag">
+                            <li>
+                                <a class="ng-binding" (click)="login()">
+                                    <span class=""><i class="fa fa-user-o on_scroll"
+                                            aria-hidden="true"></i></span>{{'Login' | translate}}
+                                </a>
+                            </li>
+                            <li>
+                                <a class="ng-binding" (click)="register()">
+                                    <span class=""><i class="fa fa-sign-in on_scroll"
+                                            aria-hidden="true"></i></span>{{'Join for us' | translate}}
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </section>
+    </section>
+    <section class="handy-home" *ngIf="currentuser">
+        <div id="Scrollable" class="sidenav-wrap" [ngClass]="{'active': sidebardiv}"
+            [ngStyle]="{'left': sidebardiv ? '0px' : '-150%'}" style="left: 0px;">
+            <h2 id="close" (click)="homepage()"> <img src="assets/images/logo/qwickzy.png"></h2>
+            <ul class="ng-scope" style="padding: 0;" onclick="">
+                <li>
+                    <a (click)="messages()">
+                        <span class="icon entypo mail"><i class="fa fa-envelope" aria-hidden="true"></i></span>
+                        <span class="text ng-binding"> {{'Messages' | translate}} </span>
+                    </a>
+                </li>
+                <li>
+                    <a (click)="notifications()">
+                        <span class="icon entypo mail"><i class="fa fa-bell" aria-hidden="true"></i></span>
+                        <span class="text ng-binding"> {{'Notifications' | translate}} ({{notificationCount}}) </span>
+                    </a>
+                </li>
+                <li>
+                    <a (click)="profile()">
+                        <span class="icon entypo user"><i class="fa fa-user" aria-hidden="true"></i></span>
+                        <span class="text ng-binding"> {{'My_Account' | translate}}</span>
+                    </a>
+                </li>
+                <li>
+                    <a (click)="logout()">
+                        <span class="icon entypo logout"><i class="fa fa-sign-out" aria-hidden="true"></i></span>
+                        <span class="text ng-binding">{{'Log_out' | translate}}</span>
+                    </a>
+                </li>
+            </ul>
+            <div class="after_side_login_cont">
+                <div class="after_side_login_innercont">
+                </div>
+            </div>
+        </div>
+        <nav class=" navbar navbar-inverse fixed" style="border-bottom: 1px solid #ccc;">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" [ngClass]="{'collapsed': sidebardiv}" id="open"
+                        (click)="navbarbtn()">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" (click)="homepage()">
+                        <img style="width: auto;max-height: 45px;" src="assets/images/logo/careforce.png"
+                            class="mob-lg">
+                    </a>
+                </div>
+                <div class="collapse navbar-collapse" id="myNavbar">
+                    <h4>
+                        <div class="after_main_inner_login ng-scope">
+                            <div class="after_main_login_value">
+                                <span class="hd_img">
+                                    <img *ngIf="currentuser && currentuser.avatar"
+                                        src="{{imageUrl}}{{currentuser.avatar}}"
+                                        onerror="this.src='assets/images/Default/user.jpg'">
+                                    <img *ngIf="currentuser && !currentuser.avatar" src="" UserDefaultImage>
+                                </span>
+                                <span class="hd_name">
+                                    <a (click)="profile()" class="ng-binding">{{currentuser.user | titlecase}}</a>
+                                    <i class="fa fa-angle-down" aria-hidden="true"></i>
+                                </span>
+                            </div>
+                            <ul class="nav navbar-nav navbar-right ng-scope expandmode">
+                                <li>
+                                    <a (click)="messages()">
+                                        <span class="icon entypo mail"><i class="fa fa-envelope"
+                                                aria-hidden="true"></i></span>
+                                        <span class="text ng-binding"> {{'Messages' | translate}} </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a (click)="notifications()">
+                                        <span class="icon entypo mail"><i class="fa fa-bell"
+                                                aria-hidden="true"></i></span>
+                                        <span class="text ng-binding">{{'Notifications' | translate}}
+                                            ({{notificationCount}})</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a (click)="profile()">
+                                        <span class="icon entypo user"><i class="fa fa-user"
+                                                aria-hidden="true"></i></span>
+                                        <span class="text ng-binding"> {{'My_Account' | translate}}</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a (click)="logout()">
+                                        <span class="icon entypo logout"><i class="fa fa-sign-out"
+                                                aria-hidden="true"></i></span>
+                                        <span class="text ng-binding"> {{'Log_out' | translate}}</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="warn_acc_pending" *ngIf="currentuser_data"><mark
+                                [innerHtml]="currentuser_data"></mark>
+                        </div>
+                    </h4>
+                </div>
+            </div>
+        </nav>
+    </section>
+</div>
+<app-confirm-dialog></app-confirm-dialog>

@@ -1,0 +1,93 @@
+<!-- <div class="ng-scope"> -->
+<div class="trans-profiles ng-scope">
+    <div class="container">
+        <div class="view-trans reviews" *ngIf="!editbtn">
+            <h2>Availability Add Address</h2>
+            <div class="card">
+
+                <div class="card-body">
+                    <form #form="ngForm" novalidate>
+                        <div class="row">
+                            <!-- <div class="col-sm-12"> -->
+                            <div class="form-group col-sm-6">
+                                <label for="">Patient Name</label>
+                                <input type="text" class="form-control" placeholder="Enter Name" [(ngModel)]="patient1"
+                                    name="patient" id="patient" ngModel #patient="ngModel" required>
+                                <div *ngIf="!patient.valid && form.submitted" class="required-message">Patient Name
+                                    is required!
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-6">
+                                <label for="">Patient Number</label>
+                                <input type="number" class="form-control" [(ngModel)]="number1" minlength="8"
+                                    maxlength="12" placeholder="Enter Mobile Number" name="number" id="number" ngModel
+                                    #number="ngModel" required>
+                                <div *ngIf="!number.valid && form.submitted" class="required-message">Patient number
+                                    is required!
+                                    <div *ngIf="number.errors && number.errors.minlength" class="required-message">
+                                        Patient Number is minimum lenth 8!
+                                    </div>
+                                    <div *ngIf="number.errors && number.errors.maxlength" class="required-message">
+                                        Patient Number is maximum length 12!
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- </div> -->
+                            <!-- <div class="col-sm-12"> -->
+                            <div class="form-group col-sm-6">
+                                <label for="">Address</label>
+                                <input type="text" class="form-control" name="formatted_address" id="formatted_address"
+                                    required ngModel #formatted_address="ngModel"
+                                    (keydown.enter)="$event.preventDefault()" class="form-control"
+                                    [(ngModel)]="formatted_address1" placeholder="Search Nearest Location"
+                                    autocorrect="off" autocapitalize="off" spellcheck="off" #search>
+                                <div *ngIf="!formatted_address.valid && form.submitted" class="required-message">Address
+                                    is required!
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-6">
+                                <label for="">City</label>
+                                <input type="text" class="form-control" [(ngModel)]="city1" required ngModel
+                                    #city="ngModel" name="city" id="city" placeholder="Enter City">
+                                <div *ngIf="!city.valid && form.submitted" class="required-message">City Name is
+                                    required!
+                                </div>
+                            </div>
+                            <!-- </div> -->
+                            <div class="col-sm-12">
+                                <div class="list-transta">
+                                    <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="zoom">
+                                        <agm-marker [latitude]="latitude" [longitude]="longitude"
+                                            [markerDraggable]="true" (dragEnd)="markerDragEnd($event)"></agm-marker>
+                                    </agm-map>
+                                </div>
+                                <input class="blue-btn hfa-btn btn-care ng-scope" type="submit"
+                                    (click)="updatepatient()">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="address-list" *ngIf="editbtn">
+            <div class="add-btn" (click)="clickBtn()">
+                <button class="btn btn-care">+ Add</button>
+            </div>
+            <div class="list" *ngFor="let item of addressLists">
+                <div class="addres-detail">
+                    <p><label>Patient Name:</label> {{item.patient}}</p>
+                    <p><label>Number:</label> {{item.number}}</p>
+                    <p><label>Address:</label> {{item.address}}</p>
+                    <p><label>City:</label> {{item.city}}</p>
+                    <p><label>Zipcode:</label> {{item.zipcode}}</p>
+
+                    <div class="add-btns">
+                        <button class="edit-add" (click)="editAddrs(item)">Edit</button>
+                        <button class="delete-add" (click)="deletAddrs(item._id)">Remove</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- </div> -->

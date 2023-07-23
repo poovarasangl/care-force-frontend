@@ -1,0 +1,192 @@
+<div class="row">
+    <div class="col-12">
+        <div class="al-right">
+            <div class="top-right-button-container text-zero" *ngIf="ExportItem">
+                <!-- <ul id="menu" class="common-subs"> -->
+                <ul id="menu" class="common-subs only-top">
+                    <li><a>{{ 'pages.exportbtn' | translate}}
+                            <i class="fa fa-caret-down" aria-hidden="true"></i>
+                        </a>
+                        <ul class="menu-subs">
+                            <li><a (click)="onexportitem('csv')">csv</a></li>
+                            <li><a (click)="onexportitem('xlsx')">xlsx</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="top-right-button-container text-zero" *ngIf="AddNewItem">
+                <button type="button" (click)="onAddNewItem()" class="top-right-button btn btn-primary btn-md mr-1">{{ addbtn_name | translate}}</button>
+                <!-- <div class="btn-group" dropdown>
+                    <div class="btn btn-primary btn-lg pl-4 pr-0 check-button">
+                        <label class="custom-control custom-checkbox mb-0 d-inline-block">
+                        <input type="checkbox" class="custom-control-input" [checked]="selectAllState==='checked'"
+                        [indeterminate]="selectAllState === 'indeterminate'" (change)="selectAll($event)">
+                        <span class="custom-control-label">&nbsp;</span>
+                        </label>
+                    </div>
+                    <button id="button-split" type="button" dropdownToggle
+                    class="btn btn-primary dropdown-toggle dropdown-toggle-split" aria-controls="dropdown-split">
+                    <span class="caret"></span>
+                    </button>
+                    <ul id="dropdown-split" *dropdownMenu class="dropdown-menu dropdown-menu-right" role="menu"
+                    aria-labelledby="button-split">
+                        <li role="menuitem"><a class="dropdown-item" href="javascript:;">{{ 'pages.move' | translate }}</a></li>
+                        <li role="menuitem"><a class="dropdown-item" href="javascript:;">{{ 'pages.delete' | translate }}</a></li>
+                    </ul> 
+                </div> -->
+            </div>
+        </div>
+        <div class="top-right-button-container text-zero" *ngIf="SendNotifications">
+            <button type="button" (click)="SendNotification($event)" class="top-right-button btn btn-primary btn-md mr-1">{{ 'pages.sendnotification' | translate}}</button>
+        </div>
+        <div class="top-right-button-container text-zero" *ngIf="SendMail">
+            <button type="button" (click)="onSendMail($event)" class="top-right-button btn btn-primary btn-md mr-1">{{ 'pages.sendmail' | translate}}</button>
+        </div>
+        <app-breadcrumb></app-breadcrumb>
+
+        <div class="row mt-3" *ngIf="EarningFilter">
+            <div class="col-md-12">
+                <div class="row">
+                    <form #form="ngForm" class="tab-forms">
+                        <div class="col-md-3">
+                            <label>From :</label>
+                            <input type="date" max="{{latest_date}}" class="form-control" name="from" ngModel #from="ngModel">
+                        </div>
+                        <div class="col-md-3">
+                            <label>To :</label>
+                            <input type="date" max="{{latest_date}}" class="form-control" name="to" ngModel #to="ngModel">
+                        </div>
+                        <div class="col-md-2">
+                            <label>Stylists</label>
+                            <select class="form-control" name="tasker" ngModel #tasker="ngModel">
+                                <option selected value="">Select Tasker</option>
+                                <option *ngFor="let item of taskerlist" value="{{item._id}}">{{item.name}}</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <label>Pay Status</label>
+                            <select class="form-control" name="status" ngModel #status="ngModel">
+                                <option selected value="">Select Status</option>
+                                <option value="1">Paid</option>
+                                <option value="0">NotPaid</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <button type="submit" class="btn btn-success" (click)="earningsearch()">Search</button>
+                            <button type="reset" class="btn btn-danger" (click)="earningclear()">Clear</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+        <div class="row mt-3" *ngIf="AllJobsFilter">
+            <div class="col-md-12">
+                <div class="row">
+                    <form #form="ngForm" class="tab-forms">
+                        <div class="col-md-3">
+                            <label>From :</label>
+                            <input type="date" class="form-control" name="from" ngModel #from="ngModel">
+                        </div>
+                        <div class="col-md-3">
+                            <label>To :</label>
+                            <input type="date" class="form-control" name="to" ngModel #to="ngModel">
+                        </div>
+                        <div class="col-md-2">
+                            <button type="submit" class="btn btn-success" (click)="alljobsearch()">Search</button>
+                            <button type="reset" class="btn btn-danger" (click)="alljobclear()">Clear</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+        <div class="row mt-3" *ngIf="PaymentFilter">
+            <div class="col-md-12">
+                <div class="row">
+                    <form #form="ngForm" class="tab-forms">
+
+                        <div class="col-md-3">
+                            <label>Billing Cycle</label>
+                            <select class="form-control" name="billcycyle" ngModel #billcycyle="ngModel" (change)="billingcycyledata($event.target.value)">
+                                <option selected value="">{{billcycledate}} - Till now</option>
+                                <option *ngFor="let item of billingcycle" value="{{item._id}}">{{item.billingcycyle}}
+                                </option>
+                            </select>
+                        </div>
+
+                    </form>
+                </div>
+
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div *ngFor="let item of card_details" class="{{(card_details.length == 4 || card_details.length == 3) ? 'col-md-3' : 'five-card-design'}} mb-3">
+                <div class="card text-white {{item.bg_color}} {{!item.click_val ? 'disabled-div':''}}">
+                    <div class="card-cated" (click)="headercardfun(item.click_val)">
+                        <div class="svg-pl">
+                            <i class="{{item.icon}}"></i>
+                            <h6>{{item.value}}</h6>
+                            <p>{{item.title}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="display-options-container">
+            <!-- <a class="btn pt-0 pl-0 d-inline-block d-md-none c-pointer">
+            </a> -->
+            <div id="displayOptions" class="collapse dont-collapse-sm">
+                <div class="d-block d-md-inline-block position-relative" *ngIf="showBulkActions">
+                    <div class="float-md-left mr-1 mb-1" dropdown>
+                        <button id="button-basic" dropdownToggle type="button" class="btn btn-outline-dark btn-xs dropdown-toggle" aria-controls="dropdown-basic">
+                            Action : {{itemAction.label}} <span class="caret"></span>
+                        </button>
+                        <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
+                            <li role="menuitem" *ngFor="let item of itemOptionsActions"><a [ngClass]="item.value === itemAction.value ? 'dropdown-item active' : 'dropdown-item'" (click)="onChangeOrderBy(item)">{{item.label}}</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- <div class="d-inline-block" *ngIf="showBulkActions">
+                    <div class="d-inline-block float-md-left mr-1 mb-1 align-top">
+                        <button type="button" class="btn btn-default btn-sm">Apply</button>
+                    </div>
+                </div> -->
+                <div class="d-inline-block" *ngIf="showSearch">
+                    <div class="search-sm d-inline-block float-md-left mr-1 mb-1 align-top">
+                        <input class="form-control" placeholder="Search" (keyup)="onSearchKeyUp($event.target.value)">
+                    </div>
+                </div>
+                <!-- <div class="float-right" *ngIf="showItemsPerPage">
+                    <span class="text-muted text-small">Per Page </span>
+                    <span dropdown class="d-inline-block position-relative">
+                        <button class="btn btn-outline-dark btn-xs dropdown-toggle" type="button" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false" dropdownToggle>
+                            {{itemsPerPage}}
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-sm text-right" *dropdownMenu>
+                            <li role="menuitem" *ngFor="let item of itemOptionsPerPage"><a
+                                    [ngClass]="item === itemsPerPage ? 'dropdown-item active' : 'dropdown-item'"
+                                    (click)="onChangeItemsPerPage(item)">{{item}}</a></li>
+                        </div>
+                    </span>
+                </div> -->
+            </div>
+            <div class="separator mb-4"></div>
+        </div>
+        <div *ngIf="settings">
+            <ng2-smart-table [settings]="settings" [count]="count" [source]="source" (custom)="onCustomAction($event)" (Pagechange)="Pagechange($event)" (PerPagechange)="PerPagechange($event)" (userRowSelect)="onUserRowSelect($event)"></ng2-smart-table>
+        </div>
+    </div>
+    <simple-notifications></simple-notifications>
+</div>
+<!-- <modal-confirm></modal-confirm> -->
+<button type="button" class="delete-btn" (click)="openModal(template)" style="display: none;"></button>
+<ng-template #template>
+    <div class="modal-body text-center">
+        <h6 class="modal-title mb-4">{{modal_title | translate}}</h6>
+        <button type="button" class="btn btn-outline-primary" (click)="confirm()">{{'modal.yes' | translate}}</button> {{" "}}
+        <button type="button" class="btn btn-primary" (click)="modalRef.hide();">{{'modal.no' | translate}}</button>
+    </div>
+</ng-template>

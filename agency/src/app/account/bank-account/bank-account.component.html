@@ -1,0 +1,110 @@
+<div class="" *ngIf="profiledata">
+    <div class="tskr_prof_dtls">
+        <div class="container">
+            <div class="tskr_rgstrn_outer_cont bank">
+                <div class="tskr_prof_dtls_inner">
+                    <div class="tskr_prof_dtls_bx">
+                        <div class="tskr_prof_dtls_hdr">
+                            <div class="tskr_prof_dtls_bx_lft">
+                                <div class="tskr_prof_dtls_tle">
+                                    {{'Bank_Account_Information' | translate}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="alert alert-danger" *ngIf="profiledata && !profiledata.banking">
+                            <strong>{{'Warning' | translate}}!</strong> {{'provide_bank_details' | translate}}.
+                        </div>
+                        <div class="field">
+                            <form name="banking" [formGroup]="bankaccountform" (ngSubmit)="onSubmit()">
+                                <div class="col-md-6 col-xs-12">
+                                    <div class="form-group">
+                                        <label for="exampleInputName2"><span style="color:red;">*</span> {{'Account_HolderName' | translate}} :</label>
+                                        <input type="text" class="form-control profilefield" *ngIf="profiledata.banking" formControlName="acc_holder_name" [(ngModel)]="profiledata.banking.acc_holder_name" placeholder="Account Holder Name">
+                                        <input type="text" class="form-control profilefield" *ngIf="!profiledata.banking" formControlName="acc_holder_name" placeholder="Account Holder Name">
+                                        <div *ngIf="submitted && bankform.acc_holder_name.errors" class="invalid-feedback">
+                                            <div class="error_msg" *ngIf="bankform.acc_holder_name.errors.required">
+                                                {{'Enter_AccountHolderName' | translate}}</div>
+                                            <div class="error_msg" *ngIf="bankform.acc_holder_name.errors.pattern">
+                                                {{'Name_mustbecharacters' | translate}}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-xs-12">
+                                    <div class="form-group">
+                                        <label><span style="color:red;">*</span> {{'Account_Number' | translate}}:</label>
+                                        <input type="text" class="form-control profilefield" *ngIf="profiledata.banking" formControlName="acc_number" [(ngModel)]="profiledata.banking.acc_number" placeholder="Account Number">
+                                        <input type="text" class="form-control profilefield" *ngIf="!profiledata.banking" formControlName="acc_number" placeholder="Account Number">
+                                        <div *ngIf="submitted && bankform.acc_number.errors" class="invalid-feedback">
+                                            <div class="error_msg" *ngIf="bankform.acc_number.errors.required">{{'Enter_AccountNumber' | translate}}!</div>
+                                            <div class="error_msg" *ngIf="bankform.acc_number.errors.pattern">{{'Maximum_numbers' | translate}}</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-xs-12">
+                                    <div class="form-group">
+                                        <label><span style="color:red;">*</span> {{'Bank_Name' | translate}}:</label>
+                                        <input type="text" class="form-control profilefield" *ngIf="profiledata.banking" formControlName="bank_name" [(ngModel)]="profiledata.banking.bank_name" placeholder="Bank Name">
+                                        <input type="text" class="form-control profilefield" *ngIf="!profiledata.banking" formControlName="bank_name" placeholder="Bank Name">
+
+                                        <div *ngIf="submitted && bankform.bank_name.errors" class="invalid-feedback">
+                                            <div class="error_msg" *ngIf="bankform.bank_name.errors.required">{{'Enter_BankName' | translate}}
+                                            </div>
+                                            <div class="error_msg" *ngIf="bankform.bank_name.errors.pattern">{{'Bank_characters' | translate}}</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-xs-12">
+                                    <div class="form-group">
+                                        <label><span style="color:red;">*</span> {{'Routing_Number' | translate}}</label>
+                                        <input type="text" class="form-control profilefield" *ngIf="profiledata.banking" formControlName="routing_number" [(ngModel)]="profiledata.banking.routing_number" placeholder="Routing Number">
+                                        <input type="text" class="form-control profilefield" *ngIf="!profiledata.banking" formControlName="routing_number" placeholder="Routing Number">
+                                        <div *ngIf="submitted && bankform.routing_number.errors" class="invalid-feedback">
+                                            <div class="error_msg" *ngIf="bankform.routing_number.errors.required">{{'Enter_RoutingNumber' | translate}}</div>
+                                            <div class="error_msg" *ngIf="bankform.routing_number.errors.pattern">{{'Maximum_ofnumbers' | translate}}</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-xs-12" *ngIf="country != undefined && country == 'US'">
+                                    <div class="form-group">
+                                        <label><span style="color:red;">*</span> {{'SSN' | translate}}:</label>
+                                        <input type="text" class="form-control profilefield" *ngIf="profiledata.banking" formControlName="ssn" [(ngModel)]="profiledata.banking.ssn" placeholder="Social Security Number">
+                                        <input type="text" class="form-control profilefield" *ngIf="!profiledata.banking" formControlName="ssn" placeholder="Social Security Number">
+
+                                        <div *ngIf="submitted && bankform.ssn.errors" class="invalid-feedback">
+                                            <div class="error_msg" *ngIf="bankform.ssn.errors.required">{{'Enter_Ssn' | translate}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-md-6 col-xs-12" *ngIf="country != undefined && country == 'United States'">
+                                    <div class="form-group">
+                                        <label><span style="color:red;">*</span> {{'SSN' | translate}}:</label>
+                                        <input type="text" class="form-control profilefield" *ngIf="profiledata.banking" required formControlName="ssn" [(ngModel)]="profiledata.banking.ssn" placeholder="Social Security Number">
+                                        <input type="text" class="form-control profilefield" *ngIf="!profiledata.banking" required formControlName="ssn" placeholder="Social Security Number">
+
+                                        <div *ngIf="submitted && bankform.ssn.errors" class="invalid-feedback">
+                                            <div class="error_msg" *ngIf="bankform.ssn.errors.required">{{'Enter_Ssn' | translate}}
+                                            </div>
+                                            <div class="error_msg" *ngIf="bankform.ssn.errors.pattern">{{'Enter_Ssn' | translate}}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-2 col-xs-12 info-btn">
+                                    <button type="submit" *ngIf="save_btn == 0" class="btn btn-primary savebtn">{{'Save' | translate}}</button>
+                                    <button class="btn btn-primary savebtn" *ngIf="save_btn == 1" type="button" disabled>
+                                        <i class="fa fa-circle-o-notch fa-spin"></i>&nbsp; {{'Loading' | translate}}
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

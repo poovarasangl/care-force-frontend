@@ -1,0 +1,159 @@
+<app-breadcrumb></app-breadcrumb>
+<app-spinner [spinner]="spinner"></app-spinner>
+<div class="card mb-4 general-settings">
+    <div class="card-body">
+        <h2 class="mb-4">{{title}} Agencie</h2>
+        <h4 *ngIf="Referral_Code!=''">Referral Code : {{Referral_Code}}</h4>
+        <form #form="ngForm" novalidate class="tooltip-label-right">
+            <div class="form-group row error-l-50 col-md-12">
+                <div class="form-group col-md-6">
+                    <label>Company Name</label>
+                    <input type="hidden" class="form-control" name="user_id" ngModel #user_id="ngModel">
+                    <input type="text" class="form-control" name="companyname" ngModel required #companyname="ngModel" [ngClass]="{ 'invalid-input': form.submitted && !companyname.valid && access }">
+                    <div *ngIf="!companyname.valid && form.submitted && access" class="required-message">Company Name is required!
+                    </div>
+                </div>
+                <div class="form-group mail col-md-6">
+                    <label>Email</label>
+                    <input type="email" class="form-control" name="email" ngModel required email #email="ngModel" [ngClass]="{ 'invalid-input': form.submitted && !email.valid && access }" ng-pattern="/^[_a-zA-Z0-9]+(\.[_a-zA-Z0-9]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,10})$/">
+                    <div *ngIf="!email.valid && form.submitted && access" class="required-message">Email is required!
+                    </div>
+                </div>
+                <!-- <div class="form-group col-md-6">
+                    <label>Company Name</label>
+                    <input type="hidden" class="form-control" name="user_id" ngModel #user_id="ngModel">
+                    <input type="text" class="form-control" name="firstname" ngModel required #firstname="ngModel" [ngClass]="{ 'invalid-input': form.submitted && !firstname.valid && access }">
+                    <div *ngIf="!firstname.valid && form.submitted && access" class="required-message">First Name is required!
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <label>Last Name</label>
+                    <input type="text" class="form-control" name="lastname" ngModel required #lastname="ngModel" [ngClass]="{ 'invalid-input': form.submitted && !lastname.valid && access }">
+                    <div *ngIf="!lastname.valid && form.submitted && access" class="required-message">Last Name is required!
+                    </div>
+                </div> -->
+                
+            </div>
+            <div class="form-group row error-l-50 col-md-12">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Company Logo</label>
+                        <input type="file" id="file" name="user_pic" class="form-control"  ngModel #user_pic="ngModel" (change)="convertfile($event)">
+                        <input type="hidden" name="userimg" class="form-control" ngModel #userimg="ngModel">
+                        <img alt="Profile Picture" class="dark-logo" width="225" hight='225' *ngIf="avatar !='' && !imagepreview.image" src="{{imageUrl}}{{avatar}}"><br>
+                        <img alt="image" class="posthead-image" width="225" hight='225' *ngIf="imagepreview.image" [src]="imagepreview.image"><br>
+                        <span class="help-block">Allowed files: jpeg, png, jpg. Max file size 1Mb</span>
+                        <!-- <div *ngIf="!user_pic.valid && form.submitted && access" class="required-message">Profile Picture is required!</div> -->
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <label>Phone</label>
+                    <input type="tel"  id="tel" ng2TelInput class="form-control" [readonly]="title == 'Edit'" (ng2TelOutput)="getNumber($event)" (intlTelInputObject)="telInputObject($event)"  [ng2TelInputOptions]="{initialCountry: 'in'}"  (countryChange)="oncountryChange($event)" name="phone" ngModel required #phone="ngModel" [ngClass]="{ 'invalid-input': form.submitted && !phone.valid && access }">
+                    <input type="text" id="result" style="display: none;" #mobilenumber>
+                    <div *ngIf="!phone.valid && form.submitted && access" class="required-message">Phone is required!
+                    </div>
+                </div>
+               
+            </div>
+            <div class="form-group row error-l-50 col-md-12">
+                <div class="form-group col-md-12">
+                    <label>Address</label>
+                    <input type="text" class="form-control" name="formatted_address" id="formatted_address" required ngModel #formatted_address="ngModel" (keydown.enter)="$event.preventDefault()" class="form-control" [(ngModel)]="address.formatted_address" [ngModelOptions]="{standalone: true}" placeholder="Search Nearest Location" autocorrect="off" autocapitalize="off" spellcheck="off"
+                         #search>
+                    <div *ngIf="!formatted_address.valid && form.submitted && access" class="required-message">Address is required!
+                    </div>
+                </div>
+                <div class="form-group mail col-md-4">
+                    <label>Line1</label>
+                    <input type="text" class="form-control" name="line1" id="line1" required ngModel #line1="ngModel"  class="form-control" [(ngModel)]="address.line1"  [ngClass]="{ 'invalid-input': form.submitted && !password.valid && access }">
+                    <div *ngIf="!line1.valid && form.submitted && access" class="required-message">line1 is required!
+                    </div>
+                </div>
+                <div class="form-group mail col-md-4">
+                    <label>Line2</label>
+                    <input type="text" class="form-control" name="line2" id="line2" required ngModel #line2="ngModel"  class="form-control" [(ngModel)]="address.line2"  [ngClass]="{ 'invalid-input': form.submitted && !password.valid && access }">
+                    <div *ngIf="!line2.valid && form.submitted && access" class="required-message">line2 is required!
+                    </div>
+                </div>
+                <div class="form-group mail col-md-4">
+                    <label>City/Town</label>
+                    <input type="text" class="form-control" name="city" id="city" required ngModel #city="ngModel"  class="form-control" [(ngModel)]="address.city"  [ngClass]="{ 'invalid-input': form.submitted && !password.valid && access }">
+                    <div *ngIf="!city.valid && form.submitted && access" class="required-message">City/Town is required!
+                    </div>
+                </div>
+                <div class="form-group mail col-md-4">
+                    <label>State/Region</label>
+                    <input type="text" class="form-control" name="state" id="state" required ngModel #state="ngModel"  class="form-control" [(ngModel)]="address.state"  [ngClass]="{ 'invalid-input': form.submitted && !password.valid && access }">
+                    <div *ngIf="!state.valid && form.submitted && access" class="required-message">State is required!
+                    </div>
+                </div>
+                <div class="form-group mail col-md-4">
+                    <label>Country</label>
+                    <input type="text" class="form-control" name="country" id="country"required ngModel #country="ngModel"  class="form-control" [(ngModel)]="address.country"  [ngClass]="{ 'invalid-input': form.submitted && !password.valid && access }">
+                    <div *ngIf="!country.valid && form.submitted && access" class="required-message">Country is required!
+                    </div>
+                </div>
+                <div class="form-group mail col-md-4">
+                    <label>Post Code</label>
+                    <input type="text" class="form-control" name="zipcode" id="zipcode" ngModel #zipcode="ngModel"  class="form-control" [(ngModel)]="address.zipcode"  [ngClass]="{ 'invalid-input': form.submitted && !password.valid && access }"
+                       required >
+                    <div *ngIf="!zipcode.valid && form.submitted && access" class="required-message">Post Code is required!
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group row error-l-50 col-md-12">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="text" class="form-control" name="password" minlength="6" maxlength="12" pattern="^[a-zA-Z0-9!@#\$%\^\&*\)\(+=._-]{8,}$" ngModel required password #password="ngModel" [ngClass]="{ 'invalid-input': form.submitted && !password.valid && access }" >
+                        <div *ngIf="!password.valid && form.submitted && access" class="required-message">Passwod is required!
+                        </div>
+                        <div *ngIf="password.invalid && (password.dirty || password.touched)">
+                            <div *ngIf="password.errors && password.errors.required" class="required-message">Passwod is required!
+                            </div>
+                            <div *ngIf="password.errors && password.errors.minlength" class="required-message">Passwod is minimum lenth 6!
+                            </div>
+                            <div *ngIf="password.errors && password.errors.maxlength" class="required-message">Passwod is maximum length 12!
+                            </div>
+                            <div *ngIf="password.errors && password.errors.pattern" class="required-message">Passwod Must Contain Atleast One uppercase,One lower case,One Numeric digit.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Confirm Password</label>
+                        <input type="text" class="form-control" name="confirmpassword" minlength="6" maxlength="12" pattern="^[a-zA-Z0-9!@#\$%\^\&*\)\(+=._-]{8,}$" ngModel required confirmpassword #confirmpassword="ngModel" [ngClass]="{ 'invalid-input': form.submitted && !confirmpassword.valid && access }" >
+                        <div *ngIf="!confirmpassword.valid && form.submitted && access" class="required-message">Confirm Passwod is required!
+                        </div>
+                        <div *ngIf="confirmpassword.invalid && (confirmpassword.dirty || confirmpassword.touched)">
+                            <div *ngIf="confirmpassword.errors && confirmpassword.errors.required" class="required-message">Confirm Passwod is required!
+                            </div>
+                            <div *ngIf="confirmpassword.errors && confirmpassword.errors.minlength" class="required-message">Confirm Passwod is minimum lenth 6!
+                            </div>
+                            <div *ngIf="confirmpassword.errors && confirmpassword.errors.maxlength" class="required-message">Confirm Passwod is maximum length 12!
+                            </div>
+                            <div *ngIf="confirmpassword.errors && confirmpassword.errors.pattern" class="required-message">Confirm Passwod Must Contain Atleast One uppercase,One lower case,One Numeric digit.
+                            </div>
+                            <div *ngIf="password && confirmpassword && password != confirmpassword" class="required-message">Confirm Passwod does't not match.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label>Status</label>
+                    <ng-select [items]="[{id:'1', name:'Active'}, {id:'2', name:'In-Active'}]"  bindLabel="name"
+                    bindValue="id" name="status" [ngClass]="{ 'invalid-input': form.submitted && !status.valid && access }" ngModel required #status="ngModel">
+                    </ng-select>
+                    <div *ngIf="!status.valid && form.submitted && access" class="required-message">Status is required!</div>
+                </div>
+            </div>
+           
+            <app-state-button [btnClass]="'btn btn-primary btn-lg btn-shadow'" style="float: right;" [currentState]="buttonState" [isDisabled]="buttonDisabled" (click)="onSubmit()">
+                Submit
+            </app-state-button>
+        </form>
+        <simple-notifications></simple-notifications>
+    </div>
+</div>

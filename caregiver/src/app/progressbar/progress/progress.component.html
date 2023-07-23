@@ -1,0 +1,461 @@
+<section class="progress-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="card px-0 pt-4 pb-0">
+
+                    <form id="msform">
+                        <!-- progressbar -->
+                        <ul id="progressbar">
+                            <!-- <li class="active" id="category"><strong>Category</strong></li> -->
+                            <li class="active" id="location"><strong>Location</strong></li>
+                            <li id="expert"><strong>Caregivers</strong></li>
+                            <li id="confirm"><strong>Confirm</strong></li>
+                            <!-- <li id="success"><strong>Success</strong></li> -->
+                        </ul>
+                        <!-- <div class="progress">
+                                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
+                                    aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>  -->
+                        <br> <!-- fieldsets -->
+                        <!-- <fieldset>
+                            <div class="form-card">
+                                <div class="row">
+                                    <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+                                        <p class="fs-title">Choose Category:</p>
+                                    </div>
+                                    <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
+                                        <p class="steps">Step <span>1</span> - 5</p>
+                                    </div>
+                                </div>
+
+                                <div class="property-data-list">
+                                    <div class="search-drop">
+                                        <label>Select Category</label>
+                                        <select class="form-control"(change)="Categorychange($event);"  [(ngModel)]="categoryname" [ngModelOptions]=" 
+                                        {standalone: true}">
+                                            <option value="" selected="" disabled="" hidden="">------</option>
+                                            <option class="special" *ngFor="let item of Category" [value]=item._id>  {{Cat_language(item,'Category')}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="search-drop">
+                                        <label>Select Sub-Category</label>
+                                        <select class="form-control"  [ngModelOptions]="{standalone: true}"  (change)="Subcategorychange($event)" [(ngModel)]="sub_cat">
+                                            <option value="" selected="" disabled="" hidden="">------</option>
+                                            <option class="special" *ngFor="let item of Subcategory" value={{item.slug}}>
+                                                {{Cat_language(item,'Category')}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="progress-btns justify-content-end">
+                                <input type="button" name="next" class="next action-button" value="Next"  (click)="nextPage('1')" style="margin-left:auto;"/>
+                            </div>
+                        </fieldset> -->
+                        <fieldset>
+                            <div class="form-card">
+                                <div class="row">
+                                    <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+                                        <p class="fs-title">Choose Location:</p>
+                                    </div>
+                                    <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
+                                        <p class="steps">Step <span>1</span> - 3</p>
+                                    </div>
+                                </div>
+                                <div class="property-data-list">
+                                    <div class="search-drop">
+                                        <label>Select Location</label>
+                                        <input name="city" class="location_city" type="text"
+                                            [ngModelOptions]="{standalone: true}" [(ngModel)]="address"
+                                            (keydown.enter)="$event.preventDefault()" placeholder="Enter Your Location"
+                                            autocorrect="off" autocapitalize="off" spellcheck="off" type="text" #search>
+
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="progress-btns">
+
+                                <!-- <input type="button" name="previous" class="previous action-button-previous"
+                                    value="Previous" /> -->
+                                <button name="next" class="next action-button " id="unique" value="Next"
+                                    (click)="nextPage('1')" style="margin-left:auto;">Next</button>
+                            </div>
+
+                        </fieldset>
+                        <fieldset>
+                            <div class="form-card">
+                                <div class="row">
+                                    <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+                                        <p class="fs-title">Choose Caregiver:</p>
+                                    </div>
+                                    <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
+                                        <p class="steps">Step <span>2</span> - 3</p>
+                                    </div>
+                                </div>
+                                <div class="property-data-list experts-date">
+                                    <div class="search-drop">
+                                        <label>Job Date</label>
+                                        <select class="form-control" (change)="datechange($event)"
+                                            [(ngModel)]="selectdate" [ngModelOptions]="{standalone: true}">
+                                            <option value="" selected="" disabled="" hidden="">------</option>
+
+                                            <option *ngFor="let item of dateValues"
+                                                label="{{item | date :'dd-MMMM-yyyy'}}"
+                                                value="{{item | date :'dd-MMMM-yyyy'}}">
+                                                {{item | date :'dd-MMMM-yyyy'}} </option>
+                                            <!-- <option class="special">12-may</option> -->
+                                        </select>
+                                    </div>
+                                    <div class="search-drop">
+                                        <label>Job Time</label>
+                                        <select class="form-control" (change)="timechange($event)"
+                                            [(ngModel)]="selectedtime" [ngModelOptions]="{standalone: true}">
+                                            <option value="" selected="" disabled="" hidden="">------</option>
+                                            <!-- <option class="special">11:00</option> -->
+                                            <option *ngFor="let item of timeValues" label="{{item | date:'h:mm a'}}"
+                                            value="{{item | date:'H:mm '}}">{{item | date:'h:mm a'}}
+                                        </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="top-services" *ngIf="taskerlistfilter&& taskerlistfilter.length>0">
+
+                                    <div class="{{item.selected? 'top-info expert-select':'top-info'}}"
+                                        *ngFor="let item of taskerlistfilter">
+                                        <div class="top-list-head" (click)="taskers(item)">
+                                            <div class="top-img">
+                                                <img src="{{imageUrl}}{{item.avatar}}"
+                                                    onerror="this.src='assets/images/Default/user.jpg'">
+                                            </div>
+                                            <div class="top-top">
+                                                <p class="top-name">{{item.username}}</p>
+                                                <p class="top-years">{{item.avg_review}} <img
+                                                        src="assets/icons/star.png" style="margin-left: 5px;"></p>
+                                            </div>
+                                        </div>
+                                        <div class="top-list-info">
+                                            <!-- <div class="top-data">
+                                                <span>Services provided</span>
+                                                <p><img src="icons/cleaning.png">Cleaning</p>
+                                            </div> -->
+                                            <div class="top-data">
+                                                <span>Service Location</span>
+                                                <p><img src="assets/icons/location.png">{{item.availability_address}}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="top-info">
+                                        <div class="top-list-head">
+                                            <div class="top-img">
+                                                <img src="icons/user.jpg">
+                                            </div>
+                                            <div class="top-top">
+                                                <p class="top-name">Kumar</p>
+                                                <p class="top-years">4.5 <img src="icons/star.png"
+                                                        style="margin-left: 5px;"></p>
+                                            </div>
+                                        </div>
+                                        <div class="top-list-info">
+                                            <div class="top-data">
+                                                <span>Services provided</span>
+                                                <p><img src="icons/cleaning.png">Cleaning</p>
+                                            </div>
+                                            <div class="top-data">
+                                                <span>Service Location</span>
+                                                <p><img src="/icons/location.png">Chennai</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="top-info">
+                                        <div class="top-list-head">
+                                            <div class="top-img">
+                                                <img src="icons/user.jpg">
+                                            </div>
+                                            <div class="top-top">
+                                                <p class="top-name">Kumar</p>
+                                                <p class="top-years">4.5 <img src="icons/star.png"
+                                                        style="margin-left: 5px;"></p>
+                                            </div>
+                                        </div>
+                                        <div class="top-list-info">
+                                            <div class="top-data">
+                                                <span>Services provided</span>
+                                                <p><img src="icons/cleaning.png">Cleaning</p>
+                                            </div>
+                                            <div class="top-data">
+                                                <span>Service Location</span>
+                                                <p><img src="/icons/location.png">Chennai</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="top-info">
+                                        <div class="top-list-head">
+                                            <div class="top-img">
+                                                <img src="icons/user.jpg">
+                                            </div>
+                                            <div class="top-top">
+                                                <p class="top-name">Kumar</p>
+                                                <p class="top-years">4.5 <img src="icons/star.png"
+                                                        style="margin-left: 5px;"></p>
+                                            </div>
+                                        </div>
+                                        <div class="top-list-info">
+                                            <div class="top-data">
+                                                <span>Services provided</span>
+                                                <p><img src="icons/cleaning.png">Cleaning</p>
+                                            </div>
+                                            <div class="top-data">
+                                                <span>Service Location</span>
+                                                <p><img src="/icons/location.png">Chennai</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="top-info">
+                                        <div class="top-list-head">
+                                            <div class="top-img">
+                                                <img src="icons/user.jpg">
+                                            </div>
+                                            <div class="top-top">
+                                                <p class="top-name">Kumar</p>
+                                                <p class="top-years">4.5 <img src="icons/star.png"
+                                                        style="margin-left: 5px;"></p>
+                                            </div>
+                                        </div>
+                                        <div class="top-list-info">
+                                            <div class="top-data">
+                                                <span>Services provided</span>
+                                                <p><img src="icons/cleaning.png">Cleaning</p>
+                                            </div>
+                                            <div class="top-data">
+                                                <span>Service Location</span>
+                                                <p><img src="/icons/location.png">Chennai</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="top-info">
+                                        <div class="top-list-head">
+                                            <div class="top-img">
+                                                <img src="icons/user.jpg">
+                                            </div>
+                                            <div class="top-top">
+                                                <p class="top-name">Kumar</p>
+                                                <p class="top-years">4.5 <img src="icons/star.png"
+                                                        style="margin-left: 5px;"></p>
+                                            </div>
+                                        </div>
+                                        <div class="top-list-info">
+                                            <div class="top-data">
+                                                <span>Services provided</span>
+                                                <p><img src="icons/cleaning.png">Cleaning</p>
+                                            </div>
+                                            <div class="top-data">
+                                                <span>Service Location</span>
+                                                <p><img src="/icons/location.png">Chennai</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="top-info">
+                                        <div class="top-list-head">
+                                            <div class="top-img">
+                                                <img src="icons/user.jpg">
+                                            </div>
+                                            <div class="top-top">
+                                                <p class="top-name">Kumar</p>
+                                                <p class="top-years">4.5 <img src="icons/star.png"
+                                                        style="margin-left: 5px;"></p>
+                                            </div>
+                                        </div>
+                                        <div class="top-list-info">
+                                            <div class="top-data">
+                                                <span>Services provided</span>
+                                                <p><img src="icons/cleaning.png">Cleaning</p>
+                                            </div>
+                                            <div class="top-data">
+                                                <span>Service Location</span>
+                                                <p><img src="/icons/location.png">Chennai</p>
+                                            </div>
+                                        </div>
+                                    </div> -->
+                                </div>
+                            </div>
+                            <div class="progress-btns">
+                                <input type="button" name="previous" class="previous action-button-previous"
+                                    value="Previous" />
+                                <input type="button" name="next" class="next action-button" id='uniquetasker'
+                                    value="Next" (click)="nextConfirmpage()" />
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <div class="form-card">
+                                <div class="row">
+                                    <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+                                        <p class="fs-title">Confirm:</p>
+                                    </div>
+                                    <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
+                                        <p class="steps">Step <span>3</span> - 3</p>
+                                    </div>
+                                </div>
+                                <h2 class="purple-text text-center"><strong>Are you sure to confirm
+                                        booking?</strong></h2>
+                                <div class="row text-center">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <span class="tick-box">
+                                            <img src="assets/icons/docs.gif" class="fit-image">
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="progress-btns">
+                                <input type="button" name="previous" class="previous action-button-previous"
+                                    value="Previous" />
+                                <!-- <input type="button" name="next" class="next action-button" value="Confirm"
+                                    (click)="confirmTasker()" /> -->
+                                <input type="button" name="next" class="next action-button" value="Confirm"
+                                    data-toggle="modal" (click)="confirmTasker()"  />
+                            </div>
+                        </fieldset>
+                        <!-- <fieldset>
+                            <div class="form-card">
+                                <div class="row">
+                                    <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+                                        <p class="fs-title"></p>
+                                    </div>
+                                    <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
+                                        <p class="steps">Step <span>4</span> - 4</p>
+                                    </div>
+                                </div>
+                                <h2 class="purple-text text-center"><strong>SUCCESS !</strong></h2>
+                                <div class="row justify-content-center">
+                                    <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
+                                        <span class="tick-box">
+                                            <img src="icons/purple-tick.gif" class="fit-image">
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset> -->
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+    $(document).ready(function () {
+
+        var current_fs, next_fs, previous_fs; //fieldsets
+        var opacity;
+        var current = 1;
+        var steps = $("fieldset").length;
+
+        setProgressBar(current);
+
+        $(".next").click(function () {
+
+            current_fs = $(this).parent().parent();
+            next_fs = $(this).parent().parent().next();
+
+            //Add Class Active
+            $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
+
+            //show the next fieldset
+            next_fs.show();
+            //hide the current fieldset with style
+            current_fs.animate({ opacity: 0 }, {
+                step: function (now) {
+                    // for making fielset appear animation
+                    opacity = 1 - now;
+
+                    current_fs.css({
+                        'display': 'none',
+                        'position': 'relative'
+                    });
+                    next_fs.css({ 'opacity': opacity });
+                },
+                duration: 500
+            });
+            setProgressBar(++current);
+        });
+
+        $(".previous").click(function () {
+
+            current_fs = $(this).parent().parent();
+            previous_fs = $(this).parent().parent().prev();
+
+            //Remove class active
+            $("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
+
+            //show the previous fieldset
+            previous_fs.show();
+
+            //hide the current fieldset with style
+            current_fs.animate({ opacity: 0 }, {
+                step: function (now) {
+                    // for making fielset appear animation
+                    opacity = 1 - now;
+
+                    current_fs.css({
+                        'display': 'none',
+                        'position': 'relative'
+                    });
+                    previous_fs.css({ 'opacity': opacity });
+                },
+                duration: 500
+            });
+            setProgressBar(--current);
+        });
+
+        function setProgressBar(curStep) {
+            var percent = parseFloat(100 / steps) * curStep;
+            percent = percent.toFixed();
+            $(".progress-bar")
+                .css("width", percent + "%")
+        }
+
+        $(".submit").click(function () {
+            return false;
+        })
+
+    });
+</script>
+
+<!-- <div class="modal fade success-pop" id="success-pop" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <h2 class="purple-text text-center"><strong>SUCCESSFULLY BOOKED !</strong></h2>
+
+                <span class="tick-box">
+                    <img src="assets/icons/doctor.gif" class="fit-image">
+                </span>
+            </div>
+
+        </div>
+    </div> -->
+<!-- </div> -->
+<div bsModal #childModal="bs-modal" class="modal fade success-pop"   id="success-pop" vtabindex="-1"
+role="dialog" aria-labelledby="dialog-child-name">
+<div class="modal-dialog modal-sm">
+<div class="modal-content">
+ <div class="modal-header">
+   <!-- <h4 id="dialog-child-name" class="modal-title pull-left"></h4> -->
+   <button type="button" class="close pull-right btn-close" aria-label="Close" >
+     <span aria-hidden="true" class="visually-hidden">&times;</span>
+   </button>
+ </div>
+ <div class="modal-body">
+    <h2 class="purple-text text-center"><strong>SUCCESSFULLY BOOKED !</strong></h2>
+
+    <span class="tick-box">
+        <img src="assets/icons/doctor.gif" class="fit-image">
+    </span>
+</div>
+</div>
+</div>
+</div>

@@ -1,0 +1,77 @@
+<div class="cont-us">
+    <div class="container">
+        <div class="row">
+            <div class="sign-up-holder login-holder col-md-6 col-sm-6 col-xs-12">
+                <h2 style="text-align: center; margin-top: 0; margin-bottom: 20px;">Contact Us</h2>
+                <form [formGroup]="ContancusForm" (ngSubmit)="onSubmit()" name="contactform" class="mt-20 loginform">
+                    <div class="form-group">
+                        <input type="text" class="form-control underline-input"
+                            [ngClass]="{ 'is-invalid': submitted && form.username.errors }" name="username"
+                            placeholder="Please Enter Username" formControlName="username">
+                        <!-- <div *ngIf="submitted && form.username.errors" class="invalid-feedback">
+                            <span *ngIf="form.username.errors.required" class="help-block validerr">Username is required</span>
+                        </div> -->
+                    </div>
+                    <div class="form-group">
+                        <input type="email" class="form-control underline-input"
+                            [ngClass]="{ 'is-invalid': submitted && form.email.errors }" name="email"
+                            placeholder="Please Enter Email" formControlName="email">
+                        <div *ngIf="submitted && form.email.errors" class="invalid-feedback">
+                            <!-- <span *ngIf="form.email.errors.required" class="help-block validerr">Email is required.</span> -->
+                            <span *ngIf="form.email.errors.email" class="help-block validerr">Invalid email.</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="tel" id="phone" class="form-control phonenumber"
+                            [ngClass]="{ 'is-invalid': submitted && form.phone.errors }" name="phone"
+                            formControlName="phone">
+                        <input type="text" id="result" style="display: none;" #mobilenumber>
+                        <!-- <div *ngIf="submitted && form.phone.errors" class="invalid-feedback">
+                            <span *ngIf="form.phone.errors.required" class="help-block validerr">Mobile Number is required</span>
+                        </div> -->
+                    </div>
+
+                    <div class="form-group">
+                        <input type="text" class="form-control underline-input" formControlName="subject"
+                            [ngClass]="{ 'is-invalid': submitted && form.subject.errors }" name="subject"
+                            placeholder="Please Enter Subject">
+                        <!-- <div *ngIf="submitted && form.subject.errors" class="invalid-feedback">
+                            <span *ngIf="form.subject.errors.required" class="help-block validerr">Subject is required</span>
+                        </div> -->
+                    </div>
+
+                    <div class="form-group">
+                        <textarea cols="60" rows="4" class="form-control underline-input" formControlName="message"
+                            [ngClass]="{ 'is-invalid': submitted && form.message.errors }" name="message"
+                            placeholder="Please Enter Message"></textarea>
+                        <!-- <div *ngIf="submitted && form.message.errors" class="invalid-feedback">
+                            <span *ngIf="form.subject.errors.required" class="help-block validerr">Message Content is required</span>
+                        </div> -->
+                    </div>
+
+                    <div class="form-group">
+                        <span></span>
+                        <button type="submit" class="grn-btn blu-btn"><span>SEND</span></button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-12 get-in-map">
+                <div id="map">
+                    <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="zoom">
+                        <agm-marker [latitude]="latitude" [longitude]="longitude" [markerDraggable]="false"></agm-marker>
+                    </agm-map>
+                </div>
+                <div class="full-width contact-info">
+                    <p class="contact-sec"><i class="fa fa-home" aria-hidden="true"></i><span *ngIf="settings && settings.location">{{settings.location}}</span></p>
+                    <div class="Contact-page">
+                        <p><a *ngIf="settings && settings.email_address" href="mailto:{{settings.email_address}}" target="_blank"><i class="fa fa-envelope" aria-hidden="true"></i>{{settings.email_address}}</a></p>
+                        <p><a *ngIf="settings && settings.contact_number_one" href="tel:{{settings.contact_number_one}}" target="_blank"><i class="fa fa-phone" aria-hidden="true"></i>{{settings.contact_number_one}}</a></p>
+                        <p><a *ngIf="settings && settings.contact_number_two" href="tel:{{settings.contact_number_one}}" target="_blank"><i class="fa fa-phone" aria-hidden="true"></i>{{settings.contact_number_one}}</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<input type="hidden" [(ngModel)]="address" (keydown.enter)="$event.preventDefault()" #search>

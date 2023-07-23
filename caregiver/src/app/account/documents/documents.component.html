@@ -1,0 +1,178 @@
+<div ui-view="" class="ng-scope">
+    <div class="tskr_prof_dtls ng-scope">
+        <div class="container">
+            <div class="tskr_rgstrn_outer_cont document">
+                <div class="tskr_prof_dtls_inner">
+                    <div class="tskr_prof_dtls_bx">
+                        <div class="tskr_prof_dtls_hdr">
+                            <div class="tskr_prof_dtls_bx_lft">
+                                <div class="tskr_prof_dtls_tle ng-binding">
+                                    {{'Document_List*' | translate}}
+                                </div>
+                                <div class="ng-binding">{{'Allowed_Files' | translate}}</div>
+                            </div>
+                        </div>
+                        <div class="field abouts" *ngIf="Getdocumentdetails">
+                            <form name="documenttaskerForm" role="form" submit-validate="" novalidate="" class="ng-pristine ng-valid">
+                                <div class="about-fields docu-list">
+                                    <div class="col-md-12 col-xs-12">
+                                        <div class="doc-add ng-scope">
+                                            <ul>
+                                                <li *ngFor="let item of Getdocumentdetails;let i = index" class="ng-scope">
+                                                    <span class="snumber">
+                                                        <p class="ng-binding">{{i+1}}.</p>
+                                                    </span>
+                                                    <span class="">
+                                                        <p class="ng-binding">{{item.name}}</p>
+                                                    </span>
+                                                    <span class="ng-scope" *ngIf="true=== (profiledata.doc | filter: item.replace_name).status">
+                                                        <p class="ng-binding">{{item.name}} Front</p>
+                                                        <br>
+                                                        <img height="100" width="100" *ngIf="'application/pdf' === (profiledata.doc | filter: item.replace_name).file_type"
+                                                        src="assets/images/Default/pdfdefault.png" >
+                                                        <img height="100" width="100" *ngIf="'application/octet-stream' === (profiledata.doc | filter: item.replace_name).file_type"
+                                                        src="assets/images/Default/docdefault.png" >
+                                                        <img height="100" width="100" *ngIf="'doc' === (profiledata.doc | filter: item.replace_name).file_type"
+                                                        src="assets/images/Default/docdefault.png" >
+                                                        <img height="100" width="100" *ngIf="'image/jpg'  === (profiledata.doc | filter: item.replace_name).file_type"
+                                                            src="{{imageurl}}{{(profiledata.doc | filter: item.replace_name).path}}"
+                                                            DocDefaultImage> 
+                                                        <img height="100" width="100" *ngIf="'image/png'  === (profiledata.doc | filter: item.replace_name).file_type"
+                                                            src="{{imageurl}}{{(profiledata.doc | filter: item.replace_name).path}}"
+                                                            DocDefaultImage> 
+                                                        <img height="100" width="100" *ngIf="'image/jpeg' === (profiledata.doc | filter: item.replace_name).file_type"
+                                                            src="{{imageurl}}{{(profiledata.doc | filter: item.replace_name).path}}"
+                                                            DocDefaultImage>                                                        
+                                                    </span>
+                                                    <span class="ng-scope" *ngIf="true=== (profiledata.doc | filter: item.replace_name_back).status">
+                                                        <p class="ng-binding">{{item.name}} Back</p>
+                                                        <br>
+                                                        <img height="100" width="100" *ngIf="'application/pdf' === (profiledata.doc | filter: item.replace_name_back).file_type"
+                                                        src="assets/images/Default/pdfdefault.png" >
+                                                        <img height="100" width="100" *ngIf="'application/octet-stream' === (profiledata.doc | filter: item.replace_name_back).file_type"
+                                                        src="assets/images/Default/docdefault.png" >
+                                                        <img height="100" width="100" *ngIf="'doc' === (profiledata.doc | filter: item.replace_name_back).file_type"
+                                                        src="assets/images/Default/docdefault.png" >
+                                                        <img height="100" width="100" *ngIf="'image/jpg'  === (profiledata.doc | filter: item.replace_name_back).file_type"
+                                                            src="{{imageurl}}{{(profiledata.doc | filter: item.replace_name_back).path}}"
+                                                            DocDefaultImage> 
+                                                        <img height="100" width="100" *ngIf="'image/png'  === (profiledata.doc | filter: item.replace_name_back).file_type"
+                                                            src="{{imageurl}}{{(profiledata.doc | filter: item.replace_name_back).path}}"
+                                                            DocDefaultImage> 
+                                                        <img height="100" width="100" *ngIf="'image/jpeg' === (profiledata.doc | filter: item.replace_name_back).file_type"
+                                                            src="{{imageurl}}{{(profiledata.doc | filter: item.replace_name_back).path}}"
+                                                            DocDefaultImage>                                                        
+                                                    </span>
+                                                    <span class="ng-scope" *ngIf="false === (profiledata.doc | filter: item).status">
+                                                        <img height="100" width="100"
+                                                            src="assets/images/Default/no_image-128.png">
+                                                    </span>
+                                                    <span *ngIf="true === (profiledata.doc | filter: item).status" class="list-btn ng-scope"> <a
+                                                            href="{{imageurl}}{{(profiledata.doc | filter: item).path}}"
+                                                            target="_blank"
+                                                            class="btn btn-secondary js-deactivate-trigger confrm conform ng-binding"
+                                                            style="width:80px;">{{'View' | translate}}</a></span>
+                                                    <!-- end ngIf: docs.path -->
+                                                    <span *ngIf="true === (profiledata.doc | filter: item).status && item.stripe != 1" class="list-btn ng-scope"> <a href="javascript:void(0)"
+                                                            (click)="openModal(item,'document','Edit')"
+                                                            class="btn btn-secondary js-deactivate-trigger confrm conform ng-binding"
+                                                            style="width:80px;">{{'Change' | translate}}</a></span>
+                                                    <span *ngIf="true === (profiledata.doc | filter: item.replace_name).status && item.stripe != 1" class="list-btn ng-scope"> <a href="javascript:void(0)"
+                                                            *ngIf="item.status == 2"
+                                                            (click)="deletedoc(item._id,item.name)"
+                                                            class="btn btn-secondary js-deactivate-trigger confrm conform ng-binding"
+                                                            style="width:80px;">{{'Delete' | translate}}</a></span>
+                                                    <!-- end ngIf: docs.path -->
+                                                    <span *ngIf="false === (profiledata.doc | filter: item).status" class="list-btn ng-scope"> <a href="javascript:void(0)"
+                                                            (click)="openModal(item,'document','Add')"
+                                                            class="btn btn-secondary js-deactivate-trigger confrm conform ng-binding"
+                                                            style="width:80px;">{{'Add' | translate}}</a></span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- <app-modal></app-modal> -->
+
+<!--Document modal end-->
+<a data-target="#document" id="openModaldocument" class="btn btn-primary" data-toggle="modal" style="display: none;"></a>
+<div class="modal fade" id="document" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                <h4 class="modal-title">{{'AddEdit_Document' | translate}}</h4>
+            </div>
+            <form class="document-forms" name="documenttasker" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <div class="modal-body view-mod-sec">
+                        <span class="ng-binding">
+                            {{'Upload_Document' | translate}}
+                        </span>
+                        <div class="main_cont final-sect">
+                            <label>Front Image</label>
+                            <div class="form-group has-success">
+                                <input type="file" name="docname" id="doc" class="filestyle" (change)="imagechangefun($event, 'front')">
+                                <label for="doc" class="file-but">
+                                    <span class="file-sec ng-binding">
+                                        {{'Choose_File' | translate}}
+                                    </span>
+                                    <span class="file-name-cnt ng-binding">{{filename}}</span>
+                                </label>
+                                <span style="margin-right: 149px;" class="ng-binding">{{'Allowed_Files' | translate}}</span>
+                                <p class="help-block">
+                                    <span class="ng-binding ng-hide" aria-hidden="true" [ngStyle]="{color: imagevalidation}">
+                                        {{'Allowed_Files' | translate}}
+                                    </span><br>
+                                    <span *ngIf="submited" class="error_msg">
+                                        {{'Allowed_filerequired' | translate}}
+                                    </span>
+                                </p><br>
+                                <img *ngIf="previewUrl" style="height: 20%;width: 50%;" [src]="previewUrl" />
+                            </div>
+                            
+                        </div>
+                        <div class="main_cont final-sect">
+                            <label>Back Image</label>
+                            <div class="form-group has-success">
+                                <input type="file" name="docname1" id="doc1" class="filestyle" (change)="imagechangefun($event, 'back')">
+                                <label for="doc1" class="file-but">
+                                    <span class="file-sec ng-binding">
+                                        {{'Choose_File' | translate}}
+                                    </span>
+                                    <span class="file-name-cnt ng-binding">{{filename1}}</span>
+                                </label>
+                                <span style="margin-right: 149px;" class="ng-binding">{{'Allowed_Files' | translate}}</span>
+                                <p class="help-block">
+                                    <span class="ng-binding ng-hide" aria-hidden="true" [ngStyle]="{color: imagevalidation}">
+                                        {{'Allowed_Files' | translate}}
+                                    </span><br>
+                                    <span *ngIf="submited" class="error_msg">
+                                        {{'Allowed_filerequired' | translate}}
+                                    </span>
+                                </p><br>
+                                <img *ngIf="previewUrl1" style="height: 20%;width: 50%;" [src]="previewUrl1" />
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary ng-binding" *ngIf="savebtn === 0" type="button" (click)="onSubmit()">{{'OK' | translate}}</button>
+                    <button class="btn btn-primary" type="button" *ngIf="savebtn === 1" disabled>
+                        <i class="fa fa-circle-o-notch fa-spin"></i>&nbsp; {{'Loading' | translate}}
+                    </button>
+                    <button class="btn btn-warning ng-binding" type="button" (click)="closeModal()" data-dismiss="modal" id="documentclose">{{'Cancel' | translate}}</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,138 @@
+.details {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+}
+
+.invoice-grid1,
+.invoice-grid2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 10px;
+    padding: 20px 0px;
+}
+
+td {
+    width: 25%;
+}
+
+.content-title {
+    font-weight: bold;
+    width: 50%;
+    float: left;
+}
+
+.content-text {
+    width: 50%;
+    float: left;
+}
+
+p {
+    width: 100%;
+    line-height: 2.5em;
+    color: #000000;
+}
+
+h3 {
+    font-weight: bold;
+    color: #145388;
+}
+
+.status-green {
+    color: #9ACD32;
+}
+
+.status-red {
+    color: red;
+}
+
+.booking-id {
+    font-size: 24px;
+    color: #ff5400;
+}
+
+table,
+td,
+th {
+    border: 1px solid #cccccc;
+    text-align: center;
+}
+
+th {
+    color: #145388;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+td {
+    font-size: 14px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.user-top,
+.tasker-top,
+.task-top,
+payment-top {
+    float: left;
+    width: 100%;
+}
+
+.user-top h3,
+.tasker-top h3,
+.payment-top h3,
+.task-top h3 {
+    margin: 0;
+    background-color: #16a085;
+    border-radius: 4px 4px 0 0;
+    padding: 10px 15px;
+    color: #fff;
+    font-size: 17px;
+    font-weight: 600;
+}
+
+.custon-sec {
+    float: left;
+    width: 100%;
+    padding: 15px;
+}
+
+.content-title {
+    font-weight: bold;
+}
+
+.invoice-grid1 {
+    border-bottom: 1px solid #e7eaeb;
+}
+
+.invoice-innergrid1,
+.invoice-innergrid2 {
+    border-right: 1px solid #e7eaeb;
+}
+
+.tasker-top h3 {
+    background-color: #e05d6f;
+}
+
+.payment-top h3 {
+    background-color: #418bca;
+}
+
+.task-top h3 {
+    background-color: #3f4e62;
+}
+
+.date {
+    color: #a3aeb4
+}
+
+.custon-sec {
+    background-color: #e7eaeb;
+}
+
+em {
+    color: #000000;
+}

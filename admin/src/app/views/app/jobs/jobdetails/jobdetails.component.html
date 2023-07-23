@@ -1,0 +1,158 @@
+<app-breadcrumb></app-breadcrumb>
+<app-spinner [spinner]="spinner"></app-spinner>
+<div class="job-details" *ngFor="let item of jobDetails">
+    <div class="card mb-4">
+        <div class="card-body">
+            <h2 class="mb-4">Job Details</h2>
+            <h3>Booking ID: <span class="booking-id">{{item.booking_id}}</span> </h3>
+        </div>
+    </div>
+    <tabset [justified]="true" *ngFor="let currancy of defaultCurrancy">
+        <tab heading="Details">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <div class="details">
+                        <div class="ststus-content">
+                            <p class="date"><span>Created:</span><span>{{item.createdAt | date}}</span></p>
+                            <h2>Status <br><span [ngClass]="item.status == 'Payment Completed' ? 'status-green' : 'status-red'" class="status-green">{{item.status}}</span></h2>
+                            <p><span class="content-title">Task Description:</span> <span class="content-text">{{item.task_description}}</span></p>
+                        </div>
+                        <div class="user-content">
+                            <h3>Customer</h3>
+                            <p><span class="content-title">Name:</span> <span class="content-text">{{item.user.username}}</span></p>
+                            <p><span class="content-title">Phone:</span> <span class="content-text">{{item.user.phone.code + item.user.phone.number }}</span></p>
+                            <p><span class="content-title">Email:</span> <span class="content-text">{{item.user.email}}</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card mb-4">
+                <div class="card-body">
+                    <div class="details">
+                        <div class="userdetails card mb-4">
+                            <div class="user-top">
+                                <h3><em class="fa fa-users" name="users"></em>&nbsp;User Details</h3>
+                                <div class="custon-sec">
+                                    <p><span class="content-title">Name:</span> <span class="content-text">{{item.user.username}}</span></p>
+                                    <p><span class="content-title">Phone:</span> <span class="content-text">{{item.user.phone.code + item.user.phone.number }}</span></p>
+                                    <p><span class="content-title">Email:</span> <span class="content-text">{{item.user.email}}</span></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="taskerdetails card mb-4">
+                            <div class="tasker-top">
+                                <h3><em class="fa fa-users" name="users"></em>&nbsp;Tasker Details</h3>
+                                <div class="custon-sec">
+                                    <p><span class="content-title">Name:</span> <span class="content-text">{{item.tasker.username}}</span></p>
+                                    <p><span class="content-title">Phone:</span> <span class="content-text">{{item.tasker.phone.code + item.tasker.phone.number }}</span></p>
+                                    <p><span class="content-title">Email:</span> <span class="content-text">{{item.tasker.email}}</span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="details">
+                        <div class="taskdetails card mb-4">
+                            <div class="task-top">
+                                <h3><em class="fa fa-briefcase" name="briefcase"></em>&nbsp;Task Details</h3>
+                                <div class="custon-sec">
+                                    <p><span class="content-title">Category:</span> <span class="content-text">{{item.maincategory[0].name}}</span></p>
+                                    <p><span class="content-title">Task Date:</span> <span class="content-text">{{item.createdAt | date}}</span></p>
+                                    <p><span class="content-title">Task Description:</span><span class="content-text">{{item.task_description}}</span></p>
+                                    <p><span class="content-title">Task Address:</span> <span class="content-text">{{item.service_address}}</span></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="paymentdetails card mb-4" *ngIf="item.status == 'Payment Completed'">
+                            <div class="payment-top">
+                                <h3><em class="fa fa-credit-card" name="credit-card"></em>&nbsp;Payment Details</h3>
+                                <div class="custon-sec">
+                                    <p><span class="content-title">Worked Hours:</span> <span class="content-text">{{item.invoice.worked_hours_human}}</span></p>
+                                    <p><span class="content-title">Task Amount:</span> <span class="content-text">{{currancy.symbol}}{{item.invoice.amount.task_cost}}</span></p>
+                                    <p><span class="content-title">Material Fee:</span> <span class="content-text">{{currancy.symbol}}{{item.invoice.amount.extra_amount}}</span></p>
+                                    <p><span class="content-title">Service Tax:</span> <span class="content-text">{{currancy.symbol}}{{item.invoice.amount.service_tax}}</span></p>
+                                    <p><span class="content-title">Grand Total:</span> <span class="content-text">{{currancy.symbol}}{{item.invoice.amount.grand_total}}</span></p>
+                                    <p><span class="content-title">Admin Commission:</span> <span class="content-text">{{currancy.symbol}}{{item.invoice.amount.admin_commission}}</span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </tab>
+        <tab heading="Invoice" *ngIf="item.status == 'Payment Completed'">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <div class="invoice-grid1">
+                        <div class="invoice-innergrid1">
+                            <div class="ststus-content">
+                                <p class="date"><span>Created:</span><span>{{item.createdAt | date}}</span></p>
+                                <h2>Status <br><span [ngClass]="item.status == 'Payment Completed' ? 'status-green' : 'status-red'" class="status-green">{{item.status}}</span></h2>
+                                <p><span class="content-title">Task Description:</span> <span class="content-text">{{item.task_description}}</span></p>
+                            </div>
+                        </div>
+                        <div class="invoice-innergrid2">
+                            <div class="user-content">
+                                <h3>Customer</h3>
+                                <p><span class="content-title">Name:</span> <span class="content-text">{{item.user.username}}</span></p>
+                                <p><span class="content-title">Phone:</span> <span class="content-text">{{item.user.phone.code + item.user.phone.number }}</span></p>
+                                <p><span class="content-title">Email:</span> <span class="content-text">{{item.user.email}}</span></p>
+                            </div>
+                        </div>
+                        <div class="invoice-innergrid3">
+                            <div class="tasker-content">
+                                <h3>Tasker Details</h3>
+                                <p><span class="content-title">Name:</span> <span class="content-text">{{item.tasker.username}}</span></p>
+                                <p><span class="content-title">Phone:</span> <span class="content-text">{{item.tasker.phone.code + item.tasker.phone.number }}</span></p>
+                                <p><span class="content-title">Email:</span> <span class="content-text">{{item.tasker.email}}</span></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="invoice-grid2">
+                        <div class="invoice-innergrid1">
+                            <div class="order-details">
+                                <h3>Order Details</h3>
+                                <p><span class="content-title">ID:</span><span class="content-text">{{item.booking_id}}</span></p>
+                                <p><span class="content-title">Date:</span><span class="content-text">{{item.createdAt | date}}</span></p>
+                            </div>
+                        </div>
+                        <div class="invoice-innergrid2">
+                            <div class="billing-address">
+                                <h3>Billing Address</h3>
+                                <p><span>{{item.service_address}}</span></p>
+                            </div>
+                        </div>
+                        <div class="invoice-innergrid3">
+                            <div class="task-details">
+                                <h3>Task Details</h3>
+                                <p><span class="content-title">Category:</span> <span class="content-text">{{item.maincategory[0].name}}</span></p>
+                                <p><span class="content-title">Sub Category:</span> <span class="content-text">{{item.category.name}}</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card mb-4" *ngIf="transactionList.length">
+                <div class="card-body">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Transaction ID</th>
+                                <th>Date</th>
+                                <th>Payment Type</th>
+                                <th>Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngFor="let list of transactionList">
+                            <tr>
+                                <td>{{list._id}}</td>
+                                <td>{{list.createdAt | date}}</td>
+                                <td>{{list.type}}</td>
+                                <td>{{list.amount}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </tab>
+    </tabset>
+</div>

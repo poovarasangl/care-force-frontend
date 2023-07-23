@@ -1,0 +1,86 @@
+<div class="ng-scope">
+    <div class="trans-profiles ng-scope">
+        <div class="container">
+            <div class="view-trans">
+                <div class="trans-packed main-scrolls-trcks">
+                    <div class="trans-profiles-header">
+                        <div class="trans-headings">
+                            <h4 class="ng-binding">{{'Availability' | translate}}</h4>
+                        </div>
+                    </div>
+                    <div class="scroll-function">
+                        <div class="trans-profiles-inner acc-av">
+                            <span class="inner-subs-parsds availtitle ng-binding">{{'Select_Business_Days' | translate}}</span>
+                            <div class="date_whl_day ng-scope" style="float: right;" *ngIf="profiledata && profiledata.working_days">
+                                <span class="date_whl_input">
+                                    <input type="checkbox" name="wholeweek"
+                                        [checked]="profiledata.working_days.length === 7 ? true : false"
+                                        (change)="wholeweek($event);" #allWeek
+                                        class="ng-valid ng-dirty ng-valid-parse ng-empty ng-touched"
+                                        aria-invalid="false">
+                                </span>
+                                <label>
+                                    {{'Whole Week' | translate}}
+                                </label>
+                            </div>
+                            <br>
+                            <div class="main_cont_cont">
+                                <div id="accordion" class="panel-group">
+                                    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true" *ngFor="let item of dayslist;let i = index;">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading" role="tab" id="headingOne">
+                                                <h4 class="panel-title">
+                                                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#panelBody{{i}}" aria-expanded="true">
+                                                        {{item.Day}}
+                                                        <span class="dayselect">{{'Whole_Day' | translate}}</span>
+                                                    </a>
+                                                </h4>
+                                                <input class="badge badge-secondary float-right pull-right" (click)="WholeDayselet($event, item.Day)" type="checkbox" name="day" value="{{item.Day}}" [checked]="item.wholeday === 1 ? true : false">
+                                            </div>
+                                            <div id="panelBody{{i}}" class="panel-collapse collapse in">
+                                                <div class="timings ng-scope" *ngFor="let list of item.timelist;let i = index;">
+                                                    <div class="time_value ng-scope">
+                                                        <input type="checkbox" value="{{list.time}}" name="{{list.time}}+{{i}}" (click)="timeslot($event,item,list)" aria-invalid="false" [checked]="list.selected">
+                                                        <label for="{{list.time}}" class="ng-binding">{{list.time}}</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="list-transta rds-max">
+                                    <span class="inner-subs-parsds ng-binding">{{'Work_Location' | translate}}</span>
+                                    <div class="botom-fuls">
+                                        <input type="text" class="form-control" [(ngModel)]="address" (keydown.enter)="$event.preventDefault()" placeholder="Search Nearest Location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" #search>
+                                        <div class="error_msg" *ngIf="address_err">
+                                            {{address_err}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="list-transta">
+                                    <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="zoom">
+                                        <agm-marker [latitude]="latitude" [longitude]="longitude" [markerDraggable]="true" (dragEnd)="markerDragEnd($event)"></agm-marker>
+                                    </agm-map>
+                                </div>
+                                <div class="list-transta avails-sumts">
+                                    <input class="blue-btn hfa-btn ng-scope" (click)="updateworkinginfo();" type="submit">
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <style class="ng-scope">
+                .green {
+                    color: green !important;
+                }
+                
+                .red {
+                    color: red !important;
+                }
+            </style>
+        </div>
+    </div>

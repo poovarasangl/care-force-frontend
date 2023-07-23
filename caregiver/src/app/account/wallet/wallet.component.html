@@ -1,0 +1,167 @@
+<div class="ng-scope" *ngIf="payamentdev === 0">
+    <div class="wallet_dtls ng-scope">
+        <div class="container">
+            <div class="tskr_rgstrn_outer_cont wallet">
+                <div class="wallet_dtls_inner">
+                    <div class="wallet_dtls_bx">
+                        <div class="wallet_dtls_hdr">
+                            <div class="wallet_dtls_bx_lft">
+                                <div class="wallet_dtls_tle ">
+                                    {{'Wallet' | translate}}
+                                </div>
+                            </div>
+                            <div class="wallet_dtls_bx_rgt">
+                                <div class="wallet_dtls_btn">
+                                    <button class="btn def_btn " [ngClass]="{'actives': Wallet_Recharge_tab}" type="button" (click)="Wallet_Recharge_tab = true;Wallet_Transactions_tab = false;">
+                    {{'Wallet_Recharge' | translate}}
+                  </button>
+                                </div>
+                                <div class="wallet_dtls_btn">
+                                    <button class="btn def_btn " type="button" [ngClass]="{'actives': Wallet_Transactions_tab}" (click)="Wallet_Recharge_tab = false;Wallet_Transactions_tab = true;">
+                    {{'Wallet_Transactions' | translate}}
+                  </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="wallet_dtls_cont" *ngIf="Wallet_Recharge_tab && DefaultCurrency">
+                            <div class="wallet_dtls_innercont wallet_recharge">
+                                <div class="wallet_recharge_left">
+                                    <div class="wallet_recharge_left_inner">
+                                        <div class="wallet_recharge_left_img_cont">
+                                            <div class="wallet_recharge_left_img">
+                                                <img src="assets/images/Default/moneypurse.png">
+                                            </div>
+                                        </div>
+                                        <div class="wallet_recharge_left_name_cont">
+                                            <div class="wallet_recharge_left_name">
+                                                <div class="wallet_recharge_left_tle ">
+                                                    {{'Current_Balance' | translate}}:
+                                                </div>
+                                                <div class="wallet_recharge_left_name" *ngIf="!walletdetails || walletdetails && walletdetails.total == null">
+                                                    {{DefaultCurrency.symbol}} 00.00
+                                                </div>
+                                                <div class="wallet_recharge_left_name" *ngIf="walletdetails && walletdetails.total != null">
+                                                    {{DefaultCurrency.symbol}} {{walletdetails.total * DefaultCurrency.value | number : '1.2-2'}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="wallet_recharge_right">
+                                    <form name="walletform" role="form">
+                                        <div class="wallet_recharge_rgt_name">
+                                            <div class="wallet_recharge_rgt_tle ">
+                                                {{'Recharge_WalletMoney' | translate}}:
+                                            </div>
+                                            <div class="wallet_recharge_rgt_vlu">
+                                                <div class="input_txt">
+                                                    <input type="text" name="walletamount" [(ngModel)]="walletamount" autocomplete="off" placeholder="Enter Amount To Be Added In Wallet" title="Numbers only">
+                                                </div>
+                                            </div>
+                                            <div class="input_rdo amount-wall" (click)="walletamount = welletamountlist.amount.minimum * DefaultCurrency.value">
+                                                <input type="radio" name="money" value="{{welletamountlist.amount.minimum * DefaultCurrency.value  | number : '1.2-2'}}">
+                                                <label for="low" class="">{{DefaultCurrency.symbol}}{{welletamountlist.amount.minimum * DefaultCurrency.value  | number : '1.2-2'}}</label>
+                                            </div>
+                                            <div class="input_rdo amount-wall" (click)="walletamount = (welletamountlist.amount.minimum + welletamountlist.amount.maximum / 2) * DefaultCurrency.value">
+                                                <input type="radio" name="money" id="mid" value="{{DefaultCurrency.symbol}}{{(welletamountlist.amount.minimum + welletamountlist.amount.maximum / 2) * DefaultCurrency.value  | number : '1.2-2'}}">
+                                                <label for="mid" class="">{{DefaultCurrency.symbol}}{{(welletamountlist.amount.minimum + welletamountlist.amount.maximum / 2) * DefaultCurrency.value  | number : '1.2-2'}}</label>
+                                            </div>
+                                            <div class="input_rdo amount-wall" (click)="walletamount = welletamountlist.amount.maximum * DefaultCurrency.value">
+                                                <input type="radio" name="money" id="hight" value="{{DefaultCurrency.symbol}}{{welletamountlist.amount.maximum * DefaultCurrency.value  | number : '1.2-2'}}">
+                                                <label for="hight" class="">{{DefaultCurrency.symbol}}{{welletamountlist.amount.maximum * DefaultCurrency.value  | number : '1.2-2'}}</label>
+                                            </div>
+                                        </div>
+                                        <div class="wallet_rgt_btns">
+                                            <div class="wallet_rgt_btns_lft ng-scope" ng-if="stripe_status == 1">
+                                                <button class="btn act_btn " (click)="addmoney_card()">
+                          {{'Add_MoneyByCard' | translate}}
+                        </button>
+                                            </div>&nbsp;
+                                            <div class="wallet_rgt_btns_rgt ng-scope">
+                                                <button class="btn def_btn " (click)="addmoney_paypal()" *ngIf="paypal_btn == 0">
+                          {{'Add_MoneyBypaypal' | translate}}
+                        </button>
+                                                <button class="btn def_btn" *ngIf="paypal_btn == 1" type="button" disabled>
+                          <i class="fa fa-circle-o-notch fa-spin"></i>&nbsp; {{'Loading' | translate}}
+                        </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="wallet_dtls_innercont wallet_trans" *ngIf="Wallet_Transactions_tab && walletdetails">
+                            <div class="wallet_dtls_innercont_row ng-scope" *ngFor="let item of walletdetails.transactions">
+                                <div class="scroller_wallet">
+                                    <div class="wallet_dtls_innercont_cont prof">
+                                        <span class="prof_img">
+                    </span>
+                                        <span class="prof_name trans_vlue ng-binding">
+                      {{'Wallet_Recharge' | translate}}
+                    </span>
+                                    </div>
+                                    <div class="wallet_dtls_innercont_cont transactions">
+                                        <span class="trans_tle trans_amnt_tle ng-binding">
+                      {{'Transaction_Amount' | translate}}
+                    </span>
+                                        <span class="trans_vlue trans_amnt_vlue ng-binding">
+                      {{DefaultCurrency.symbol}}{{item.trans_amount * DefaultCurrency.value | number : '1.2-2'}}
+                    </span>
+                                    </div>
+                                    <div class="wallet_dtls_innercont_cont trans_Balance">
+                                        <span class="trans_Balance_tle trans_tle ng-binding">
+                      {{'Balance_Amount' | translate}}
+                    </span>
+                                        <span class="trans_Balance_vlue trans_vlue ng-binding">
+                      {{DefaultCurrency.symbol}}{{item.avail_amount * DefaultCurrency.value | number : '1.2-2'}}
+                    </span>
+                                    </div>
+                                    <div class="wallet_dtls_innercont_cont trans_type">
+                                        <span class="trans_type_tle trans_tle ng-binding">
+                      {{'TransactionType' | translate}}
+                    </span>
+                                        <span class="trans_type_stus trans_vlue crd ng-binding ng-scope" *ngIf="item.type  == 'CREDIT'">
+                      <img src="assets/images/Default/arrow-pointing-down.svg" class="down">
+                      {{item.type}}
+                    </span>
+                                        <span class="trans_type_stus trans_vlue crd ng-binding ng-scope" *ngIf="item.type  == 'DEBIT'">
+                      <img src="assets/images/Default/arrow-pointing-up.svg" class="down">
+                      {{item.type}}
+                    </span>
+                                    </div>
+                                    <div class="wallet_dtls_innercont_cont trans_date">
+                                        <span class="trans_date_tle trans_tle ng-binding">
+                      {{'Transaction_Date' | translate}}
+                    </span>
+                                        <span class="trans_date_vlue trans_vlue ng-binding">
+                      {{item.trans_date | date :'dd-MMM-yyyy'}}
+                    </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="faq-page" style="background: inherit;" *ngIf="Wallet_Transactions_tab && !walletdetails">
+                            <div class="errormsg">
+                                <div class="panelbody">{{'DontHave_Transactions' | translate}}!</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="payment-stus" *ngIf="payamentdev === 1">
+    <div class="success-stus fail-stus">
+        <div class="checkmark-circle fail-ico">
+            <div class="background"><i class="fa fa-times redirect_icon" aria-hidden="true"></i></div>
+        </div>
+        <div class="redirect_text"><span class="paymentfaildtext">{{'Payment_Failed' | translate}} </span></div>
+        <div class="redirect_linkdiv"><a class="redirect_link" (click)="backpage()">{{'GoPaymentPage' | translate}}</a>
+        </div>
+    </div>
+    <!-- failure -->
+</div>
+<app-modal></app-modal>
+<router-outlet></router-outlet>

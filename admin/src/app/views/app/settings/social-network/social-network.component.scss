@@ -1,0 +1,15 @@
+.sociallinks {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 5em;
+}
+
+.mobileapp {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 5em;
+}
+
+h2 {
+    color: #337ab7!important;
+}

@@ -1,0 +1,872 @@
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                <h4 class="modal-title" *ngIf="modalcontend">{{modalcontend.title}}</h4>
+            </div>
+            <div class="modal-body">
+                <!--Riview modal start-->
+                <div *ngIf="openreview && modalcontend && modalcontend.modalname === 'review'">
+                    <ul class="view-detail-pop"
+                        *ngIf="openreview && modalcontend && modalcontend.modalname === 'review'">
+                        <li>
+                            <label class="col-md-5">{{'Job_Id' | translate}}:</label>
+                            <p value="" readonly="">{{openreview.task.booking_id}}</p>
+                        </li>
+                        <li>
+                            <label class="col-md-5 ">{{'UserName' | translate}}:</label>
+                            <p>{{openreview.task.user.username}}</p>
+                        </li>
+                        <li>
+                            <label class="col-md-5">{{'Rating' | translate}}:</label>
+                            <form class="rating">
+                                <label>
+                                    <input type="radio" name="stars" value="1"
+                                        [checked]="openreview.rating === 1 ? true : false" [attr.disabled]="true" />
+                                    <span class="icon">★</span>
+                                </label>
+                                <label>
+                                    <input type="radio" name="stars" value="2"
+                                        [checked]="openreview.rating === 2 ? true : false" [attr.disabled]="true" />
+                                    <span class="icon">★</span>
+                                    <span class="icon">★</span>
+                                </label>
+                                <label>
+                                    <input type="radio" name="stars" value="3"
+                                        [checked]="openreview.rating === 3 ? true : false" [attr.disabled]="true" />
+                                    <span class="icon">★</span>
+                                    <span class="icon">★</span>
+                                    <span class="icon">★</span>
+                                </label>
+                                <label>
+                                    <input type="radio" name="stars" value="4"
+                                        [checked]="openreview.rating === 4 ? true : false" [attr.disabled]="true" />
+                                    <span class="icon">★</span>
+                                    <span class="icon">★</span>
+                                    <span class="icon">★</span>
+                                    <span class="icon">★</span>
+                                </label>
+                                <label>
+                                    <input type="radio" name="stars" value="5"
+                                        [checked]="openreview.rating === 5 ? true : false" [attr.disabled]="true" />
+                                    <span class="icon">★</span>
+                                    <span class="icon">★</span>
+                                    <span class="icon">★</span>
+                                    <span class="icon">★</span>
+                                    <span class="icon">★</span>
+                                </label>
+                            </form>
+                        </li>
+                        <li>
+                            <label class="col-md-5">{{'Comments' | translate}}:</label>
+                            <p value="" readonly="">{{openreview.comments}}
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+                <!--Riview modal end-->
+
+                <!--Transaction modal start-->
+                <div *ngIf="openreview && modalcontend && modalcontend.modalname === 'transaction'">
+                    <div id="pdfData" #pdfData>
+                        <table style="width:100%; background:#EAEAEA; color:#fff; padding:5px 10px" class="log-hdr">
+                            <tbody>
+                                <tr>
+                                    <td style="padding:5px;"><img src="assets/images/Default/moneypurse.png"></td>
+                                    <td
+                                        style="text-align: right; font-size: 13px; line-height: 20px; padding:10px; color:#000">
+                                        <p style="margin: 0px 0px 0px; line-height: 20px; font-size: 13px; font-family:verdana;"
+                                            class="">
+                                            {{openreview.task_details.timestamp | date :'dd/MM/yyyy'}}</p>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table style="width:100%; color:#000; padding:10px; border-bottom: 1px solid #ddd;"
+                            class="amt-dsply">
+                            <tbody>
+                                <tr>
+                                    <td style="padding:10px; font-size:26px;" class="">
+                                        {{DefaultCurrency.symbol}} {{(openreview.invoice.amount.worked_hours_cost +
+                                        openreview.invoice.amount.extra_amount) * DefaultCurrency.value |
+                                        number:'1.2-2'}}</td>
+                                    <td
+                                        style="text-align: right; font-size: 13px; line-height: 20px; padding:10px; color:#999">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table
+                            style="width:100%; color:#000; padding:0px; background: #D1D1D1; border-bottom: 1px solid #ddd;"
+                            class="bok-id">
+                            <tbody>
+                                <tr>
+                                    <td style="padding:10px; font-size:13px;" class="">{{'Job_Id' | translate}}:
+                                        {{openreview.booking_id}}
+                                    </td>
+                                    <td style="text-align: right; font-size: 13px; line-height: 20px; padding:10px;">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="transaction-modal">
+                            <table width="100%" border="0" cellspacing="0" cellpadding="10"
+                                style="margin:5px; text-align: left; font-size: 13px; line-height: 20px;"
+                                class="wrk-dtls">
+                                <tbody>
+                                    <tr>
+                                        <div class="table-body-left">
+                                            <td class="dtls-info">
+                                                <table width="100%" border="0" cellspacing="0" cellpadding="0"
+                                                    style="font-size: 13px;">
+                                                    <tbody>
+                                                        <tr ng-if="TTEMS.TaskDetails.categoryname">
+                                                            <td height="30">{{'CategoryName' | translate}}:</td>
+                                                            <td>{{openreview.maincategory}}
+                                                                ({{openreview.category.name}})
+                                                            </td>
+                                                        </tr>
+                                                        <tr ng-if="TTEMS.task.user.username" class=" ng-enter-prepare"
+                                                            *ngIf="modalcontend.usertype == 'tasker'">
+                                                            <td height="30">{{'UserName' | translate}}:</td>
+                                                            <td height="30">{{openreview.user.username}}</td>
+                                                        </tr>
+                                                        <tr ng-if="TTEMS.task.user.username" class=" ng-enter-prepare"
+                                                            *ngIf="modalcontend.usertype == 'user'">
+                                                            <td height="30">{{'Taskername' | translate}}:</td>
+                                                            <td height="30">{{openreview.tasker.username}}</td>
+                                                        </tr>
+                                                        <tr ng-if="TTEMS.TaskDetails.address" class=" ng-enter-prepare">
+                                                            <td height="30">{{'JobAddress' | translate}}:</td>
+                                                            <td height="30">{{openreview.address}}</td>
+                                                        </tr>
+                                                        <tr ng-if="TTEMS.TaskDetails.invoice.amount.minimum_cost"
+                                                            class=" ng-enter-prepare">
+                                                            <td height="30" style="width: 180px;">{{'Minimum_HourlyRate'
+                                                                | translate}}:
+                                                            </td>
+                                                            <td height="30" style="width: 180px;">
+                                                                {{DefaultCurrency.symbol}}{{openreview.hourly_rate *
+                                                                DefaultCurrency.value | number:'1.2-2'}}</td>
+                                                        </tr>
+                                                        <tr ng-if="TTEMS.task.payment_type" class="ng-enter-prepare">
+                                                            <td height="30" style="width: 180px;">{{'PaymentType' |
+                                                                translate}}:
+                                                            </td>
+                                                            <td height="30" style="width: 180px;">
+                                                                {{openreview.payment_type}}</td>
+                                                        </tr>
+                                                        <tr *ngIf="openreview.invoice.miscellaneous.length > 0"
+                                                            class="ng-enter-prepare">
+                                                            <td height="30"
+                                                                style="color: #2196f3; font-size:14px;font-weight: 900;">
+                                                                {{'MaterialDetails' | translate}}:</td>
+                                                        </tr>
+                                                        <tr *ngIf="openreview.invoice.miscellaneous.length > 0"
+                                                            class=" ng-enter-prepare">
+                                                            <td height="30"
+                                                                style="color: #FF5722; font-size:14px;font-weight: 900;">
+                                                                {{'Products' | translate}} </td>
+                                                            <td height="30"
+                                                                style="color: #FF5722; font-size:14px; font-weight: 900;">
+                                                                {{'Price' | translate}}</td>
+                                                        </tr>
+                                                        <tr *ngFor="let item of openreview.invoice.miscellaneous"
+                                                            class=" ng-enter-prepare">
+                                                            <td height="30">{{item.name}}</td>
+                                                            <td height="30"> {{DefaultCurrency.symbol}} {{item.price *
+                                                                DefaultCurrency.value | number:'1.2-2'}} </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </div>
+
+                                        <div class="table-body-right">
+                                            <td valign="top" class="amt-info">
+                                                <table width="100%" border="0" cellspacing="0" cellpadding="0"
+                                                    style="font-size: 13px;">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td height="30">{{'JobAmount' | translate}}:</td>
+                                                            <td height="30"></td>
+                                                            <td style="text-align: right;">
+                                                                {{DefaultCurrency.symbol}}{{openreview.invoice.amount.worked_hours_cost
+                                                                * DefaultCurrency.value | number:'1.2-2'}}</td>
+                                                        </tr>
+                                                        <tr ng-if="TTEMS.TaskDetails.invoice.amount.extra_amount">
+                                                            <td height="30">{{'MaterialFee' | translate}}:</td>
+                                                            <td height="30" style="float: right;margin-left: 110px;">
+                                                                <span>+</span>
+                                                            </td>
+                                                            <td height="30" style="text-align: right;">
+                                                                {{DefaultCurrency.symbol}}{{openreview.invoice.amount.extra_amount
+                                                                * DefaultCurrency.value | number:'1.2-2'}}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td height="30">{{'Total' | translate}}:</td>
+                                                            <td height="30"></td>
+                                                            <td style="text-align: right;">
+                                                                {{DefaultCurrency.symbol}}{{(openreview.invoice.amount.worked_hours_cost
+                                                                + openreview.invoice.amount.extra_amount) *
+                                                                DefaultCurrency.value | number:'1.2-2'}}
+                                                            </td>
+                                                        </tr>
+                                                        <tr *ngIf="modalcontend.usertype == 'tasker'">
+                                                            <td height="30">{{'AdminCommission' | translate}}</td>
+                                                            <td height="30" style="float: right;margin-left: 110px;">
+                                                                <span>-</span>
+                                                            </td>
+                                                            <td height="30" style="text-align: right;">
+                                                                {{DefaultCurrency.symbol}}{{openreview.invoice.amount.admin_commission
+                                                                * DefaultCurrency.value | number:'1.2-2'}} </td>
+                                                        </tr>
+                                                        <tr style="border-top: 1px solid #ddd; border-bottom: 1px solid #ddd;"
+                                                            *ngIf="modalcontend.usertype == 'tasker'">
+                                                            <td height="50" style="font-weight: bold; font-size: 15px;">
+                                                                {{'ExpertEarnings' | translate}}</td>
+                                                            <td height="30"></td>
+                                                            <td style="text-align: right;font-size: 15px;">
+                                                                <b>{{DefaultCurrency.symbol}}{{openreview.invoice.amount.tasker_earning
+                                                                    * DefaultCurrency.value | number:'1.2-2'}}</b>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </div>
+
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="transaction-footer">
+                        <table
+                            style="width:100%; color:#fff; padding:0px; border-top: 1px solid #ddd; background: #000; font-size:13px;"
+                            class="spt-ftr">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                            <tbody>
+                                                <tr>
+                                                    <td style="width: 75px;"><img
+                                                            src="assets/images/Default/chat-icon.png" width="40"
+                                                            style="margin-left: 20px;"></td>
+                                                    <td style=" width: 280px;">
+                                                        <h6 style="color: #FC7800; margin: 0px 0px 5px;">
+                                                            HFA Support
+                                                        </h6>
+                                                        <p style="font-size:10px; color: #FFFFFF; margin: 0px;">
+                                                            tom@zoplay.com<br>
+                                                        </p>
+                                                    </td>
+                                                    <td style="width: 75px;">
+                                                    </td>
+                                                    <td width="40"
+                                                        style="  margin-left: 20px; padding: 20px 20px; width: 75px;">
+                                                    </td>
+                                                    <td style=" width: 280px;">
+                                                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td style="width: 20px; text-align: center;">
+                                                                    </td>
+                                                                    <td style="width: 20px; text-align: center;">
+                                                                        <button class="btn btn-info" type="button"
+                                                                            (click)="downloadPdf(openreview._id,modalcontend.usertype)">Download
+                                                                            PDF</button>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+
+                </div>
+                <!--Transaction modal end-->
+
+                <!--JobDetails  modal start-->
+                <div *ngIf="openreview && modalcontend && modalcontend.modalname === 'jobDetails'">
+                    <ul class="view-detail-pop">
+                        <li *ngIf="this.usertype == 'user'">
+                            <div class="logo-container prof-image" id="taskerimage">
+                                <img id="theImg" class="img-circle" src="{{imageUrl}}{{openreview.tasker.avatar}}"
+                                    UserDefaultImage>
+                            </div>
+                        </li>
+                        <li *ngIf="this.usertype == 'tasker'">
+                            <div class="logo-container prof-image" id="taskerimage">
+                                <img id="theImg" class="img-circle" src="{{imageUrl}}{{openreview.user.avatar}}"
+                                    UserDefaultImage>
+                            </div>
+                        </li>
+                        <li>
+                            <label class="col-md-5"> Booking Id:</label>
+                            <p class="col-md-5">{{openreview.booking_id}}</p>
+                        </li>
+                        <li *ngIf="this.usertype == 'user'">
+                            <label class="col-md-5">Expert Name:</label>
+                            <p class="col-md-5"><span>{{openreview.tasker.username}}</span>
+                            </p>
+                        </li>
+                        <li *ngIf="this.usertype == 'tasker'">
+                            <label class="col-md-5">User Name:</label>
+                            <p class="col-md-5"><span>{{openreview.user.username}}</span>
+                            </p>
+                        </li>
+                        <li *ngIf="this.usertype == 'user'">
+                            <label class="col-md-5">Expert Email:</label>
+                            <p class="col-md-5 ">{{openreview.tasker.email}}</p>
+                        </li>
+                        <li *ngIf="this.usertype == 'tasker'">
+                            <label class="col-md-5">User Email:</label>
+                            <p class="col-md-5 ">{{openreview.user.email}}</p>
+                        </li>
+                        <li>
+                            <label class="col-md-5 ">Category:</label>
+                            <p class="col-md-5 ">{{openreview.category.name}}</p>
+                        </li>
+                        <li>
+                            <label class="col-md-5 ">Task Status:</label>
+                            <p class="col-md-5 ">{{openreview.taske_status}}</p>
+                        </li>
+                        <li>
+                            <label class="col-md-5">Booking Date:</label>
+                            <p class="col-md-5">
+                                {{openreview.task_details.timestamp | date:'dd/MM/yyyy hh:mm aa'}}</p>
+                        </li>
+                        <li>
+                            <label class="col-md-5">Job Start Date:</label>
+                            <p class="col-md-5">
+                                {{openreview.history.job_started_time | date:'dd/MM/yyyy hh:mm aa'}}</p>
+                        </li>
+                        <li>
+                            <label class="col-md-5">Job Complete Date:</label>
+                            <p class="col-md-5">
+                                {{openreview.history.job_completed_time | date:'dd/MM/yyyy hh:mm aa'}}</p>
+                        </li>
+                        <li>
+                            <label class="col-md-5">Hours Worked:</label>
+                            <p class="col-md-5">
+                                {{openreview.invoice.worked_hours_human}}</p>
+                        </li>
+                        <li>
+                            <label class="col-md-5">Job Amount:</label>
+                            <p class="col-md-6">{{DefaultCurrency.symbol}}{{openreview.hourly_rate *
+                                DefaultCurrency.value | number:'1.2-2'}} /hr</p>
+                        </li>
+                        <li *ngIf="this.usertype == 'tasker'">
+                            <label class="col-md-5">Material Fee:</label>
+                            <p class="col-md-6 ">{{DefaultCurrency.symbol}}{{openreview.invoice.amount.extra_amount *
+                                DefaultCurrency.value | number:'1.2-2'}}</p>
+                        </li>
+                        <li *ngIf="this.usertype == 'user'">
+                            <label class="col-md-5">Job Amount(Incl. Material Fee):</label>
+                            <p class="col-md-6 ">{{DefaultCurrency.symbol}}{{openreview.invoice.amount.total +
+                                openreview.invoice.amount.extra_amount * DefaultCurrency.value | number:'1.2-2'}}</p>
+                        </li>
+                        <li *ngIf="this.usertype == 'user'">
+                            <label class="col-md-5">Service Tax:</label>
+                            <p class="col-md-6">{{DefaultCurrency.symbol}}{{openreview.invoice.amount.service_tax *
+                                DefaultCurrency.value | number:'1.2-2'}}</p>
+                        </li>
+                        <li *ngIf="this.usertype == 'user'">
+                            <label class="col-md-5">Total Amount:</label>
+                            <p class="col-md-6 ">{{DefaultCurrency.symbol}}{{openreview.invoice.amount.grand_total *
+                                DefaultCurrency.value | number:'1.2-2'}}</p>
+                        </li>
+                        <li *ngIf="this.usertype == 'tasker'">
+                            <label class="col-md-5">Admin Commission:</label>
+                            <p class="col-md-6 ">{{DefaultCurrency.symbol}}{{openreview.invoice.amount.admin_commission
+                                * DefaultCurrency.value | number:'1.2-2'}}</p>
+                        </li>
+
+                        <li *ngIf="this.usertype == 'tasker'">
+                            <label class="col-md-5">Job Earnings:</label>
+                            <p class="col-md-6 ">{{DefaultCurrency.symbol}}{{openreview.invoice.amount.tasker_earning *
+                                DefaultCurrency.value | number:'1.2-2'}}</p>
+                        </li>
+                        <li>
+                            <label class="col-md-5">Job Description:</label>
+                            <p class="col-md-5" style="word-break: break-all;" ng-bind="TDVMI.taskdescription">
+                                {{openreview.description}}</p>
+                        </li>
+                        <li>
+                            <label class="col-md-5">Job Address:</label>
+                            <p class="col-md-5">{{openreview.address}}</p>
+                        </li>
+                    </ul>
+                </div>
+                <!--JobDetails  modal end-->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /.modal -->
+<a data-target="#myModal" id="openModalButton" class="btn btn-primary" data-toggle="modal" style="display: none;"></a>
+<!--Empty content modal-->
+
+<!--Wallet modal-->
+<a data-target="#wallet" id="openModalwallet" class="btn btn-primary" data-toggle="modal" style="display: none;"></a>
+<div class="modal fade" id="wallet" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                <h4 class="modal-title" *ngIf="modalcontend">{{modalcontend.title}}</h4>
+            </div>
+            <form role="form" id="payment-form" [formGroup]="carddetailsform" (ngSubmit)="onSubmitwallet()">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <label for="cardNumber">Credit Card</label>
+                                <div class="input-group carddetail">
+                                    <input type="number" class="form-control card-field" name="number" max="16"
+                                        placeholder="Valid Card Number" autocomplete="cc-number"
+                                        formControlName="number" (keyup)="checklength($event)" />
+                                    <span class="input-group-addon"><i class="fa fa-credit-card-alt"
+                                            aria-hidden="true"></i></span>
+                                </div>
+                                <span>{{cardname}}</span>
+                                <div *ngIf="submitted && cardformvalidation.number.errors" class="invalid-feedback">
+                                    <div class="error_msg" *ngIf="cardformvalidation.number.errors.required">Card Number
+                                        is required</div>
+                                </div>
+                                <div class="error_msg" *ngIf="cardnumber_Error">{{cardnumber_Error}}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row expiry-and-cvv">
+                        <div class="col-md-9">
+                            <label><span class="hidden-xs">Expiration</span></label>
+                            <div class="form-group">
+                                <div class="col-xs-5 col-md-5">
+                                    <div class="input-group carddetail">
+                                        <select name="exp_month" class="form-control" formControlName="exp_month">
+                                            <option value="" class="" selected="selected">MM</option>
+                                            <option value="01">01</option>
+                                            <option value="02">02</option>
+                                            <option value="03">03</option>
+                                            <option value="04">04</option>
+                                            <option value="05">05</option>
+                                            <option value="06">06</option>
+                                            <option value="07">07</option>
+                                            <option value="08">08</option>
+                                            <option value="09">09</option>
+                                            <option value="10">10</option>
+                                            <option value="11">11</option>
+                                            <option value="12">12</option>
+                                        </select>
+                                        <span class="input-group-addon"><i class="fa fa-calendar"
+                                                aria-hidden="true"></i></span>
+                                    </div>
+                                    <div *ngIf="submitted && cardformvalidation.exp_month.errors"
+                                        class="invalid-feedback">
+                                        <div class="error_msg" *ngIf="cardformvalidation.exp_month.errors.required">Exp
+                                            Month is required
+                                        </div>
+                                    </div>
+                                </div>
+                                <span style="font-size: 25px;float: left;">/</span>
+                                <div class="col-xs-5 col-md-5">
+                                    <div class="input-group carddetail">
+                                        <select name="exp_year" class="form-control" formControlName="exp_year">
+                                            <option value="" class="" selected="selected">YYYY</option>
+                                            <option *ngFor="let item of yearlist" value="{{item}}">{{item}}</option>
+                                        </select>
+                                        <span class="input-group-addon"><i class="fa fa-calendar"
+                                                aria-hidden="true"></i></span>
+                                    </div>
+                                    <div *ngIf="submitted && cardformvalidation.exp_year.errors"
+                                        class="invalid-feedback">
+                                        <div class="error_msg" *ngIf="cardformvalidation.exp_year.errors.required">Exp
+                                            Year is required</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="cardCVC">CVV code</label>
+                                <div class="input-group carddetail">
+                                    <input type="number" placeholder="123" class="form-control" name="cvv" maxlength="3"
+                                        formControlName="cvv" />
+                                    <span class="input-group-addon"><i class="fa fa-credit-card-alt"
+                                            aria-hidden="true"></i></span>
+                                </div>
+                                <div *ngIf="submitted && cardformvalidation.cvv.errors" class="invalid-feedback">
+                                    <div class="error_msg" *ngIf="cardformvalidation.cvv.errors.required">Cvv number is
+                                        required
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="walletclose" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" *ngIf="savebtn === 0" class="btn btn-primary">Submit</button>
+                    <button class="btn btn-primary" *ngIf="savebtn === 1" type="button" disabled>
+                        <i class="fa fa-circle-o-notch fa-spin"></i>&nbsp; Loading
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!--Wallet modal end-->
+
+<!--Canceljob modal-->
+<a data-target="#canceljob" id="openModalcanceljob" class="btn btn-primary" data-toggle="modal"
+    style="display: none;"></a>
+<div class="modal fade" id="canceljob" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                <h4 class="modal-title" *ngIf="modalcontend">{{modalcontend.title}}</h4>
+            </div>
+            <div class="modal-body" *ngIf="modalcontend && modalcontend.show === 'canceljob'">
+                <label class="control-label">Reason For Cancellation</label>
+                <div class="form-group" *ngFor="let item of openreview">
+                    <input type="radio" name="adminreason" (change)="otheroptions = false;" value="{{item.reason}}"
+                        [(ngModel)]="reasons" class="ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required"
+                        aria-invalid="true" checked="true">
+                    <label class="control-label">{{item.reason}}</label>
+                </div>
+                <input type="radio" name="adminreason" id="other" value="Other" (change)="otheroptions = true;"
+                    [(ngModel)]="reasons" class="ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required"
+                    aria-invalid="true">
+                <label class="control-label">Other</label>
+                <div *ngIf="otheroptions">
+                    <textarea type="text" name="line1" id="line1" [(ngModel)]="otherdata"
+                        class="form-control"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" type="button" *ngIf="otheroptions" (click)="confirmed()">OK</button>
+                <button class="btn btn-primary" type="button" *ngIf="!otheroptions" (click)="confirmed()">OK</button>
+                <button class="btn btn-warning" id="canceljobclose" type="button" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Canceljob modal end-->
+
+<!--Completedjob modal-->
+<a data-target="#completedjob" id="openModalcompletedjob" class="btn btn-primary" data-toggle="modal"
+    style="display: none;"></a>
+<div class="modal fade" id="completedjob" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                <h4 class="modal-title" *ngIf="modalcontend">{{modalcontend.title}}</h4>
+            </div>
+            <form name="extraForm" role="form" [formGroup]="myForm" (ngSubmit)="completeformsubmit()">
+                <div class="modal-body" *ngIf="modalcontend && modalcontend.show === 'completedjob'">
+                    <div class="add-matrl-btn">
+                        <p class="imp-note">Note : Click on Add material below to add miscellaneous charges you spend,
+                            If not then click OK to complete Job</p>
+                        <div class="addmatrl-title">
+                            <input type="checkbox" id="material" name="material"
+                                (change)="material = $event.target.checked" #checkbox
+                                class="ng-pristine ng-untouched ng-valid ng-empty material-checkbox"
+                                aria-invalid="false">
+                            <label for="material">Add Material </label>
+                            <label style="float:right " for="material">Total Item {{additem}}</label>
+                        </div>
+                        <div class="miscel-detl form-group ng-hide" *ngIf="material" aria-hidden="true">
+                            <div formArrayName="formArray">
+                                <div *ngFor="let control of myForm.controls['formArray'].controls; let i = index">
+                                    <div class="adder-list" [formGroupName]="i">
+                                        <div class="left-list">
+                                            <input type="text" placeholder="Tool Name" formControlName="name"
+                                                style="height:33px"
+                                                class="ng-untouched ng-empty ng-invalid ng-invalid-required has-error ng-dirty"
+                                                aria-invalid="true">&nbsp;
+
+                                        </div>
+                                        <div class="right-list">
+                                            <input type="number" placeholder="Tool Rent" formControlName="price"
+                                                (keyup)="amountchange($event);" style="height:33px"
+                                                class="ng-untouched ng-empty ng-invalid ng-invalid-required has-error ng-dirty"
+                                                aria-invalid="true">&nbsp;
+                                            <span class="input-group-addon">{{DefaultCurrency.symbol}}</span>
+                                            <button class="remove remove-one-field" type="button" (click)="delInput(i)"
+                                                aria-hidden="false">X</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="addfields" type="button" (click)="addInput()">Add fields</button>
+                            <label style="float:right" for="material">{{additemamount}}</label>
+                            <label style="float:right" for="material">Total Miscellaneous
+                                Amount:</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" type="submit">OK</button>
+                    <button class="btn btn-warning" type="button" (click)="materialClear()" data-dismiss="modal"
+                        id="completedjobclose">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!--Completedjob modal end-->
+
+<!--Reviewjob modal-->
+<a data-target="#reviewjob" id="openModalreviewjob" class="btn btn-primary" data-toggle="modal"
+    style="display: none;"></a>
+<div class="modal fade" id="reviewjob" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                <h4 class="modal-title" *ngIf="modalcontend">{{modalcontend.title}}</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="line1">Rate Your {{type}} For This Job ?</label><br>
+                    <rating [(ngModel)]="rate" [max]="5" style="color: #ff6905;font-size: 25px;"></rating>
+                    <p style="color: red;" *ngIf="rate === 0 && submited" class="help-block ng-hide" aria-hidden="true">
+                        Rating Is Required
+                    </p>
+                </div>
+                <div class="form-group">
+                    <label for="line1">Comments</label>
+                    <textarea type="text" class="form-control" [(ngModel)]="comment" name="comment"
+                        aria-invalid="true"></textarea>
+                    <p style="color:red" *ngIf="!comment && submited" class="help-block ng-hide" aria-hidden="true">
+                        Comment Is Required
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" type="button" (click)="submitreview();">OK</button>
+                    <button class="btn btn-warning" type="button" data-dismiss="modal"
+                        id="reviewjobclose">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Reviewjob modal end-->
+
+<!--Category modal-->
+<a data-target="#categoryadd" id="openModalcategoryadd" class="btn btn-primary" data-toggle="modal"
+    style="display: none;"></a>
+<div class="modal fade" id="categoryadd" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                <h4 class="modal-title" *ngIf="modalcontend">{{modalcontend.title}}</h4>
+            </div>
+            <form [formGroup]="categorytaskerForm" (ngSubmit)="categorysubmit()" *ngIf="!editcategoryform">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="control-label"> Main Category</label>
+                        <select class="form-control" formControlName="manicategory" (change)="Categorychange($event);">
+                            <option value="" selected="selected"> Select Category</option>
+                            <option *ngFor="let item of Categorylist" value="{{item._id}}">{{item.name}}</option>
+                        </select>
+                        <div *ngIf="categorysubmitted && categoryformdata.manicategory.errors" class="invalid-feedback">
+                            <label *ngIf="categoryformdata.manicategory.errors.required"
+                                style="color: red; font-size: 12px;" class=" ng-hide" aria-hidden="true">Category
+                                name is required.</label>
+                        </div>
+                    </div>
+                    <div class="form-group" *ngIf="manicategory">
+                        <label class="control-label">Sub Category</label>
+                        <select class="form-control" formControlName="subcategory"
+                            (change)="subcategorycommision($event)">
+                            <option value=""> Select Category</option>
+                            <option *ngFor="let item of Subcategorylist" value="{{item._id}}">{{item.name}}</option>
+                        </select>
+                        <div *ngIf="categorysubmitted && categoryformdata.subcategory.errors" class="invalid-feedback">
+                            <label *ngIf="categoryformdata.subcategory.errors.required"
+                                style="color: red; font-size: 12px;" class=" ng-hide" aria-hidden="true">Subcategory
+                                name is required.</label>
+                        </div>
+                    </div>
+                    <div class="form-group" *ngIf="subcategory">
+                        <label for="HourlyRate">{{categoryType}} Rate in {{DefaultCurrency.code}}</label>
+                        <div class="input-group" *ngIf="categoryType == 'Flat'">
+                            <span class="input-group-addon"> {{DefaultCurrency.symbol}} </span>
+                            <input type="number" disabled name="rate" id="rate" formControlName="rate"
+                                class="form-control" aria-invalid="false">
+                        </div>
+                        <div class="input-group" *ngIf="categoryType != 'Flat'">
+                            <span class="input-group-addon"> {{DefaultCurrency.symbol}} </span>
+                            <input type="number" (keyup)="checkcommision($event)" name="rate" id="rate"
+                                formControlName="rate" class="form-control" aria-invalid="false">
+                        </div>
+                        <div *ngIf="categoryType && categorysubmitted && categoryformdata.rate.errors"
+                            class="invalid-feedback">
+                            <label *ngIf="categoryType && categoryformdata.rate.errors.required"
+                                style="color: red; font-size: 12px;" class=" ng-hide"
+                                aria-hidden="true">{{categoryType}} rate is required.</label>
+                        </div>
+                        <label *ngIf="commision" style="color: red; font-size: 12px;" class=" ng-hide"
+                            aria-hidden="true">{{commision}}</label>
+                    </div>
+                    <div class="form-group" aria-hidden="false" *ngIf="subcategory">
+                        <label class="control-label">Level Of Experience</label>
+                        <select name="levels" class="form-control" aria-invalid="false" formControlName="explevel">
+                            <option value="" selected="selected">Select Your Experience</option>
+                            <option *ngFor="let item of experiencelist" value="{{item._id}}">{{item.name}}</option>
+                        </select>
+                        <div *ngIf="categorysubmitted && categoryformdata.explevel.errors" class="invalid-feedback">
+                            <label *ngIf="categoryformdata.explevel.errors.required"
+                                style="color: red; font-size: 12px;" class=" ng-hide" aria-hidden="true">Experience is
+                                required.</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer btnscont">
+                    <button class="btn act_btn" type="submit" style="border: 1px solid #67098f;background-color: #fff;">
+                        Save </button>
+                    <button class="btn def_btn" type="button" style="border: 1px solid #67098f;background-color: #fff;"
+                        data-dismiss="modal" id="categoryaddclose">
+                        Cancel </button>
+                </div>
+            </form>
+
+            <form [formGroup]="categoryedittaskerForm" class="editform" (ngSubmit)="categoryeditsubmit()"
+                *ngIf="editcategoryform">
+                <div class="form-group">
+                    <label class="control-label"> Main Category</label>
+                    <select class="form-control" formControlName="manicategory"
+                        [(ngModel)]="editcategoryform.categoryid" disabled readonly>
+                        <option value="" selected="selected"> Select Category</option>
+                        <option *ngFor="let item of Categorylist" value="{{item._id}}">{{item.name}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Sub Category</label>
+                    <select class="form-control" formControlName="subcategory" disabled
+                        [(ngModel)]="editcategoryform.childid" (change)="subcategorycommision($event)" readonly>
+                        <option value="" selected="selected"> Select Category</option>
+                        <option *ngFor="let item of Subcategorylist" value="{{item._id}}">{{item.name}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="HourlyRate">{{categoryType}} Rate in (USD)</label>
+                    <div class="input-group" *ngIf="categoryType == 'Flat'">
+                        <span class="input-group-addon"> {{DefaultCurrency.symbol}} </span>
+                        <input type="number" name="rate" id="rate" formControlName="rate" disabled class="form-control"
+                            [(ngModel)]="editcategoryform.hour_rate">
+                    </div>
+                    <div class="input-group" *ngIf="categoryType != 'Flat'">
+                        <span class="input-group-addon">{{DefaultCurrency.symbol}} </span>
+                        <input type="number" (keyup)="checkcommisionedit($event,editcategoryform.childid)" name="rate"
+                            id="rate" formControlName="rate" class="form-control"
+                            [(ngModel)]="editcategoryform.hour_rate">
+                    </div>
+                    <div *ngIf="categoryType && categoryeditformdata.rate.errors" class="invalid-feedback">
+                        <label *ngIf="categoryType && categoryeditformdata.rate.errors.required"
+                            style="color: red; font-size: 12px;" class="ng-hide" aria-hidden="true">{{categoryType}}
+                            RATE IS REQUIRED.</label>
+                    </div>
+                    <label *ngIf="commision" style="color: red; font-size: 12px;" class=" ng-hide"
+                        aria-hidden="true">{{commision}}</label>
+                </div>
+                <div class="form-group" aria-hidden="false">
+                    <label class="control-label">Level Of Experience</label>
+                    <select name="levels" class="form-control" [(ngModel)]="editcategoryform.experience"
+                        formControlName="explevel">
+                        <option value="" selected="selected">Select Your Experience</option>
+                        <option *ngFor="let item of experiencelist" value="{{item._id}}">{{item.name}}</option>
+                    </select>
+                    <div *ngIf="categoryeditformdata.explevel.errors" class="invalid-feedback">
+                        <label *ngIf="categoryeditformdata.explevel.errors.required"
+                            style="color: red; font-size: 12px;" class=" ng-hide" aria-hidden="true">Experience Is
+                            Required.</label>
+                    </div>
+                </div>
+                <div class="modal-footer btnscont">
+                    <button class="btn act_btn" type="submit" style="border: 1px solid #67098f;background-color: #fff;">
+                        Save </button>
+                    <button class="btn def_btn" type="button" style="border: 1px solid #67098f;background-color: #fff;"
+                        data-dismiss="modal" id="categoryaddclose">
+                        Cancel </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!--Category modal end-->
+
+<!--Document modal end-->
+<a data-target="#document" id="openModaldocument" class="btn btn-primary" data-toggle="modal"
+    style="display: none;"></a>
+<div class="modal fade" id="document" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                <h4 class="modal-title" *ngIf="modalcontend">{{modalcontend.title}}</h4>
+            </div>
+            <form class="document-forms" name="documenttaskerForm" enctype="multipart/form-data"
+                (ngSubmit)="onSubmit()">
+                <div class="modal-body">
+                    <div class="modal-body view-mod-sec">
+                        <span>
+                            Upload The Document:
+                        </span>
+                        <div class="main_cont final-sect">
+                            <div class="form-group has-success">
+                                <input type="file" name="docname" id="doc" class="filestyle"
+                                    (change)="imagechangefun($event)">
+                                <label for="doc" class="file-but">
+                                    <span class="file-sec">
+                                        Choose File
+                                    </span>
+                                    <span class="file-name-cnt">{{filename}}</span>
+                                </label>
+                                <span style="margin-right: 149px;">Allowed Files: JPEG, JPG,
+                                    PNG,
+                                    PDF, DOC,
+                                    DOCX.</span>
+                                <p class="help-block">
+                                    <span class="ng-hide" aria-hidden="true" [ngStyle]="{color: imagevalidation}">
+                                        Allowed Files: JPEG, JPG, PNG, PDF, DOC, DOCX.
+                                    </span><br>
+                                    <span *ngIf="submited" class="error_msg">
+                                        Allowed file is required!.
+                                    </span>
+                                </p><br>
+                                <img *ngIf="previewUrl" style="height: 40%;width: 70%;" [src]="previewUrl" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" *ngIf="savebtn === 0" type="submit">OK</button>
+                    <button class="btn btn-primary" *ngIf="savebtn === 1" type="button" disabled>
+                        <i class="fa fa-circle-o-notch fa-spin"></i>&nbsp; Loading
+                    </button>
+                    <button class="btn btn-warning" type="button" (click)="closeModal()" data-dismiss="modal"
+                        id="documentclose">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

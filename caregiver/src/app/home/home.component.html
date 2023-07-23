@@ -1,0 +1,260 @@
+<!-- <div id="masterdiv"  *ngIf="loadingcontent">
+  <div id="childdiv1"></div>
+  <div id="childdiv2"></div>
+  <div id="childdiv3"></div>
+</div> -->
+<section class="handy-home">
+    <section id="banner" class="handy-home-banner jarallax">
+        <div class="ban-frame" id="videoWithJs">
+            <img *ngIf="appearance && appearance.background_option == 1" src="{{imageUrl}}{{appearance.image}}"
+                onError="this.src='assets/images/Default/home-bg.jpg'">
+            <iframe width="100%" allow='autoplay; encrypted-media' height="170%" id="ytplayer"
+                *ngIf="appearance && appearance.background_option == 2" webkitallowfullscreen mozallowfullscreen
+                allowfullscreen style="border:none;" [src]="appearance.video | safe"
+                allow="1; fullscreen; picture-in-picture; xr-spatial-tracking; encrypted-media"></iframe>
+        </div>
+
+        <div class="home-container">
+            <div class="container">
+
+                <div class="row">
+
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" *ngIf="Categorysearch">
+                        <div class="service-info">
+                            <h2><span>Professional </span> Care Services</h2>
+                            <!-- <p class="about-qwickzy">A Careforce website is a platform where customers can find and hire
+                                professional handymen
+                                for their
+                                property
+                                maintenance and repair needs. These websites typically offer a range of services,
+                                pricing
+                                information, and booking
+                                options.</p> -->
+                            <p class="about-qwickzy">Professionally trained and carefully selected caregivers all over
+                                the United States. Our local Caregivers provide
+                                trusted Care you depend on. Whether it is an emergency or scheduled care, Our quick
+                                response team will provide the right
+                                Service for your medical assistance.</p>
+                            <!-- <form name="searchform" class="frm-fields" role="form">
+
+                                <select class="form-control select1 selectpicker" (change)="Categorychange($event);">
+                                    <option class="special" value="" disabled selected hidden>
+                                        {{ 'main_cat' | translate }}</option>
+                                    <option class="special" *ngFor="let item of Category" [value]=item._id>
+                                        {{Cat_language(item,'Category')}}
+                                    </option>
+                                </select>
+
+                                
+                                    <select class="form-control select2 selectpicker" (change)="Subcategorychange($event);"
+                                        #subcat>
+                                        <option class="special" value="" disabled selected>
+                                            {{'Subcategory'| translate}}</option>
+                                        <option class="special" *ngFor="let item of Subcategory" value={{item.slug}}>
+                                            {{Cat_language(item,'Category')}}
+                                        </option>
+                                    </select>
+
+
+                                <button type="button" (click)="onSubmit()"
+                                    class="btn search-service">{{'SEARCH'|translate}} </button>
+
+                            </form> -->
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+    <!-- <section class="select-section">
+        <div class="container">
+            <h2 class="title-head">Recommended Services</h2>
+
+            <div class="services-grp">
+
+                <div class="services" *ngFor="let item of Category" (click)="jobDetailpage(item)">
+                    <img src="{{imageUrl}}{{item.image}}" class="service-img">
+                    <p class="which-service">{{item.name}}</p>
+                </div>
+                <div class="services">
+                    <img src="assets/images/services/carpenting.svg" class="service-img">
+                    <p class="which-service">Carpenting</p>
+                </div>
+                <div class="services">
+                    <img src="assets/images/services/cleaning.svg" class="service-img">
+                    <p class="which-service">Cleaning</p>
+                </div>
+                <div class="services">
+                    <img src="assets/images/services/mechanic.svg" class="service-img">
+                    <p class="which-service">Mechanic</p>
+                </div>
+                <div class="services">
+                    <img src="assets/images/services/furniture-service.svg" class="service-img">
+                    <p class="which-service">Furniture service</p>
+                </div>
+                <div class="services">
+                    <img src="assets/images/services/electrical.svg" class="service-img">
+                    <p class="which-service">Electrical</p>
+                </div>
+            </div>
+            <div class="services-grp">
+
+                <div class="services">
+                    <img src="assets/images/services/painting.svg" class="service-img">
+                    <p class="which-service">Painting</p>
+                </div>
+                <div class="services">
+                    <img src="assets/images/services/pest-control.svg" class="service-img">
+                    <p class="which-service">Pest control</p>
+                </div>
+                <div class="services">
+                    <img src="assets/images/services/salon.svg" class="service-img">
+                    <p class="which-service">Salon service</p>
+                </div>
+                <div class="services">
+                    <img src="assets/images/services/makeup.svg" class="service-img">
+                    <p class="which-service">Makeup</p>
+                </div>
+                <div class="services">
+                    <img src="assets/images/services/roofing.svg" class="service-img">
+                    <p class="which-service">Roofing</p>
+                </div>
+                <div class="services">
+                    <img src="assets/images/services/ac-service.svg" class="service-img">
+                    <p class="which-service">AC services</p>
+                </div>
+            </div>
+        </div>
+
+    </section> -->
+
+    <!-- <section class="top-section">
+        <div class="container">
+            <h3 class="title-head">Top Service Providers</h3>
+            <div class="top-services">
+                <div class="top-info">
+                    <div class="top-list-head">
+                        <div class="top-img">
+                            <img src="assets/images/Default/user.jpg">
+                        </div>
+                        <div class="top-top">
+                            <p class="top-name">Janani</p>
+                            <p class="top-years">6 years</p>
+                        </div>
+                    </div>
+                    <div class="top-list-info">
+                        <div class="top-data">
+                            <span>Services provided</span>
+                            <p>Nursing</p>
+                        </div>
+                        <div class="top-data">
+                            <span>Service Location</span>
+                            <p>Chennai</p>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+    </section> -->
+
+
+
+    <!-- <section class="handy-home-testimonials jarallax">
+        <div class="container carouselcontainer">
+            <div class="row">
+                <div class="col-sm-12 col-xs-12">
+                    <h2 class="section-title"> {{'People_Saying' | translate}} </h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-xs-12" *ngIf="peoplecmd">
+                    <div id="myCarousel" class="carousel" data-ride="carousel" test>
+                        <div class="carousel-inner row w-100 mx-auto" #cara="Carousel" [animationDuration]="300">
+                            <div class="carousel-item col-md-4" *ngFor="let cmd of peoplecmd; let i=index"
+                                [ngClass]="{'active': i===0 || i===1 || i===2}">
+                                <div class="slider-body" style="background-color: white !important;">
+                                    <div class="wth-img">
+                                        <br><br>
+                                        <img src="{{imageUrl}}{{cmd.image}}" alt="image slide" height="100"
+                                            onError="this.src='assets/images/Default/user.jpg'">
+                                    </div><br><br>
+                                    <div class="testimonials-content">
+                                        <p class="client-review-cnt">{{cmd.description}}</p><br>
+                                        <h4 class="author-name">{{cmd.name}}/ <span class="highlight">
+                                                {{cmd.profession}}</span></h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <a class="carousel-control-prev" role="button" (click)="cara.prev(1)"></a>
+                        <a class="carousel-control-next" role="button" (click)="cara.next(1)"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
+    <!-- <section class="handy-home-payment">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 col-xs-12 payment-heading">
+                    <h2 class="section-title">{{'Payment_Pricing' | translate}}</h2>
+                </div>
+                <div class="col-md-4 col-sm-4 col-xs-12 pay-ment-sec" *ngFor="let payment of posttasks">
+                    <div class="payment-method">
+                        <div class="img-rotate">
+                            <img src="{{imageUrl}}{{payment.image}}" err-src alt="payment icons" CategoryDefaultImage>
+                        </div>
+                        <div class="circle-content">
+                            <h4>{{Cat_language(payment,'posttask-name')}}</h4>
+                            <p>{{Cat_language(payment,'posttask-description')}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> -->
+    <!-- <section class="handy-home-gallery">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 col-xs-12">
+                    <h2 class="section-title">{{'HireNeeds_AroundHome' | translate}}</h2>
+                </div>
+                <div class="cvr-dv col-md-12 col-sm-12 col-xs-12">
+                    <div class="spcf-dv col-md-2 col-sm-2" *ngFor="let categoryinfo of categories">
+                        <div class="pro1" (click)="subcategory(categoryinfo.slug)">
+                            <a>
+                                <div class="pro-pict">
+                                    <div class="afkl-lazy-wrapper">
+                                        <img class="afkl-lazy-image" src="{{imageUrl}}{{categoryinfo.image}}"
+                                            CategoryDefaultImage>
+                                    </div>
+                                </div>
+                                <div class="cat-txtt">
+                                    <span>{{categoryinfo.name}}</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="spcf-dv col-md-2 col-sm-2" (click)="maincategory()">
+                        <div class="pro1">
+                            <div class="pro-pict text-center morebtn-wrap">
+                                <button type="button" class="btn btn-default view-more">
+                                    <i class="fa fa-hand-o-right blink" aria-hidden="true" style="color: red;"></i>
+                                </button>
+                            </div>
+                            <div class="cat-txtt">
+                                <span>{{'ViewMore' | translate}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> -->
+</section>

@@ -1,0 +1,12 @@
+.label-hide {
+    display: none;
+}
+input[type="date"]::-webkit-calendar-picker-indicator {
+    color: rgba(0, 0, 0, 0);
+    opacity: 1;
+    display: block;
+    background: url(https://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/calendar_2.png) no-repeat;
+    width: 20px;
+    height: 20px;
+    border-width: thin;
+}

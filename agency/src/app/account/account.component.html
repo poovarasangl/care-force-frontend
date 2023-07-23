@@ -1,0 +1,134 @@
+<section *ngIf="currentuser" class="">
+    <div class="prof_banner ">
+        <div class="prof_banner_inner">
+            <div class="container">
+                <div class="tskr_rgstrn_outer_cont">
+                    <div class="prof_banner_inner_cont">
+                        <div class="left_prof">
+                            <div class="img_prof">
+                                <img *ngIf="currentuser && currentuser.avatar" src="{{imageUrl}}{{currentuser.avatar}}"
+                                    onerror="this.src='assets/images/Default/user.jpg';">
+                                <img *ngIf="currentuser && !currentuser.avatar" src="" UserDefaultImage>
+                            </div>
+                            <div class="prof_det">
+                                <div class="name ng-binding">{{currentUserName | titlecase }}</div>
+                                <div class="numvber ng-binding">{{currentUserCode}} {{currentUserNumber}}</div>
+                            </div>
+                        </div>
+                        <div class="right_prof">
+                            <button class="btn ng-binding" (click)="logout()">Log out</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="prof_navg" *ngIf="role != 'tasker'">
+            <div class="prof_navg_inner">
+                <div class="container">
+                    <div class="tskr_rgstrn_outer_cont">
+                        <div class="prof_nav_value">
+                            <div class="prof_nave_name">
+                                <span class="">
+                                    <a [ngClass]="{active: profiletab}"
+                                        (click)="profiletab = true;Detailstab = false;InviteFriendstab = false;Wallettab = false;Documentstab = false; Addresstab = false;
+                    Availabilitytab = false;Reviewstab = false;Transactionstab = false;profilepage();">{{'Profile' | translate}}</a>
+                                </span>
+                                <span class="">
+                                    <a [ngClass]="{active: Detailstab}"
+                                        (click)="profiletab = false;Detailstab = true;InviteFriendstab = false;Wallettab = false;Documentstab = false; Addresstab = false;
+                    Availabilitytab = false;Reviewstab = false;Transactionstab = false;jobdetailspage()">{{'JobDetails' | translate}}</a>
+                                </span>
+                                <span class="">
+                                    <a [ngClass]="{active: InviteFriendstab}"
+                                        (click)="profiletab = false;Detailstab = false;InviteFriendstab = true;Wallettab = false;Documentstab = false; Addresstab = false;
+                    Availabilitytab = false;Reviewstab = false;Transactionstab = false;invitefriendspage()">{{'InviteFriends' | translate}}</a>
+                                </span>
+                                <span class="" *ngIf="walletshow">
+                                    <a [ngClass]="{active: Wallettab}" (click)="profiletab = false;Detailstab = false;InviteFriendstab = false;Wallettab = true;Availabilitytab = false; Addresstab = false;;
+                    Reviewstab = false;Transactionstab = false;walletpage()">{{'Wallet' | translate}}</a>
+                                </span>
+                                <span class="">
+                                    <a [ngClass]="{active: Transactionstab}" (click)="profiletab = false;Detailstab = false;InviteFriendstab = false;Wallettab = false;Transactionstab = true; Addresstab = false;
+                    Reviewstab = false;transactionspage()">{{'Transactions' | translate}}</a>
+                                </span>
+                                <span class="">
+                                    <a [ngClass]="{active: Reviewstab}" (click)="profiletab = false;Detailstab = false;InviteFriendstab = false;Wallettab = false;Transactionstab = false; Addresstab = false;
+                    Reviewstab = true;reviewspage()">{{'Reviews' | translate}}</a>
+                                </span>
+                                <span class="">
+                                    <a [ngClass]="{active: Addresstab}" (click)="profiletab = false;Detailstab = false;InviteFriendstab = false;Wallettab = false;Transactionstab = false;
+                    Reviewstab = false; Addresstab = true; addresspage()">{{'Pateint Details' | translate}}</a>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="prof_navg" *ngIf="role === 'tasker'">
+            <div class="prof_navg_inner">
+                <div class="container container-tab">
+                    <div class="tskr_rgstrn_outer_cont">
+                        <div class="prof_nav_value">
+                            <div class="prof_nave_name">
+                                <span class="">
+                                    <a [ngClass]="{active: profiletab}"
+                                        (click)="profiletab = true;Accounttab = false;Abouttab = false;Categorytab = false;Documentstab = false;
+                    Availabilitytab = false;Reviewstab = false;Transactionstab = false;Detailstab = false;profilepage();">{{'Profile' | translate}}</a>
+                                </span>
+                                <span class="">
+                                    <a [ngClass]="{active: Abouttab}"
+                                        (click)="profiletab = false;Accounttab = false;Abouttab = true;Categorytab = false;Documentstab = false;
+                    Availabilitytab = false;Reviewstab = false;Transactionstab = false;Detailstab = false;aboutpage();">
+                                        {{'About' | translate}}</a>
+                                </span>
+                                <span class="">
+                                    <a [ngClass]="{active: Accounttab}"
+                                        (click)="profiletab = false;Accounttab = true;Abouttab = false;Categorytab = false;Documentstab = false;
+                    Availabilitytab = false;Reviewstab = false;Transactionstab = false;Detailstab = false;accountpage();">
+                                        {{'Account' | translate}} <i *ngIf="profile && !profile.banking"
+                                            class="fa fa-exclamation-triangle ng-scope" style="color:#ff9800"></i>
+                                    </a>
+                                </span>
+                                <span class="">
+                                    <a [ngClass]="{active: Categorytab}"
+                                        (click)="profiletab = false;Accounttab = false;Abouttab = false;Categorytab = true;Documentstab = false;
+                    Availabilitytab = false;Reviewstab = false;Transactionstab = false;Detailstab = false;categorypage();">
+                                        {{'Category' | translate}}</a>
+                                </span>
+                                <span class="">
+                                    <a [ngClass]="{active: Availabilitytab}"
+                                        (click)="profiletab = false;Accounttab = false;Abouttab = false;Categorytab = false;Documentstab = false;
+                    Availabilitytab = true;Reviewstab = false;Transactionstab = false;Detailstab = false;availabilitypage();">{{'Availability' | translate}}</a>
+                                </span>
+                                <span class="">
+                                    <a [ngClass]="{active: Detailstab}" (click)="profiletab = false;Detailstab = true;Abouttab = false;Accounttab = false;InviteFriendstab = false;
+                    Categorytab = false;Wallettab = false;Documentstab = false;Availabilitytab = false;Reviewstab = false;
+                    Transactionstab = false;jobdetailspage();">{{'JobDetails' | translate}}</a>
+                                </span>
+                                <span class="">
+                                    <a [ngClass]="{active: Transactionstab}"
+                                        (click)="profiletab = false;Detailstab = false;Abouttab = false;Accounttab = false;InviteFriendstab = false;
+                    Categorytab = false;Wallettab = false;Transactionstab = true;Reviewstab = false;
+                    Documentstab = false;Availabilitytab = false;transactionspage();">{{'Transactions' | translate}}</a>
+                                </span>
+                                <span class="">
+                                    <a [ngClass]="{active: Reviewstab}" (click)="profiletab = false;Detailstab = false;Abouttab = false;Accounttab = false;InviteFriendstab = false;
+                    Categorytab = false;Wallettab = false;Transactionstab = false;Reviewstab = true;Documentstab = false;
+                    Availabilitytab = false;reviewspage();">{{'Reviews' | translate}}</a>
+                                </span>
+                                <span class="">
+                                    <a [ngClass]="{active: Documentstab}"
+                                        (click)="profiletab = false;Accounttab = false;Abouttab = false;Categorytab = false;Documentstab = true;
+                    Availabilitytab = false;Reviewstab = false;Transactionstab = false;Detailstab = false;documentspage()">{{'Documents' | translate}}</a>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<router-outlet></router-outlet>
+<app-confirm-dialog></app-confirm-dialog>

@@ -1,0 +1,45 @@
+<app-breadcrumb></app-breadcrumb>
+<simple-notifications></simple-notifications>
+<app-spinner [spinner]="spinner"></app-spinner>
+<div class="card mb-4 general-settings">
+    <div class="card-body">
+        <h2 class="mb-4">{{title}} People Comment</h2>
+        <form class="tooltip-label-right" novalidate #form="ngForm">
+            <div class="form-group ng-scope">
+                <label for="peopleName">People Name</label>
+                <input type="text" name="peopleName" class="form-control" ngModel required #peopleName="ngModel" [ngClass]="{ 'invalid-input': buttonDisabled && !peopleName.valid }">
+                <div *ngIf="!peopleName.valid && buttonDisabled" class="required-message">People Name is required!
+                </div>
+            </div>
+            <div class="form-group ng-scope">
+                <label for="professionName">Profession Name</label>
+                <input type="text" name="professionName" class="form-control" ngModel required #professionName="ngModel" [ngClass]="{ 'invalid-input': buttonDisabled && !professionName.valid }">
+                <div *ngIf="!professionName.valid && buttonDisabled" class="required-message">Profession Name is required!
+                </div>
+            </div>
+            <div class="form-group">
+                <label>People Image</label>
+                <input type="file" id="file" name="image" class="form-control" accept="image/*" #image ngModel (change)="getFiles($event, 'image')">
+                <span class="help-block">Allowed files: jpeg, png, jpg. Max file size 1Mb</span><br>
+                <img alt="image" class="preview-image black-image" *ngIf="peopleCommentData && peopleCommentData.image && !imagepreview.image" src="{{imageUrl}}{{peopleCommentData.image}}"><br>
+                <img alt="image" class="preview-image" *ngIf="imagepreview.image" [src]="imagepreview.image"><br>
+            </div>
+            <div class="form-group ng-scope">
+                <label for="description">Description</label>
+                <textarea type="text" name="description" class="form-control" ngModel required #description="ngModel" [ngClass]="{ 'invalid-input': buttonDisabled && !description.valid }"></textarea>
+                <div *ngIf="!description.valid && buttonDisabled" class="required-message">Description is required!
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Status</label>
+                <ng-select [items]="[{id:'1', name:'Publish'}, {id:'2', name:'Unpublish'}]" bindLabel="name"
+                bindValue="id" name="status" [ngClass]="{ 'invalid-input': form.submitted && !status.valid }" ngModel required #status="ngModel">
+                </ng-select>
+                <div *ngIf="!status.valid && buttonDisabled" class="required-message">Status is required</div>
+            </div>
+            <app-state-button [btnClass]="'btn btn-primary btn-lg btn-shadow'" style="float: right;" [currentState]="buttonState" [isDisabled]="buttonDisabled" (click)="onSubmit()">
+                Submit
+            </app-state-button>
+        </form>
+    </div>
+</div>

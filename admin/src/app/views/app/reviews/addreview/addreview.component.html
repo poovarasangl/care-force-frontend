@@ -1,0 +1,101 @@
+<app-breadcrumb></app-breadcrumb>
+<app-spinner [spinner]="spinner"></app-spinner>
+<div class="job-details">
+    <div class="card mb-4">
+        <div class="card-body">
+            <h1 class="mb-4">Reviews</h1>
+            <div class="row">
+                <div class="col-md-3">
+                    <h4>TASK  </h4><span class="task">{{task}}</span>
+                </div>
+                <div class="col-md-3">
+                    <h4>BOOKING ID </h4><span class="booking-id">{{booking_id}}</span>
+                </div>
+                <div class="col-md-3">
+                    <h4>RATTING </h4>
+                    <span *ngIf="ratting == 5" class="start-rate">
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                    </span>
+                    <span *ngIf="ratting == 4" class="start-rate">
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                    </span>
+                    <span *ngIf="ratting == 3" class="start-rate">
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                    </span>
+                    <span *ngIf="ratting == 2" class="start-rate">
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                    </span>
+                    <span *ngIf="ratting == 1" class="start-rate">
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                    </span>
+                </div>
+                <div class="col-md-3">
+                    <h4>STATUS</h4>
+                    <div class="sec-del" *ngIf="status == 0">Deleted</div>
+                    <div class="sec-pro" *ngIf="status == 1">Onprogress</div>
+                    <div class="sec-comp" *ngIf="status == 2">Accepted</div>
+                    <div class="sec-stp" *ngIf="status == 3">StartOff</div>
+                    <div class="sec-arr" *ngIf="status == 4">Arrived</div>
+                    <div class="sec-job" *ngIf="status == 5">StartJob</div>
+                    <div class="sec-comp" *ngIf="status == 6">Completed</div>
+                    <div class="sec-comp" *ngIf="status == 7">Completed</div>
+                    <div class="sec-del" *ngIf="status == 8">Cancelled</div>
+                    <div class="sec-dis" *ngIf="status == 9">Dispute</div>
+                    <div class="sec-ser" *ngIf="status == 10">Search</div>
+                </div>
+            </div>
+            <br>
+            <div class="details">
+                <div class="user-content">
+                    <h3>User</h3>
+                    <p><span class="content-title">Name</span> <span class="content-text">{{username}}</span></p>
+                    <p><span class="content-title">Phone</span> <span class="content-text">{{userphone }}</span></p>
+                    <p><span class="content-title">Email</span> <span class="content-text">{{useremail}}</span></p>
+                </div>
+                <div class="user-content">
+                    <h3>Tasker</h3>
+                    <p><span class="content-title">Name</span> <span class="content-text">{{taskername}}</span></p>
+                    <p><span class="content-title">Phone</span> <span class="content-text">{{taskerphone }}</span></p>
+                    <p><span class="content-title">Email</span> <span class="content-text">{{taskeremail}}</span></p>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <h4 class="mb-4">Review Details</h4>
+            <form #form="ngForm" novalidate class="tooltip-label-right">
+                <div class="form-group row error-l-50 col-md-12">
+                    <div class="form-group mail col-md-10">
+                    <p><span class="content-title">Date</span> <span class="content-text">{{reviewed_date}}</span></p>
+                    <br><p><span class="content-title">Reviewed By</span> 
+                        <span class="review-type">{{reviewed_by}}</span></p>
+                    <br><p><span class="content-title">Comments</span> <span class="content-text"><input type="hidden" class="form-control" name="review_id" value="" ngModel #review_id="ngModel">
+                        <textarea id="comments" name="comments"  class="form-control" ngModel required #comments="ngModel" [ngClass]="{ 'invalid-input': form.submitted && !comments.valid }" rows="3" style="width: 400px; height: 150px;" cols="50">{{comments}}</textarea>
+                        <div *ngIf="!comments.valid && form.submitted" class="required-message">Comments is required!</div></span>
+                    </p>
+                    </div>
+                    <div class="form-group mail col-md-12">
+                    <div class="bet-space">
+                    <app-state-button [btnClass]="'btn btn-success btn-shadow com-btns'" [currentState]="buttonState" [isDisabled]="buttonDisabled" (click)="onSubmit()">
+                        Submit
+                    </app-state-button>
+                    <a href='app/reviews/list' class="btn btn-danger btn-shadow com-btns">
+                        Back
+                    </a>
+                   </div>
+                </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

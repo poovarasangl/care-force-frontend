@@ -1,0 +1,154 @@
+.details{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+}
+.invoice-grid1, .invoice-grid2{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 10px;
+    padding: 20px 0px;
+}
+td{
+    width: 25%;
+}
+.content-title{
+    font-weight: bold;
+    width: 50%;
+    float: left;
+}
+.content-text{
+    width: 50%;
+    float: left;
+}
+p{
+    width: 100%;
+}
+h4{
+    font-weight: bold;
+}
+.status-green{
+    color: Green;
+}
+.status-red{
+    color: red;
+}
+.booking-id{
+    font-size: 24px;
+    color: #d9534f;
+}
+
+.task{
+    font-size: 24px;
+    color: #5bc0de;
+}
+table, td, th {
+    border: 1px solid #cccccc;
+    text-align: center;
+}
+th{
+    color: #145388;
+    font-weight: bold;
+    font-size: 16px;
+}
+td{
+    font-size: 14px;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.user-top, .tasker-top, .task-top, payment-top {
+    float: left;
+    width:100%;
+}
+.user-top h3, .tasker-top h3, .payment-top h3, .task-top h3 {
+    margin: 0;
+    background-color: #17a2b8;
+    border-radius: 4px 4px 0 0;
+    padding: 10px 15px;
+    color: #fff;
+    font-size: 17px;
+    font-weight: 600;
+}
+.custon-sec {
+    float: left;
+    width: 100%;
+    padding: 15px;
+}
+.content-title{
+    font-weight: bold;
+}
+.review-type {
+    width: 50%;
+    float: left;
+    text-transform: uppercase;
+}
+
+::ng-deep .star:before {
+    content: "\2605";
+    position: absolute;
+    visibility: visible;
+}
+
+::ng-deep .star:checked:before {
+    content: "\2606";
+    position: absolute;
+}
+
+::ng-deep span.start-rate i {
+    font-size: 18px;
+}
+
+::ng-deep span.start-rate i.fa.fa-star {
+    color: #ffc107;
+}
+
+.sec-comp {
+    color: #339933;
+    font-weight: 600;
+    font-size: 20px;
+}
+.sec-del {
+    color: #339933;
+    font-weight: 600;
+    font-size: 20px;
+}
+.sec-pro {
+    color: #339933;
+    font-weight: 600;
+    font-size: 20px;
+}
+.sec-stp {
+    color: #339933;
+    font-weight: 600;
+    font-size: 20px;
+}
+.sec-arr {
+    color: #339933;
+    font-weight: 600;
+    font-size: 20px;
+}
+.sec-job {
+    color: #339933;
+    font-weight: 600;
+    font-size: 20px;
+}
+.sec-dis {
+    color: #339933;
+    font-weight: 600;
+    font-size: 20px;
+}
+.sec-ser {
+    color: #339933;
+    font-weight: 600;
+    font-size: 20px;
+}
+.bet-space .com-btns {
+    padding: 7px 30px !important;
+    margin: 7px !important;
+}
+.bet-space {
+    width: 100%;
+    text-align: center;
+}

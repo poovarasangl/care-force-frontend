@@ -1,0 +1,188 @@
+<app-breadcrumb></app-breadcrumb>
+<app-spinner [spinner]="spinner"></app-spinner>
+<div class="card mb-4">
+    <div class="card-body">
+        <h1 class="mb-4">Social Networks URL/Links</h1>
+        <hr>
+        <form #form="ngForm" novalidate class="tooltip-label-right">
+            <div class="sociallinks">
+                <div class="row-one">
+                    <div class="Facebook_details">
+                        <h2>Facebook Details</h2>
+                        <div class="form-group error-l-50">
+                            <label>Name</label>
+                            <input type="text" class="form-control" name="fbname" ngModel required #fbname="ngModel" [ngClass]="{ 'invalid-input': form.submitted && !fbname.valid }">
+                            <div *ngIf="!fbname.valid && form.submitted" class="required-message">Name is required!</div>
+                        </div>
+                        <div class="form-group error-l-50">
+                            <label>URL</label>
+                            <input type="text" class="form-control" name="fburl" ngModel required #fburl="ngModel" [ngClass]="{ 'invalid-input': form.submitted && !fburl.valid }">
+                            <div *ngIf="!fburl.valid && form.submitted" class="required-message">Url is required!</div>
+                        </div>
+                        <div class="form-group">
+                            <label>Status</label>
+                            <ng-select [items]="[{id:'1', name:'Publish'}, {id:'2', name:'Unpublish'}]" bindLabel="name"
+                            bindValue="id" name="fbstatus" [ngClass]="{ 'invalid-input': form.submitted && !fbstatus.valid }" ngModel required #fbstatus="ngModel">
+                            </ng-select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row-two">
+                    <div class="Facebook_details">
+                        <h2>Twitter Details</h2>
+                        <div class="form-group error-l-50">
+                            <label>Name</label>
+                            <input type="text" class="form-control" name="twname" ngModel required #twname="ngModel" [ngClass]="{ 'invalid-input': form.submitted && !twname.valid }">
+                            <div *ngIf="!twname.valid && form.submitted" class="required-message">Name is required!</div>
+                        </div>
+                        <div class="form-group error-l-50">
+                            <label>URL</label>
+                            <input type="text" class="form-control" name="twurl" ngModel required #twurl="ngModel" [ngClass]="{ 'invalid-input': form.submitted && !twurl.valid }">
+                            <div *ngIf="!twurl.valid && form.submitted" class="required-message">Url is required!</div>
+                        </div>
+                        <div class="form-group">
+                            <label>Status</label>
+                            <ng-select [items]="[{id:'1', name:'Publish'}, {id:'2', name:'Unpublish'}]" bindLabel="name"
+                            bindValue="id" name="twstatus" [ngClass]="{ 'invalid-input': form.submitted && !twstatus.valid }" ngModel required #twstatus="ngModel">
+                            </ng-select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row-three">
+                    <div class="Facebook_details">
+                        <h2>Linked In Details</h2>
+                        <div class="form-group error-l-50">
+                            <label>Name</label>
+                            <input type="text" class="form-control" name="liname" ngModel required #liname="ngModel" [ngClass]="{ 'invalid-input': form.submitted && !liname.valid }">
+                            <div *ngIf="!liname.valid && form.submitted" class="required-message">Name is required!</div>
+                        </div>
+                        <div class="form-group error-l-50">
+                            <label>URL</label>
+                            <input type="text" class="form-control" name="liurl" ngModel required #liurl="ngModel" [ngClass]="{ 'invalid-input': form.submitted && !liurl.valid }">
+                            <div *ngIf="!liurl.valid && form.submitted" class="required-message">Url is required!</div>
+                        </div>
+                        <div class="form-group">
+                            <label>Status</label>
+                            <ng-select [items]="[{id:'1', name:'Publish'}, {id:'2', name:'Unpublish'}]" bindLabel="name"
+                            bindValue="id" name="listatus" [ngClass]="{ 'invalid-input': form.submitted && !listatus.valid }" ngModel required #listatus="ngModel">
+                            </ng-select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row-four">
+                    <div class="Facebook_details">
+                        <h2>Pinterest Details</h2>
+                        <div class="form-group error-l-50">
+                            <label>Name</label>
+                            <input type="text" class="form-control" name="piname" ngModel required #piname="ngModel" [ngClass]="{ 'invalid-input': form.submitted && !piname.valid }">
+                            <div *ngIf="!piname.valid && form.submitted" class="required-message">Name is required!</div>
+                        </div>
+                        <div class="form-group error-l-50">
+                            <label>URL</label>
+                            <input type="text" class="form-control" name="piurl" ngModel required #piurl="ngModel" [ngClass]="{ 'invalid-input': form.submitted && !piurl.valid }">
+                            <div *ngIf="!piurl.valid && form.submitted" class="required-message">Url is required!</div>
+                        </div>
+                        <div class="form-group">
+                            <label>Status</label>
+                            <ng-select [items]="[{id:'1', name:'Publish'}, {id:'2', name:'Unpublish'}]" bindLabel="name"
+                            bindValue="id" name="pistatus" [ngClass]="{ 'invalid-input': form.submitted && !pistatus.valid }" ngModel required #pistatus="ngModel">
+                            </ng-select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row-five">
+                    <div class="Facebook_details">
+                        <h2>YouTube Details</h2>
+                        <div class="form-group error-l-50">
+                            <label>Name</label>
+                            <input type="text" class="form-control" name="ytname" ngModel required #ytname="ngModel" [ngClass]="{ 'invalid-input': form.submitted && !ytname.valid }">
+                            <div *ngIf="!ytname.valid && form.submitted" class="required-message">Name is required!</div>
+                        </div>
+                        <div class="form-group error-l-50">
+                            <label>URL</label>
+                            <input type="text" class="form-control" name="yturl" ngModel required #yturl="ngModel" [ngClass]="{ 'invalid-input': form.submitted && !yturl.valid }">
+                            <div *ngIf="!yturl.valid && form.submitted" class="required-message">Url is required!</div>
+                        </div>
+                        <div class="form-group">
+                            <label>Status</label>
+                            <ng-select [items]="[{id:'1', name:'Publish'}, {id:'2', name:'Unpublish'}]" bindLabel="name"
+                            bindValue="id" name="ytstatus" [ngClass]="{ 'invalid-input': form.submitted && !ytstatus.valid }" ngModel required #ytstatus="ngModel">
+                            </ng-select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row-six">
+                    <div class="Facebook_details">
+                        <h2>Google + Details</h2>
+                        <div class="form-group error-l-50">
+                            <label>Name</label>
+                            <input type="text" class="form-control" name="gpname" ngModel required #gpname="ngModel" [ngClass]="{ 'invalid-input': form.submitted && !gpname.valid }">
+                            <div *ngIf="!gpname.valid && form.submitted" class="required-message">Name is required!</div>
+                        </div>
+                        <div class="form-group error-l-50">
+                            <label>URL</label>
+                            <input type="text" class="form-control" name="gpurl" ngModel required #gpurl="ngModel" [ngClass]="{ 'invalid-input': form.submitted && !gpurl.valid }">
+                            <div *ngIf="!gpurl.valid && form.submitted" class="required-message">Url is required!</div>
+                        </div>
+                        <div class="form-group">
+                            <label>Status</label>
+                            <ng-select [items]="[{id:'1', name:'Publish'}, {id:'2', name:'Unpublish'}]" bindLabel="name"
+                            bindValue="id" name="gpstatus" [ngClass]="{ 'invalid-input': form.submitted && !gpstatus.valid }" ngModel required #gpstatus="ngModel">
+                            </ng-select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mobileapp">
+                <h1>Mobile Download URL/Links</h1>
+                <hr>
+                <div class="row-seven">
+                    <div class="Facebook_details">
+                        <h2>Google Play Details</h2>
+                        <div class="form-group error-l-50">
+                            <label>Name</label>
+                            <input type="text" class="form-control" name="gplname" ngModel required #gplname="ngModel" [ngClass]="{ 'invalid-input': form.submitted && !gplname.valid }">
+                            <div *ngIf="!gplname.valid && form.submitted" class="required-message">Name is required!</div>
+                        </div>
+                        <div class="form-group error-l-50">
+                            <label>URL</label>
+                            <input type="text" class="form-control" name="gplurl" ngModel required #gplurl="ngModel" [ngClass]="{ 'invalid-input': form.submitted && !gplurl.valid }">
+                            <div *ngIf="!gplurl.valid && form.submitted" class="required-message">Url is required!</div>
+                        </div>
+                        <div class="form-group">
+                            <label>Status</label>
+                            <ng-select [items]="[{id:'1', name:'Publish'}, {id:'2', name:'Unpublish'}]" bindLabel="name"
+                            bindValue="id" name="gplstatus" [ngClass]="{ 'invalid-input': form.submitted && !gplstatus.valid }" ngModel required #gplstatus="ngModel">
+                            </ng-select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row-eight">
+                    <div class="Facebook_details">
+                        <h2>Apple Store Details</h2>
+                        <div class="form-group error-l-50">
+                            <label>Name</label>
+                            <input type="text" class="form-control" name="apsname" ngModel required #apsname="ngModel" [ngClass]="{ 'invalid-input': form.submitted && !apsname.valid }">
+                            <div *ngIf="!apsname.valid && form.submitted" class="required-message">Name is required!</div>
+                        </div>
+                        <div class="form-group error-l-50">
+                            <label>URL</label>
+                            <input type="text" class="form-control" name="apsurl" ngModel required #apsurl="ngModel" [ngClass]="{ 'invalid-input': form.submitted && !apsurl.valid }">
+                            <div *ngIf="!apsurl.valid && form.submitted" class="required-message">Url is required!</div>
+                        </div>
+                        <div class="form-group">
+                            <label>Status</label>
+                            <ng-select [items]="[{id:'1', name:'Publish'}, {id:'2', name:'Unpublish'}]" bindLabel="name"
+                            bindValue="id" name="apsstatus" [ngClass]="{ 'invalid-input': form.submitted && !apsstatus.valid }" ngModel required #apsstatus="ngModel">
+                            </ng-select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <app-state-button [btnClass]="'btn btn-primary btn-lg btn-shadow'" style="float: right;" [currentState]="buttonState" [isDisabled]="buttonDisabled" (click)="onSubmit()">
+                Submit
+            </app-state-button>
+        </form>
+    </div>
+    <simple-notifications></simple-notifications>
+</div>

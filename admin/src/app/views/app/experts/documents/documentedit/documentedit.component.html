@@ -1,0 +1,34 @@
+<app-breadcrumb></app-breadcrumb>
+<div class="card mb-4">
+    <div class="card-body">
+        <h6 class="mb-4">Add/Edit Document</h6>
+
+        <form #form="ngForm" novalidate class="tooltip-label-right">
+            <div class="grid-class">
+                <div class="form-group error-l-50">
+                    <label>Document Name</label>
+                    <input type="text" class="form-control" name="name" ngModel required #name="ngModel" [ngClass]="{ 'invalid-input': form.submitted && !name.valid }">
+                    <div *ngIf="!name.valid && form.submitted" class="required-message">Document name is required!</div>
+                </div>
+                <div class="form-group">
+                    <label>Status</label>
+                    <ng-select [items]="[{id:'1', name:'Publish'}, {id:'2', name:'Unpublish'}]" bindLabel="name"
+                    bindValue="id" name="status" [ngClass]="{ 'invalid-input': form.submitted && !status.valid }" ngModel required #status="ngModel">
+                    </ng-select>
+                    <div *ngIf="!status.valid && form.submitted" class="required-message">Status is required</div>
+                </div>
+                <div class="form-group">
+                    <label>Document Mandatory</label>
+                <ng-select [items]="[{id:'1', name:'Enable'}, {id:'2', name:'Disable'}]" bindLabel="name"
+                bindValue="id" name="mandatory" [ngClass]="{ 'invalid-input': form.submitted && !mandatory.valid }" ngModel required #mandatory="ngModel">
+                </ng-select>
+                    <div *ngIf="!mandatory.valid && form.submitted" class="required-message">Document Mandatory option is required</div>
+                </div>
+            </div>
+            <app-state-button style="float: right;" [btnClass]="'btn btn-primary btn-lg btn-shadow'" [currentState]="buttonState" [isDisabled]="buttonDisabled" (click)="onSubmit()">
+                Submit
+            </app-state-button>
+        </form>
+    </div>
+    <simple-notifications></simple-notifications>
+</div>

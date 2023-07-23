@@ -1,0 +1,215 @@
+<section ui-view="content" class="ng-scope" *ngIf="userprofile && Categorylist">
+    <section class="ng-scope">
+        <div class="profilepage">
+            <div class="profilepage-top"
+                style="background:rgb(63, 63, 63) url('assets/images/Default/viewprofile_back.jpg');">
+                <div class="container">
+                    <div class="profimg-holder">
+                        <figure>
+                            <img *ngIf="userprofile && userprofile.avatar" err-src="user"
+                                src="{{imageurl}}{{userprofile.avatar}}">
+                            <img *ngIf="userprofile && !userprofile.avatar" err-src="user"
+                                src="assets/images/Default/user.jpg">
+                        </figure>
+                    </div>
+                    <a (click)="homepage()">
+                        <span style="color: #67098f;text-decoration: none;float: left;" class="ng-binding">
+                            <i class="fa fa-arrow-left custom-icon"></i>BACK
+                        </span>
+                    </a>
+                    <h1 class="text-fil ng-binding">{{'Iam' |translate}} {{userprofile.firstname}}
+                        {{userprofile.lastname}}.</h1>
+                    <h4>
+                        <rating [(ngModel)]="userprofile.avg_review" [readonly]="true" [max]="5"
+                            style="color: #ff6905;font-size: 25px;"></rating>
+                    </h4>
+                    <ul class="profil-flow">
+                        <li class="thumbs-up-desk" style="float:right!important">
+                            <i class="fa fa-thumbs-o-up"></i>
+                            <div class="txt-rit">
+                                <span class="pstv-text ng-binding">{{'Expert_Available' | translate}}</span>
+                            </div>
+                        </li>
+                        <li class="bdr-lin">
+                            <i class="fa fa-check"></i>
+                            <div class="txt-rit">
+                                <span class="pstv-text ng-binding"> {{'Ive_done' | translate}}<b class="ng-binding"
+                                        *ngIf="ratting && ratting.length > 0">
+                                        {{ratting.length}} Jobs .</b>
+                                    <b class="ng-binding" *ngIf="(!ratting || !ratting.length > 0)">
+                                        0 Jobs .</b></span>
+                                <span class="sml-text ng-binding"> {{'IveAnExpert' | translate}}<b class="ng-binding">
+                                        {{'Since' | translate}}
+                                        {{userprofile.createdAt | date:'MMM, yyyy'}}</b></span>
+                            </div>
+                        </li>
+                        <li class="loc-cnt">
+                            <i class="fa fa-map-marker"></i>
+                            <div class="txt-rit">
+                                <span class="pstv-text ng-binding">{{'Location' | translate}}</span>
+                                <span class="sml-text ng-binding">{{userprofile.availability_address}}</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="ng-scope">
+        <div class="profile-pages">
+            <div class="tabbable-panel">
+                <div class="tabbable-line">
+                    <div class="profle-container">
+                        <div class="container2">
+                            <div active="active" class="ng-isolate-scope">
+                                <ul class="hire-liip nav nav-tabs">
+                                    <li class="active"><a data-toggle="tab" href="#Hireme">{{'HireMe' | translate}}</a>
+                                    </li>
+                                    <li><a data-toggle="tab" href="#Reviews">{{'Reviews' | translate}}</a></li>
+                                    <li><a data-toggle="tab" href="#About">{{'About' | translate}}</a></li>
+                                </ul>
+                                <div class="profi-content ng-scope" id="">
+                                    <div class="container2">
+                                        <div class="tab-content">
+                                            <!--Hireme tab start-->
+                                            <div class="tab-pane active" id="Hireme">
+                                                <div class="col-md-12 hire-tab ng-scope"
+                                                    *ngFor="let item of userprofile.taskerskills">
+                                                    <div class="brdlinr">
+                                                        <div class="generlinf">
+                                                            <div class="col-md-6 hire-title" style="margin-top:10px">
+                                                                <h3 class="ng-binding">{{item.categoryid.name ?
+                                                                    item.categoryid.name : item.categoryid}} /
+                                                                    {{item.childid.name ? item.childid.name :
+                                                                    item.childid}}</h3>
+                                                            </div>
+
+                                                            <div class="col-md-6 hire-price ng-scope">
+                                                                <a class="hirebtn ng-binding"
+                                                                    (click)="ChooseExpert(item)"
+                                                                    style="width:285px;float:right!important;text-align:center">
+                                                                    <span class="muted ng-binding">{{'SelectFor' |
+                                                                        translate}}</span>: {{DefaultCurrency.symbol}}
+                                                                    <span class="ng-binding">{{item.hour_rate *
+                                                                        DefaultCurrency.value |
+                                                                        number:'1.2-2'}}/hr</span></a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--Hireme tab end-->
+
+                                            <!--Review tab start-->
+                                            <div class="tab-pane" id="Reviews">
+                                                <div class="tasker-prof-review">
+                                                    <div class="tasker-review-tab"
+                                                        *ngIf="ratting && ratting.length > 0 ">
+                                                        <ul class="hire-tasker" *ngFor="let item of ratting">
+                                                            <li>
+                                                                <div class="prof-geninfo-section">
+                                                                    <h2 class="tasker-work-name"
+                                                                        *ngIf="item.taskdetails">
+                                                                        {{item.taskdetails.category.name}}</h2>
+                                                                    <span class="tasker-img">
+                                                                        <div class="tasker-img-holder">
+                                                                            <figure>
+                                                                                <img *ngIf="item.taskdetails && item.taskdetails.user.avatar"
+                                                                                    err-src="user"
+                                                                                    src="{{imageurl}}{{item.taskdetails.user.avatar}}"
+                                                                                    UserDefaultImage>
+                                                                                <img *ngIf="item.taskdetails && !item.taskdetails.user.avatar"
+                                                                                    err-src="user"
+                                                                                    src="assets/images/Default/user.jpg">
+                                                                            </figure>
+                                                                            <span class="tasker-detailed-name"
+                                                                                *ngIf="item.taskdetails.user">{{item.taskdetails.user.username}}</span>
+                                                                        </div>
+                                                                    </span>
+                                                                </div>
+                                                                <div class="tasker-overall-performance"
+                                                                    *ngIf="item.taskdetails.ratting && item.taskdetails.ratting.user && item.taskdetails.ratting.user.comments">
+                                                                    <p class="bind">
+                                                                        {{item.taskdetails.ratting.user.comments}}</p>
+                                                                </div>
+                                                                <div class="tasker-perform-rating"
+                                                                    *ngIf="item.taskdetails.ratting && item.taskdetails.ratting.user && item.taskdetails.ratting.user.rating">
+                                                                    <span>
+                                                                        <rating
+                                                                            [(ngModel)]="item.taskdetails.ratting.user.rating"
+                                                                            [readonly]="true" [max]="5"
+                                                                            style="color: #ff6905;font-size: 25px;">
+                                                                        </rating>
+                                                                    </span>
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <div *ngIf="ratting && (!ratting || !ratting.length > 0 || userprofile.avg_review === 0)"
+                                                        class="tsk_dtls_two_cont_rgt" style="margin-top: 2%;">
+                                                        <div class="errormsg">
+                                                            <div class="panelbody">{{'no_reviewsyet' | translate}} !
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--Review tab end-->
+
+                                            <!--About tab start-->
+                                            <div class="tab-pane" id="About">
+                                                <div class="aboutpage">
+                                                    <div class="abouttop">
+                                                        <ul class="factloop">
+                                                            <h3 class="ng-binding">{{'facts_me' | translate}}:</h3>
+                                                            <li><i class="fa fa-calendar"></i>
+                                                                <p class="ng-binding">{{'IveAnExpert' | translate}}<b
+                                                                        class="ng-binding"> {{'Since' | translate}}
+                                                                        {{userprofile.createdAt | date:'MMM, yyyy'}}</b>
+                                                                </p>
+                                                            </li>
+                                                            <li><i class="fa fa-check"></i>
+                                                                <p class="ng-binding">{{'IveAnExpert' | translate}} <b
+                                                                        class="ng-binding">{{completed_task}}</b>
+                                                                    {{'Jobs' | translate}}.
+                                                                </p>
+                                                            </li>
+                                                            <li>
+                                                                <p class="ng-binding">{{'Im' | translate}} <b
+                                                                        class="ng-binding"></b> {{'Inthis_cat' |
+                                                                    translate}}</p>
+                                                            </li>
+                                                        </ul>
+                                                        <ul class="factloop">
+                                                            <h3 class="ng-binding">{{'why_expert' | translate}}:</h3>
+                                                            <li *ngIf="userprofile.about" ng-if="data.question.question"
+                                                                class="ng-scope about-tasker">
+                                                                <h4 class="ng-binding">{{'About_You' | translate}}</h4>
+                                                                <p ng-bind-html="data.answer"
+                                                                    class="ng-binding about-tasker">
+                                                                    {{userprofile.about.aboutyou}}</p>
+                                                            </li>
+                                                            <li *ngIf="userprofile.about" ng-if="data.question.question"
+                                                                class="ng-scope about-tasker">
+                                                                <h4 class="ng-binding">{{'abt_wrk_exp' | translate}}
+                                                                </h4>
+                                                                <p ng-bind-html="data.answer"
+                                                                    class="ng-binding about-tasker">
+                                                                    {{userprofile.about.aboutexperience}}</p>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--About tab end-->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>

@@ -1,0 +1,6 @@
+<app-customtable [settings]="settings" [count]="count" [source]="source" [viewurl]="viewurl" [card_details]="card_details" [showSearch]="true" [showBulkActions]="false" [ExportItem]="true" [EarningFilter]="true" [itemsPerPage]="default_limit" [AddNewItem]="false" (onheaderCardChange)="onheaderCardChange($event)" (onPageChange)="onPageChange($event)"
+    (onSearchChange)="onSearchChange($event)" (onBulkactionChange)="onBulkactionChange($event)" (onitemsPerPageChange)="onitemsPerPageChange($event)" (onsearchfilter)="onsearchfilter($event)" (onexportemit)="onexportemit($event)">
+</app-customtable>
+<simple-notifications></simple-notifications>
+<app-spinner [spinner]="spinner"></app-spinner>
+    

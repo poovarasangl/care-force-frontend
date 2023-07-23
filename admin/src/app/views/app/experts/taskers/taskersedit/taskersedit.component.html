@@ -1,0 +1,605 @@
+<app-breadcrumb></app-breadcrumb>
+<simple-notifications></simple-notifications>
+
+<div class="edittasker">
+    <div class=" card mb-4 imagesection">
+        <div class="card-body " *ngIf="experteditdata">
+            <img *ngIf="experteditdata && experteditdata.avatar" src={{imageUrl}}{{experteditdata.avatar}}>
+            <img *ngIf="experteditdata && !experteditdata.avatar" src="\assets\img\admin-image.png">
+
+            <h2 class="user-name">{{experteditdata.firstname | uppercase}} {{experteditdata.lastname | uppercase}}</h2>
+        </div>
+    </div>
+    <div class="card mb-4 formsection">
+        <div class="card-body ">
+            <tabset [justified]="true" #Expertsedittab>
+                <tab heading="General" (selectTab)="onSelect($event)">
+                    <div class="personalinfoform margn-tp-form">
+                        <h3>Personal Settings</h3>
+                        <p>Your personal account settings</p>
+                        <hr>
+                        <form #form="ngForm" novalidate class="tooltip-label-right">
+                            <div class="form-group row error-l-50 col-md-12">
+                                <div class="form-group col-md-6">
+                                    <label>First Name</label>
+                                    <input type="hidden" class="form-control" name="user_id" ngModel #user_id="ngModel">
+                                    <input type="text" class="form-control" name="firstname" ngModel required #firstname="ngModel" [ngClass]="{ 'invalid-input': form.submitted && !firstname.valid }">
+                                    <div *ngIf="!firstname.valid && form.submitted" class="required-message">First Name is required!
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label>Last Name</label>
+                                    <input type="text" class="form-control" name="lastname" ngModel required #lastname="ngModel" [ngClass]="{ 'invalid-input': form.submitted && !lastname.valid }">
+                                    <div *ngIf="!lastname.valid && form.submitted" class="required-message">Last Name is required!
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Gender</label>
+                                    <select class="custom-select" name="gender" ngModel required #gender="ngModel">
+                                        <option value="male">Male</option>
+                                        <option value="female">Female</option>
+
+                                    </select>
+                                    <div *ngIf="!gender.valid && form.submitted" class="required-message">Status is required!
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>DOB</label>
+                                    <input type="text" placeholder="Datepicker" class="form-control" name="basicDate" ngModel #basicDate="ngModel" bsDatepicker [container]="'html'"  [bsConfig]="{ adaptivePosition: true, dateInputFormat: 'DD-MM-YYYY' }">
+                                </div>
+                            </div>
+                            <div class="form-group row error-l-50 col-md-12">
+                                <div class="form-group mail col-md-6">
+                                    <label>Email</label>
+                                    <input type="email" class="form-control" name="email" ngModel required email #email="ngModel" [ngClass]="{ 'invalid-input': form.submitted && !email.valid }" ng-pattern="/^[_a-zA-Z0-9]+(\.[_a-zA-Z0-9]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,10})$/">
+                                    <div *ngIf="!email.valid && form.submitted" class="required-message">Email is required!
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6 phone-input-class">
+                                    <label>Phone</label>
+                                    <input type="tel" id="tel" ng2TelInput class="form-control" [readonly]="title == 'Edit'" disabled (ng2TelOutput)="getNumber($event)" (intlTelInputObject)="telInputObject($event)" [ng2TelInputOptions]="{initialCountry: 'us'}" (countryChange)="oncountryChange($event)"
+                                        name="phone" ngModel required #phone="ngModel" [ngClass]="{ 'invalid-input': form.submitted && !phone.valid }">
+                                    <div *ngIf="!phone.valid && form.submitted" class="required-message">Phone is required!
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row error-l-50 col-md-12">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Profile Picture</label>
+                                        <input type="file" id="file" name="avatar" class="form-control" ngModel required #avatar="ngModel" (change)="getFiles($event, 'image')">
+                                        <img alt="image" class="preview-image avatar" *ngIf="experteditdata && experteditdata.avatar && !imagepreview.image" src="{{imageUrl}}{{experteditdata.avatar}}"><br>
+                                        <img alt="avatar-pic" class="preview-pic" *ngIf="imagepreview.image" [src]="imagepreview.image"><br>
+                                        <div *ngIf="!avatar.valid && form.submitted" class="required-message">Profile Picture is required!</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Status</label>
+                                    <ng-select [items]="[{id:'1', name:'Verified'}, {id:'2', name:'Unverified'}, {id:'3', name: 'Pending'}]" bindLabel="name" bindValue="id" name="status" [ngClass]="{ 'invalid-input': form.submitted && !status.valid }" ngModel required #status="ngModel">
+                                    </ng-select>
+                                    <!-- <div *ngIf="!mode.valid && form.submitted" class="required-message">Option is required</div> -->
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </tab>
+                <tab heading="About" (selectTab)="onSelect($event)">
+                    <div class="About margn-tp-form">
+                        <h3>Profile Settings</h3>
+                        <p>Your Profile Details</p>
+                        <hr>
+                        <div class="form-group row error-l-50">
+                            <form #aboutform="ngForm" novalidate class="tooltip-label-right abtform">
+                                <div class="abt-items" *ngFor="let item of experteditpagetwodata">
+                                    <!-- Array input -->
+                                    <h5>{{item.question}}</h5>
+                                    <!-- <input type="hidden" name="{{item._id}}" ngModel required #[item._id]="ngModel"> -->
+                                    <input type="hidden" name="{{item.question}}-question" [(ngModel)]="item._id">
+                                    <textarea name="{{item.question}}-answer" [(ngModel)]="item.answer" class="form-control">{{item.answer}}</textarea>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </tab>
+                <tab heading="Category" (selectTab)="onSelect($event)">
+                    <div class="cat-row margn-tp-form">
+                        <div class="cat-headings">
+                            <h3>Category Settings</h3>
+                            <p>Your Category</p>
+                        </div>
+                        <div class="cat-button">
+                            <button class="add-category btn btn-success" (click)="openModal(template)">Add
+                                Category</button>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="cat-list-show " *ngFor="let item of skillsarr">
+                        <div class="cat-list-name">
+                            <h4 *ngIf="experteditdata && experteditdata.taskerskills">{{item.name}}</h4>
+                        </div>
+                        <div class="cat-list-btns">
+                            <span>
+                                <button class="btn btn-info icn-btn" (click)="openModaledit(templateedit, item )"
+                                    title="Edit Category"><i class="fa fa-edit"></i></button>
+                            </span>
+                            <span>
+                                <button class="btn btn-warning icn-btn"
+                                    (click)="openModalcatdelete(templatecatdelete, item )" title="Delete Category"><i
+                                        class="fa fa-trash"></i></button>
+                            </span>
+                            <span>
+                                <button class="btn btn-success icn-btn" *ngIf="item.status == 1"
+                                    (click)="changecatstatus(item)" title="Unverify Category"><i
+                                        class="fa fa-check"></i></button>
+                                <button class="btn btn-danger icn-btn" *ngIf="item.status == 2"
+                                    (click)="changecatstatus(item)" title="Verify Category"><i
+                                        class="fa fa-times"></i></button>
+                            </span>
+                        </div>
+                    </div>
+                </tab>
+                <tab heading="Availability" (selectTab)="onSelect($event)">
+                    <div class="ng-scope margn-tp-form">
+                        <p>Select business days/hours</p>
+                        <div class="trans-profiles ng-scope">
+                            <div class="container">
+                                <div class="view-trans">
+                                    <div class="trans-packed main-scrolls-trcks">
+                                        <div class="trans-profiles-header">
+                                            <div class="trans-headings">
+                                                <h4 class="ng-binding">Availability</h4>
+                                            </div>
+                                        </div>
+                                        <div class="scroll-function">
+                                            <div class="trans-profiles-inner acc-av">
+                                                <span class="inner-subs-parsds availtitle ng-binding">Select Business
+                                                    Days</span>
+                                                <div class="date_whl_day ng-scope" style="float: right;">
+                                                    <span class="date_whl_input" *ngIf="experteditdata && experteditdata.working_days">
+                                                        <input type="checkbox" name="wholeweek"
+                                                            [checked]="experteditdata.working_days.length === 7 ? true : false"
+                                                            (change)="wholeweek($event);" #allWeek
+                                                            class="ng-valid ng-dirty ng-valid-parse ng-empty ng-touched"
+                                                            aria-invalid="false"> </span>
+                                                    <label>Whole Week </label>
+                                                </div>
+                                                <br>
+                                                <div class="main_cont_cont">
+                                                    <accordion [isAnimated]="true" *ngFor="let item of dayslist;let i = index;">
+                                                        <accordion-group heading="{{item.Day}}">
+                                                            <button class="whole-day-btn" accordion-heading type="button">
+                                                                <span class="">
+                                                                    <input
+                                                                        class="badge badge-secondary float-right pull-right"
+                                                                        (click)="WholeDayselet($event, item.Day)"
+                                                                        type="checkbox" name="day" value="{{item.Day}}"
+                                                                        [checked]="item.wholeday === 1 ? true : false">
+                                                                    <span class="dayselect">Whole Day</span>
+                                                                </span>
+                                                            </button>
+                                                            <div class="timings ng-scope" *ngFor="let list of item.timelist;let i = index;">
+                                                                <div class="time_value ng-scope">
+                                                                    <input type="checkbox" value="{{list.time}}" name="{{list.time}}+{{i}}" (click)="timeslot($event,item,list)" aria-invalid="false" [checked]="list.selected">
+                                                                    <label for="{{list.time}}" class="ng-binding">{{list.time}}</label>
+                                                                </div>
+                                                            </div>
+                                                        </accordion-group>
+                                                    </accordion>
+                                                    <hr>
+                                                    <div class="card mb-4">
+                                                        <div class="agm-map">
+                                                            <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="zoom">
+                                                                <agm-marker [latitude]="latitude" [longitude]="longitude" [markerDraggable]="true" (dragEnd)="markerDragEnd($event)"></agm-marker>
+                                                            </agm-map>
+                                                        </div>
+                                                        <div class="list-transta rds-max">
+                                                            <span class="inner-subs-parsds ng-binding">Work
+                                                                Location</span>
+                                                            <div class="botom-fuls">
+                                                                <form #addressform="ngForm" novalidate>
+                                                                    <input type="text" class="form-control" (keydown.enter)="$event.preventDefault()" name="address" class="form-control" ngModel required #address="ngModel" placeholder="Search Nearest Location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text"
+                                                                        #search>
+                                                                    <!-- <div class="error_msg">
+                                                                    Please Enter Address
+                                                                </div> -->
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <style class="ng-scope">
+                                    .green {
+                                        color: green !important;
+                                    }
+                                    
+                                    .red {
+                                        color: red !important;
+                                    }
+                                </style>
+                            </div>
+                        </div>
+                    </div>
+                </tab>
+                <tab heading="TaskerDocuments" (selectTab)="onSelect($event)">
+                    <div class="documentlist margn-tp-form">
+                        <span>
+                            <h3 class="tab-head-cls">Documents List</h3>
+                        </span>
+                        <span>
+                            <p class="mandry-txt-info">* - mandatory</p>
+                        </span>
+                        <hr>
+                        <div class="documentlist">
+                            <table>
+                                <tr class="documentname" *ngFor="let item of documentlist">
+                                    <td>
+                                        {{item.name}}
+                                        <span class="madatory-icon" *ngIf="item.mandatory == 1">*</span>
+                                    </td>
+                                    <td>
+                                        <p style="color: darkblue;">Front image</p>
+                                        <span class="ng-scope" *ngIf="true === (experteditdata.doc | filter: item.replace_name).status">
+                                            <img height="100" width="100"
+                                                *ngIf="'application/pdf' === (experteditdata.doc | filter: item.replace_name).file_type"
+                                                src="assets/img/pdfdefault.png">
+                                            <img height="100" width="100"
+                                                *ngIf="'application/octet-stream' === (experteditdata.doc | filter: item.replace_name).file_type"
+                                                src="assets/img/docdefault.png">
+                                            <img height="100" width="100"
+                                                *ngIf="'doc' === (experteditdata.doc | filter: item.replace_name).file_type"
+                                                src="assets/img/docdefault.png">
+                                            <img height="100" width="100"
+                                                *ngIf="'image/jpg'  === (experteditdata.doc | filter: item.replace_name).file_type"
+                                                src="{{imageurl}}{{(experteditdata.doc | filter: item.replace_name).path}}"
+                                                DocDefaultImage>
+                                            <img height="100" width="100"
+                                                *ngIf="'image/png'  === (experteditdata.doc | filter: item.replace_name).file_type"
+                                                src="{{imageurl}}{{(experteditdata.doc | filter: item.replace_name).path}}"
+                                                DocDefaultImage>
+                                            <img height="100" width="100"
+                                                *ngIf="'image/jpeg' === (experteditdata.doc | filter: item.replace_name).file_type"
+                                                src="{{imageurl}}{{(experteditdata.doc | filter: item.replace_name).path}}"
+                                                DocDefaultImage>
+                                        </span>
+
+                                    </td>
+                                    <td>
+                                        <p style="color: darkblue;">Back image</p>
+                                        <span class="ng-scope" *ngIf="true === (experteditdata.doc | filter: item.replace_name_back).status">
+                                            <img height="100" width="100"
+                                                *ngIf="'application/pdf' === (experteditdata.doc | filter: item.replace_name_back).file_type"
+                                                src="assets/img/pdfdefault.png">
+                                            <img height="100" width="100"
+                                                *ngIf="'application/octet-stream' === (experteditdata.doc | filter: item.replace_name_back).file_type"
+                                                src="assets/img/docdefault.png">
+                                            <img height="100" width="100"
+                                                *ngIf="'doc' === (experteditdata.doc | filter: item.replace_name_back).file_type"
+                                                src="assets/img/docdefault.png">
+                                            <img height="100" width="100"
+                                                *ngIf="'image/jpg'  === (experteditdata.doc | filter: item.replace_name_back).file_type"
+                                                src="{{imageurl}}{{(experteditdata.doc | filter: item.replace_name_back).path}}"
+                                                DocDefaultImage>
+                                            <img height="100" width="100"
+                                                *ngIf="'image/png'  === (experteditdata.doc | filter: item.replace_name_back).file_type"
+                                                src="{{imageurl}}{{(experteditdata.doc | filter: item.replace_name_back).path}}"
+                                                DocDefaultImage>
+                                            <img height="100" width="100"
+                                                *ngIf="'image/jpeg' === (experteditdata.doc | filter: item.replace_name_back).file_type"
+                                                src="{{imageurl}}{{(experteditdata.doc | filter: item.replace_name_back).path}}"
+                                                DocDefaultImage>
+                                        </span>
+
+                                    </td>
+                                    <td>
+                                        <span *ngIf="true === (experteditdata.doc | filter: item).status" class="list-btn"> <a
+                                                href="{{imageurl}}{{(experteditdata.doc | filter: item).path}}"
+                                                target="_blank"
+                                                class="btn btn-success js-deactivate-trigger confrm conform"
+                                                style="width:80px;">View</a></span>
+                                        <!-- end ngIf: docs.path -->
+                                        <span *ngIf="true === (experteditdata.doc | filter: item).status && item.stripe != 1" class="list-btn"> <a href="javascript:void(0)"
+                                                (click)="openModaldocedit(templatedocedit, item)"
+                                                class="btn btn-primary js-deactivate-trigger confrm conform"
+                                                style="width:80px;">Change</a></span>
+                                        <span *ngIf="true === (experteditdata.doc | filter: item).status  && item.stripe != 1" class="list-btn"> <a href="javascript:void(0)"
+                                                (click)="deletedoc(templatedocdelete,item)"
+                                                class="btn btn-danger js-deactivate-trigger confrm conform"
+                                                style="width:80px;">Delete</a></span>
+                                        <!-- end ngIf: docs.path -->
+                                        <span *ngIf="false === (experteditdata.doc | filter: item).status" class="list-btn"> <a href="javascript:void(0)"
+                                                (click)="openModaladd(templatedocadd, item)"
+                                                class="btn btn-secondary js-deactivate-trigger confrm conform"
+                                                style="width:80px;">Add</a></span>
+                                    </td>
+                            </table>
+                        </div>
+                    </div>
+                </tab>
+                <tab heading="AccountInformation" (selectTab)="onSelect($event)">
+                    <div class="accountinfo margn-tp-form">
+                        <h3>Bank Account Settings</h3>
+                        <p>Your Bank Account Informations</p>
+                        <hr>
+                        <form #bankform="ngForm" novalidate class="tooltip-label-right">
+                            <div class="form-group error-l-50">
+                                <label>Account Name:</label>
+                                <input type="text" class="form-control" name="acc_holder_name" ngModel required #acc_holder_name="ngModel" [ngClass]="{ 'invalid-input': bankform.submitted && !acc_holder_name.valid }">
+                                <div *ngIf="!acc_holder_name.valid && bankform.submitted" class="required-message">
+                                    Account Name is required!</div>
+                            </div>
+                            <div class="form-group error-l-50">
+                                <label>Account Number:</label>
+                                <input type="text" class="form-control" name="acc_number" ngModel required #acc_number="ngModel" [ngClass]="{ 'invalid-input': bankform.submitted && !acc_number.valid }">
+                                <div *ngIf="!acc_number.valid && bankform.submitted" class="required-message">Account Number is required!</div>
+                            </div>
+                            <div class="form-group error-l-50">
+                                <label>Bank Name:</label>
+                                <input type="text" class="form-control" name="bank_name" ngModel required #bank_name="ngModel" [ngClass]="{ 'invalid-input': bankform.submitted && !bank_name.valid }">
+                                <div *ngIf="!bank_name.valid && bankform.submitted" class="required-message">Bank Name is required!</div>
+                            </div>
+                            <div class="form-group error-l-50">
+                                <label>Routing Number:</label>
+                                <input type="text" class="form-control" name="routing_number" ngModel required #routing_number="ngModel" [ngClass]="{ 'invalid-input': bankform.submitted && !routing_number.valid }">
+                                <div *ngIf="!routing_number.valid && bankform.submitted" class="required-message">Bank Name is required!</div>
+                            </div>
+                            <div class="form-group error-l-50" *ngIf="experteditdata && (experteditdata.phone.code == +1 || experteditdata.country_code == 'US')">
+                                <label>SSN Number:</label>
+                                <input type="text" class="form-control" name="ssn_number" ngModel required #ssn_number="ngModel" [ngClass]="{ 'invalid-input': bankform.submitted && !ssn_number.valid }">
+                                <div *ngIf="!ssn_number.valid && bankform.submitted" class="required-message">SSN number is required!</div>
+                            </div>
+                        </form>
+                    </div>
+                    <app-state-button [btnClass]="'btn btn-primary btn-lg btn-shadow'" style="float: left;" [currentState]="buttonState" [isDisabled]="buttonDisabled" (click)="saveaccdata(bankform)">
+                        Save
+                    </app-state-button>
+                </tab>
+            </tabset>
+            <app-state-button *ngIf="!value" [btnClass]="'btn btn-primary btn-lg btn-shadow'" style="float: right;" [currentState]="buttonState" [isDisabled]="buttonDisabled" (click)="onSubmit()">
+                Submit
+            </app-state-button>
+        </div>
+    </div>
+</div>
+
+<!-- MODALS FOR EXPERTS PAGE -->
+<!-- <ng-template #template>
+    <div class="text-center">
+        <form #catform="ngForm" novalidate class="tooltip-label-right">
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="control-label"> Main Category</label>
+                    <select class="form-control" name="categoryid" class="form-control" ngModel required #categoryid="ngModel" (change)="Categorychange($event);" [ngClass]="{ 'invalid-input': catform.submitted && !categoryid.valid }">
+                        <option value="" selected="selected"> Select Category</option>
+                        <option *ngFor="let item of taskercategory" value="{{item._id}}">{{item.name}}</option>
+                    </select>
+                    <label *ngIf="!categoryid.valid && catform.submitted" class="required-message">Category
+                        name is required.</label>
+                </div>
+                <div class="form-group" *ngIf="categoryid.valid">
+                    <label class="control-label">Sub Category</label>
+                    <select class="form-control" name="childid" class="form-control" ngModel required #childid="ngModel" (change)="subcategorycommision($event)" [ngClass]="{ 'invalid-input': catform.submitted && !childid.valid }">
+                        <option value=""> Select Category</option>
+                        <option *ngFor="let item of subcat" value="{{item._id}}">{{item.name}}</option>
+                    </select>
+                    <label *ngIf="!childid.valid && catform.submitted" class="required-message">Subcategory name is
+                        required.</label>
+                </div>
+                <div class="form-group">
+                    <div class="form-group" *ngIf="ratetype && ratetype == 'Flat'">
+                        <label for="flatRate">{{ratetype}} Rate</label>
+                        <div class="input-group">
+                            <span class="input-group-addon currency-defa-sym">{{defaultcurrencysymbol.symbol}} </span>
+                            <input type="number" name="hour_rate" class="form-control entry-blocked" disabled [(ngModel)]="commission">
+                        </div>
+                    </div>
+                    <div class="form-group" *ngIf="ratetype && ratetype == 'Hourly'">
+                        <label for="HourlyRate">Set {{ratetype}} Rate (Minimum Hourly Rate is
+                            {{defaultcurrencysymbol.symbol}} {{commission}})
+                        </label>
+                        <div class="input-group">
+                            <span class="input-group-addon currency-defa-sym"> {{defaultcurrencysymbol.symbol}} </span>
+                            <input type="number" name="hour_rate" class="form-control" ngModel required #hour_rate="ngModel" (keyup)="minimumrate($event)">
+                        </div>
+                        <div *ngIf="showerror" class="required-message">Minimum hourly rate is {{defaultcurrencysymbol.symbol}}{{commission}}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group" *ngIf="ratetype && ratetype != 'undefined'">
+                    <label class="control-label">Level Of Experience</label>
+                    <select class="form-control" name="experience" class="form-control" ngModel required #experience="ngModel">
+                        <option value="" selected="selected">Select Your Experience</option>
+                        <option *ngFor="let item of activeexplist" value="{{item._id}}">{{item.name}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer btnscont">
+                <button type="button" class="btn btn-outline-primary" (click)="confirmsavecat(catform)">Save</button> {{" "}}
+                <button type="button" class="btn btn-primary" (click)="modalRef.hide();">Cancel</button>
+            </div>
+        </form>
+    </div>
+</ng-template> -->
+<ng-template #template>
+    <div class="text-center">
+        <form #catform="ngForm" novalidate class="tooltip-label-right">
+            <div class="modal-body">
+                <!-- <div class="form-group">
+                    <label class="control-label"> Main Category</label>
+                    <select class="form-control" name="categoryid" class="form-control" ngModel required #categoryid="ngModel" (change)="Categorychange($event);" [ngClass]="{ 'invalid-input': catform.submitted && !categoryid.valid }"> 
+                    <option value="" selected="selected"> Select Category</option>
+                    <option *ngFor="let item of categorylist" value="{{item._id}}">{{item.name}}</option>
+                </select>
+                    <label *ngIf="!categoryid.valid && catform.submitted" class="required-message">Category
+                        name is required.</label>
+                </div> -->
+                <div class="form-group" >
+                    <label class="control-label">Main Category</label>
+                    <select class="form-control" name="childid" class="form-control" ngModel required #childid="ngModel"  (change)="Categorychange($event)" [ngClass]="{ 'invalid-input': catform.submitted && !childid.valid }">
+                    <option value=""> Select Category</option>
+                    <option  *ngFor="let item of taskercategory" value="{{item._id}}">{{item.name}}</option>
+                </select>
+                    <label *ngIf="!childid.valid && catform.submitted" class="required-message">Subcategory name is required.</label>
+                </div>
+                <div class="form-group">
+                    <div class="form-group" *ngIf="ratetype && ratetype == 'Flat'">
+                        <label for="flatRate">{{ratetype}} Rate</label>
+                        <div class="input-group">
+                            <span class="input-group-addon currency-defa-sym"> {{defaultcurrencysymbol.symbol}} </span>
+                            <input type="number" name="hour_rate" class="form-control entry-blocked" disabled [(ngModel)]="commission">
+                        </div>
+                    </div>
+                    <div class="form-group" *ngIf="ratetype && ratetype == 'Hourly'">
+                        <label for="HourlyRate">Set {{ratetype}} Rate (Minimum Hourly Rate is {{defaultcurrencysymbol.symbol}} {{commission}})
+                    </label>
+                        <div class="input-group">
+                            <span class="input-group-addon currency-defa-sym"> {{defaultcurrencysymbol.symbol}} </span>
+                            <input type="number" name="hour_rate" class="form-control" ngModel required #hour_rate="ngModel" (keyup)="minimumrate($event)">
+                        </div>
+                        <div *ngIf="showerror" class="required-message">Minimum hourly rate is {{defaultcurrencysymbol.symbol}}{{commission}}</div>
+                    </div>
+                </div>
+                <div class="form-group" *ngIf="ratetype && ratetype != 'undefined'">
+                    <label class="control-label">Level Of Experience</label>
+                    <select class="form-control" name="experience" class="form-control" ngModel required #experience="ngModel">
+                    <option value="" selected="selected">Select Your Experience</option>
+                    <option *ngFor="let item of activeexplist" value="{{item._id}}">{{item.name}}</option>
+                </select>
+                </div>
+            </div>
+            <div class="modal-footer btnscont">
+                <button type="button" class="btn btn-outline-primary" (click)="confirmsavecat(catform)">Save</button> {{" "}}
+                <button type="button" class="btn btn-primary" (click)="modalRef.hide();">Cancel</button>
+            </div>
+        </form>
+    </div>
+</ng-template>
+<ng-template #templateedit>
+    <div class="text-center">
+        <form #catnoneditform="ngForm" novalidate class="tooltip-label-right">
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="control-label"> Main Category</label>
+                    <!-- <select class="form-control" name="manicategory" class="form-control" ngModel required #manicategory="ngModel"> 
+                    <option *ngFor="let item of skillsarr" selected="selected" value="{{item._id}}">{{item.name}}</option>
+                </select> -->
+                    <input type="text" class="form-control entry-blocked" disabled name="maincatnonedit" [(ngModel)]="categoryEdititems.name">
+                </div>
+              <!--  <div class="form-group">
+                    <label class="control-label">Sub Category</label>
+                      <select class="form-control" name="subcategory" class="form-control" ngModel required #subcategory="ngModel" (change)="subcategorycommision($event)" [ngClass]="{ 'invalid-input': form.submitted && !subcategory.valid }">
+                    <option value=""> Select Category</option>
+                    <option  *ngFor="let item of subcat" value="{{item._id}}">{{item.name}}</option>
+                </select>
+                    <label *ngIf="!subcategory.valid && form.submitted" class="required-message">Subcategory name is required.</label> s
+                    <input type="text" class="form-control entry-blocked" disabled name="subcatnonedit" [(ngModel)]="categoryEdititems.subcategorie_name">
+                </div> -->
+                <div class="form-group">
+                    <div class="form-group" *ngIf="categoryEdititems && categoryEdititems.ratetype == 'Flat'">
+                        <label for="flatRate">{{categoryEdititems.ratetype}} Rate</label>
+                        <div class="input-group">
+                            <span class="input-group-addon currency-defa-sym"> {{defaultcurrencysymbol.symbol}} </span>
+                            <input type="number" name="hour_rate" class="form-control entry-blocked" disabled [(ngModel)]="houlryrate">
+                        </div>
+                    </div>
+                    <div class="form-group" *ngIf="categoryEdititems && categoryEdititems.ratetype == 'Hourly'">
+                        <label for="HourlyRate">Set {{categoryEdititems.ratetype}} Rate (Minimum Hourly Rate is
+                            {{defaultcurrencysymbol.symbol}} {{categoryEdititems.hour_rate}})
+                        </label>
+                        <div class="input-group">
+                            <span class="input-group-addon currency-defa-sym"> {{defaultcurrencysymbol.symbol}} </span>
+                            <input type="number" name="hour_rate" class="form-control entry-blocked" disabled [(ngModel)]="houlryrate" required (keyup)="minimumeditrate($event)">
+                        </div>
+                        <div *ngIf="showediterror" class="required-message">Minimum hourly rate is {{defaultcurrencysymbol.symbol}}{{categoryEdititems.hour_rate}}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Level Of Experience</label>
+                    <select class="form-control" name="experience" class="form-control" required [(ngModel)]="categoryEdititems.experience">
+                        <option value="" selected="selected">Select Your Experience</option>
+                        <option *ngFor="let item of activeexplist" value="{{item._id}}">{{item.name}}</option>
+                    </select>
+                </div>
+                <div class="modal-footer btnscont">
+                    <button type="button" class="btn btn-outline-primary" (click)="confirmupdatecat(catnoneditform)">Save</button> {{" "}}
+                    <button type="button" class="btn btn-primary" (click)="modalRef.hide();">Cancel</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</ng-template>
+
+<ng-template #templatedocedit>
+    <div class="text-center">
+        <div class="text-center modal-custom-body">
+            <h3 class="txt-aln">Add/Edit Document</h3>
+            <hr>
+            <form #templatedocedit="ngForm" novalidate class="tooltip-label-right">
+                <div class="txt-aln">
+                    <label>Upload The Document:</label>
+                    <h6>Front Image</h6>
+                    <input type="file" id="file" name="doc" class="form-control" ngModel required #doc="ngModel" (change)="getFiles($event, 'front')" [ngClass]="{ 'invalid-input': docsave && !doc.valid }">
+                    <img alt="doc-pic" class="preview-pic" *ngIf="imagepreview.front" [src]="imagepreview.front"><br>
+                    <div *ngIf="!doc.valid && docsave" class="required-message">Front Image is required!</div>
+                    <h6>Back Image</h6>
+                    <input type="file" id="file" name="doc2" class="form-control" ngModel required #doc2="ngModel" (change)="getFiles($event, 'back')" [ngClass]="{ 'invalid-input': docsave && !doc2.valid }">
+                    <img alt="doc-pic" class="preview-pic" *ngIf="imagepreview.back" [src]="imagepreview.back"><br>
+                    <div *ngIf="!doc2.valid && docsave" class="required-message">Back Image is required!</div>
+                    <p class="txt-aln">Allowed Files: JPEG, JPG, PNG, PDF, DOC, DOCX.</p>
+                    <div class="btnscont cnfrm-btn">
+                        <button type="button" class="btn btn-outline-primary" (click)="confirm(templatedocedit)">Ok</button> {{" "}}
+                        <button type="button" class="btn btn-primary" (click)="modalRef.hide();">Cancel</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</ng-template>
+<ng-template #templatedocadd>
+    <div class="text-center modal-custom-body">
+        <h3 class="txt-aln">Add/Edit Document</h3>
+        <hr>
+        <form #templatedocaddform="ngForm" novalidate class="tooltip-label-right">
+            <div class="txt-aln ">
+                <label>Upload The Document:</label>
+                <h6>Front Image</h6>
+                <input type="file" name="front" class="form-control" ngModel required #front="ngModel" (change)="getFiles($event, 'front')" [ngClass]="{ 'invalid-input': docaddsave && !front.valid }">
+                <img alt="front-pic" class="preview-pic" *ngIf="imagepreview.front" [src]="imagepreview.front"><br>
+                <div *ngIf="docaddsave && !front.valid" class="required-message">Front image is required!</div>
+
+                <h6>Back Image</h6>
+                <input type="file" name="back" class="form-control" ngModel required #back="ngModel" (change)="getFiles($event, 'back')" [ngClass]="{ 'invalid-input': docaddsave && !back.valid }">
+                <img alt="doc-pic" class="preview-pic" *ngIf="imagepreview.back" [src]="imagepreview.back"><br>
+                <div *ngIf="docaddsave && !back.valid" class="required-message">Back image is required!</div>
+
+                <p class="txt-aln">Allowed Files: JPEG, JPG, PNG, PDF, DOC, DOCX.</p>
+                <div class="btnscont cnfrm-btn">
+                    <button type="button" class="btn btn-outline-primary" (click)="confirmadd(templatedocaddform)">Ok</button> {{" "}}
+                    <button type="button" class="btn btn-primary" (click)="modalRef.hide();">Cancel</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</ng-template>
+<ng-template #templatedocdelete>
+    <div class="modal-custom-body">
+        <h3 class="text-center-btn">Are you sure to delete this document?</h3>
+        <div class="text-center-btn">
+            <button type="button" class="btn btn-outline-primary " (click)="delconfirm()">Yes</button> {{" "}}
+            <button type="button" class="btn btn-primary text-center" (click)="modalRef.hide();">no</button>
+        </div>
+    </div>
+</ng-template>
+<ng-template #templatecatdelete>
+    <div class="modal-custom-body">
+        <h3 class="text-center-btn">Are you sure to delete this Category?</h3>
+        <div class="text-center-btn">
+            <button type="button" class="btn btn-outline-primary " (click)="confirmcategorydelete()">Yes</button> {{" "}}
+            <button type="button" class="btn btn-primary text-center" (click)="modalRef.hide();">no</button>
+        </div>
+    </div>
+</ng-template>

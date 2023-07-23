@@ -1,0 +1,710 @@
+<section class="ng-scope">
+    <div class="ng-scope">
+        <div class="tskr_rgstrn ng-scope">
+            <div class="container">
+                <div class="tskr_rgstrn_outer_cont">
+                    <div class="tab-animation active-sec" active="active">
+                        <ul class="nav nav-tabs">
+                            <li [ngClass]="{'active': PersonalInfotab}"><a data-toggle="tab" href="#PersonalInfo"
+                                    (click)="PersonalInfobtn()">1. {{'PersonalInfo' | translate}}</a></li>
+                            <li [ngClass]="{'active': WorkInfo}" class="{{DocumentsInfo ? '' : 'pointer-event'}}"><a
+                                    class="{{DocumentsInfo ? '' : 'disabled'}}" data-toggle="tab"
+                                    (click)="WorkInfobtn()">2. {{'WorkInfo' | translate}}</a></li>
+                            <li *ngIf="Getdocumentdetails.doccond === 1" [ngClass]="{'active': DocumentsInfo}"
+                                class="{{Category ? '' : 'pointer-event'}}">
+                                <a data-toggle="tab" class="{{Category ? '' : 'disabled'}}"
+                                    (click)="DocumentsInfobtn()">3. {{'DocumentsInfo' | translate}}</a>
+                            </li>
+                            <li *ngIf="Getdocumentdetails.doccond === 1" [ngClass]="{'active': Category}"
+                                class="{{Category ? '' : 'pointer-event'}}">
+                                <a data-toggle="tab" class="{{Category ? '' : 'disabled'}}" (click)="Categorybtn()">4.
+                                    {{'Category' | translate}}</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="tab-content">
+                        <div class="tab-pane ng-scope" [ngClass]="{'active': PersonalInfotab}">
+                            <form [formGroup]="Prosonalinfo" (ngSubmit)="onSubmit()" autocomplete="off">
+                                <div class="tskr_rgstrn_1">
+                                    <div class="tskr_rgstrn_tle1">
+                                        <div class="tskr_rgstrn_1_tle ng-binding">
+                                            {{'Apply_AnExpert' | translate}}
+                                        </div>
+                                        <div class="tskr_rgstrn_1_stle ng-binding">
+                                            {{'TellAbout_Yourself' | translate}}
+                                        </div>
+                                    </div>
+                                    <div class="tskr_rgstrn_cont1 taskerimg">
+                                        <div class="tskr_rgstrn_inner_cont">
+                                            <div class="inner_main_cont">
+                                                <div class="main_cont">
+                                                    <div class="main_cont_top">
+                                                        <div class="main_cont_rgt">
+
+                                                            <div class="main_cont_rgt_img">
+                                                                <span class="main_cont_rgt_imgs">
+                                                                    <img *ngIf="previewUrl" class="ng-scope"
+                                                                        src="{{previewUrl}}">
+                                                                    <img *ngIf="!previewUrl" class="ng-scope"
+                                                                        src="assets/images/Default/user.jpg">
+                                                                </span>
+                                                                <div class="filetype-holdr">
+                                                                    <div class="form-group">
+                                                                        <span class="main_cont_rgt_img_i">
+                                                                            <i class="fa fa-pencil"
+                                                                                aria-hidden="true"></i>
+                                                                            <input
+                                                                                class="bluebtn savdedit ng-pristine ng-untouched ng-valid ng-empty"
+                                                                                title="Upload Your Profile Picture"
+                                                                                type="file"
+                                                                                (change)="fileupload($event);"
+                                                                                accept="'image/*'" id="image"
+                                                                                value="Upload" err-src=""
+                                                                                src="uploads/default/noimage.jpg"
+                                                                                aria-invalid="false">
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="main_cont_lft tasker-reg">
+                                                            <div class="bday_date">
+                                                                <span class="topedtext ng-binding">{{'FirstName' |
+                                                                    translate}}</span>
+                                                                <div class="botom-fuls">
+                                                                    <ul class="day-list">
+                                                                        <li>
+                                                                            <input type="text" name="firstname"
+                                                                                maxlength="15" ng-maxlength="15"
+                                                                                formControlName="firstname"
+                                                                                pattern="[a-zA-Z]*"
+                                                                                [(ngModel)]="Prosonalinfodatalist.firstname"
+                                                                                placeholder="Enter Your First Name">
+                                                                            <div *ngIf="submitted && prosonalsubmit.firstname.errors"
+                                                                                class="invalid-feedback">
+                                                                                <div class="error_msg"
+                                                                                    *ngIf="prosonalsubmit.firstname.errors.required">
+                                                                                    {{'Firstnamereq' | translate}}</div>
+                                                                                <div class="error_msg"
+                                                                                    *ngIf="prosonalsubmit.firstname.errors.pattern">
+                                                                                    {{'Firstname_notvalid' |
+                                                                                    translate}}.
+                                                                                </div>
+                                                                            </div>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                            <div class="bday_date">
+                                                                <span class="topedtext ng-binding">{{'LastName' |
+                                                                    translate}}</span>
+                                                                <div class="botom-fuls">
+                                                                    <ul class="day-list">
+                                                                        <li>
+                                                                            <input type="text" name="lastname"
+                                                                                maxlength="15" ng-maxlength="15"
+                                                                                formControlName="lastname"
+                                                                                pattern="[a-zA-Z]*"
+                                                                                [(ngModel)]="Prosonalinfodatalist.lastname"
+                                                                                placeholder="Enter Your Last Name">
+                                                                            <div *ngIf="submitted && prosonalsubmit.lastname.errors"
+                                                                                class="invalid-feedback">
+                                                                                <div class="error_msg"
+                                                                                    *ngIf="prosonalsubmit.lastname.errors.required">
+                                                                                    {{'Lastname_req' | translate}}</div>
+                                                                                <div class="error_msg"
+                                                                                    *ngIf="prosonalsubmit.lastname.errors.pattern">
+                                                                                    {{'Lastname_notvalid' | translate}}.
+                                                                                </div>
+                                                                            </div>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                            <div class="bday_date">
+                                                                <span class="topedtext ng-binding">{{'EmailAddress' |
+                                                                    translate}}</span>
+                                                                <div class="botom-fuls">
+                                                                    <ul class="day-list">
+                                                                        <li>
+                                                                            <input
+                                                                                placeholder="Enter Your Email Address"
+                                                                                formControlName="email" name="email"
+                                                                                type="text"
+                                                                                [(ngModel)]="email ? email : Prosonalinfodatalist.email"
+                                                                                (change)="emailcheck($event)" required>
+                                                                            <div *ngIf="submitted && prosonalsubmit.email.errors"
+                                                                                class="invalid-feedback">
+                                                                                <div class="error_msg"
+                                                                                    *ngIf="prosonalsubmit.email.errors.required">
+                                                                                    {{'email_req' | translate}}</div>
+                                                                                <div class="error_msg"
+                                                                                    *ngIf="prosonalsubmit.email.errors.email">
+                                                                                    {{'valid_email' | translate}}</div>
+                                                                            </div>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                            <div class="bday_date">
+                                                                <span>
+                                                                    <!-- <div id="datepicker" class="datepicker input-group date" data-date-format="dd-mm-yyyy">
+                                                                                <input class="form-control" type="text" #bdaydate [(ngModel)]="bdatedate"
+                                                                                placeholder="DD-MM-YYYY"
+                                                                                    formControlName="bdate"/>
+                                                                                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                                                            </div> -->
+                                                                    <!-- <div class="input-group datepicker">
+                                                                                <input type="text" id="datepicker2"
+                                                                                    [(ngModel)]="bdatedate" -->
+                                                                    <span class="topedtext ng-binding">{{'YourBirthdate'
+                                                                        | translate}}?</span>
+                                                                    <div class="botom-fuls">
+                                                                        <ul class="day-list dte-pkr">
+                                                                            <!-- <div class="cal-holde new-holders ng-scope">
+                                                                                <i (click)="dp.show()"
+                                                                                    [attr.aria-expanded]="dp.isOpen"
+                                                                                    class="fa fa-calendar" role="button"
+                                                                                    tabindex="0"></i>
+                                                                                <input type="text"
+                                                                                    style="height: 42px;width: 85%;"
+                                                                                    [minDate]="minDate"
+                                                                                    [maxDate]="maxDate"
+                                                                                    #dp="bsDatepicker"
+                                                                                    placeholder="DD-MM-YYYY"
+                                                                                    class="form-control"
+                                                                                    (change)="validDate($event)"
+                                                                                    formControlName="bdate" />
+                                                                                <span class="input-group-addon"><i
+                                                                                        class="glyphicon glyphicon-calendar"></i></span>
+                                                                            </div>
+                                                                            <br> -->
+                                                                            <div class="input-group date">
+                                                                                <input type="text" id="datepicker2"
+                                                                                    [(ngModel)]="bdatedate"
+                                                                                    [maxDate]="maxDate"
+                                                                                    [bsConfig]="{ isAnimated: true,dateInputFormat: 'DD-MM-YYYY',containerClass: 'theme-red' }"
+                                                                                    placeholder="Datepicker"
+                                                                                    placeholder="DD-MM-YYYY"
+                                                                                    (bsValueChange)="validDate($event)"
+                                                                                    class="form-control"
+                                                                                    #dp="bsDatepicker" bsDatepicker
+                                                                                    formControlName="bdate">
+                                                                                <!-- <input type="text" id="datepicker2" [(ngModel)]="bdatedate" date-picker placeholder="DD-MM-YYYY" class="form-control" (change)="validDate($event)" (dateselected)="dateSelectedend($event)" [createpage]="true" [singleDatePicker]="true" formControlName="bdate"
+                                                                            /> -->
+                                                                                <span class="input-group-addon"
+                                                                                    (click)="dp.toggle()"
+                                                                                    [attr.aria-expanded]="dp.isOpen"><i
+                                                                                        class="glyphicon glyphicon-calendar"></i></span>
+                                                                            </div>
+                                                                            <br>
+                                                                        </ul>
+                                                                        <div *ngIf="submitted && prosonalsubmit.bdate.errors"
+                                                                            class="invalid-feedback">
+                                                                            <div class="error_msg"
+                                                                                *ngIf="prosonalsubmit.bdate.errors.required">
+                                                                                {{'doB_req' | translate}}</div>
+                                                                        </div>
+                                                                    </div>
+                                                                </span>
+                                                            </div>
+                                                            <p>{{myDateValue | date: 'dd-MM-yyyy'}}</p>
+                                                            <div class="bday_date">
+                                                                <span class="topedtext ng-binding">{{'Gender' |
+                                                                    translate}}</span>
+                                                                <div class="botom-fuls">
+                                                                    <ul class="day-list">
+                                                                        <li>
+                                                                            <select name="gender"
+                                                                                [(ngModel)]="Prosonalinfodatalist.gender"
+                                                                                formControlName="gender">
+                                                                                <option value="" class="ng-binding"
+                                                                                    selected="selected">
+                                                                                    {{'SelectGender' | translate}}
+                                                                                </option>
+                                                                                <option value="male" class="ng-binding">
+                                                                                    {{'Male' | translate}}
+                                                                                </option>
+                                                                                <option value="female"
+                                                                                    class="ng-binding">{{'Female' |
+                                                                                    translate}}
+                                                                                </option>
+                                                                                <option value="none" class="ng-binding">
+                                                                                    {{'RatherNotSay' | translate}}
+                                                                                </option>
+                                                                            </select>
+                                                                            <div *ngIf="submitted && prosonalsubmit.gender.errors"
+                                                                                class="invalid-feedback">
+                                                                                <div class="error_msg"
+                                                                                    *ngIf="prosonalsubmit.gender.errors.required">
+                                                                                    {{'Gender_required' | translate}}
+                                                                                </div>
+                                                                            </div>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                            <div class="mailing_info bday_date">
+                                                                <div class="mailing_info_cont">
+                                                                    <div class="mailing_info_scont_btn">
+                                                                        <div class="mailing_info_btn_cont">
+                                                                            <span>
+                                                                                <button type="submit"
+                                                                                    class="ng-binding">
+                                                                                    {{'Continue' | translate}}
+                                                                                </button>
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="tab-pane ng-scope" [ngClass]="{'active': WorkInfo}">
+                            <div class="tskr_rgstrn_1">
+                                <div class="tskr_rgstrn_tle1">
+                                    <div class="tskr_rgstrn_1_tle ng-binding">
+                                        {{'Apply_AnExpert' | translate}}
+                                    </div>
+                                    <div class="tskr_rgstrn_1_stle ng-binding">
+                                        {{'TellAbout_Yourself' | translate}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tskr_rgstrn_cont1">
+                                <form [formGroup]="Workinfoform">
+                                    <div class="tskr_rgstrn_inner_cont">
+                                        <div class="inner_main_cont">
+                                            <div class="main_cont">
+                                                <div class="main_cont_2_1">
+                                                    <div class="main_cont_tle">
+                                                        <label class="ng-binding">
+                                                            {{'Select_Business_Days' | translate}}
+                                                        </label>
+                                                    </div>
+                                                    <div class="date_whl_day">
+                                                        <span class="date_whl_input">
+                                                            <input type="checkbox" name="wholeweek"
+                                                                (change)="wholeweek($event);" #allWeek
+                                                                class="ng-valid ng-dirty ng-valid-parse ng-empty ng-touched"
+                                                                aria-invalid="false">
+                                                        </span>
+                                                        <span class="whole-week">
+                                                            {{'Whole_Week' | translate}}
+                                                        </span>
+                                                    </div>
+                                                    <div class="main_cont_cont">
+
+                                                        <div id="accordion" class="panel-group">
+                                                            <div class="panel-group" id="accordion" role="tablist"
+                                                                aria-multiselectable="true"
+                                                                *ngFor="let item of dayslist;let i = index;">
+                                                                <div class="panel panel-default">
+                                                                    <div class="panel-heading" role="tab"
+                                                                        id="headingOne">
+                                                                        <h4 class="panel-title">
+                                                                            <a role="button" data-toggle="collapse"
+                                                                                data-parent="#accordion"
+                                                                                href="#panelBody{{i}}"
+                                                                                aria-expanded="false">
+                                                                                {{item.Day}}
+                                                                                <span class="dayselect">{{'Whole_Day' |
+                                                                                    translate}}</span>
+                                                                            </a>
+                                                                        </h4>
+                                                                        <input
+                                                                            class="badge badge-secondary float-right pull-right"
+                                                                            (click)="WholeDay($event, item.Day)"
+                                                                            type="checkbox" name="day"
+                                                                            value="{{item.Day}}"
+                                                                            [checked]="item.wholeday === 1 ? true : false">
+                                                                    </div>
+                                                                    <div id="panelBody{{i}}"
+                                                                        class="panel-collapse collapse">
+                                                                        <div class="timings ng-scope"
+                                                                            *ngFor="let list of item.timelist;let i = index;">
+                                                                            <div class="time_value ng-scope">
+                                                                                <input type="checkbox"
+                                                                                    value="{{list.time}}"
+                                                                                    name="{{list.time}}+{{i}}"
+                                                                                    (click)="timeslot($event,item,list)"
+                                                                                    aria-invalid="false"
+                                                                                    [checked]="list.selected">
+                                                                                <label for="{{list.time}}"
+                                                                                    class="ng-binding">{{list.time}}</label>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="main_cont_2_2 map-content">
+                                                            <div class="main_cont_tle">
+                                                                <label class="ng-binding">
+                                                                    {{'Work_Location' | translate}}
+                                                                </label>
+                                                            </div>
+                                                            <div class="main2_cont_cont">
+                                                                <div class="lop-div-task">
+                                                                    <agm-map class="map-body" [latitude]="latitude"
+                                                                        [longitude]="longitude" [zoom]="zoom">
+                                                                        <agm-marker [latitude]="latitude"
+                                                                            [longitude]="longitude"
+                                                                            [markerDraggable]="true"
+                                                                            (dragEnd)="markerDragEnd($event)">
+                                                                        </agm-marker>
+                                                                    </agm-map>
+                                                                </div>
+                                                            </div><br>
+                                                            <div class="form-group">
+                                                                <input type="text" [ngModelOptions]="{standalone: true}"
+                                                                    [(ngModel)]="address" class="form-control"
+                                                                    (keydown.enter)="$event.preventDefault()"
+                                                                    placeholder="Search Nearest Location"
+                                                                    autocorrect="off" autocapitalize="off"
+                                                                    spellcheck="off" type="text" #search>
+                                                                <div class="error_msg" *ngIf="address_err">
+                                                                    {{address_err}}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="main_cont_2_4">
+                                                            <div class="main_cont_2_4_btn">
+                                                                <button class="btn ng-binding" (click)="submitfun();">
+                                                                    {{'Continue' | translate}}
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="tab-pane ng-scope" [ngClass]="{active: DocumentsInfo}">
+                            <div class="tskr_rgstrn_1">
+                                <div class="tskr_rgstrn_tle1">
+                                    <div class="tskr_rgstrn_1_tle ng-binding">
+                                        {{'Apply_AnExpert' | translate}}
+                                    </div>
+                                    <div class="tskr_rgstrn_1_stle ng-binding">
+                                        {{'TellAbout_Yourself' | translate}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tskr_rgstrn_cont1">
+                                <div class="tskr_rgstrn_inner_cont">
+                                    <div class="inner_main_cont">
+                                        <div class="main_cont final-sect" *ngIf="documenttaskerForm">
+                                            <form [formGroup]="documenttaskerForm" (ngSubmit)="Docsubmit()"
+                                                #registerForm="ngForm" enctype="multipart/form-data">
+                                                <div class="form-group">
+                                                    <label class="control-label ng-binding">{{'Document_List*' |
+                                                        translate }}</label>
+                                                    <label class="ng-binding">{{'Allowed_Files' | translate}}</label>
+                                                    <ul *ngIf="Getdocumentdetails.doccond === 1">
+                                                        <div
+                                                            *ngFor="let item of Getdocumentdetails.response; let i = index;">
+                                                            <li class="form-group loop-cnt ng-scope"
+                                                                *ngIf="item.status == 1">
+                                                                <div class="row" *ngIf="item.status == 1">
+                                                                    <div class="col-md-6 space-sec">
+                                                                        <label for="docs.name"
+                                                                            class="ng-binding">{{item.name}}
+                                                                            Front</label> <span
+                                                                            *ngIf="item.flag == true || item.mandatory > 0"
+                                                                            style="color: red;">*</span>
+                                                                        <input type="file" #filetag
+                                                                            name="{{item.replace_name}}"
+                                                                            formControlName="{{item.replace_name}}"
+                                                                            (change)="imagechangefun($event,item.replace_name)"
+                                                                            aria-invalid="true">
+                                                                        <label class="file-but">
+                                                                            <span class="file-sec ng-binding">
+                                                                                {{'Choose_File' | translate}}
+                                                                            </span>
+                                                                            <span class="file-name-cnt ng-binding"
+                                                                                *ngIf="!documenttaskerForm.value[item.replace_name]">{{'NoFile_Chosen'|
+                                                                                translate}}</span>
+                                                                            <span class="file-name-cnt ng-binding"
+                                                                                *ngIf="documenttaskerForm.value[item.replace_name]">{{documenttaskerForm.value[item.replace_name]}}</span>
+                                                                        </label>
+                                                                        <p class="help-block"
+                                                                            *ngIf="documenttaskerForm.controls[item.replace_name].status != 'INVALID' && Docsubmitbtn">
+                                                                        </p>
+                                                                        <p class="help-block"
+                                                                            *ngIf="documenttaskerForm.controls[item.replace_name].status === 'INVALID' && Docsubmitbtn">
+                                                                            <span class="help-block ng-binding ng-hide"
+                                                                                *ngIf="documenttaskerForm.invalid"
+                                                                                style="color:red">
+                                                                                {{item.name}} Front {{'Is_Required' |
+                                                                                translate}}</span>
+                                                                        </p>
+                                                                    </div>
+                                                                    <div class="col-md-6 space-sec">
+                                                                        <label for="docs.name"
+                                                                            class="ng-binding">{{item.name}}
+                                                                            Back</label> <span
+                                                                            *ngIf="item.flag == true || item.mandatory > 0"
+                                                                            style="color: red;">*</span>
+                                                                        <input type="file" #filetag
+                                                                            name="{{item.replace_name_back}}"
+                                                                            formControlName="{{item.replace_name_back}}"
+                                                                            (change)="imagechangefun($event,item.replace_name_back)"
+                                                                            aria-invalid="true">
+                                                                        <label class="file-but">
+                                                                            <span class="file-sec ng-binding">
+                                                                                {{'Choose_File' | translate}}
+                                                                            </span>
+                                                                            <span class="file-name-cnt ng-binding"
+                                                                                *ngIf="!documenttaskerForm.value[item.replace_name_back]">{{'NoFile_Chosen'|
+                                                                                translate}}</span>
+                                                                            <span class="file-name-cnt ng-binding"
+                                                                                *ngIf="documenttaskerForm.value[item.replace_name_back]">{{documenttaskerForm.value[item.replace_name_back]}}</span>
+                                                                        </label>
+                                                                        <p class="help-block"
+                                                                            *ngIf="documenttaskerForm.controls[item.replace_name_back].status != 'INVALID' && Docsubmitbtn">
+                                                                        </p>
+                                                                        <p class="help-block"
+                                                                            *ngIf="documenttaskerForm.controls[item.replace_name_back].status === 'INVALID' && Docsubmitbtn">
+                                                                            <span class="help-block ng-binding ng-hide"
+                                                                                *ngIf="documenttaskerForm.invalid"
+                                                                                style="color:red">
+                                                                                {{item.name}} Back {{'Is_Required' |
+                                                                                translate}}</span>
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                            </li>
+                                                        </div>
+                                                    </ul>
+                                                </div>
+                                                <div class="main_cont_2_4">
+                                                    <div class="main_cont_2_4_btn">
+                                                        <button class="btn ng-binding" type="submit">
+                                                            {{'Continue' | translate}}
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane ng-scope" [ngClass]="{active: Category}">
+                            <div class="tskr_rgstrn_1">
+                                <div class="tskr_rgstrn_tle1">
+                                    <div class="tskr_rgstrn_1_tle ng-binding">
+                                        {{'Apply_AnExpert' | translate}}
+                                    </div>
+                                    <div class="tskr_rgstrn_1_stle ng-binding">
+                                        {{'TellAbout_Yourself' | translate}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tskr_rgstrn_cont_3 ng-scope">
+                                <div class="tskr_cont_3_hdr">
+                                    <div class="tskr_rgstrn_cont_3_tle ng-binding">
+                                        {{'AddYourSkills' | translate}} &amp; {{'Experience' | translate}}
+                                    </div>
+                                    <div class="tskr_rgstrn_cont_3_btn">
+                                        <button class="btn ng-binding" (click)="openModal(template)">
+                                            {{'Add_Category' | translate}}
+                                        </button>
+                                    </div>
+                                </div><br>
+                                <div class="tskr_cont_3_cont">
+                                    <div class="tskr_cont_3_list">
+                                        <div class="tskr_cont_3_cont_inner ng-scope"
+                                            *ngFor="let item of Categoryinfoform">
+                                            <div class="tskr_3_cont_inner_left ng-binding">
+                                                {{getcategoryname(item.manicategory)}}
+                                            </div>
+                                            <div class="tskr_3_cont_inner_rgt">
+
+                                                <span class="edit"
+                                                    (click)="editcategory(editcategorymodel,item.manicategory)">
+                                                    <span class="icons">
+                                                        <i class="fa fa-pencil" aria-hidden="true"></i>
+                                                    </span>
+                                                    <span class="name"><a class="ng-binding">{{'Edit' |
+                                                            translate}}</a></span>
+                                                </span>
+                                                <span class="delete" (click)="deletecategory(item.manicategory);">
+                                                    <span class="icons">
+                                                        <i class="fa fa-trash" aria-hidden="true"></i>
+                                                    </span>
+                                                    <span class="name"><a class="ng-binding">{{'Delete' |
+                                                            translate}}</a></span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <div class="tskr_3_sbmt_btn">
+                                            <div class="tskr_3_sbmt_btn_inner">
+                                                <button class="btn ng-binding" (click)="registertasker();" type="button"
+                                                    *ngIf="reg_btn === 0">
+                                                    {{'Submit' | translate}}
+                                                </button>
+                                                <button class="btn ng-binding" *ngIf="reg_btn === 1" type="button"
+                                                    disabled>
+                                                    <i class="fa fa-circle-o-notch fa-spin"></i>&nbsp; {{'Loading' |
+                                                    translate}}
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<app-confirm-dialog></app-confirm-dialog>
+<!--Category add-->
+<ng-template #template>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">{{'Add_Category' | translate}}</h4>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="categorytaskerForm" (ngSubmit)="categorysubmit()">
+            <div class="form-group">
+                <label class="control-label ng-binding"> {{'Main_Category' | translate}}</label>
+                <select class="form-control" formControlName="manicategory" (change)="Categorychange($event);">
+                    <option value="" class="ng-binding" selected="selected"> {{'Select_Category' | translate}}</option>
+                    <option *ngFor="let item of Categorylist" value="{{item._id}}">{{item.name}}</option>
+                </select>
+                <div *ngIf="categorysubmitted && categoryformdata.manicategory.errors" class="invalid-feedback">
+                    <label *ngIf="categoryformdata.manicategory.errors.required" style="color: red; font-size: 12px;"
+                        class="ng-binding ng-hide" aria-hidden="true">{{'Category_required' | translate}}.</label>
+                </div>
+            </div>
+            <div class="form-group ng-scope" *ngIf="manicategory">
+                <label class="control-label ng-binding">{{'Sub_Category' | translate}}</label>
+                <select class="form-control" formControlName="subcategory"
+                    (change)="subcategory = true;subcategorycommision($event)">
+                    <option value="" class="ng-binding" selected="selected"> {{'Select_Category' | translate}}</option>
+                    <option *ngFor="let item of Subcategory" value="{{item._id}}">{{item.name}}</option>
+                </select>
+                <div *ngIf="categorysubmitted && categoryformdata.subcategory.errors" class="invalid-feedback">
+                    <label *ngIf="categoryformdata.subcategory.errors.required" style="color: red; font-size: 12px;"
+                        class="ng-binding ng-hide" aria-hidden="true">{{'Subcategory_required' | translate}}.</label>
+                </div>
+            </div>
+            <div class="form-group" *ngIf="subcategory">
+                <label for="HourlyRate" class="ng-binding">{{categoryRate}} {{'Ratein' | translate}} (USD)</label>
+                <div class="input-group">
+                    <span class="input-group-addon ng-binding"> $ </span>
+                    <input type="number" *ngIf="categoryRate == 'Flat'" value="{{commisionrate}}" readonly name="rate"
+                        id="rate" formControlName="rate" class="form-control" aria-invalid="false">
+
+                    <input type="number" (keyup)="checkcommision($event)" *ngIf="categoryRate == 'Hourly'" name="rate"
+                        id="rate" formControlName="rate" class="form-control" aria-invalid="false">
+                </div>
+                <div *ngIf="categorysubmitted && categoryformdata.rate.errors" class="invalid-feedback">
+                    <label *ngIf="categoryformdata.rate.errors.required" style="color: red; font-size: 12px;"
+                        class="ng-binding ng-hide" aria-hidden="true">{{categoryRate}} {{'rate_required' |
+                        translate}}.</label>
+                </div>
+                <label *ngIf="commision" style="color: red; font-size: 12px;" class="ng-binding ng-hide"
+                    aria-hidden="true">{{commision}}</label>
+            </div>
+            <div class="form-group" aria-hidden="false" *ngIf="subcategory">
+                <label class="control-label ng-binding">{{'Level_Experience' | translate}}</label>
+                <select name="levels" class="form-control" aria-invalid="false" formControlName="explevel">
+                    <option value="" class="ng-binding" selected="selected">{{'Select_Experience' | translate}}</option>
+                    <option *ngFor="let item of experiencelist" value="{{item._id}}">{{item.name}}</option>
+                </select>
+                <div *ngIf="categorysubmitted && categoryformdata.explevel.errors" class="invalid-feedback">
+                    <label *ngIf="categoryformdata.explevel.errors.required" style="color: red; font-size: 12px;"
+                        class="ng-binding ng-hide" aria-hidden="true">{{'Exp_required' | translate}}.</label>
+                </div>
+            </div>
+            <div class="btnscont">
+                <button class="btn act_btn ng-binding" type="submit"> {{'Save' | translate}} </button>
+                <button class="btn def_btn ng-binding" type="button"
+                    style="border: 1px solid #67098f;background-color: #fff;" (click)="closeAdd()">
+                    {{'Cancel' | translate}} </button>
+            </div>
+        </form>
+    </div>
+</ng-template>
+<!--Category add-->
+<!--Category edit-->
+<ng-template #editcategorymodel>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">{{'Edit_Category' | translate}}</h4>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="categoryedittaskerForm" (ngSubmit)="categoryeditsubmit()">
+            <div class="form-group">
+                <label class="control-label ng-binding"> {{'Main_Category' | translate}}</label>
+                <select class="form-control" formControlName="manicategory" [(ngModel)]="editcategoryform.manicategory"
+                    disabled readonly>
+                    <option value="" class="ng-binding" selected="selected"> {{'Select_Category' | translate}}</option>
+                    <option *ngFor="let item of Categorylist" value="{{item._id}}">{{item.name}}</option>
+                </select>
+            </div>
+            <div class="form-group ng-scope">
+                <label class="control-label ng-binding">{{'Sub_Category' | translate}}</label>
+                <select class="form-control" formControlName="subcategory" [(ngModel)]="editcategoryform.subcategory"
+                    disabled readonly>
+                    <option value="" class="ng-binding" selected="selected"> {{'Select_Category' | translate}}</option>
+                    <option *ngFor="let item of Subcategory" value="{{item._id}}">{{item.name}}</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="HourlyRate" class="ng-binding">{{editcategoryform.categoryRate}} Rate in (USD)</label><br>
+                <div class="input-group price-input">
+                    <span class="input-group-addon ng-binding"> $ </span>
+                    <input type="number" *ngIf="editcategoryform.categoryRate == 'Flat'" readonly name="rate" id="rate"
+                        formControlName="rate" class="form-control" aria-invalid="false">
+                    <input type="number" (keyup)="checkcommisionedit($event,editcategoryform.subcategory)"
+                        *ngIf="editcategoryform.categoryRate == 'Hourly'" name="rate" id="rate" formControlName="rate"
+                        class="form-control" aria-invalid="false">
+
+                </div>
+                <div *ngIf="categoryeditformdata.rate.errors" class="invalid-feedback">
+                    <label *ngIf="categoryeditformdata.rate.errors.required" style="color: red; font-size: 12px;"
+                        class="ng-binding ng-hide" aria-hidden="true">{{'HourlyRate_Required' | translate}}.</label>
+                </div>
+                <label *ngIf="commision" style="color: red; font-size: 12px;" class="ng-binding ng-hide"
+                    aria-hidden="true">{{commision}}</label>
+            </div>
+            <div class="form-group" aria-hidden="false">
+                <label class="control-label ng-binding">{{'Level_Experience' | translate}}</label>
+                <select name="levels" class="form-control" [(ngModel)]="editcategoryform.explevel"
+                    formControlName="explevel">
+                    <option value="" class="ng-binding" selected="selected">{{'Select_Experience' | translate}}</option>
+                    <option *ngFor="let item of experiencelist" value="{{item._id}}">{{item.name}}</option>
+                </select>
+                <div *ngIf="categoryeditformdata.explevel.errors" class="invalid-feedback">
+                    <label *ngIf="categoryeditformdata.explevel.errors.required" style="color: red; font-size: 12px;"
+                        class="ng-binding ng-hide" aria-hidden="true">{{'Exp_required' | translate}}.</label>
+                </div>
+            </div>
+            <div class="btnscont">
+                <button class="btn act_btn ng-binding" type="submit"> {{'Save' | translate}} </button>
+                <button class="btn def_btn ng-binding" type="button"
+                    style="border: 1px solid #67098f;background-color: #fff;" (click)="modalRef.hide()">
+                    {{'Cancel' | translate}} </button>
+            </div>
+        </form>
+    </div>
+</ng-template>
+<!--Category edit-->

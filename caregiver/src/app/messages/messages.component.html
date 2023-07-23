@@ -1,0 +1,49 @@
+<section ui-view="content" class="">
+    <section class="quickFixedheight">
+        <div class="applyto-tasker accounts">
+            <div class="container">
+                <div class="acc-head">
+                    <h1 class="top-texts acc-tle">{{'Messages' | translate}}</h1>
+                </div>
+                <div class="full-holder msg-container">
+                    <div class="bs-example" *ngIf="messages">
+                        <div class="custom-table">
+                            <table class="table table-responsive">
+                                <thead>
+                                    <tr>
+                                        <th style="width:30px;">#</th>
+                                        <th class="nme-msg" style="width:200px;">{{'Name' | translate}}</th>
+                                        <th style="width:200px;">{{'Job' | translate}}</th>
+                                        <th style="width:50px;" >{{'Actions' | translate}}</th>
+                                    </tr>
+                                </thead>
+                                <tbody *ngIf="messages">
+                                    <tr *ngFor="let item of messages; let i=index">
+                                        <td scope="row">{{i+1}}</td>
+                                        <td class="nme-msg" *ngIf="currentuser.user_type === 'user'" >{{item.tasker[0].username | titlecase }}</td>
+                                        <td class="nme-msg" *ngIf="currentuser.user_type === 'tasker'" >{{item.user[0].username | titlecase }}</td>
+                                        <td >{{item.task.booking_id}}</td>
+                                        <td class="msg-actions">
+                                            <a class=" btn-view" (click)="view(item)">{{'View' | translate}}</a> &nbsp;
+                                            <a href="javascript:void(0)" class=" btn-delete" (click)="deletemsg(item)">{{'Delete' | translate}}</a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div style="text-align: center;" *ngIf="messagecount > 3" class="pagination_inner clearfix">
+                            <app-pagination [totalRecords]="messagecount" [recordsPerPage]="3" (onPageChange)="pagechange($event)">
+                            </app-pagination>
+                        </div>
+                    </div>
+                    <div class="faq-page" style="background: inherit;" *ngIf="!messages">
+                        <div class="errormsg">
+                            <div class="panelbody">{{'DontHave_Messages' | translate}} !</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>
+<app-confirm-dialog></app-confirm-dialog>

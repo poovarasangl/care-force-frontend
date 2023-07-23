@@ -1,0 +1,270 @@
+.text-lg {
+    font-size: 18px !important;
+}
+
+.bg-success {
+    background-color: #16a085 !important;
+}
+
+.text-strong {
+    font-weight: 700;
+}
+
+.mb-0 {
+    margin-bottom: 0 !important;
+}
+
+.card-title .text-left,
+.card .card-title {
+    margin-bottom: 2px !important;
+}
+
+.dashboard-card {
+    width: 100%;
+    float: left;
+    padding: 12px;
+}
+
+.clr-des1 {
+    background-color: #16a085;
+}
+
+.sec-dash {
+    width: 100%;
+    float: left;
+    border-radius: 6px;
+}
+
+.dashboard-card i {
+    font-size: 18px;
+    color: #fff;
+    margin: 10px 0 16px;
+}
+
+.dashboard-card h4 {
+    float: left;
+    width: 100%;
+    text-transform: uppercase;
+    color: #fff;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.dashboard-card h5 {
+    width: 100%;
+    float: left;
+    font-size: 16px;
+    color: #fff;
+    font-weight: 600;
+}
+
+.user-diver {
+    width: 100%;
+    float: left;
+    margin: 7px 0;
+}
+
+.left-sec {
+    width: 50%;
+    float: left;
+}
+
+.left-sec h6 {
+    width: 100%;
+    float: left;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.left-sec span {
+    width: 100%;
+    float: left;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.common-dash .col-md-3 {
+    padding: 0px 8px 20px 8px;
+}
+
+.link-sec {
+    width: 100%;
+    float: left;
+    text-align: center;
+}
+
+.link-sec p {
+    margin: 0;
+    float: left;
+    width: 100%;
+    padding: 11px 0;
+    background-color: #00000045;
+    border-radius: 0 0 6px 6px;
+    color: #fff;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.clr-des2 {
+    background-color: #e05d6f;
+}
+
+.clr-des3 {
+    background-color: #418bca;
+}
+
+.clr-des4 {
+    background-color: #3f4e62;
+}
+
+.clr-des5 {
+    background-color: #5a3f37;
+}
+
+.clr-des6 {
+    background-color: #f0ad4e;
+}
+
+.clr-des7 {
+    background-color: #1693A5;
+}
+
+.clr-des8 {
+    background-color: #424242;
+}
+
+.card-clr1 {
+    background-color: #3f4e62;
+}
+
+.card-clr2 {
+    background-color: #f0ad4e;
+}
+
+.card-clr3 {
+    background-color: #5bc0de;
+}
+
+.card-clr4 {
+    background-color: #16a085;
+}
+
+.card-clr5 {
+    background-color: #e05d6f;
+}
+
+.sec-card-det {
+    background: #fff;
+    padding: 16px;
+    border-radius: .75rem;
+    border: initial;
+    box-shadow: 0 1px 15px rgba(0, 0, 0, .04), 0 1px 6px rgba(0, 0, 0, .04);
+}
+
+.sec-card-det-two {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-gap: 13px;
+}
+
+.sec-card-det-two-bg {
+    margin-top: 25px;
+    background: #fff;
+    padding: 16px;
+    border-radius: .75rem;
+    border: initial;
+    box-shadow: 0 1px 15px rgba(0, 0, 0, .04), 0 1px 6px rgba(0, 0, 0, .04);
+}
+
+.sec-card-det-three-bg {
+    margin-top: 25px;
+}
+
+.graph {
+    background: #fff;
+    padding: 16px;
+    border-radius: .75rem;
+    border: initial;
+    box-shadow: 0 1px 15px rgba(0, 0, 0, .04), 0 1px 6px rgba(0, 0, 0, .04);
+}
+
+// media query for .sec-card-det-two
+@media screen and (max-width: 600px) {
+    .sec-card-det-two {
+        display: block;
+    }
+}
+
+.graph-field {
+    display: grid;
+    grid-template-columns: 65% 30%;
+    grid-gap: 25px;
+}
+
+// media query for .graph-field
+@media screen and (max-width: 600px) {
+    .graph-field {
+        display: block;
+    }
+}
+
+.sec-card-det-four-bg {
+    margin-top: 25px;
+}
+
+.stats {
+    background: #fff;
+    padding: 16px;
+    border-radius: .75rem;
+    border: initial;
+    box-shadow: 0 1px 15px rgba(0, 0, 0, .04), 0 1px 6px rgba(0, 0, 0, .04);
+}
+
+.stats-field {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-gap: 25px;
+}
+
+// media query for .stats-field
+@media screen and (max-width: 600px) {
+    .stats-field {
+        display: block;
+    }
+}
+
+.card-head {
+    color: #fff;
+}
+
+.fa {
+    color: #fff;
+}
+
+.detl-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+progress#file {
+    width: 100%;
+}
+
+.scroll-li {
+    text-align: -webkit-center;
+    max-height: 500px;
+    overflow: auto;
+}
+
+.percnt-stats {
+    background-color: #ebeef2;
+    max-width: 75px;
+    height: 40px;
+    padding: 10px;
+}
+
+li {
+    list-style-type: none;
+}
